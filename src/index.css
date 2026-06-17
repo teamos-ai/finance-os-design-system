@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The three-layer token system (CSS variables for primitive → semantic → */
+/* component, per theme) is defined in S4. */
