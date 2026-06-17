@@ -1,6 +1,60 @@
+@import './styles/tokens.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* The three-layer token system (CSS variables for primitive → semantic → */
-/* component, per theme) is defined in S4. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--c-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-fg font-body antialiased;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+    color: var(--c-fg);
+  }
+
+  /* token-driven focus ring */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--ring-offset) var(--c-canvas), 0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--c-ring);
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--c-accent);
+    color: var(--c-accent-fg);
+  }
+
+  /* tokenized scrollbar (subtle, on-theme) */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-border-strong) transparent;
+  }
+}
+
+/* Respect reduced-motion globally (brief requirement) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
