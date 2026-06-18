@@ -1,15 +1,15 @@
 /**
- * ThemeToggle — 3-position Dark / Light / Paper radiogroup with a sliding thumb.
- * `rounded-pill` is one of the two intentional exceptions to the 8px-squircle rule.
+ * ThemeToggle — 3-position Light / Paper / Dark radiogroup with a sliding thumb.
+ * Paper sits in the middle — the warm in-between of clean white and true black.
  */
 import { Moon, Sun, FileText } from 'lucide-react'
 import { useTheme, type Theme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
 const MODES: { theme: Theme; label: string; Icon: typeof Moon }[] = [
-  { theme: 'dark', label: 'Dark', Icon: Moon },
   { theme: 'light', label: 'Light', Icon: Sun },
   { theme: 'paper', label: 'Paper', Icon: FileText },
+  { theme: 'dark', label: 'Dark', Icon: Moon },
 ]
 
 export const ThemeToggle = ({ className }: { className?: string }) => {
@@ -19,11 +19,11 @@ export const ThemeToggle = ({ className }: { className?: string }) => {
     <div
       role="radiogroup"
       aria-label="Theme"
-      className={cn('relative inline-flex items-center rounded-pill border border-border bg-surface p-1', className)}
+      className={cn('relative inline-flex items-center rounded-sm border border-border bg-surface p-1', className)}
     >
       <span
         aria-hidden
-        className="absolute left-1 top-1 h-8 w-8 rounded-full bg-accent-soft transition-transform duration-base ease-out"
+        className="absolute left-1 top-1 h-8 w-8 rounded-sm bg-accent-soft transition-transform duration-base ease-out"
         style={{ transform: `translateX(${idx * 100}%)` }}
       />
       {MODES.map((m) => {
@@ -36,7 +36,7 @@ export const ThemeToggle = ({ className }: { className?: string }) => {
             aria-label={m.label}
             onClick={() => setTheme(m.theme)}
             className={cn(
-              'relative z-10 grid h-8 w-8 place-items-center rounded-full transition-colors',
+              'relative z-10 grid h-8 w-8 place-items-center rounded-sm transition-colors',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
               active ? 'text-accent-text' : 'text-fg-subtle hover:text-fg',
             )}

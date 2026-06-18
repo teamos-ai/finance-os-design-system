@@ -1,9 +1,9 @@
 /**
  * CelebrationButton — Finance OS.
  *
- * A gradient button (locked gold→amber signature fill) that throws a small shower of
+ * A gradient button (locked amber→amber signature fill) that throws a small shower of
  * thin coloured streamers on click — they fly up from the button's top-centre, then arc
- * back down and fade. The streamer palette is the Finance OS gold/amber family (with two
+ * back down and fade. The streamer palette is the Finance OS amber/amber family (with two
  * deeper navy/bronze tones for depth) so the burst reads luxe, not confetti-loud. Honours
  * `prefers-reduced-motion`: reduced users get NO streamers (the click still works).
  * Per-click keyed bursts (a seq ref) support rapid re-clicks; each burst self-cleans after
@@ -16,7 +16,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { EASE_OUT } from '@/lib/motion'
 
-/** Streamer ribbon colours — gold/amber signature trio + bronze + two deeper tones for depth. */
+/** Streamer ribbon colours — amber/amber signature trio + bronze + two deeper tones for depth. */
 const STREAMER_COLORS = ['#EEBA2B', '#E68A00', '#F5C95A', '#BE9522', '#C9761A', '#1E3A5F']
 
 interface Streamer {

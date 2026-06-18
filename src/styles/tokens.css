@@ -4,297 +4,263 @@
    →  component (component-scoped, references semantic).
    Themes switch by toggling [data-theme] on <html>; only the SEMANTIC layer
    changes between themes. Never reference a --p-* primitive in a component.
+
+   Accent = Momentum Amber (primary, "orange") + Atlas Blue (secondary). Signal Gold
+   has been retired from the system. Dark = true OLED black; Light = pure white;
+   Paper = warm ivory (the in-between). Each family ships 5 shades.
    ============================================================================ */
 
 /* ----------------------------------------------------------------------------
-   LAYER 1 — PRIMITIVES (theme-independent raw values; source: brand book p.4)
+   LAYER 1 — PRIMITIVES (theme-independent; 5 shades per family)
    ---------------------------------------------------------------------------- */
 :root {
-  /* Signal Gold — primary accent (brand book) */
-  --p-gold-50:  #FCF1D5;
-  --p-gold-100: #F8E3AA;
-  --p-gold-200: #F5D680;
-  --p-gold-300: #F1C855;
-  --p-gold-400: #EEBA2B; /* base — Signal Gold */
-  --p-gold-500: #BE9522;
-  --p-gold-600: #8F701A;
-  --p-gold-700: #5F4A11;
-  --p-gold-800: #302509;
+  /* Momentum Amber — primary accent (orange) */
+  --p-amber-100: #F0B966;
+  --p-amber-200: #EBA133;
+  --p-amber-300: #E68A00; /* base */
+  --p-amber-400: #B86E00;
+  --p-amber-500: #8A5300;
 
-  /* Momentum Amber — energy / CTA (brand book + derived ends) */
-  --p-amber-50:  #FDF0DE;
-  --p-amber-100: #F9D9AE;
-  --p-amber-200: #F0B966;
-  --p-amber-300: #EBA133;
-  --p-amber-400: #E68A00; /* base — Momentum Amber */
-  --p-amber-500: #B86E00;
-  --p-amber-600: #8A5300;
-  --p-amber-700: #5C3700;
-  --p-amber-800: #2E1C00;
+  /* Atlas Blue — secondary accent (blue) */
+  --p-blue-100: #ADB6D2;
+  --p-blue-200: #8591BC;
+  --p-blue-300: #5C6DA5;
+  --p-blue-400: #33488F; /* base */
+  --p-blue-500: #1F2B56;
 
-  /* Atlas / Corporate Blue — structure / navy (brand book) */
-  --p-blue-50:  #EAEDF4;
-  --p-blue-100: #D6DAE9;
-  --p-blue-200: #ADB6D2;
-  --p-blue-300: #8591BC;
-  --p-blue-400: #5C6DA5;
-  --p-blue-500: #33488F; /* base — Atlas Blue */
-  --p-blue-600: #293A72;
-  --p-blue-700: #1F2B56;
-  --p-blue-800: #141D39;
-  --p-blue-900: #0A0E1D;
+  /* Neutral — type, hairlines, surfaces (white → near-black) */
+  --p-neutral-100: #F4F5F7;
+  --p-neutral-200: #C9CDD6;
+  --p-neutral-300: #8B93A3;
+  --p-neutral-400: #3A3F4B;
+  --p-neutral-500: #0F1115;
+  --p-white: #FFFFFF;
+  --p-black: #000000;
 
-  /* Neutral (Ink) — cool grey with a faint navy undertone to sit with Atlas.
-     Anchored to Clarity White #FFF / #CCC / #999 and Off-Black #2D2D2D. */
-  --p-neutral-0:   #FFFFFF; /* Clarity White */
-  --p-neutral-50:  #F6F7F9;
-  --p-neutral-100: #ECEEF2;
-  --p-neutral-200: #D7DBE2;
-  --p-neutral-300: #B4BAC6;
-  --p-neutral-400: #8B93A3;
-  --p-neutral-500: #646C7D;
-  --p-neutral-600: #474E5C;
-  --p-neutral-700: #333845;
-  --p-neutral-800: #22262F;
-  --p-neutral-850: #181B22;
-  --p-neutral-900: #10131B;
-  --p-neutral-950: #0A0C12; /* OLED base */
-  --p-offblack:    #2D2D2D; /* brand literal Off-Black */
-  --p-black:       #000000;
+  /* Dark surface anchors (luxury minimalism — true black + carbon + charcoal) */
+  --p-carbon: #161616;   /* card surface on black */
+  --p-charcoal: #1F1F1F; /* elevated / raised */
 
-  /* States — derived, harmonised, AA-tuned per theme below */
+  /* State hues (semantic only — not shown as ramps) */
   --p-green-300: #5FE0A6;
-  --p-green-400: #2FB67A;
-  --p-green-600: #138A5E;
+  --p-green-500: #138A5E;
   --p-green-700: #0E6B49;
-  --p-red-300:   #FF8A8E;
-  --p-red-400:   #FF6166;
-  --p-red-600:   #D5292F;
-  --p-red-700:   #A81E23;
-
-  /* Signature gradient + glow (raw) */
-  --p-gradient-accent: linear-gradient(135deg, var(--p-gold-400) 0%, var(--p-amber-400) 100%);
+  --p-red-300: #FF8A8E;
+  --p-red-500: #D5292F;
+  --p-red-700: #A81E23;
 }
 
 /* ----------------------------------------------------------------------------
    LAYER 2 — SEMANTIC  ·  DARK / OLED  (default + [data-theme="dark"])
-   bg/surface/fg/border/accent/state intents. Only this layer changes per theme.
+   True black page; carbon cards lift gently; charcoal raises further.
    ---------------------------------------------------------------------------- */
 :root,
 [data-theme="dark"] {
   color-scheme: dark;
 
-  /* surfaces */
-  --c-canvas:      var(--p-neutral-950);
-  --c-surface:     var(--p-neutral-900);
-  --c-elevated:    var(--p-neutral-850);
-  --c-inset:       #06070C;
-  --c-overlay:     rgba(4, 5, 9, 0.72);
+  --c-canvas:       #000000;          /* true OLED black */
+  --c-canvas-muted: #0E0E0E;          /* crinkle / alternating section ground */
+  --c-surface:      var(--p-carbon);  /* #161616 card */
+  --c-elevated:     var(--p-charcoal);/* #1F1F1F raised */
+  --c-inset:        #0A0A0A;
+  --c-overlay:      rgba(0, 0, 0, 0.72);
 
-  /* foreground */
-  --c-fg:          var(--p-neutral-50);
-  --c-fg-muted:    #AEB5C2;
-  --c-fg-subtle:   var(--p-neutral-400);
+  --c-fg:          #F5F5F5;
+  --c-fg-muted:    #B5B5B5;
+  --c-fg-subtle:   #8A8A8A;
   --c-fg-onaccent: #1A1206;
 
-  /* borders */
-  --c-border:        var(--p-neutral-800);
-  --c-border-strong: var(--p-neutral-700);
-  --c-border-subtle: rgba(255, 255, 255, 0.06);
+  --c-border:        #2A2A2A;
+  --c-border-strong: #3A3A3A;
+  --c-border-subtle: rgba(255, 255, 255, 0.07);
 
-  /* accent (gold) — fill vs. text are distinct so both pass AA */
-  --c-accent:       var(--p-gold-400);
-  --c-accent-hover: var(--p-gold-300);
-  --c-accent-press: var(--p-gold-500);
-  --c-accent-soft:  rgba(238, 186, 43, 0.12);
-  --c-accent-text:  var(--p-gold-300); /* gold text on dark canvas */
-  --c-accent-fg:    #1A1206;           /* text/icon on a gold fill */
+  --c-accent:       var(--p-amber-300);
+  --c-accent-hover: var(--p-amber-200);
+  --c-accent-press: var(--p-amber-400);
+  --c-accent-soft:  rgba(230, 138, 0, 0.16);
+  --c-accent-text:  var(--p-amber-200); /* AA on black */
+  --c-accent-fg:    #1A1206;
 
-  /* amber (energy) */
-  --c-amber:       var(--p-amber-400);
-  --c-amber-text:  var(--p-amber-300);
-  --c-amber-soft:  rgba(230, 138, 0, 0.14);
+  --c-amber:      var(--p-amber-300);
+  --c-amber-text: var(--p-amber-200);
+  --c-amber-soft: rgba(230, 138, 0, 0.16);
 
-  /* brand blue (info / structure) */
-  --c-brand:       var(--p-blue-300);
-  --c-brand-soft:  rgba(133, 145, 188, 0.16);
+  --c-brand:      var(--p-blue-200);
+  --c-brand-soft: rgba(133, 145, 188, 0.16);
 
-  /* states */
   --c-success:      var(--p-green-300);
   --c-success-soft: rgba(47, 182, 122, 0.16);
-  --c-warning:      var(--p-amber-300);
+  --c-warning:      var(--p-amber-200);
   --c-warning-soft: rgba(235, 161, 51, 0.16);
   --c-danger:       var(--p-red-300);
-  --c-danger-soft:  rgba(255, 97, 102, 0.16);
-  --c-info:         var(--p-blue-300);
+  --c-danger-soft:  rgba(255, 138, 142, 0.16);
+  --c-info:         var(--p-blue-200);
   --c-info-soft:    rgba(133, 145, 188, 0.16);
 
-  /* focus ring + glow */
-  --c-ring:           var(--p-gold-400);
-  --c-glow-accent:    rgba(238, 186, 43, 0.45);
-  --c-gradient-accent: var(--p-gradient-accent);
+  --c-ring:            var(--p-amber-300);
+  --c-glow-accent:     rgba(230, 138, 0, 0.45);
+  --c-gradient-accent: linear-gradient(135deg, var(--p-amber-100) 0%, var(--p-amber-300) 100%);
 
-  /* elevation (glow does the lifting on dark; shadows stay subtle) */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
-  --shadow-md: 0 6px 20px -6px rgba(0,0,0,0.6);
-  --shadow-lg: 0 18px 50px -12px rgba(0,0,0,0.7);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 6px 20px -6px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 18px 50px -12px rgba(0, 0, 0, 0.8);
   --shadow-glow: 0 0 40px -8px var(--c-glow-accent);
 }
 
 /* ----------------------------------------------------------------------------
-   LAYER 2 — SEMANTIC  ·  LIGHT / Clarity
+   LAYER 2 — SEMANTIC  ·  LIGHT / Clarity  (pure white + #F6F7F9 rhythm)
    ---------------------------------------------------------------------------- */
 [data-theme="light"] {
   color-scheme: light;
 
-  --c-canvas:      var(--p-neutral-50);
-  --c-surface:     var(--p-neutral-0);
-  --c-elevated:    var(--p-neutral-0);
-  --c-inset:       #EEF0F4;
-  --c-overlay:     rgba(16, 19, 27, 0.45);
+  --c-canvas:       #FFFFFF;          /* pure white */
+  --c-canvas-muted: #F6F7F9;          /* the 50/off-white rhythm ground */
+  --c-surface:      #FFFFFF;
+  --c-elevated:     #FFFFFF;
+  --c-inset:        #F6F7F9;
+  --c-overlay:      rgba(16, 19, 27, 0.45);
 
-  --c-fg:          var(--p-neutral-900);
-  --c-fg-muted:    var(--p-neutral-600);
-  --c-fg-subtle:   var(--p-neutral-500);
+  --c-fg:          #14161B;
+  --c-fg-muted:    #474E5C;
+  --c-fg-subtle:   #646C7D;
   --c-fg-onaccent: #1A1206;
 
-  --c-border:        var(--p-neutral-200);
-  --c-border-strong: var(--p-neutral-300);
+  --c-border:        #E6E8EC;
+  --c-border-strong: #CDD2DA;
   --c-border-subtle: rgba(16, 19, 27, 0.08);
 
-  --c-accent:       var(--p-gold-400);
-  --c-accent-hover: var(--p-gold-300);
-  --c-accent-press: var(--p-gold-500);
-  --c-accent-soft:  rgba(238, 186, 43, 0.16);
-  --c-accent-text:  var(--p-amber-600); /* AA gold/bronze text on white */
+  --c-accent:       var(--p-amber-300);
+  --c-accent-hover: var(--p-amber-200);
+  --c-accent-press: var(--p-amber-400);
+  --c-accent-soft:  rgba(230, 138, 0, 0.14);
+  --c-accent-text:  var(--p-amber-500); /* AA on white */
   --c-accent-fg:    #1A1206;
 
-  --c-amber:       var(--p-amber-400);
-  --c-amber-text:  var(--p-amber-600);
-  --c-amber-soft:  rgba(230, 138, 0, 0.14);
+  --c-amber:      var(--p-amber-300);
+  --c-amber-text: var(--p-amber-500);
+  --c-amber-soft: rgba(230, 138, 0, 0.14);
 
-  --c-brand:       var(--p-blue-500);
-  --c-brand-soft:  rgba(51, 72, 143, 0.10);
+  --c-brand:      var(--p-blue-400);
+  --c-brand-soft: rgba(51, 72, 143, 0.10);
 
   --c-success:      var(--p-green-700);
   --c-success-soft: rgba(19, 138, 94, 0.12);
-  --c-warning:      var(--p-amber-600);
+  --c-warning:      var(--p-amber-500);
   --c-warning-soft: rgba(138, 83, 0, 0.12);
   --c-danger:       var(--p-red-700);
   --c-danger-soft:  rgba(213, 41, 47, 0.10);
-  --c-info:         var(--p-blue-500);
+  --c-info:         var(--p-blue-400);
   --c-info-soft:    rgba(51, 72, 143, 0.10);
 
-  --c-ring:           var(--p-gold-500);
-  --c-glow-accent:    rgba(230, 138, 0, 0.35);
-  --c-gradient-accent: var(--p-gradient-accent);
+  --c-ring:            var(--p-amber-400);
+  --c-glow-accent:     rgba(230, 138, 0, 0.30);
+  --c-gradient-accent: linear-gradient(135deg, var(--p-amber-100) 0%, var(--p-amber-300) 100%);
 
-  --shadow-sm: 0 1px 2px rgba(16,19,27,0.06);
-  --shadow-md: 0 8px 24px -8px rgba(16,19,27,0.14);
-  --shadow-lg: 0 20px 50px -16px rgba(16,19,27,0.18);
+  --shadow-sm: 0 1px 2px rgba(16, 19, 27, 0.06);
+  --shadow-md: 0 8px 24px -8px rgba(16, 19, 27, 0.12);
+  --shadow-lg: 0 20px 50px -16px rgba(16, 19, 27, 0.16);
   --shadow-glow: 0 8px 30px -10px var(--c-glow-accent);
 }
 
 /* ----------------------------------------------------------------------------
-   LAYER 2 — SEMANTIC  ·  PAPER (warm off-white, editorial)
+   LAYER 2 — SEMANTIC  ·  PAPER  (warm ivory — the in-between, matches Health OS)
    ---------------------------------------------------------------------------- */
 [data-theme="paper"] {
   color-scheme: light;
 
-  --c-canvas:      #FBF6EA;
-  --c-surface:     #FFFDF8;
-  --c-elevated:    #FFFFFF;
-  --c-inset:       #F3EAD6;
-  --c-overlay:     rgba(42, 36, 25, 0.40);
+  --c-canvas:       #F9F6F2;          /* Health OS warm ivory */
+  --c-canvas-muted: #F1ECE4;          /* deeper ivory crinkle ground */
+  --c-surface:      #FFFDF8;
+  --c-elevated:     #FFFFFF;
+  --c-inset:        #F4F0EA;
+  --c-overlay:      rgba(42, 36, 25, 0.40);
 
   --c-fg:          #2A2419;
   --c-fg-muted:    #6B6149;
   --c-fg-subtle:   #71674B;
   --c-fg-onaccent: #1A1206;
 
-  --c-border:        #E8DEC8;
+  --c-border:        #E7E0D8;
   --c-border-strong: #D8CBA9;
   --c-border-subtle: rgba(42, 36, 25, 0.08);
 
-  --c-accent:       var(--p-amber-400);
-  --c-accent-hover: var(--p-amber-300);
-  --c-accent-press: var(--p-amber-500);
+  --c-accent:       var(--p-amber-300);
+  --c-accent-hover: var(--p-amber-200);
+  --c-accent-press: var(--p-amber-400);
   --c-accent-soft:  rgba(230, 138, 0, 0.14);
-  --c-accent-text:  var(--p-amber-600);
+  --c-accent-text:  var(--p-amber-500);
   --c-accent-fg:    #1A1206;
 
-  --c-amber:       var(--p-amber-400);
-  --c-amber-text:  var(--p-amber-600);
-  --c-amber-soft:  rgba(230, 138, 0, 0.16);
+  --c-amber:      var(--p-amber-300);
+  --c-amber-text: var(--p-amber-500);
+  --c-amber-soft: rgba(230, 138, 0, 0.16);
 
-  --c-brand:       var(--p-blue-600);
-  --c-brand-soft:  rgba(41, 58, 114, 0.10);
+  --c-brand:      var(--p-blue-500);
+  --c-brand-soft: rgba(31, 43, 86, 0.10);
 
   --c-success:      var(--p-green-700);
   --c-success-soft: rgba(14, 107, 73, 0.12);
-  --c-warning:      var(--p-amber-600);
+  --c-warning:      var(--p-amber-500);
   --c-warning-soft: rgba(138, 83, 0, 0.12);
   --c-danger:       var(--p-red-700);
   --c-danger-soft:  rgba(168, 30, 35, 0.10);
-  --c-info:         var(--p-blue-600);
-  --c-info-soft:    rgba(41, 58, 114, 0.10);
+  --c-info:         var(--p-blue-500);
+  --c-info-soft:    rgba(31, 43, 86, 0.10);
 
-  --c-ring:           var(--p-amber-500);
-  --c-glow-accent:    rgba(230, 138, 0, 0.30);
-  --c-gradient-accent: var(--p-gradient-accent);
+  --c-ring:            var(--p-amber-400);
+  --c-glow-accent:     rgba(230, 138, 0, 0.28);
+  --c-gradient-accent: linear-gradient(135deg, var(--p-amber-100) 0%, var(--p-amber-300) 100%);
 
-  --shadow-sm: 0 1px 2px rgba(42,36,25,0.06);
-  --shadow-md: 0 8px 24px -8px rgba(42,36,25,0.12);
-  --shadow-lg: 0 20px 50px -16px rgba(42,36,25,0.16);
+  --shadow-sm: 0 1px 2px rgba(42, 36, 25, 0.06);
+  --shadow-md: 0 8px 24px -8px rgba(42, 36, 25, 0.12);
+  --shadow-lg: 0 20px 50px -16px rgba(42, 36, 25, 0.16);
   --shadow-glow: 0 8px 30px -10px var(--c-glow-accent);
 }
 
 /* ----------------------------------------------------------------------------
    LAYER 3 — COMPONENT TOKENS (reference semantic only; inherit per theme)
-   Representative set; expanded per-component in S5.
    ---------------------------------------------------------------------------- */
 :root {
-  /* radius — 8px-max squircles + pill for avatars/pills */
+  /* radius — 2/4/6/8 only. No pills, no full rounds on UI boxes. */
   --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 6px;
-  --radius-lg: 8px;   /* squircle cap */
-  --radius-pill: 9999px;
+  --radius-lg: 8px;
 
   /* motion — gentle */
-  --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --dur-fast: 150ms;
   --dur-base: 250ms;
   --dur-slow: 400ms;
 
   /* button */
-  --btn-fg:           var(--c-accent-fg);
-  --btn-bg:           var(--c-accent);
-  --btn-bg-hover:     var(--c-accent-hover);
-  --btn-radius:       var(--radius-lg);
+  --btn-fg:       var(--c-accent-fg);
+  --btn-bg:       var(--c-accent);
+  --btn-bg-hover: var(--c-accent-hover);
+  --btn-radius:   var(--radius-lg);
 
   /* card */
-  --card-bg:      var(--c-surface);
-  --card-border:  var(--c-border);
-  --card-radius:  var(--radius-lg);
-  --card-shadow:  var(--shadow-md);
+  --card-bg:     var(--c-surface);
+  --card-border: var(--c-border);
+  --card-radius: var(--radius-lg);
+  --card-shadow: var(--shadow-md);
 
   /* input */
-  --input-bg:        var(--c-surface);
-  --input-border:    var(--c-border-strong);
-  --input-fg:        var(--c-fg);
+  --input-bg:          var(--c-surface);
+  --input-border:      var(--c-border-strong);
+  --input-fg:          var(--c-fg);
   --input-placeholder: var(--c-fg-subtle);
-  --input-radius:    var(--radius-md);
+  --input-radius:      var(--radius-md);
 
   /* focus ring */
   --ring-width: 2px;
   --ring-offset: 2px;
 
   /* fixed component surfaces (theme-independent) */
-  --c-inverse-bg: #16181F;   /* the dark "luxury pill" — same on every theme */
-  --c-inverse-fg: #F6F7F9;
+  --c-inverse-bg: #141414;   /* dark "luxury" surface — same on every theme */
+  --c-inverse-fg: #F5F5F5;
   --c-danger-solid: #B42318; /* solid danger fill, AA with white */
   --c-on-danger: #FFFFFF;
 }

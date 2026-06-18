@@ -105,7 +105,7 @@ function StatusPill({ tone }: { tone: CalloutTone }) {
   const s = STATUS_META[tone]
   return (
     <span className={cn('inline-flex items-center gap-1.5 font-mono text-mono-xs uppercase', s.text)}>
-      <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', s.dot)} />
+      <span aria-hidden className={cn('h-1.5 w-1.5 rounded-sm', s.dot)} />
       {s.label}
     </span>
   )

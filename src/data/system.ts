@@ -7,6 +7,7 @@ import type { LucideIcon } from 'lucide-react'
 import {
   Inbox, MessageSquare, Workflow, Bot, Filter, CalendarCheck,
   MessagesSquare, BarChart3, Layers, Repeat,
+  ShieldCheck, Type, Sparkles, SquareStack,
 } from 'lucide-react'
 import type { Accent } from '@/lib/accents'
 
@@ -26,16 +27,16 @@ export interface Feature {
 }
 
 export const FEATURES: Feature[] = [
-  { title: 'Unified CRM', tagline: 'All leads in one place.', description: 'Track enquiries, borrowers, and deal progress in a single pipeline — first enquiry to settlement.', Icon: Inbox, accent: 'gold' },
+  { title: 'Unified CRM', tagline: 'All leads in one place.', description: 'Track enquiries, borrowers, and deal progress in a single pipeline — first enquiry to settlement.', Icon: Inbox, accent: 'amber' },
   { title: 'Lead Follow-Up', tagline: 'Automated. Never miss a lead.', description: 'Instant SMS + email follow-ups on every enquiry, tracked inside the pipeline.', Icon: MessageSquare, accent: 'amber' },
   { title: 'Automated Nurture', tagline: 'Stay top of mind.', description: 'Timely campaigns keep prospects warm through longer decision cycles.', Icon: Repeat, accent: 'blue' },
-  { title: 'AI Conversations', tagline: 'Respond 24/7.', description: 'AI chat answers, qualifies, and books — even outside business hours.', Icon: Bot, accent: 'gold' },
+  { title: 'AI Conversations', tagline: 'Respond 24/7.', description: 'AI chat answers, qualifies, and books — even outside business hours.', Icon: Bot, accent: 'amber' },
   { title: 'Workflow Automation', tagline: 'Remove the manual admin.', description: 'Follow-ups, routing, reminders and pipeline updates trigger at the right time.', Icon: Workflow, accent: 'amber' },
   { title: 'Smart Funnels', tagline: 'Capture more leads.', description: 'High-converting, pre-built landing pages that route enquiries into the pipeline.', Icon: Filter, accent: 'blue' },
-  { title: 'Online Booking', tagline: 'Clients book instantly.', description: 'Integrated calendar booking with automated reminders — no email back-and-forth.', Icon: CalendarCheck, accent: 'gold' },
+  { title: 'Online Booking', tagline: 'Clients book instantly.', description: 'Integrated calendar booking with automated reminders — no email back-and-forth.', Icon: CalendarCheck, accent: 'amber' },
   { title: 'Client Messaging', tagline: 'One unified inbox.', description: 'SMS, email and social in one place — every conversation, one client.', Icon: MessagesSquare, accent: 'amber' },
   { title: 'Business Insights', tagline: 'Track what matters.', description: 'Real-time dashboards on lead sources, conversion and pipeline performance.', Icon: BarChart3, accent: 'blue' },
-  { title: 'Tech Stack Merge', tagline: 'Replace many tools.', description: 'CRM, marketing, messaging, funnels, analytics and scheduling — one platform.', Icon: Layers, accent: 'gold' },
+  { title: 'Tech Stack Merge', tagline: 'Replace many tools.', description: 'CRM, marketing, messaging, funnels, analytics and scheduling — one platform.', Icon: Layers, accent: 'amber' },
 ]
 
 export interface Stat {
@@ -68,7 +69,7 @@ export interface Pillar {
 }
 
 export const PILLARS: Pillar[] = [
-  { name: 'The Ruler', weight: '70%', blurb: 'Structure, order, authority and stability. It replaces scattered tools and reactive workflows with a system brokers can rely on.', accent: 'gold' },
+  { name: 'The Ruler', weight: '70%', blurb: 'Structure, order, authority and stability. It replaces scattered tools and reactive workflows with a system brokers can rely on.', accent: 'amber' },
   { name: 'The Sage', weight: '30%', blurb: 'Clarity, insight and calm explanation. It turns complexity into understanding so brokers act with confidence, not hesitation.', accent: 'blue' },
 ]
 
@@ -76,3 +77,27 @@ export const TESTIMONIAL = {
   quote: 'I saved 100s of hours and 1,000s of dollars per month. It has been the best business decision ever — hands down.',
   author: 'Mortgage broker, Finance OS',
 }
+
+/** Relevant /commands for the hero command widget — design system, plans & docs. */
+export const COMMANDS: string[] = [
+  'browse the components',
+  'copy a token',
+  'switch the theme',
+  'open the live demo',
+  'read the business plan',
+  'read the marketing plan',
+  'view on github',
+]
+
+export interface TickerItem {
+  Icon: LucideIcon
+  text: string
+}
+
+export const TICKER_ITEMS: TickerItem[] = [
+  { Icon: ShieldCheck, text: 'WCAG AA throughout' },
+  { Icon: Layers, text: 'Fully tokenised · zero glass' },
+  { Icon: Type, text: 'Spline Sans + Anonymous Pro' },
+  { Icon: Sparkles, text: 'Momentum Amber + Atlas Blue' },
+  { Icon: SquareStack, text: '8px-max squircles' },
+]

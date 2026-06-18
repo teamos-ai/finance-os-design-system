@@ -1,7 +1,7 @@
 /**
  * Swatch — a click-to-copy colour chip. Shows the colour, a label, its HEX and its RGB,
  * and copies the hex (or any `copyValue`) to the clipboard on click with a brief
- * "Copied" confirmation. Flat hairline card, 8px squircle, gold focus ring. Reduced-motion
+ * "Copied" confirmation. Flat hairline card, 8px squircle, amber focus ring. Reduced-motion
  * safe (no JS motion). The colours shown are the brand's fixed hexes, so they read the
  * same in every theme; the surrounding card flips with the theme.
  */

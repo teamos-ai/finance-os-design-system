@@ -254,7 +254,7 @@ export function SocialSection() {
           </p>
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             {[
-              { name: 'Gradient', wrap: 'bg-gradient-accent', fg: 'text-accent-fg', note: 'Signature gold — feed quotes & hero posts.' },
+              { name: 'Gradient', wrap: 'bg-gradient-accent', fg: 'text-accent-fg', note: 'Signature amber — feed quotes & hero posts.' },
               { name: 'Dark', wrap: 'bg-inverse', fg: 'text-inverse-fg', note: 'Carbon — stat cards & data posts.' },
               { name: 'Paper', wrap: 'bg-surface border border-border', fg: 'text-fg', note: 'Quiet light — timeline & link cards.' },
             ].map((recipe) => (

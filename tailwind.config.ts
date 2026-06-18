@@ -17,7 +17,7 @@ export default {
       black: '#000000',
 
       /* semantic (intent) — preferred in components */
-      canvas: 'var(--c-canvas)',
+      canvas: { DEFAULT: 'var(--c-canvas)', muted: 'var(--c-canvas-muted)' },
       surface: 'var(--c-surface)',
       elevated: 'var(--c-elevated)',
       inset: 'var(--c-inset)',
@@ -61,31 +61,6 @@ export default {
       info: { DEFAULT: 'var(--c-info)', soft: 'var(--c-info-soft)' },
       inverse: { DEFAULT: 'var(--c-inverse-bg)', fg: 'var(--c-inverse-fg)' },
       ring: 'var(--c-ring)',
-
-      /* primitives (raw ramps) — for the Color docs + rare raw needs */
-      gold: {
-        50: 'var(--p-gold-50)', 100: 'var(--p-gold-100)', 200: 'var(--p-gold-200)',
-        300: 'var(--p-gold-300)', 400: 'var(--p-gold-400)', 500: 'var(--p-gold-500)',
-        600: 'var(--p-gold-600)', 700: 'var(--p-gold-700)', 800: 'var(--p-gold-800)',
-      },
-      amberp: {
-        50: 'var(--p-amber-50)', 100: 'var(--p-amber-100)', 200: 'var(--p-amber-200)',
-        300: 'var(--p-amber-300)', 400: 'var(--p-amber-400)', 500: 'var(--p-amber-500)',
-        600: 'var(--p-amber-600)', 700: 'var(--p-amber-700)', 800: 'var(--p-amber-800)',
-      },
-      blue: {
-        50: 'var(--p-blue-50)', 100: 'var(--p-blue-100)', 200: 'var(--p-blue-200)',
-        300: 'var(--p-blue-300)', 400: 'var(--p-blue-400)', 500: 'var(--p-blue-500)',
-        600: 'var(--p-blue-600)', 700: 'var(--p-blue-700)', 800: 'var(--p-blue-800)',
-        900: 'var(--p-blue-900)',
-      },
-      neutral: {
-        0: 'var(--p-neutral-0)', 50: 'var(--p-neutral-50)', 100: 'var(--p-neutral-100)',
-        200: 'var(--p-neutral-200)', 300: 'var(--p-neutral-300)', 400: 'var(--p-neutral-400)',
-        500: 'var(--p-neutral-500)', 600: 'var(--p-neutral-600)', 700: 'var(--p-neutral-700)',
-        800: 'var(--p-neutral-800)', 850: 'var(--p-neutral-850)', 900: 'var(--p-neutral-900)',
-        950: 'var(--p-neutral-950)',
-      },
     },
 
     borderRadius: {
@@ -95,8 +70,6 @@ export default {
       md: 'var(--radius-md)',
       DEFAULT: 'var(--radius-md)',
       lg: 'var(--radius-lg)',
-      pill: 'var(--radius-pill)',
-      full: '9999px',
     },
 
     extend: {

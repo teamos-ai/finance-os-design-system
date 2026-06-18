@@ -2,7 +2,7 @@
  * Motion primitives — Finance OS's quiet Framer Motion vocabulary.
  *
  * Every primitive honours `prefers-reduced-motion`. Vocabulary = fade + small
- * translate + gentle marquee + soft hover lift + count-up + signature gold glow.
+ * translate + gentle marquee + soft hover lift + count-up + signature amber glow.
  * No bounce / wobble / elastic / autoplay. Durations stay subtle (<= 480ms).
  * Use at most ONE reveal per viewport band so the page reads calm.
  *
@@ -143,21 +143,21 @@ export const HoverLift = ({
   )
 }
 
-/* ── Glow — signature gold/amber radial wash behind a hero/banner ──────────────
+/* ── Glow — signature amber/amber radial wash behind a hero/banner ──────────────
    Pure CSS radial gradients at low alpha, blurred. aria-hidden, no pointer events. */
 export const Glow = ({ className }: { className?: string }) => (
   <div aria-hidden className={cn('pointer-events-none absolute inset-0 -z-10 overflow-hidden', className)}>
     <div
-      className="absolute left-1/2 top-[-18%] h-[620px] w-[min(1100px,120%)] -translate-x-1/2 rounded-full blur-3xl opacity-70"
+      className="absolute left-1/2 top-[-18%] h-[620px] w-[min(1100px,120%)] -translate-x-1/2 rounded-sm blur-3xl opacity-70"
       style={{
         background:
-          'radial-gradient(closest-side, rgba(238,186,43,0.30), rgba(230,138,0,0.14) 55%, transparent 75%)',
+          'radial-gradient(closest-side, rgba(230, 138, 0,0.30), rgba(230,138,0,0.14) 55%, transparent 75%)',
       }}
     />
   </div>
 )
 
-/* ── BorderGlow — animated gold sweep around an accent surface ─────────────── */
+/* ── BorderGlow — animated amber sweep around an accent surface ─────────────── */
 export const BorderGlow = ({ className, children }: { className?: string; children: React.ReactNode }) => {
   const reduced = useReducedMotion()
   return (
@@ -166,7 +166,7 @@ export const BorderGlow = ({ className, children }: { className?: string; childr
         <motion.div
           aria-hidden
           className="pointer-events-none absolute -inset-px rounded-lg opacity-60"
-          style={{ background: 'conic-gradient(from 0deg, transparent, rgba(238,186,43,0.5), transparent 30%)' }}
+          style={{ background: 'conic-gradient(from 0deg, transparent, rgba(230, 138, 0,0.5), transparent 30%)' }}
           animate={{ rotate: 360 }}
           transition={{ duration: 6, ease: 'linear', repeat: Infinity }}
         />
@@ -183,12 +183,12 @@ export const BreathingDot = ({ className }: { className?: string }) => {
     <span className={cn('relative inline-flex h-2 w-2', className)}>
       {!reduced && (
         <motion.span
-          className="absolute inline-flex h-full w-full rounded-full bg-accent"
+          className="absolute inline-flex h-full w-full rounded-sm bg-accent"
           animate={{ scale: [1, 2.2], opacity: [0.6, 0] }}
           transition={{ duration: 1.8, ease: 'easeOut', repeat: Infinity }}
         />
       )}
-      <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+      <span className="relative inline-flex h-2 w-2 rounded-sm bg-accent" />
     </span>
   )
 }
@@ -217,7 +217,7 @@ export const Reveal = ({
   )
 }
 
-/* ── GradientShimmer — gentle moving gold→amber sheen on text/labels ───────── */
+/* ── GradientShimmer — gentle moving amber→amber sheen on text/labels ───────── */
 export const GradientShimmer = ({ className, children }: { className?: string; children: React.ReactNode }) => {
   const reduced = useReducedMotion()
   return (

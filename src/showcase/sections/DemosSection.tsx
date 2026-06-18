@@ -40,7 +40,7 @@ import { cn } from '@/lib/cn'
 /* -------------------------------------------------------------------------- */
 
 type Stage =
-  | { label: string; variant: 'gold' }
+  | { label: string; variant: 'amber' }
   | { label: string; variant: 'blue' }
   | { label: string; variant: 'amber' }
   | { label: string; variant: 'success' }
@@ -55,7 +55,7 @@ interface Deal {
 const DEALS: Deal[] = [
   { borrower: 'Harper & Vale', product: 'Owner-occupier refinance', amount: '$840,000', stage: { label: 'Application', variant: 'blue' } },
   { borrower: 'M. Okonkwo', product: 'First home buyer', amount: '$520,000', stage: { label: 'Pre-approval', variant: 'amber' } },
-  { borrower: 'Sandhu Holdings', product: 'Commercial term loan', amount: '$1,250,000', stage: { label: 'Assessment', variant: 'gold' } },
+  { borrower: 'Sandhu Holdings', product: 'Commercial term loan', amount: '$1,250,000', stage: { label: 'Assessment', variant: 'amber' } },
   { borrower: 'R. Delacroix', product: 'Investment property', amount: '$675,000', stage: { label: 'Settled', variant: 'success' } },
 ]
 
@@ -64,20 +64,19 @@ interface Activity {
   what: string
   when: string
   icon: typeof Mail
-  accent: 'gold' | 'blue' | 'amber'
+  accent: 'amber' | 'blue' | 'amber'
 }
 
 const INBOX: Activity[] = [
-  { who: 'Maya Robinson', what: 'replied to your follow-up', when: '4m', icon: Mail, accent: 'gold' },
+  { who: 'Maya Robinson', what: 'replied to your follow-up', when: '4m', icon: Mail, accent: 'amber' },
   { who: 'James Patel', what: 'booked a discovery call', when: '21m', icon: CalendarCheck, accent: 'blue' },
   { who: 'Sana Kaur', what: 'sent two documents', when: '1h', icon: MessageSquare, accent: 'amber' },
-  { who: 'Leo Marsh', what: 'opened your rate review', when: '3h', icon: Mail, accent: 'gold' },
+  { who: 'Leo Marsh', what: 'opened your rate review', when: '3h', icon: Mail, accent: 'amber' },
 ]
 
-const ACCENT_WELL: Record<'gold' | 'blue' | 'amber', string> = {
-  gold: 'bg-accent-soft text-accent-text',
-  blue: 'bg-brand-soft text-brand',
+const ACCENT_WELL: Record<'amber' | 'blue', string> = {
   amber: 'bg-amber-soft text-amber-text',
+  blue: 'bg-brand-soft text-brand',
 }
 
 const initials = (name: string): string =>
@@ -214,7 +213,7 @@ const Dashboard = () => (
           aria-hidden
         >
           <Bell className="h-4 w-4" strokeWidth={1.5} />
-          <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-accent" />
+          <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-sm bg-accent" />
         </span>
         <Button variant="primary" size="sm" leadingIcon={<Plus className="h-3.5 w-3.5" />}>
           New deal

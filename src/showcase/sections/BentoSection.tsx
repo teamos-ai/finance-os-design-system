@@ -113,7 +113,7 @@ export function BentoSection() {
           <StaggerItem className="md:col-span-3">
             <div className="flex h-full flex-col items-start justify-between gap-5 rounded-lg border border-border bg-elevated p-6 md:flex-row md:items-center md:p-8">
               <div className="flex flex-col gap-2">
-                <Badge variant="gold" size="sm" dot>
+                <Badge variant="amber" size="sm" dot>
                   Replaces 8 tools
                 </Badge>
                 <h3 className="font-display text-title-lg text-fg">

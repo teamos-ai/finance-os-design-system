@@ -1,10 +1,12 @@
 /**
- * Accent recipes — the per-accent tonal indirection (mirrors the template's accents.ts).
- * Components (Card, FeatureCard, ToolCard, MonoLabel…) never hand-write per-accent colour
- * sets; they read ACCENTS[accent]. Every value is a SEMANTIC token class — zero rogue hex.
+ * Accent recipes — the per-accent tonal indirection. Components (Card, FeatureCard,
+ * ToolCard, MonoLabel…) never hand-write per-accent colour sets; they read ACCENTS[accent].
+ * Every value is a SEMANTIC token class — zero rogue hex.
+ *
+ * The legacy gold accent has been retired; Momentum Amber is primary, Atlas Blue secondary.
  */
-export type Accent = 'gold' | 'amber' | 'blue' | 'green' | 'neutral'
-export const ACCENTS_LIST: Accent[] = ['gold', 'amber', 'blue', 'green', 'neutral']
+export type Accent = 'amber' | 'blue' | 'green' | 'neutral'
+export const ACCENTS_LIST: Accent[] = ['amber', 'blue', 'green', 'neutral']
 
 export interface AccentRecipe {
   /** soft tinted background well */
@@ -24,15 +26,6 @@ export interface AccentRecipe {
 }
 
 export const ACCENTS: Record<Accent, AccentRecipe> = {
-  gold: {
-    well: 'bg-accent-soft',
-    text: 'text-accent-text',
-    dot: 'bg-accent',
-    badge: 'gold',
-    wash: 'bg-gradient-to-br from-accent-soft to-transparent',
-    washIcon: 'text-accent-text',
-    ring: 'ring-accent',
-  },
   amber: {
     well: 'bg-amber-soft',
     text: 'text-amber-text',

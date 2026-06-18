@@ -1,6 +1,6 @@
 /**
  * Disclosure — a calm accordion. Smooth height-auto expand/collapse via Framer
- * AnimatePresence, a chevron that rotates, gold focus ring. Reduced-motion safe
+ * AnimatePresence, a chevron that rotates, amber focus ring. Reduced-motion safe
  * (snaps open/closed). 8px squircle, flat hairline, zero glass.
  */
 import * as React from 'react'

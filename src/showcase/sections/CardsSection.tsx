@@ -39,13 +39,13 @@ import { FEATURES, TOOLS_REPLACED } from '@/data/system'
 
 /** Per-tool icon + accent for the ToolCard row, keyed off the TOOLS_REPLACED strings. */
 const TOOL_META: Record<string, { icon: LucideIcon; accent: Accent }> = {
-  CRM: { icon: Inbox, accent: 'gold' },
+  CRM: { icon: Inbox, accent: 'amber' },
   'Email marketing': { icon: Mail, accent: 'amber' },
   'SMS platform': { icon: MessageSquare, accent: 'blue' },
-  'Funnel builder': { icon: Filter, accent: 'gold' },
+  'Funnel builder': { icon: Filter, accent: 'amber' },
   'Website builder': { icon: Globe, accent: 'amber' },
   'Booking software': { icon: CalendarCheck, accent: 'blue' },
-  Automation: { icon: Workflow, accent: 'gold' },
+  Automation: { icon: Workflow, accent: 'amber' },
   'Review management': { icon: Star, accent: 'amber' },
 }
 
@@ -145,7 +145,7 @@ export function CardsSection() {
                   name={name}
                   meta="Replaced by Finance OS"
                   icon={m?.icon ?? Inbox}
-                  accent={m?.accent ?? 'gold'}
+                  accent={m?.accent ?? 'amber'}
                 />
               )
             })}
@@ -190,10 +190,10 @@ export function CardsSection() {
             action={<MonoLabel tone="subtle" number="05">Card · media</MonoLabel>}
           >
             <Card
-              accent="gold"
+              accent="amber"
               placeholderIcon={LineChart}
               badge={
-                <Badge variant="gold" size="sm">
+                <Badge variant="amber" size="sm">
                   Report
                 </Badge>
               }

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
 export type Theme = 'dark' | 'light' | 'paper'
-export const THEMES: Theme[] = ['dark', 'light', 'paper']
+export const THEMES: Theme[] = ['light', 'paper', 'dark']
 export const THEME_LABELS: Record<Theme, string> = {
   dark: 'Dark · OLED',
   light: 'Light · Clarity',

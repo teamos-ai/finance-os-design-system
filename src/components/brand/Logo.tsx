@@ -1,53 +1,51 @@
 /**
- * Logo — the Finance OS "OS" gradient squircle monogram + wordmark.
- * The dark-mode gradient mark is the primary brand lockup (brand book p.12).
+ * Logo — the real Finance OS brand marks (PNG assets in /public).
+ *   • mark      → the square gradient "OS" monogram (works on any background; favicon).
+ *   • full/rect → the FINANCE OS rectangle lockup, theme-aware: the white-outline version
+ *     on dark, the gradient-fill version on light/paper.
  */
+import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
 type Size = 'sm' | 'md' | 'lg'
 
-const MARK_SIZE: Record<Size, string> = {
-  sm: 'h-8 w-8 text-[0.7rem]',
-  md: 'h-10 w-10 text-title-sm',
-  lg: 'h-12 w-12 text-title-md',
+const MARK: Record<Size, string> = {
+  sm: 'h-8 w-8',
+  md: 'h-10 w-10',
+  lg: 'h-12 w-12',
 }
-const WORD_SIZE: Record<Size, string> = {
-  sm: 'text-title-sm',
-  md: 'text-title-md',
-  lg: 'text-title-lg',
+const RECT: Record<Size, string> = {
+  sm: 'h-7',
+  md: 'h-9',
+  lg: 'h-12',
 }
 
 export const LogoMark = ({ size = 'md', className }: { size?: Size; className?: string }) => (
-  <span
-    aria-hidden
-    className={cn(
-      'grid place-items-center rounded-lg bg-gradient-accent font-display font-bold text-accent-fg shadow-glow',
-      MARK_SIZE[size],
-      className,
-    )}
-  >
-    OS
-  </span>
+  <img
+    src="/logo-square.png"
+    alt="Finance OS"
+    width={48}
+    height={48}
+    className={cn('block shrink-0 object-contain', MARK[size], className)}
+  />
 )
 
 export interface LogoProps {
-  variant?: 'mark' | 'full' | 'wordmark'
+  variant?: 'mark' | 'full' | 'rect' | 'wordmark'
   size?: Size
   className?: string
 }
 
 export const Logo = ({ variant = 'full', size = 'md', className }: LogoProps) => {
-  const wordmark = (
-    <span className={cn('font-display font-semibold tracking-tight text-fg', WORD_SIZE[size])}>
-      Finance<span className="text-accent-text">OS</span>
-    </span>
-  )
+  const { theme } = useTheme()
   if (variant === 'mark') return <LogoMark size={size} className={className} />
-  if (variant === 'wordmark') return <span className={className}>{wordmark}</span>
+  // Rectangle lockup — white-outline version reads on dark; gradient-fill on light/paper.
+  const src = theme === 'dark' ? '/logo-rect-white.png' : '/logo-rect.png'
   return (
-    <span className={cn('inline-flex items-center gap-2.5', className)}>
-      <LogoMark size={size} />
-      {wordmark}
-    </span>
+    <img
+      src={src}
+      alt="Finance OS"
+      className={cn('block w-auto shrink-0 object-contain', RECT[size], className)}
+    />
   )
 }

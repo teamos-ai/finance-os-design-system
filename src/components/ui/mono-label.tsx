@@ -49,7 +49,7 @@ export const MonoLabel = ({
       )}
       {...props}
     >
-      {dot && <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', t.mark)} />}
+      {dot && <span aria-hidden className={cn('h-1.5 w-1.5 rounded-sm', t.mark)} />}
       {number && <span className="tabular-nums opacity-70">{number}</span>}
       {children}
       {trailing && <span className="opacity-70">{trailing}</span>}

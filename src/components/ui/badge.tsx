@@ -1,18 +1,17 @@
 /**
- * Badge — small mono pill. Token-only tonal recipes. `rounded-pill` is one of the two
- * intentional exceptions to the 8px-squircle rule (the other is ThemeToggle).
+ * Badge — small mono tag. Token-only tonal recipes. Squared corners (rounded-sm, 4px)
+ * to match the system's 8px-max, no-pill radius language.
  */
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
 const badge = cva(
-  'inline-flex items-center gap-1.5 rounded-pill font-mono font-bold uppercase whitespace-nowrap',
+  'inline-flex items-center gap-1.5 rounded-sm font-mono font-bold uppercase whitespace-nowrap',
   {
     variants: {
       variant: {
         neutral: 'bg-elevated text-fg-muted',
-        gold: 'bg-accent-soft text-accent-text',
         amber: 'bg-amber-soft text-amber-text',
         blue: 'bg-brand-soft text-brand',
         success: 'bg-success-soft text-success',
@@ -37,7 +36,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement>, Varia
 
 export const Badge = ({ className, variant, size, dot, emoji, children, ...props }: BadgeProps) => (
   <span className={cn(badge({ variant, size }), className)} {...props}>
-    {dot && <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-current" />}
+    {dot && <span aria-hidden className="h-1.5 w-1.5 rounded-sm bg-current" />}
     {emoji && <span aria-hidden>{emoji}</span>}
     {children}
   </span>

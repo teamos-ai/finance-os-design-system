@@ -17,7 +17,7 @@ export interface ToolCardProps {
   className?: string
 }
 
-export const ToolCard = ({ name, meta, icon: Icon, accent = 'gold', badge = 'Replaces', className }: ToolCardProps) => {
+export const ToolCard = ({ name, meta, icon: Icon, accent = 'amber', badge = 'Replaces', className }: ToolCardProps) => {
   const a = ACCENTS[accent]
   return (
     <article

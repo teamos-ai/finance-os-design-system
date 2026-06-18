@@ -41,7 +41,7 @@ const RELATED: RelatedPost[] = [
     description:
       'Most pipelines carry stages nobody uses. A short, honest list is the one brokers keep up to date.',
     readTime: '6 min read',
-    accent: 'gold',
+    accent: 'amber',
   },
   {
     eyebrow: 'Nurture',

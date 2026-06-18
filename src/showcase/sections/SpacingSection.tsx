@@ -5,7 +5,7 @@
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 
-/** The 8px-derived spacing scale. Each step renders a live gold ruler. */
+/** The 8px-derived spacing scale. Each step renders a live amber ruler. */
 const SPACE_SCALE: { token: string; px: number; note: string }[] = [
   { token: 'space-1', px: 4, note: 'Hairline gaps, icon insets' },
   { token: 'space-2', px: 8, note: 'Base unit — tight stacks' },
@@ -73,7 +73,7 @@ export function SpacingSection() {
                     </span>
                   </div>
 
-                  {/* the gold ruler */}
+                  {/* the amber ruler */}
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-full max-w-[16rem] overflow-hidden rounded-xs bg-inset">
                       <div

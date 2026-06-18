@@ -1,12 +1,12 @@
 /**
  * Button — Finance OS.
  *
- * Primary CTA = `variant="primary"` (gold fill, dark label — AA). The signature
- * gold→amber CTA = `variant="gradient"` with a gold glow (use sparingly). The dark
+ * Primary CTA = `variant="primary"` (amber fill, dark label — AA). The signature
+ * gradient CTA = `variant="gradient"` with an amber glow (use sparingly). The dark
  * luxury pill = `variant="dark"` (fixed near-black, same on every theme).
  *
  * 8px squircle by default (the global maximum), never a full pill. Glow only on the
- * gradient CTA; neutral variants use soft shadows. Focus ring = the gold --c-ring.
+ * gradient CTA; neutral variants use soft shadows. Focus ring = the amber --c-ring.
  * Active scale 0.98. Don't stack two primary CTAs. Token-only — zero rogue hex.
  */
 import * as React from 'react'

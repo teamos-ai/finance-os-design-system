@@ -56,7 +56,7 @@ export function OverviewSection() {
           return (
             <Card key={pillar.name} tone="surface" padding="lg">
               <div className="flex items-center justify-between">
-                <MonoLabel tone={pillar.accent === 'gold' ? 'accent' : 'brand'} dot>
+                <MonoLabel tone={pillar.accent === 'amber' ? 'accent' : 'brand'} dot>
                   {pillar.name}
                 </MonoLabel>
                 <span className={`font-display text-display-sm ${a.text}`}>{pillar.weight}</span>

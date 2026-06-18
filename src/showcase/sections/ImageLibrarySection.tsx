@@ -5,7 +5,7 @@
  * direction; a closing note covers how images behave per theme. Calm, broker-grade.
  *
  * Self-contained: the wash CSS strings are documented signature-gradient + glow draughts
- * built only from the locked gold/amber/navy family (rgba allowed inside a documented glow).
+ * built only from the locked amber/amber/navy family (rgba allowed inside a documented glow).
  */
 import { Building2, LineChart, Handshake, ShieldCheck, Check, X } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
@@ -23,7 +23,7 @@ const FRAMES: ReadonlyArray<{
   {
     ratio: '16/9',
     label: 'Hero & banner',
-    note: '16 / 9 · gold glow',
+    note: '16 / 9 · amber glow',
     background:
       'radial-gradient(120% 140% at 0% 0%, rgba(238,186,43,0.20), transparent 60%), linear-gradient(135deg, #1b2433, #0e131c)',
     dark: true,
@@ -65,7 +65,7 @@ export function ImageLibrarySection() {
       id="imagery"
       eyebrow="17 - Image Library"
       title="Image Library"
-      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Until shoots land, washes built from the signature gold-amber-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
+      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Until shoots land, washes built from the signature amber-amber-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
     >
       {/* Aspect-ratio frames */}
       <div className="mb-14">
@@ -174,7 +174,7 @@ export function ImageLibrarySection() {
               />
               <p className="mt-4 font-body text-body-sm leading-relaxed text-fg-muted">
                 Documentary tone, restrained colour, advisors mid-work. Warmth comes from a faint
-                gold glow — never a filter. Subjects look composed, not staged.
+                amber glow — never a filter. Subjects look composed, not staged.
               </p>
             </div>
           </div>
@@ -213,7 +213,7 @@ export function ImageLibrarySection() {
             {
               Icon: ShieldCheck,
               theme: 'Dark-OLED',
-              body: 'Frames glow against true black. A faint gold wash at the corner ties the image to the accent without a visible border seam.',
+              body: 'Frames glow against true black. A faint amber wash at the corner ties the image to the accent without a visible border seam.',
             },
             {
               Icon: Building2,

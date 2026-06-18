@@ -4,7 +4,7 @@
  * Three working lead-magnet patterns, all on Finance OS tokens:
  *   1. Tech-stack savings calculator — number Inputs for current monthly spend across a
  *      few tools, summed live (useState), compared to Finance OS at $297/mo. Monthly +
- *      annual savings count up (CountUp) inside an on-brand gold result card.
+ *      annual savings count up (CountUp) inside an on-brand amber result card.
  *   2. Gated download card — a lead magnet (PDF) behind a single email field with a
  *      success / thank-you state (useState).
  *   3. Newsletter opt-in — email Input + Button with its own thank-you state.
@@ -112,7 +112,7 @@ function SavingsCalculator() {
         </div>
       </div>
 
-      {/* Result — on-brand gold card */}
+      {/* Result — on-brand amber card */}
       <div
         className={cn(
           'relative flex flex-col overflow-hidden rounded-md border p-6',
@@ -123,7 +123,7 @@ function SavingsCalculator() {
           <MonoLabel number="02" tone={isSaving ? 'accent' : 'subtle'}>
             With Finance OS
           </MonoLabel>
-          <Badge variant="gold" size="sm">
+          <Badge variant="amber" size="sm">
             {currency(PRICING.financeOs)}/mo
           </Badge>
         </div>

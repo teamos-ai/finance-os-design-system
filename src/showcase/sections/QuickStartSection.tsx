@@ -140,7 +140,7 @@ const FILE_TREE = `src/
 │  ├─ cn.ts             clsx + tailwind-merge (font-size fix)
 │  ├─ theme.tsx         ThemeProvider + useTheme
 │  ├─ motion.tsx        FadeIn, Stagger, reduced-motion safe
-│  └─ accents.ts        gold | amber | blue | green | neutral
+│  └─ accents.ts        amber | amber | blue | green | neutral
 ├─ components/ui/       Button, Card, Badge, Input, …
 └─ data/system.ts       BRAND, FEATURES, STATS, PRICING`
 

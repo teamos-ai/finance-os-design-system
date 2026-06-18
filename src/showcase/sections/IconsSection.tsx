@@ -157,7 +157,7 @@ export function IconsSection() {
             <MonoLabel tone="accent" number="04">
               Logo lockups
             </MonoLabel>
-            <Badge variant="gold" dot>
+            <Badge variant="amber" dot>
               Brand
             </Badge>
           </div>

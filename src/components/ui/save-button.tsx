@@ -1,7 +1,7 @@
 /**
  * SaveButton — Finance OS.
  *
- * A gold accent CTA (`variant="primary"`) that, on click, sends up a few small green
+ * A amber accent CTA (`variant="primary"`) that, on click, sends up a few small green
  * check chips that rise and fade — the calm "saved" confirmation. Reuses the Finance
  * success token for the chip skin so it themes per mode with no rogue colour. Honours
  * `prefers-reduced-motion`: reduced users get at most two ticks with no travel (a gentle

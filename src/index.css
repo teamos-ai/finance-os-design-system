@@ -40,11 +40,71 @@
     color: var(--c-accent-fg);
   }
 
-  /* tokenized scrollbar (subtle, on-theme) */
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--c-border-strong) transparent;
   }
+}
+
+@layer utilities {
+  /* Subtle grain overlay — apply over a relatively-positioned surface as a sibling. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+  /* Grain tuned for true-black / carbon panels (lifts a faint speckle). */
+  .grain-dark::after {
+    opacity: 0.1;
+    mix-blend-mode: screen;
+  }
+}
+
+/* ── Alternating section texture ("crinkle / paper") ─────────────────────────
+   Every 3rd content section (2nd, 5th, 8th… <section> in <main>) gets the muted
+   ground + a fine fractal-noise crinkle, so scrolling reveals each section change.
+   The hero is nth-of-type(1) and stays clean. Rhythm: clean · crinkled · clean ·
+   clean · crinkled · clean … Light/paper blend `multiply` (darkens the speckle into
+   a crinkle on warm/white grounds); dark blends `screen` (lifts a faint speckle on
+   true black, where multiply is invisible). Grain sits behind content (z-0), so text
+   contrast is untouched. Static — nothing to freeze for reduced-motion. */
+main > section:nth-of-type(3n + 2) {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--c-canvas-muted);
+}
+main > section:nth-of-type(3n + 2) > * {
+  position: relative;
+  z-index: 1;
+}
+main > section:nth-of-type(3n + 2)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+[data-theme='dark'] main > section:nth-of-type(3n + 2)::before {
+  opacity: 0.08;
+  mix-blend-mode: screen;
+}
+
+/* Ticker / banner marquee — CSS-driven, two copies translate -50% for a seamless loop. */
+@keyframes fos-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: fos-marquee 40s linear infinite;
 }
 
 /* Respect reduced-motion globally (brief requirement) */

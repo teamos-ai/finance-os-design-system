@@ -1,7 +1,7 @@
 /**
  * FeatureCard — icon well + title + body. The workhorse of feature grids and bento
  * cells. Optional numbered overline for the "01 02 03" rhythm. Flat hairline, soft
- * gold-edge hover, zero glass. Sentence-case copy, dark-luxury Finance voice.
+ * amber-edge hover, zero glass. Sentence-case copy, dark-luxury Finance voice.
  *
  * PHOTOGRAPHY (prop-driven): pass `image` (+ `imageAlt`) to turn the card into a
  * photo-topped tour/feature card — a photo (or graceful on-token wash placeholder)
@@ -61,7 +61,7 @@ export const FeatureCard = ({
   icon: Icon,
   title,
   description,
-  accent = 'gold',
+  accent = 'amber',
   number,
   eyebrow,
   image,

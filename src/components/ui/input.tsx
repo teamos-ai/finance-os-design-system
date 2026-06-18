@@ -1,5 +1,5 @@
 /**
- * Input — flat hairline field. 8px radius, 1px line, gold focus ring (no glow).
+ * Input — flat hairline field. 8px radius, 1px line, amber focus ring (no glow).
  * Optional label, hint, error and a leading Lucide icon. Anonymous Pro throughout.
  */
 import * as React from 'react'

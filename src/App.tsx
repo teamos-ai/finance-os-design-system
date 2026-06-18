@@ -1,4 +1,6 @@
 import { Shell } from '@/showcase/Shell'
+import { Ticker } from '@/components/ui/banner'
+import { TICKER_ITEMS } from '@/data/system'
 import { HeroSection } from '@/showcase/sections/HeroSection'
 import { VideoSection } from '@/showcase/sections/VideoSection'
 import { QuickStartSection } from '@/showcase/sections/QuickStartSection'
@@ -23,6 +25,7 @@ import { DemosSection } from '@/showcase/sections/DemosSection'
 export default function App() {
   return (
     <Shell>
+      <Ticker items={TICKER_ITEMS} variant="dark" />
       <HeroSection />
       <VideoSection />
       <QuickStartSection />

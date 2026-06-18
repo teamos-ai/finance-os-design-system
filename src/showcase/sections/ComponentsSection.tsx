@@ -27,7 +27,7 @@ type Period = 'daily' | 'weekly' | 'monthly'
 
 const BADGE_VARIANTS: { variant: NonNullable<BadgeProps['variant']>; label: string }[] = [
   { variant: 'neutral', label: 'Neutral' },
-  { variant: 'gold', label: 'Gold' },
+  { variant: 'amber', label: 'amber' },
   { variant: 'amber', label: 'Amber' },
   { variant: 'blue', label: 'Blue' },
   { variant: 'success', label: 'Funded' },
@@ -46,7 +46,7 @@ export function ComponentsSection() {
       id="components"
       eyebrow="11 - Components"
       title="Components"
-      lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and one disciplined gold accent throughout."
+      lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and one disciplined amber accent throughout."
     >
       <div className="flex flex-col gap-4">
         {/* Buttons — all nine variants */}
@@ -206,7 +206,7 @@ export function ComponentsSection() {
               <CelebrationButton>Mark settled</CelebrationButton>
             </div>
             <p className="font-body text-body-sm text-fg-muted">
-              Save sends up a few green check chips; Mark settled throws a brief shower of gold
+              Save sends up a few green check chips; Mark settled throws a brief shower of amber
               streamers. Both honour <span className="font-mono">prefers-reduced-motion</span>.
             </p>
           </div>

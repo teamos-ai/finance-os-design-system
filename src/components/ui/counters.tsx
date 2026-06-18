@@ -175,7 +175,7 @@ export const SeatsRemaining = ({
   total,
   noun = 'seats',
   count = 'taken',
-  accent = 'gold',
+  accent = 'amber',
   duration = 1.4,
   className,
 }: SeatsRemainingProps) => {

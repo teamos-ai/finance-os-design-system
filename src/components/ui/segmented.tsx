@@ -6,7 +6,7 @@
  * uncontrolled.
  *
  * A11y: role="tablist" with roving tabindex and ArrowLeft/Right (and Up/Down) keyboard
- * support, aria-selected on each tab. 8px squircle, gold focus ring, quiet token motion.
+ * support, aria-selected on each tab. 8px squircle, amber focus ring, quiet token motion.
  */
 import * as React from 'react';
 import { cn } from '@/lib/cn';
