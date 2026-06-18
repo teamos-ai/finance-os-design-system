@@ -291,4 +291,10 @@
   /* focus ring */
   --ring-width: 2px;
   --ring-offset: 2px;
+
+  /* fixed component surfaces (theme-independent) */
+  --c-inverse-bg: #16181F;   /* the dark "luxury pill" — same on every theme */
+  --c-inverse-fg: #F6F7F9;
+  --c-danger-solid: #B42318; /* solid danger fill, AA with white */
+  --c-on-danger: #FFFFFF;
 }

@@ -52,8 +52,14 @@ export default {
       },
       success: { DEFAULT: 'var(--c-success)', soft: 'var(--c-success-soft)' },
       warning: { DEFAULT: 'var(--c-warning)', soft: 'var(--c-warning-soft)' },
-      danger: { DEFAULT: 'var(--c-danger)', soft: 'var(--c-danger-soft)' },
+      danger: {
+        DEFAULT: 'var(--c-danger)',
+        soft: 'var(--c-danger-soft)',
+        solid: 'var(--c-danger-solid)',
+        fg: 'var(--c-on-danger)',
+      },
       info: { DEFAULT: 'var(--c-info)', soft: 'var(--c-info-soft)' },
+      inverse: { DEFAULT: 'var(--c-inverse-bg)', fg: 'var(--c-inverse-fg)' },
       ring: 'var(--c-ring)',
 
       /* primitives (raw ramps) — for the Color docs + rare raw needs */
