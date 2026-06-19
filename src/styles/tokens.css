@@ -21,6 +21,13 @@
   --p-amber-400: #B86E00;
   --p-amber-500: #8A5300;
 
+  /* Signal Gold — brand highlight (returned as a primary brand colour) */
+  --p-gold-100: #FBEAB8;
+  --p-gold-200: #F4D472;
+  --p-gold-300: #EEBA2B; /* base */
+  --p-gold-400: #C2941F;
+  --p-gold-500: #8A6A16;
+
   /* Atlas Blue — secondary accent (blue) */
   --p-blue-100: #ADB6D2;
   --p-blue-200: #8591BC;
@@ -80,6 +87,7 @@
   --c-accent-soft:  rgba(230, 138, 0, 0.16);
   --c-accent-text:  var(--p-amber-200); /* AA on black */
   --c-accent-fg:    #1A1206;
+  --c-highlight:    var(--p-amber-300); /* #E68A00 — primary orange, 8:1 on black */
 
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-200);
@@ -135,6 +143,7 @@
   --c-accent-soft:  rgba(230, 138, 0, 0.14);
   --c-accent-text:  var(--p-amber-500); /* AA on white */
   --c-accent-fg:    #1A1206;
+  --c-highlight:    var(--p-amber-400); /* #B86E00 — deeper orange, AA-large on white */
 
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-500);
@@ -190,6 +199,7 @@
   --c-accent-soft:  rgba(230, 138, 0, 0.14);
   --c-accent-text:  var(--p-amber-500);
   --c-accent-fg:    #1A1206;
+  --c-highlight:    var(--p-amber-400); /* #B86E00 — deeper orange, AA-large on ivory */
 
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-500);
@@ -263,4 +273,8 @@
   --c-inverse-fg: #F5F5F5;
   --c-danger-solid: #B42318; /* solid danger fill, AA with white */
   --c-on-danger: #FFFFFF;
+
+  /* secondary button — Atlas Blue solid fill with white label (fixed across themes) */
+  --c-brand-solid: var(--p-blue-400); /* #33488F */
+  --c-on-brand: #FFFFFF;
 }

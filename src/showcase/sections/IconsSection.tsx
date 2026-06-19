@@ -1,269 +1,173 @@
-/**
- * IconsSection — Icons & Logo.
- * A curated Lucide line set drawn at strokeWidth 1.5 with token colours, the three
- * size steps (16 / 20 / 24), the IconButton variant set, and the Finance OS logo
- * lockups with clear-space rules and a do / avoid pair. Reference reads like the system.
- */
-import type { ReactNode } from 'react'
+import * as React from 'react'
 import {
-  LayoutDashboard, Wallet, TrendingUp, PieChart, Receipt, Landmark,
-  FileText, Briefcase, Users, ShieldCheck, BadgeDollarSign, Banknote,
-  Calculator, Bell, Mail, Search, Calendar, Settings,
-  Download, Filter, ArrowUpRight, CircleCheck, Lock, Sparkles,
-  Plus, ChevronRight, Play, MoreHorizontal,
+  Wallet, Landmark, PiggyBank, TrendingUp, LineChart, PieChart, Receipt, Calculator,
+  Coins, CreditCard, Banknote, HandCoins, Percent, Target, Briefcase, Building2,
+  Users, UserCheck, Handshake, FileText, FileCheck, ClipboardCheck, CalendarCheck, Clock,
+  Bell, Mail, MessageSquare, Phone, Send, Inbox, Search, Filter,
+  Workflow, ShieldCheck, BadgeCheck, Rocket,
+  Download, Check, Copy,
 } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import type { LucideIcon } from 'lucide-react'
+import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
-import { IconButton } from '@/components/ui/icon-button'
-import { Badge } from '@/components/ui/badge'
-import { Logo, LogoMark } from '@/components/brand/Logo'
-import { FadeIn, Stagger, StaggerItem } from '@/lib/motion'
+import { Button } from '@/components/ui/button'
+import { copyText } from '@/lib/utils'
 
-type IconEntry = { icon: typeof Wallet; name: string }
-
-const ICONS: IconEntry[] = [
-  { icon: LayoutDashboard, name: 'layout-dashboard' },
-  { icon: Wallet, name: 'wallet' },
-  { icon: TrendingUp, name: 'trending-up' },
-  { icon: PieChart, name: 'pie-chart' },
-  { icon: Receipt, name: 'receipt' },
-  { icon: Landmark, name: 'landmark' },
-  { icon: FileText, name: 'file-text' },
-  { icon: Briefcase, name: 'briefcase' },
-  { icon: Users, name: 'users' },
-  { icon: ShieldCheck, name: 'shield-check' },
-  { icon: BadgeDollarSign, name: 'badge-dollar-sign' },
-  { icon: Banknote, name: 'banknote' },
-  { icon: Calculator, name: 'calculator' },
-  { icon: Bell, name: 'bell' },
-  { icon: Mail, name: 'mail' },
-  { icon: Search, name: 'search' },
-  { icon: Calendar, name: 'calendar' },
-  { icon: Settings, name: 'settings' },
-  { icon: Download, name: 'download' },
-  { icon: Filter, name: 'filter' },
-  { icon: ArrowUpRight, name: 'arrow-up-right' },
-  { icon: CircleCheck, name: 'circle-check' },
-  { icon: Lock, name: 'lock' },
-  { icon: Sparkles, name: 'sparkles' },
+const ICONS: { name: string; Icon: LucideIcon }[] = [
+  { name: 'wallet', Icon: Wallet }, { name: 'landmark', Icon: Landmark }, { name: 'piggy-bank', Icon: PiggyBank },
+  { name: 'trending-up', Icon: TrendingUp }, { name: 'line-chart', Icon: LineChart }, { name: 'pie-chart', Icon: PieChart },
+  { name: 'receipt', Icon: Receipt }, { name: 'calculator', Icon: Calculator }, { name: 'coins', Icon: Coins },
+  { name: 'credit-card', Icon: CreditCard }, { name: 'banknote', Icon: Banknote }, { name: 'hand-coins', Icon: HandCoins },
+  { name: 'percent', Icon: Percent }, { name: 'target', Icon: Target }, { name: 'briefcase', Icon: Briefcase },
+  { name: 'building', Icon: Building2 }, { name: 'users', Icon: Users }, { name: 'user-check', Icon: UserCheck },
+  { name: 'handshake', Icon: Handshake }, { name: 'file-text', Icon: FileText }, { name: 'file-check', Icon: FileCheck },
+  { name: 'clipboard-check', Icon: ClipboardCheck }, { name: 'calendar-check', Icon: CalendarCheck }, { name: 'clock', Icon: Clock },
+  { name: 'bell', Icon: Bell }, { name: 'mail', Icon: Mail }, { name: 'message-square', Icon: MessageSquare },
+  { name: 'phone', Icon: Phone }, { name: 'send', Icon: Send }, { name: 'inbox', Icon: Inbox },
+  { name: 'search', Icon: Search }, { name: 'filter', Icon: Filter }, { name: 'workflow', Icon: Workflow },
+  { name: 'shield-check', Icon: ShieldCheck }, { name: 'badge-check', Icon: BadgeCheck }, { name: 'rocket', Icon: Rocket },
 ]
 
-const SIZES: { px: number; cls: string; label: string }[] = [
-  { px: 16, cls: 'h-4 w-4', label: 'sm' },
-  { px: 20, cls: 'h-5 w-5', label: 'md' },
-  { px: 24, cls: 'h-6 w-6', label: 'lg' },
-]
+const STROKE = 1.75
 
-const ICON_BUTTONS = [
-  { variant: 'dark', label: 'Play track', icon: Play },
-  { variant: 'outline', label: 'Next', icon: ChevronRight },
-  { variant: 'soft', label: 'Add item', icon: Plus },
-  { variant: 'ghost', label: 'More options', icon: MoreHorizontal },
-  { variant: 'accent', label: 'Confirm', icon: CircleCheck },
-] as const
+function IconCell({ name, Icon }: { name: string; Icon: LucideIcon }) {
+  const [copied, setCopied] = React.useState(false)
+  const ref = React.useRef<HTMLButtonElement>(null)
+  const copy = async () => {
+    const svg = ref.current?.querySelector('svg')
+    if (svg && (await copyText(svg.outerHTML))) {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1200)
+    }
+  }
+  return (
+    <button
+      ref={ref}
+      type="button"
+      data-icon={name}
+      onClick={copy}
+      title={`Copy ${name}.svg`}
+      className="group flex flex-col items-center gap-2 rounded-md border border-border bg-surface p-4 transition-colors duration-fast hover:border-border-strong hover:bg-canvas-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+    >
+      <span className="relative grid h-8 w-8 place-items-center text-fg">
+        <Icon className="h-6 w-6" strokeWidth={STROKE} aria-hidden />
+      </span>
+      <span className="flex items-center gap-1 font-mono text-[0.625rem] text-fg-subtle">
+        {copied ? <Check className="h-3 w-3 text-success" strokeWidth={2.5} /> : <Copy className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-60" />}
+        {name}
+      </span>
+    </button>
+  )
+}
+
+const BG_TILES = [
+  { name: 'Dark / Black', bg: '#000000', label: 'text-white/60' },
+  { name: 'Light / White', bg: '#FFFFFF', label: 'text-black/50' },
+  { name: 'Paper / Ivory', bg: '#F9F6F2', label: 'text-black/50' },
+]
 
 export function IconsSection() {
+  const gridRef = React.useRef<HTMLDivElement>(null)
+
+  // Build a single downloadable SVG sheet from the rendered icons (Lucide, ISC).
+  const downloadPack = () => {
+    const root = gridRef.current
+    if (!root) return
+    const cells = Array.from(root.querySelectorAll<HTMLElement>('[data-icon]'))
+    const COLS = 6
+    const CELL = 56
+    const sheetW = COLS * CELL
+    const sheetH = Math.ceil(cells.length / COLS) * CELL
+    let body = ''
+    cells.forEach((cell, i) => {
+      const svg = cell.querySelector('svg')
+      if (!svg) return
+      const col = i % COLS
+      const row = Math.floor(i / COLS)
+      const x = col * CELL + (CELL - 24) / 2
+      const y = row * CELL + (CELL - 24) / 2
+      body += `<g transform="translate(${x},${y})" fill="none" stroke="#1A1A1A" stroke-width="${STROKE}" stroke-linecap="round" stroke-linejoin="round">${svg.innerHTML}</g>`
+    })
+    const sheet = `<svg xmlns="http://www.w3.org/2000/svg" width="${sheetW}" height="${sheetH}" viewBox="0 0 ${sheetW} ${sheetH}"><rect width="100%" height="100%" fill="none"/>${body}</svg>`
+    const url = URL.createObjectURL(new Blob([sheet], { type: 'image/svg+xml' }))
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'finance-os-icons.svg'
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <Section
       id="icons"
-      eyebrow="10 - Icons & Logo"
+      eyebrow="10 — Icons & Logo"
       title="Icons & Logo"
-      lead="A calm Lucide line set drawn at a constant 1.5px stroke, plus the Finance OS lockups and the clear-space rules that keep the brand composed across every theme."
+      lead="A curated Finance OS icon set — clean, rounded line icons at 1.75 stroke. Click any icon to copy its SVG, or download the whole pack. Below: the logo lockups on every theme surface."
     >
-      {/* ─── Icon library ─────────────────────────────────────────── */}
-      <FadeIn>
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <MonoLabel tone="accent" number="01">
-            Library
-          </MonoLabel>
-          <span className="font-mono text-caption text-fg-subtle">lucide-react · strokeWidth 1.5</span>
-        </div>
-      </FadeIn>
-
-      <Stagger className="grid grid-cols-3 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4 md:grid-cols-6">
-        {ICONS.map(({ icon: Icon, name }) => (
-          <StaggerItem
-            key={name}
-            className="flex aspect-square flex-col items-center justify-center gap-2.5 bg-surface px-2 text-center transition-colors duration-fast ease-out hover:bg-elevated"
-          >
-            <Icon className="h-6 w-6 text-fg" strokeWidth={1.5} aria-hidden />
-            <span className="truncate font-mono text-[0.625rem] tracking-wide text-fg-subtle">{name}</span>
-          </StaggerItem>
-        ))}
-      </Stagger>
-
-      <p className="mt-4 font-body text-body-sm leading-relaxed text-fg-muted">
-        Icons inherit <code className="font-mono text-mono-xs text-accent-text">currentColor</code>, so they pick up
-        the surrounding token — <code className="font-mono text-mono-xs text-fg">text-fg</code> for default,{' '}
-        <code className="font-mono text-mono-xs text-accent-text">text-accent-text</code> for emphasis. Decorative icons
-        carry <code className="font-mono text-mono-xs text-fg">aria-hidden</code>; meaningful ones get a label.
-      </p>
-
-      {/* ─── Sizes ────────────────────────────────────────────────── */}
-      <div className="mt-12">
-        <FadeIn>
-          <MonoLabel tone="accent" number="02" className="mb-4">
-            Sizes
-          </MonoLabel>
-        </FadeIn>
-        <Demo label="16 / 20 / 24 px — one stroke weight at every step">
-          <div className="flex flex-wrap items-end gap-10">
-            {SIZES.map(({ px, cls, label }) => (
-              <div key={px} className="flex flex-col items-center gap-3">
-                <div className="grid h-16 w-16 place-items-center rounded-md border border-border bg-surface">
-                  <Wallet className={cls + ' text-accent-text'} strokeWidth={1.5} aria-hidden />
-                </div>
-                <div className="text-center">
-                  <p className="font-display text-title-sm text-fg">{px}px</p>
-                  <p className="font-mono text-caption text-fg-subtle">{label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Demo>
-      </div>
-
-      {/* ─── Icon buttons ─────────────────────────────────────────── */}
-      <div className="mt-12">
-        <FadeIn>
-          <MonoLabel tone="accent" number="03" className="mb-4">
-            Icon buttons
-          </MonoLabel>
-        </FadeIn>
-        <Demo label="IconButton — dark · outline · soft · ghost · accent">
-          <div className="flex flex-wrap items-center gap-8">
-            {ICON_BUTTONS.map(({ variant, label, icon: Icon }) => (
-              <div key={variant} className="flex flex-col items-center gap-2.5">
-                <IconButton variant={variant} aria-label={label}>
-                  <Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden />
-                </IconButton>
-                <span className="font-mono text-caption text-fg-subtle">{variant}</span>
-              </div>
-            ))}
-          </div>
-        </Demo>
-        <p className="mt-4 font-body text-body-sm leading-relaxed text-fg-muted">
-          Icon-only controls are square with a fixed target and a required{' '}
-          <code className="font-mono text-mono-xs text-accent-text">aria-label</code>. The icon child sits at the{' '}
-          <code className="font-mono text-mono-xs text-fg">md</code> step (20px) inside the default{' '}
-          <code className="font-mono text-mono-xs text-fg">h-11 w-11</code> box.
-        </p>
-      </div>
-
-      {/* ─── Logo lockups ─────────────────────────────────────────── */}
-      <div className="mt-14">
-        <FadeIn>
-          <div className="mb-5 flex items-center justify-between gap-3">
-            <MonoLabel tone="accent" number="04">
-              Logo lockups
+      <div className="space-y-12">
+        {/* ── Icon pack ─────────────────────────────────────────────── */}
+        <div>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <MonoLabel tone="amber" dot>
+              Finance OS icon pack · {ICONS.length} icons
             </MonoLabel>
-            <Badge variant="amber" dot>
-              Brand
-            </Badge>
+            <Button variant="primary" size="sm" leadingIcon={<Download className="h-4 w-4" strokeWidth={2} />} onClick={downloadPack}>
+              Download pack (.svg)
+            </Button>
           </div>
-        </FadeIn>
-
-        <div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
-          {/* Mark */}
-          <LockupTile label="Mark · LogoMark">
-            <LogoMark size="lg" />
-          </LockupTile>
-          {/* Full */}
-          <LockupTile label="Full · Logo">
-            <Logo size="md" />
-          </LockupTile>
-          {/* Wordmark */}
-          <LockupTile label="Wordmark · Logo variant='wordmark'">
-            <Logo variant="wordmark" size="md" />
-          </LockupTile>
+          <div ref={gridRef} className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+            {ICONS.map((it) => (
+              <IconCell key={it.name} name={it.name} Icon={it.Icon} />
+            ))}
+          </div>
+          <p className="mt-4 font-mono text-caption leading-relaxed text-fg-subtle">
+            Built on <span className="text-accent-text">Lucide</span> (ISC licence) — free to use &amp; redistribute. Sizes 16 / 20 / 24px,
+            stroke 1.75, token colours. Untitled UI's paid set is not redistributed; this is our own license-clean pack in the same clean style.
+          </p>
         </div>
 
-        {/* On-surface companion row */}
-        <div className="mt-px grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-3">
-          <LockupTile label="On surface" surface>
-            <LogoMark size="lg" />
-          </LockupTile>
-          <LockupTile label="On surface" surface>
-            <Logo size="md" />
-          </LockupTile>
-          <LockupTile label="On surface" surface>
-            <Logo variant="wordmark" size="md" />
-          </LockupTile>
-        </div>
-
-        {/* Clear space */}
-        <div className="mt-6">
-          <Demo label="Clear space — keep one mark-height of clearance on every side">
-            <div className="flex flex-wrap items-center gap-8">
-              <div className="relative grid place-items-center rounded-md border border-dashed border-border-strong p-10">
-                <span aria-hidden className="absolute left-3 top-3 font-mono text-[0.625rem] text-fg-subtle">
-                  1×
-                </span>
-                <Logo size="md" />
+        {/* ── Sizes ─────────────────────────────────────────────────── */}
+        <div>
+          <MonoLabel tone="subtle">Sizing</MonoLabel>
+          <div className="mt-3 flex items-end gap-6 rounded-lg border border-border bg-surface p-6">
+            {[16, 20, 24, 32].map((px) => (
+              <div key={px} className="flex flex-col items-center gap-2 text-fg">
+                <Wallet style={{ width: px, height: px }} strokeWidth={STROKE} aria-hidden />
+                <span className="font-mono text-caption text-fg-subtle">{px}px</span>
               </div>
-              <p className="max-w-sm font-body text-body-sm leading-relaxed text-fg-muted">
-                Reserve a minimum clear space equal to the height of the{' '}
-                <code className="font-mono text-mono-xs text-accent-text">OS</code> mark around the full lockup. Never
-                let type, rules or imagery cross that boundary.
-              </p>
-            </div>
-          </Demo>
+            ))}
+          </div>
         </div>
 
-        {/* Do / Avoid */}
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="overflow-hidden rounded-lg border border-success/40 bg-success-soft/40">
-            <div className="flex items-center gap-2 border-b border-success/30 px-4 py-2.5">
-              <CircleCheck className="h-4 w-4 text-success" strokeWidth={1.5} aria-hidden />
-              <MonoLabel tone="success">Do</MonoLabel>
-            </div>
-            <div className="grid place-items-center p-8">
-              <Logo size="md" />
-            </div>
-            <p className="border-t border-border px-4 py-3 font-body text-body-sm leading-relaxed text-fg-muted">
-              Use the locked gradient mark beside the wordmark, with the supplied spacing intact.
-            </p>
+        {/* ── Logo lockups on every surface ─────────────────────────── */}
+        <div>
+          <MonoLabel tone="amber" dot>Logo lockups · both rectangles on every theme</MonoLabel>
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {BG_TILES.map((tile) => (
+              <div key={tile.name} className="overflow-hidden rounded-lg border border-border">
+                <div className="flex flex-col items-center justify-center gap-6 p-8" style={{ background: tile.bg }}>
+                  <img src="/logo-rect-white.png" alt="Finance OS — white lockup" className="h-9 w-auto object-contain" />
+                  <img src="/logo-rect.png" alt="Finance OS — gradient lockup" className="h-9 w-auto object-contain" />
+                  <img src="/logo-square.png" alt="Finance OS — mark" className="h-10 w-10 object-contain" />
+                </div>
+                <div className="border-t border-border bg-surface px-4 py-2.5">
+                  <span className="font-mono text-caption text-fg-subtle">{tile.name}</span>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="overflow-hidden rounded-lg border border-danger/40 bg-danger-soft/30">
-            <div className="flex items-center gap-2 border-b border-danger/30 px-4 py-2.5">
-              <Lock className="h-4 w-4 text-danger" strokeWidth={1.5} aria-hidden />
-              <MonoLabel tone="subtle" className="text-danger">
-                Avoid
-              </MonoLabel>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-md border border-border bg-surface p-4">
+              <MonoLabel tone="subtle" size="sm">Clear space</MonoLabel>
+              <p className="mt-1.5 font-body text-body-sm text-fg-muted">Keep padding equal to the height of the "OS" monogram on all sides.</p>
             </div>
-            <div className="grid place-items-center p-8">
-              <span className="inline-flex items-center gap-2.5 opacity-90">
-                <LogoMark size="lg" className="rotate-6 scale-90 shadow-none saturate-50" />
-                <span className="font-body font-semibold tracking-tight text-fg-subtle">FinanceOS</span>
-              </span>
+            <div className="rounded-md border border-border bg-surface p-4">
+              <MonoLabel tone="subtle" size="sm">Which to use</MonoLabel>
+              <p className="mt-1.5 font-body text-body-sm text-fg-muted">White-outline lockup on dark; gradient-fill lockup on light/paper. The square mark works on any surface.</p>
             </div>
-            <p className="border-t border-border px-4 py-3 font-body text-body-sm leading-relaxed text-fg-muted">
-              Don't rotate or recolour the mark, drop the glow, or set the wordmark in a non-display face.
-            </p>
           </div>
         </div>
       </div>
     </Section>
-  )
-}
-
-/** A single logo lockup tile — canvas by default, surface when `surface`. */
-function LockupTile({
-  label,
-  surface = false,
-  children,
-}: {
-  label: string
-  surface?: boolean
-  children: ReactNode
-}) {
-  return (
-    <div className={surface ? 'bg-surface' : 'bg-canvas'}>
-      <div className="grid min-h-[7.5rem] place-items-center px-6 py-10">{children}</div>
-      <div className="border-t border-border px-4 py-2.5">
-        <span className="font-mono text-caption text-fg-subtle">{label}</span>
-      </div>
-    </div>
   )
 }

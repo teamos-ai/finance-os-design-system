@@ -28,7 +28,7 @@ export function HeroSection() {
 
       <FadeIn delay={0.1}>
         <h1 className="mt-6 max-w-3xl font-display text-display-2xl text-fg">
-          The operating system for <span className="text-amber-text">serious brokers</span>.
+          The operating system for <span className="text-highlight">serious brokers</span>.
         </h1>
       </FadeIn>
 

@@ -27,7 +27,6 @@ type Period = 'daily' | 'weekly' | 'monthly'
 
 const BADGE_VARIANTS: { variant: NonNullable<BadgeProps['variant']>; label: string }[] = [
   { variant: 'neutral', label: 'Neutral' },
-  { variant: 'amber', label: 'amber' },
   { variant: 'amber', label: 'Amber' },
   { variant: 'blue', label: 'Blue' },
   { variant: 'success', label: 'Funded' },
@@ -40,6 +39,7 @@ const BADGE_VARIANTS: { variant: NonNullable<BadgeProps['variant']>; label: stri
 export function ComponentsSection() {
   const [period, setPeriod] = useState<Period>('weekly')
   const [page, setPage] = useState(1)
+  const [intent, setIntent] = useState<'primary' | 'secondary'>('primary')
 
   return (
     <Section
@@ -49,6 +49,52 @@ export function ComponentsSection() {
       lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and one disciplined amber accent throughout."
     >
       <div className="flex flex-col gap-4">
+        {/* Button intents — primary (orange) vs secondary (blue), with the token to call */}
+        <Demo label="Button intents — primary &amp; secondary">
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <MonoLabel tone="subtle">Toggle the intent</MonoLabel>
+              <SegmentedControl
+                aria-label="Button intent"
+                value={intent}
+                onValueChange={(v) => setIntent(v as 'primary' | 'secondary')}
+                options={[
+                  { value: 'primary', label: 'Primary' },
+                  { value: 'secondary', label: 'Secondary' },
+                ]}
+              />
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="flex flex-col items-center justify-center gap-4 rounded-md border border-border bg-canvas p-8">
+                <Button variant={intent} size="lg">
+                  {intent === 'primary' ? 'Book a call' : 'Compare plans'}
+                </Button>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <Button variant={intent} size="md">Medium</Button>
+                  <Button variant={intent} size="sm">Small</Button>
+                  <Button variant={intent} size="md" disabled>Disabled</Button>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center gap-3 rounded-md border border-border bg-surface p-6">
+                <div className="flex items-center gap-2">
+                  <span className={intent === 'primary' ? 'h-3 w-3 rounded-sm bg-accent' : 'h-3 w-3 rounded-sm bg-brand-solid'} aria-hidden />
+                  <span className="font-display text-title-sm text-fg">
+                    {intent === 'primary' ? 'Primary · Momentum Amber' : 'Secondary · Atlas Blue'}
+                  </span>
+                </div>
+                <p className="font-body text-body-sm leading-relaxed text-fg-muted">
+                  {intent === 'primary'
+                    ? 'The main call to action — one per view.'
+                    : 'The supporting action that sits beside a primary.'}
+                </p>
+                <code className="rounded-sm bg-inset px-3 py-2 font-mono text-caption text-accent-text">
+                  {intent === 'primary' ? '<Button variant="primary">' : '<Button variant="secondary">'}
+                </code>
+              </div>
+            </div>
+          </div>
+        </Demo>
+
         {/* Buttons — all nine variants */}
         <Demo label="Button — nine variants">
           <div className="flex flex-wrap items-center gap-3">

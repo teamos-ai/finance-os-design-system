@@ -23,7 +23,7 @@ const button = cva(
     variants: {
       variant: {
         primary: 'bg-accent text-accent-fg hover:bg-accent-hover',
-        secondary: 'bg-surface text-fg border border-border hover:border-border-strong hover:shadow-sm',
+        secondary: 'bg-brand-solid text-brand-fg hover:brightness-110',
         ghost: 'bg-transparent text-fg hover:bg-accent-soft',
         dark: 'bg-inverse text-inverse-fg hover:brightness-110',
         gradient: 'bg-gradient-accent text-accent-fg hover:brightness-[1.04] shadow-glow',

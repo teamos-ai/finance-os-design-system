@@ -1,55 +1,135 @@
+import * as React from 'react'
+import { ChevronDown, Check } from 'lucide-react'
 import { Section } from '@/showcase/Section'
-import { MonoLabel, type MonoTone } from '@/components/ui/mono-label'
-import { Swatch, GradientSwatch } from '@/components/ui/swatch'
+import { MonoLabel } from '@/components/ui/mono-label'
+import { GradientSwatch } from '@/components/ui/swatch'
+import { copyText } from '@/lib/utils'
+import { cn } from '@/lib/cn'
 
-type Shade = { hex: string; label: string; primary?: boolean }
+type Shade = { label: string; hex: string; main?: boolean }
+type Primary = {
+  key: string
+  name: string
+  role: string
+  hex: string
+  rgb: string
+  shades: Shade[]
+  light: string
+  dark: string
+}
 
-const AMBER: Shade[] = [
-  { hex: '#F0B966', label: '100' },
-  { hex: '#EBA133', label: '200' },
-  { hex: '#E68A00', label: '300', primary: true },
-  { hex: '#B86E00', label: '400' },
-  { hex: '#8A5300', label: '500' },
-]
-const BLUE: Shade[] = [
-  { hex: '#ADB6D2', label: '100' },
-  { hex: '#8591BC', label: '200' },
-  { hex: '#5C6DA5', label: '300' },
-  { hex: '#33488F', label: '400', primary: true },
-  { hex: '#1F2B56', label: '500' },
-]
-const NEUTRAL: Shade[] = [
-  { hex: '#FFFFFF', label: 'White' },
-  { hex: '#F4F5F7', label: '100' },
-  { hex: '#C9CDD6', label: '200' },
-  { hex: '#8B93A3', label: '300' },
-  { hex: '#3A3F4B', label: '400' },
-  { hex: '#0F1115', label: '500' },
-  { hex: '#000000', label: 'Black' },
-]
-
-const SEMANTIC: [string, string][] = [
-  ['canvas', 'page ground — true black / pure white / warm ivory'],
-  ['surface · elevated', 'cards & panels, then raised menus/popovers'],
-  ['fg · fg-muted · fg-subtle', 'text — primary, secondary, tertiary'],
-  ['border · border-strong', 'hairlines & dividers'],
-  ['accent', 'Momentum Amber — primary CTA + focus ring'],
-  ['brand', 'Atlas Blue — secondary, info, links'],
-  ['success · warning · danger · info', 'state colours'],
-  ['canvas-muted', 'the crinkle / off-section ground'],
+const PRIMARIES: Primary[] = [
+  {
+    key: 'amber', name: 'Momentum Amber', role: 'Primary accent · CTAs, focus, the gradient',
+    hex: '#E68A00', rgb: '230, 138, 0',
+    shades: [{ label: '100', hex: '#F0B966' }, { label: '200', hex: '#EBA133' }, { label: '300', hex: '#E68A00', main: true }, { label: '400', hex: '#B86E00' }, { label: '500', hex: '#8A5300' }],
+    light: 'Fill #E68A00 (300) · AA text #8A5300 (500)', dark: 'Fill #E68A00 (300) · AA text #EBA133 (200)',
+  },
+  {
+    key: 'gold', name: 'Signal Gold', role: 'Brand highlight · accents & emphasis',
+    hex: '#EEBA2B', rgb: '238, 186, 43',
+    shades: [{ label: '100', hex: '#FBEAB8' }, { label: '200', hex: '#F4D472' }, { label: '300', hex: '#EEBA2B', main: true }, { label: '400', hex: '#C2941F' }, { label: '500', hex: '#8A6A16' }],
+    light: 'Emphasis #EEBA2B · AA text #8A6A16 (500)', dark: 'Emphasis #EEBA2B (300) reads on black',
+  },
+  {
+    key: 'blue', name: 'Atlas Blue', role: 'Secondary accent · info, structure, links',
+    hex: '#33488F', rgb: '51, 72, 143',
+    shades: [{ label: '100', hex: '#ADB6D2' }, { label: '200', hex: '#8591BC' }, { label: '300', hex: '#5C6DA5' }, { label: '400', hex: '#33488F', main: true }, { label: '500', hex: '#1F2B56' }],
+    light: 'Fill / text #33488F (400)', dark: 'Text #8591BC (200) · fill #33488F (400)',
+  },
+  {
+    key: 'black', name: 'Black', role: 'Dark canvas & ink',
+    hex: '#000000', rgb: '0, 0, 0',
+    shades: [{ label: 'Canvas', hex: '#000000', main: true }, { label: 'Muted', hex: '#0E0E0E' }, { label: 'Carbon', hex: '#161616' }, { label: 'Charcoal', hex: '#1F1F1F' }, { label: 'Line', hex: '#2A2A2A' }],
+    light: 'Ink only — #14161B text on white', dark: 'Canvas #000 · surface #161616 · elevated #1F1F1F',
+  },
+  {
+    key: 'white', name: 'White', role: 'Light canvas & paper',
+    hex: '#FFFFFF', rgb: '255, 255, 255',
+    shades: [{ label: 'Canvas', hex: '#FFFFFF', main: true }, { label: 'Muted', hex: '#F6F7F9' }, { label: 'Line', hex: '#E6E8EC' }, { label: 'Ivory', hex: '#F9F6F2' }, { label: 'Ivory-2', hex: '#F1ECE4' }],
+    light: 'Canvas #FFF · muted #F6F7F9 · paper ivory #F9F6F2', dark: 'Text — #F5F5F5 on black',
+  },
 ]
 
-function Ramp({ name, tone, note, shades }: { name: string; tone: MonoTone; note: string; shades: Shade[] }) {
+function useCopy() {
+  const [copied, setCopied] = React.useState(false)
+  const copy = async (v: string) => {
+    if (await copyText(v)) {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1200)
+    }
+  }
+  return [copied, copy] as const
+}
+
+function ShadeChip({ shade }: { shade: Shade }) {
+  const [copied, copy] = useCopy()
   return (
-    <div>
-      <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <MonoLabel tone={tone} dot>{name}</MonoLabel>
-        <span className="font-mono text-caption text-fg-subtle">{note}</span>
-      </div>
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-7">
-        {shades.map((s) => (
-          <Swatch key={s.label} hex={s.hex} label={s.label} primary={s.primary} />
-        ))}
+    <button
+      type="button"
+      onClick={() => copy(shade.hex)}
+      aria-label={`Copy ${shade.hex}`}
+      className="group flex flex-col gap-1 rounded-sm text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+    >
+      <span
+        className={cn('relative h-12 w-full rounded-md border border-border-subtle', shade.main && 'ring-2 ring-accent ring-offset-1 ring-offset-surface')}
+        style={{ background: shade.hex }}
+      >
+        <span className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100">
+          {copied ? <Check className="h-4 w-4 text-fg" strokeWidth={2.5} /> : <span className="font-mono text-[0.625rem] text-fg/70">copy</span>}
+        </span>
+      </span>
+      <span className="font-mono text-[0.625rem] uppercase text-fg-subtle">{shade.label}</span>
+      <span className="font-mono text-[0.625rem] text-fg">{shade.hex}</span>
+    </button>
+  )
+}
+
+function ColorCard({ c }: { c: Primary }) {
+  const [open, setOpen] = React.useState(false)
+  return (
+    <div className="overflow-hidden rounded-lg border border-border bg-surface">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="flex w-full items-center gap-4 p-4 text-left transition-colors duration-fast hover:bg-canvas-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+      >
+        <span className="h-12 w-12 shrink-0 rounded-md border border-border-subtle" style={{ background: c.hex }} aria-hidden />
+        <span className="min-w-0 flex-1">
+          <span className="block font-display text-title-sm text-fg">{c.name}</span>
+          <span className="block font-mono text-caption text-fg-subtle">{c.role}</span>
+        </span>
+        <span className="hidden shrink-0 text-right sm:block">
+          <span className="block font-mono text-caption text-fg">{c.hex}</span>
+          <span className="block font-mono text-caption text-fg-subtle">rgb({c.rgb})</span>
+        </span>
+        <ChevronDown className={cn('h-4 w-4 shrink-0 text-fg-subtle transition-transform duration-base', open && 'rotate-180')} strokeWidth={2} aria-hidden />
+      </button>
+
+      <div className={cn('grid transition-[grid-template-rows] duration-base ease-out', open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}>
+        <div className="overflow-hidden">
+          <div className="border-t border-border p-4">
+            <div className="mb-4 flex items-center gap-3 sm:hidden">
+              <span className="font-mono text-caption text-fg">{c.hex}</span>
+              <span className="font-mono text-caption text-fg-subtle">rgb({c.rgb})</span>
+            </div>
+            <MonoLabel tone="subtle" size="sm">Shades — click to copy</MonoLabel>
+            <div className="mt-2.5 grid grid-cols-5 gap-2">
+              {c.shades.map((s) => <ShadeChip key={s.label} shade={s} />)}
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-md border border-border bg-canvas p-3">
+                <MonoLabel tone="subtle" size="sm">In light mode</MonoLabel>
+                <p className="mt-1.5 font-body text-body-sm leading-relaxed text-fg-muted">{c.light}</p>
+              </div>
+              <div className="rounded-md border border-border bg-canvas p-3">
+                <MonoLabel tone="amber" size="sm">In dark mode</MonoLabel>
+                <p className="mt-1.5 font-body text-body-sm leading-relaxed text-fg-muted">{c.dark}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -61,32 +141,30 @@ export function ColorSection() {
       id="color"
       eyebrow="05 — Color"
       title="Color"
-      lead="Two accent families — Momentum Amber (primary) and Atlas Blue (secondary) — plus a neutral white-to-black ramp. Five shades each. Components name a semantic token, never a raw hex; click any swatch to copy."
+      lead="Five locked primaries with their hex + RGB. Click any card to drop down its shade ramp and see exactly which shade to use in light vs dark mode. Components always name a semantic token, never a raw hex."
     >
-      <div className="space-y-10">
-        <Ramp name="Momentum Amber" tone="amber" note="primary accent · CTA, focus, the gradient" shades={AMBER} />
-        <Ramp name="Atlas Blue" tone="brand" note="secondary accent · info, structure, links" shades={BLUE} />
-        <Ramp name="Neutral" tone="subtle" note="type, hairlines & surfaces — white through black" shades={NEUTRAL} />
+      <div className="space-y-3">
+        {PRIMARIES.map((c) => (
+          <ColorCard key={c.key} c={c} />
+        ))}
+      </div>
 
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
         <div>
           <MonoLabel tone="amber" dot>Signature gradient</MonoLabel>
-          <div className="mt-3 max-w-md">
+          <div className="mt-3">
             <GradientSwatch label="gradient-accent · amber sweep" css="linear-gradient(135deg, #F0B966 0%, #E68A00 100%)" />
           </div>
         </div>
-
-        <div className="rounded-lg border border-border bg-surface p-6">
-          <MonoLabel tone="subtle">Semantic surfaces — what components actually name</MonoLabel>
-          <dl className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-            {SEMANTIC.map(([token, desc]) => (
-              <div key={token} className="flex flex-col border-b border-border-subtle pb-2">
-                <dt className="font-mono text-caption text-accent-text">{token}</dt>
-                <dd className="font-body text-body-sm text-fg-muted">{desc}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-4 font-mono text-caption text-fg-subtle">
-            Every foreground/background pair passes WCAG AA across dark, light and paper.
+        <div className="rounded-lg border border-border bg-surface p-5">
+          <MonoLabel tone="subtle">Semantic tokens components call</MonoLabel>
+          <p className="mt-3 font-body text-body-sm leading-relaxed text-fg-muted">
+            <code className="text-accent-text">accent</code> (amber) ·{' '}
+            <code className="text-accent-text">brand</code> (blue) ·{' '}
+            <code className="text-accent-text">highlight</code> (heading orange) ·{' '}
+            <code className="text-accent-text">canvas / surface / elevated</code> ·{' '}
+            <code className="text-accent-text">fg / fg-muted / fg-subtle</code> ·{' '}
+            <code className="text-accent-text">border</code> · state colours. Switching theme moves only this layer.
           </p>
         </div>
       </div>

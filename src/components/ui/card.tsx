@@ -73,7 +73,7 @@ const ActionsRow = ({ items, className }: { items: ActionItem[]; className?: str
       <Button
         key={i}
         size="sm"
-        variant={a.variant ?? (i === items.length - 1 ? 'primary' : 'secondary')}
+        variant={a.variant ?? (i === items.length - 1 ? 'primary' : 'outline')}
         onClick={a.onClick}
         {...(a.href ? { as: 'a' as const, href: a.href } : {})}
       >

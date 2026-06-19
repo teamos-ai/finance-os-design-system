@@ -49,7 +49,10 @@ export default {
       brand: {
         DEFAULT: 'var(--c-brand)',
         soft: 'var(--c-brand-soft)',
+        solid: 'var(--c-brand-solid)',
+        fg: 'var(--c-on-brand)',
       },
+      highlight: 'var(--c-highlight)',
       success: { DEFAULT: 'var(--c-success)', soft: 'var(--c-success-soft)' },
       warning: { DEFAULT: 'var(--c-warning)', soft: 'var(--c-warning-soft)' },
       danger: {

@@ -29,7 +29,7 @@ Finance OS closes those gaps. Every enquiry is captured the moment it arrives, e
 
 export function TypographySection() {
   const [accent, setAccent] = React.useState<'amber' | 'blue'>('amber')
-  const accentClass = accent === 'amber' ? 'text-amber-text' : 'text-brand'
+  const accentClass = accent === 'amber' ? 'text-highlight' : 'text-brand'
 
   return (
     <Section
