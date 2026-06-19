@@ -46,14 +46,14 @@ export function ComponentsSection() {
       id="components"
       eyebrow="11 - Components"
       title="Components"
-      lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and one disciplined amber accent throughout."
+      lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and a theme-pinned accent — orange (dark), blue (light), gold (paper) — throughout."
     >
       <div className="flex flex-col gap-4">
-        {/* Button intents — primary (orange) vs secondary (blue), with the token to call */}
-        <Demo label="Button intents — primary &amp; secondary">
+        {/* Button intents — primary (solid accent) vs secondary (outline); accent is theme-pinned */}
+        <Demo label="Button intents — primary (solid) &amp; secondary (outline)">
           <div className="flex flex-col gap-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <MonoLabel tone="subtle">Toggle the intent</MonoLabel>
+              <MonoLabel tone="subtle">Accent follows the theme · orange (dark) · blue (light) · gold (paper)</MonoLabel>
               <SegmentedControl
                 aria-label="Button intent"
                 value={intent}
@@ -77,15 +77,18 @@ export function ComponentsSection() {
               </div>
               <div className="flex flex-col justify-center gap-3 rounded-md border border-border bg-surface p-6">
                 <div className="flex items-center gap-2">
-                  <span className={intent === 'primary' ? 'h-3 w-3 rounded-sm bg-accent' : 'h-3 w-3 rounded-sm bg-brand-solid'} aria-hidden />
+                  <span
+                    className={intent === 'primary' ? 'h-3 w-3 rounded-sm bg-accent' : 'h-3 w-3 rounded-sm border border-accent-text'}
+                    aria-hidden
+                  />
                   <span className="font-display text-title-sm text-fg">
-                    {intent === 'primary' ? 'Primary · Momentum Amber' : 'Secondary · Atlas Blue'}
+                    {intent === 'primary' ? 'Primary · solid accent fill' : 'Secondary · accent outline'}
                   </span>
                 </div>
                 <p className="font-body text-body-sm leading-relaxed text-fg-muted">
                   {intent === 'primary'
-                    ? 'The main call to action — one per view.'
-                    : 'The supporting action that sits beside a primary.'}
+                    ? 'The main call to action — one per view. Solid, in the theme accent (orange · blue · gold).'
+                    : 'The supporting action — outline only, transparent inside, in the same theme accent.'}
                 </p>
                 <code className="rounded-sm bg-inset px-3 py-2 font-mono text-caption text-accent-text">
                   {intent === 'primary' ? '<Button variant="primary">' : '<Button variant="secondary">'}

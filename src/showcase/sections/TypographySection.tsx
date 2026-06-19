@@ -1,7 +1,5 @@
-import * as React from 'react'
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
-import { SegmentedControl } from '@/components/ui/segmented'
 import { cn } from '@/lib/cn'
 
 type Row = { token: string; cls: string; spec: string; sample: string }
@@ -20,7 +18,7 @@ const BODY: Row[] = [
   { token: 'body-md', cls: 'text-body-md', spec: '15px · 1.65', sample: 'It replaces fragmented tools with one dependable operating layer.' },
   { token: 'body-sm', cls: 'text-body-sm', spec: '13px · 1.6', sample: 'Predictable pipeline. More settlements. Less admin.' },
   { token: 'caption', cls: 'text-caption', spec: '12px · 1.4', sample: 'Replaces 8 tools · $297/mo' },
-  { token: 'mono-xs', cls: 'text-mono-xs uppercase', spec: '11px · 700 · 0.04em', sample: 'Momentum amber #E68A00' },
+  { token: 'mono-xs', cls: 'text-mono-xs uppercase', spec: '11px · 700 · 0.04em', sample: 'Theme accent · pinned per mode' },
 ]
 
 const BODY_COPY = `Most brokers don't lose deals because they're bad at their job. They lose them in the gaps — the enquiry that lands at 9pm and gets a reply at noon, the pre-approval that goes quiet, the past client who refinances with someone else because no one followed up.
@@ -28,36 +26,19 @@ const BODY_COPY = `Most brokers don't lose deals because they're bad at their jo
 Finance OS closes those gaps. Every enquiry is captured the moment it arrives, every follow-up fires on time, and every conversation — SMS, email, social — lives in one place. You stay the trusted adviser; the system handles the chase. The result is a pipeline you can actually predict: more settlements, less admin, and a business that runs whether you're in the office or not.`
 
 export function TypographySection() {
-  const [accent, setAccent] = React.useState<'amber' | 'blue'>('amber')
-  const accentClass = accent === 'amber' ? 'text-highlight' : 'text-brand'
-
   return (
     <Section
       id="typography"
       eyebrow="06 — Typography"
       title="Typography"
-      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour to preview the brand orange against the brand blue."
+      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Highlighted headings take the THEME ACCENT automatically — orange in dark, blue in light, gold in paper — so type stays on-brand in every mode. Switch the theme (top-right) to preview."
     >
       <div className="space-y-8">
-        {/* heading colour toggle */}
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-surface px-5 py-4">
-          <MonoLabel tone="subtle">Heading colour</MonoLabel>
-          <SegmentedControl
-            aria-label="Heading colour"
-            value={accent}
-            onValueChange={(v) => setAccent(v as 'amber' | 'blue')}
-            options={[
-              { value: 'amber', label: 'Orange' },
-              { value: 'blue', label: 'Blue' },
-            ]}
-          />
-        </div>
-
-        {/* display specimens — coloured by the toggle */}
+        {/* display specimens — highlighted in the theme accent (text-highlight) */}
         <div>
           <div className="mb-4 flex items-center justify-between">
-            <MonoLabel tone={accent === 'amber' ? 'amber' : 'brand'} dot>Display · Spline Sans</MonoLabel>
-            <span className="font-mono text-caption text-fg-subtle">font-display</span>
+            <MonoLabel tone="accent" dot>Display · Spline Sans</MonoLabel>
+            <span className="font-mono text-caption text-fg-subtle">font-display · text-highlight</span>
           </div>
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {DISPLAY.map((r) => (
@@ -66,7 +47,7 @@ export function TypographySection() {
                   <code className="font-mono text-mono-xs text-accent-text">.{r.token}</code>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
                 </div>
-                <p className={cn('font-display transition-colors duration-base', r.cls, accentClass)}>{r.sample}</p>
+                <p className={cn('font-display text-highlight transition-colors duration-base', r.cls)}>{r.sample}</p>
               </div>
             ))}
           </div>

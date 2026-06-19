@@ -1,13 +1,14 @@
 /**
  * Button — Finance OS.
  *
- * Primary CTA = `variant="primary"` (amber fill, dark label — AA). The signature
- * gradient CTA = `variant="gradient"` with an amber glow (use sparingly). The dark
- * luxury pill = `variant="dark"` (fixed near-black, same on every theme).
+ * Accent is THEME-PINNED: orange (dark) · blue (light) · gold (paper).
+ * Primary CTA = `variant="primary"` (solid accent fill, AA label). Secondary =
+ * `variant="secondary"` (accent OUTLINE only — transparent inside). The signature
+ * gradient CTA = `variant="gradient"` (accent glow, use sparingly); dark luxury =
+ * `variant="dark"` (fixed near-black, same on every theme).
  *
- * 8px squircle by default (the global maximum), never a full pill. Glow only on the
- * gradient CTA; neutral variants use soft shadows. Focus ring = the amber --c-ring.
- * Active scale 0.98. Don't stack two primary CTAs. Token-only — zero rogue hex.
+ * 8px squircle by default (the global maximum), never a full pill. Active scale 0.98.
+ * Don't stack two primary CTAs. Token-only — zero rogue hex.
  */
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -23,7 +24,7 @@ const button = cva(
     variants: {
       variant: {
         primary: 'bg-accent text-accent-fg hover:bg-accent-hover',
-        secondary: 'bg-brand-solid text-brand-fg hover:brightness-110',
+        secondary: 'bg-transparent text-accent-text border border-accent-text hover:bg-accent-soft',
         ghost: 'bg-transparent text-fg hover:bg-accent-soft',
         dark: 'bg-inverse text-inverse-fg hover:brightness-110',
         gradient: 'bg-gradient-accent text-accent-fg hover:brightness-[1.04] shadow-glow',

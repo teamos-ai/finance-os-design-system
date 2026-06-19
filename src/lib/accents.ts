@@ -3,7 +3,8 @@
  * ToolCard, MonoLabel…) never hand-write per-accent colour sets; they read ACCENTS[accent].
  * Every value is a SEMANTIC token class — zero rogue hex.
  *
- * The legacy gold accent has been retired; Momentum Amber is primary, Atlas Blue secondary.
+ * Accent is theme-pinned (orange/blue/gold); these decorative recipes (amber/blue/green/
+ * neutral) are independent tonal sets for cards and labels — pick one explicitly.
  */
 export type Accent = 'amber' | 'blue' | 'green' | 'neutral'
 export const ACCENTS_LIST: Accent[] = ['amber', 'blue', 'green', 'neutral']

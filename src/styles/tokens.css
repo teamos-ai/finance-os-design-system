@@ -5,30 +5,31 @@
    Themes switch by toggling [data-theme] on <html>; only the SEMANTIC layer
    changes between themes. Never reference a --p-* primitive in a component.
 
-   Accent = Momentum Amber (primary, "orange") + Atlas Blue (secondary). Signal Gold
-   has been retired from the system. Dark = true OLED black; Light = pure white;
-   Paper = warm ivory (the in-between). Each family ships 5 shades.
+   Accent is THEME-PINNED: Dark → Momentum Amber (orange), Light → Atlas Blue,
+   Paper → Signal Gold. Buttons: primary = solid accent fill, secondary = accent
+   outline (transparent inside). Dark = true OLED black; Light = pure white;
+   Paper = warm ivory. Each family ships 5 shades.
    ============================================================================ */
 
 /* ----------------------------------------------------------------------------
    LAYER 1 — PRIMITIVES (theme-independent; 5 shades per family)
    ---------------------------------------------------------------------------- */
 :root {
-  /* Momentum Amber — primary accent (orange) */
+  /* Momentum Amber — dark-mode accent (orange) */
   --p-amber-100: #F0B966;
   --p-amber-200: #EBA133;
   --p-amber-300: #E68A00; /* base */
   --p-amber-400: #B86E00;
   --p-amber-500: #8A5300;
 
-  /* Signal Gold — brand highlight (returned as a primary brand colour) */
+  /* Signal Gold — paper-mode accent */
   --p-gold-100: #FBEAB8;
   --p-gold-200: #F4D472;
   --p-gold-300: #EEBA2B; /* base */
   --p-gold-400: #C2941F;
   --p-gold-500: #8A6A16;
 
-  /* Atlas Blue — secondary accent (blue) */
+  /* Atlas Blue — light-mode accent (blue) */
   --p-blue-100: #ADB6D2;
   --p-blue-200: #8591BC;
   --p-blue-300: #5C6DA5;
@@ -59,7 +60,7 @@
 
 /* ----------------------------------------------------------------------------
    LAYER 2 — SEMANTIC  ·  DARK / OLED  (default + [data-theme="dark"])
-   True black page; carbon cards lift gently; charcoal raises further.
+   Accent = Momentum Amber. True black page; carbon cards lift; charcoal raises.
    ---------------------------------------------------------------------------- */
 :root,
 [data-theme="dark"] {
@@ -81,12 +82,12 @@
   --c-border-strong: #3A3A3A;
   --c-border-subtle: rgba(255, 255, 255, 0.07);
 
-  --c-accent:       var(--p-amber-300);
+  --c-accent:       var(--p-amber-300); /* #E68A00 orange (pinned to dark) */
   --c-accent-hover: var(--p-amber-200);
   --c-accent-press: var(--p-amber-400);
   --c-accent-soft:  rgba(230, 138, 0, 0.16);
   --c-accent-text:  var(--p-amber-200); /* AA on black */
-  --c-accent-fg:    #1A1206;
+  --c-accent-fg:    #1A1206;            /* ink label on orange fill */
   --c-highlight:    var(--p-amber-300); /* #E68A00 — primary orange, 8:1 on black */
 
   --c-amber:      var(--p-amber-300);
@@ -117,6 +118,7 @@
 
 /* ----------------------------------------------------------------------------
    LAYER 2 — SEMANTIC  ·  LIGHT / Clarity  (pure white + #F6F7F9 rhythm)
+   Accent = Atlas Blue.
    ---------------------------------------------------------------------------- */
 [data-theme="light"] {
   color-scheme: light;
@@ -131,19 +133,19 @@
   --c-fg:          #14161B;
   --c-fg-muted:    #474E5C;
   --c-fg-subtle:   #646C7D;
-  --c-fg-onaccent: #1A1206;
+  --c-fg-onaccent: #FFFFFF;
 
   --c-border:        #E6E8EC;
   --c-border-strong: #CDD2DA;
   --c-border-subtle: rgba(16, 19, 27, 0.08);
 
-  --c-accent:       var(--p-amber-300);
-  --c-accent-hover: var(--p-amber-200);
-  --c-accent-press: var(--p-amber-400);
-  --c-accent-soft:  rgba(230, 138, 0, 0.14);
-  --c-accent-text:  var(--p-amber-500); /* AA on white */
-  --c-accent-fg:    #1A1206;
-  --c-highlight:    var(--p-amber-400); /* #B86E00 — deeper orange, AA-large on white */
+  --c-accent:       var(--p-blue-400); /* #33488F Atlas Blue (pinned to light) */
+  --c-accent-hover: var(--p-blue-300);
+  --c-accent-press: var(--p-blue-500);
+  --c-accent-soft:  rgba(51, 72, 143, 0.12);
+  --c-accent-text:  var(--p-blue-400); /* 8.5:1 on white */
+  --c-accent-fg:    #FFFFFF;           /* white label on blue fill */
+  --c-highlight:    var(--p-blue-400); /* headings blue on white */
 
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-500);
@@ -161,9 +163,9 @@
   --c-info:         var(--p-blue-400);
   --c-info-soft:    rgba(51, 72, 143, 0.10);
 
-  --c-ring:            var(--p-amber-400);
-  --c-glow-accent:     rgba(230, 138, 0, 0.30);
-  --c-gradient-accent: linear-gradient(135deg, var(--p-amber-100) 0%, var(--p-amber-300) 100%);
+  --c-ring:            var(--p-blue-400);
+  --c-glow-accent:     rgba(51, 72, 143, 0.28);
+  --c-gradient-accent: linear-gradient(135deg, var(--p-blue-300) 0%, var(--p-blue-400) 100%);
 
   --shadow-sm: 0 1px 2px rgba(16, 19, 27, 0.06);
   --shadow-md: 0 8px 24px -8px rgba(16, 19, 27, 0.12);
@@ -173,6 +175,7 @@
 
 /* ----------------------------------------------------------------------------
    LAYER 2 — SEMANTIC  ·  PAPER  (warm ivory — the in-between, matches Health OS)
+   Accent = Signal Gold.
    ---------------------------------------------------------------------------- */
 [data-theme="paper"] {
   color-scheme: light;
@@ -187,19 +190,19 @@
   --c-fg:          #2A2419;
   --c-fg-muted:    #6B6149;
   --c-fg-subtle:   #71674B;
-  --c-fg-onaccent: #1A1206;
+  --c-fg-onaccent: #2A2419;
 
   --c-border:        #E7E0D8;
   --c-border-strong: #D8CBA9;
   --c-border-subtle: rgba(42, 36, 25, 0.08);
 
-  --c-accent:       var(--p-amber-300);
-  --c-accent-hover: var(--p-amber-200);
-  --c-accent-press: var(--p-amber-400);
-  --c-accent-soft:  rgba(230, 138, 0, 0.14);
-  --c-accent-text:  var(--p-amber-500);
-  --c-accent-fg:    #1A1206;
-  --c-highlight:    var(--p-amber-400); /* #B86E00 — deeper orange, AA-large on ivory */
+  --c-accent:       var(--p-gold-300); /* #EEBA2B Signal Gold (pinned to paper) */
+  --c-accent-hover: var(--p-gold-200);
+  --c-accent-press: var(--p-gold-400);
+  --c-accent-soft:  rgba(238, 186, 43, 0.16);
+  --c-accent-text:  var(--p-gold-500); /* #8A6A16 antique gold — AA on ivory */
+  --c-accent-fg:    #2A2419;           /* ink label on gold fill */
+  --c-highlight:    var(--p-gold-500); /* deep gold headings on ivory */
 
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-500);
@@ -217,9 +220,9 @@
   --c-info:         var(--p-blue-500);
   --c-info-soft:    rgba(31, 43, 86, 0.10);
 
-  --c-ring:            var(--p-amber-400);
-  --c-glow-accent:     rgba(230, 138, 0, 0.28);
-  --c-gradient-accent: linear-gradient(135deg, var(--p-amber-100) 0%, var(--p-amber-300) 100%);
+  --c-ring:            var(--p-gold-400);
+  --c-glow-accent:     rgba(238, 186, 43, 0.30);
+  --c-gradient-accent: linear-gradient(135deg, var(--p-gold-200) 0%, var(--p-gold-300) 100%);
 
   --shadow-sm: 0 1px 2px rgba(42, 36, 25, 0.06);
   --shadow-md: 0 8px 24px -8px rgba(42, 36, 25, 0.12);
@@ -274,7 +277,23 @@
   --c-danger-solid: #B42318; /* solid danger fill, AA with white */
   --c-on-danger: #FFFFFF;
 
-  /* secondary button — Atlas Blue solid fill with white label (fixed across themes) */
+  /* Atlas Blue solid (brand swatch / info usage — fixed across themes) */
   --c-brand-solid: var(--p-blue-400); /* #33488F */
   --c-on-brand: #FFFFFF;
+
+  /* ── Fixed brand BANNER surfaces — theme-independent (identical in every mode) ──
+     Five-banner set: black · orange-gradient · blue-gradient · paper · white. */
+  --banner-black-bg:  #000000;
+  --banner-black-fg:  #F4F4F5;
+  --banner-black-bd:  #2A2A2A;
+  --banner-orange-bg: linear-gradient(135deg, #F0B966 0%, #E68A00 100%);
+  --banner-orange-fg: #1A1206;
+  --banner-blue-bg:   linear-gradient(135deg, #5C6DA5 0%, #33488F 100%);
+  --banner-blue-fg:   #FFFFFF;
+  --banner-paper-bg:  #F9F6F2;
+  --banner-paper-fg:  #2A2419;
+  --banner-paper-bd:  #E7E0D8;
+  --banner-white-bg:  #FFFFFF;
+  --banner-white-fg:  #14161B;
+  --banner-white-bd:  #E6E8EC;
 }
