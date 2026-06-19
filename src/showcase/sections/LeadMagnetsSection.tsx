@@ -12,7 +12,7 @@
  * Real React state throughout, accessible labels, token-only, 8px radius ceiling.
  */
 import * as React from 'react'
-import { Calculator, Check, Download, FileText, Mail, RotateCcw, TrendingDown } from 'lucide-react'
+import { Calculator, Check, Download, FileText, Mail, RotateCcw, TrendingDown, BookOpen, Layers, ListChecks } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -21,6 +21,10 @@ import { MonoLabel } from '@/components/ui/mono-label'
 import { CountUp } from '@/lib/motion'
 import { PRICING } from '@/data/system'
 import { cn } from '@/lib/cn'
+import { EbookTemplate, MagazineTemplate } from '@/components/lead-magnets/templates/flip'
+import { SwipeFileTemplate, ChecklistTemplate, QuizTemplate, CalculatorTemplate, ScorecardTemplate } from '@/components/lead-magnets/templates/interactive'
+import { CheatSheetTemplate, GuideTemplate, WorkbookTemplate, CaseStudyTemplate, ReportTemplate } from '@/components/lead-magnets/templates/documents'
+import { NewsletterTemplate, EmailCourseTemplate, WebinarTemplate, ToolkitTemplate, ResourceListTemplate, PlannerTemplate, CouponTemplate } from '@/components/lead-magnets/templates/conversion'
 
 /* ── Savings calculator ──────────────────────────────────────────────────────
    Each line is one tool a broker pays for today. Defaults reflect a typical
@@ -336,33 +340,118 @@ function OptInForm() {
   )
 }
 
+const MOTION_VOCAB = [
+  { Icon: BookOpen, t: 'Page-flip', d: 'Ebooks · magazines · guides' },
+  { Icon: Layers, t: 'Swipe', d: 'Swipe files · idea decks' },
+  { Icon: ListChecks, t: 'Checkbox tick', d: 'Checklists · quizzes' },
+]
+
 export function LeadMagnetsSection() {
   return (
     <Section
       id="leadmagnets"
       eyebrow="16 - Lead Magnets"
       title="Lead Magnets"
-      lead="Conversion surfaces with real state — a working tech-stack savings calculator, a gated download, and an opt-in form. Calm copy, accessible labels, token-only."
+      lead="A template library and framework for spinning up on-brand lead magnets — with motion built in: page-flip for ebooks and magazines, swipe for swipe files, and a checkbox tick for checklists and quizzes. Drop your content into any frame and ship. Switch the theme (top-right) to watch every magnet restyle itself."
     >
-      <div className="flex flex-col gap-8">
-        <Demo
-          label="Tech-stack savings calculator"
-          action={
-            <Badge variant="outline" size="sm">
-              <Calculator className="h-3 w-3" strokeWidth={1.5} aria-hidden />
-              Live
-            </Badge>
-          }
-        >
-          <SavingsCalculator />
-        </Demo>
-
-        <Demo label="Gated download & opt-in">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <GatedDownload />
-            <OptInForm />
+      <div className="flex flex-col gap-12">
+        {/* Built-in motion vocabulary */}
+        <div>
+          <MonoLabel tone="accent" dot>
+            The motion vocabulary · built in
+          </MonoLabel>
+          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            {MOTION_VOCAB.map((m) => (
+              <div key={m.t} className="flex items-start gap-3 rounded-md border border-border bg-surface p-4">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-accent-soft text-accent-text">
+                  <m.Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+                </span>
+                <div>
+                  <p className="font-display text-title-sm text-fg">{m.t}</p>
+                  <p className="font-mono text-caption text-fg-subtle">{m.d}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        </Demo>
+        </div>
+
+        {/* Flip */}
+        <div>
+          <MonoLabel tone="subtle">Turn the pages — flip</MonoLabel>
+          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+            <EbookTemplate />
+            <MagazineTemplate />
+          </div>
+        </div>
+
+        {/* Interactive */}
+        <div>
+          <MonoLabel tone="subtle">Interactive — swipe · tick · count-up</MonoLabel>
+          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+            <SwipeFileTemplate />
+            <ChecklistTemplate />
+            <QuizTemplate />
+            <ScorecardTemplate />
+          </div>
+          <div className="mt-6">
+            <CalculatorTemplate />
+          </div>
+        </div>
+
+        {/* Documents */}
+        <div>
+          <MonoLabel tone="subtle">Documents</MonoLabel>
+          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+            <CheatSheetTemplate />
+            <GuideTemplate />
+            <WorkbookTemplate />
+            <CaseStudyTemplate />
+          </div>
+          <div className="mt-6">
+            <ReportTemplate />
+          </div>
+        </div>
+
+        {/* Opt-in & utility */}
+        <div>
+          <MonoLabel tone="subtle">Opt-in &amp; utility</MonoLabel>
+          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+            <NewsletterTemplate />
+            <EmailCourseTemplate />
+            <WebinarTemplate />
+            <ToolkitTemplate />
+            <ResourceListTemplate />
+            <PlannerTemplate />
+          </div>
+          <div className="mx-auto mt-6 max-w-sm">
+            <CouponTemplate />
+          </div>
+        </div>
+
+        {/* Live capture surfaces */}
+        <div>
+          <MonoLabel tone="subtle">Capture surfaces — live state</MonoLabel>
+          <div className="mt-4 flex flex-col gap-6">
+            <Demo
+              label="Tech-stack savings calculator"
+              action={
+                <Badge variant="outline" size="sm">
+                  <Calculator className="h-3 w-3" strokeWidth={1.5} aria-hidden />
+                  Live
+                </Badge>
+              }
+            >
+              <SavingsCalculator />
+            </Demo>
+
+            <Demo label="Gated download & opt-in">
+              <div className="grid gap-6 lg:grid-cols-2">
+                <GatedDownload />
+                <OptInForm />
+              </div>
+            </Demo>
+          </div>
+        </div>
       </div>
     </Section>
   )
