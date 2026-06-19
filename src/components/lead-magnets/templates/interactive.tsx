@@ -128,11 +128,13 @@ export function QuizTemplate() {
             <span className="tabular-nums text-accent-text">{Math.round((step / QUIZ.length) * 100)}%</span>
           </div>
           <p className="font-display text-title-md text-fg">{QUIZ[step].q}</p>
-          <div className="mt-4 flex flex-col gap-2">
+          <div className="mt-4 flex flex-col gap-2" role="radiogroup" aria-label="Answer options">
             {QUIZ[step].options.map((o, i) => (
               <button
                 key={o.label}
                 type="button"
+                role="radio"
+                aria-checked={picked === i}
                 onClick={() => setPicked(i)}
                 className={cn(
                   'flex items-center gap-3 rounded-md border px-4 py-3 text-left font-body text-body-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',

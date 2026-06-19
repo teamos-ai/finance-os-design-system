@@ -21,7 +21,7 @@ const badge = cva(
         outline: 'border border-border-strong text-fg-muted',
       },
       size: {
-        sm: 'text-[0.625rem] tracking-[0.1em] px-2 py-0.5',
+        sm: 'text-mono-2xs tracking-[0.1em] px-2 py-0.5',
         md: 'text-mono-xs px-2.5 py-1',
       },
     },

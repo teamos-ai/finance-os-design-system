@@ -277,10 +277,6 @@
   --c-danger-solid: #B42318; /* solid danger fill, AA with white */
   --c-on-danger: #FFFFFF;
 
-  /* Atlas Blue solid (brand swatch / info usage — fixed across themes) */
-  --c-brand-solid: var(--p-blue-400); /* #33488F */
-  --c-on-brand: #FFFFFF;
-
   /* ── Fixed brand BANNER surfaces — theme-independent (identical in every mode) ──
      Five-banner set: black · orange-gradient · blue-gradient · paper · white. */
   --banner-black-bg:  #000000;

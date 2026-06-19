@@ -92,7 +92,7 @@ export function MagazineTemplate() {
     <PaperPage key="feature">
       <TemplateKicker>Feature</TemplateKicker>
       <h4 className="mt-2 font-display text-title-lg text-fg">The afternoon, returned</h4>
-      <div className="mt-3 columns-2 gap-4 font-body text-body-sm leading-relaxed text-fg-muted [column-rule:1px_solid_var(--c-border-subtle)]">
+      <div className="mt-3 gap-4 font-body text-body-sm leading-relaxed text-fg-muted sm:columns-2 sm:[column-rule:1px_solid_var(--c-border-subtle)]">
         <p className="mb-3">
           When every enquiry routes itself and every follow-up fires on time, the broker's day stops
           being reactive.

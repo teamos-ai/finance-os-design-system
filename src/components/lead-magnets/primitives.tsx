@@ -50,7 +50,16 @@ export function Flipbook({ pages, className, aspect = 'aspect-[3/4]' }: Flipbook
     })
 
   return (
-    <div className={cn('flex flex-col items-center gap-4', className)}>
+    <div
+      className={cn('flex flex-col items-center gap-4 outline-none', className)}
+      tabIndex={0}
+      role="group"
+      aria-label="Flipbook — use left and right arrow keys to turn pages"
+      onKeyDown={(e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1) }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); go(1) }
+      }}
+    >
       <div className={cn('relative w-full max-w-sm overflow-hidden rounded-lg border border-border bg-surface shadow-lg', aspect)} style={{ perspective: '1600px' }}>
         <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-6 bg-gradient-to-r from-black/10 to-transparent" />
         <AnimatePresence initial={false}>
@@ -171,7 +180,17 @@ export function SwipeDeck({ items, className, keepLabel = 'Keep', skipLabel = 'S
   const reset = () => setCards(items)
 
   return (
-    <div className={cn('flex flex-col items-center gap-5', className)}>
+    <div
+      className={cn('flex flex-col items-center gap-5 outline-none', className)}
+      tabIndex={0}
+      role="group"
+      aria-label="Swipe deck — left arrow to skip, right arrow to keep"
+      onKeyDown={(e) => {
+        if (!front) return
+        if (e.key === 'ArrowLeft') { e.preventDefault(); decide(front.id, -1) }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); decide(front.id, 1) }
+      }}
+    >
       <div className="relative aspect-[4/5] w-full max-w-xs">
         <AnimatePresence>
           {cards.length > 0 ? (

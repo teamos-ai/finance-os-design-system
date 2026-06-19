@@ -1,10 +1,10 @@
 /**
  * CelebrationButton — Finance OS.
  *
- * A gradient button (locked amber→amber signature fill) that throws a small shower of
- * thin coloured streamers on click — they fly up from the button's top-centre, then arc
- * back down and fade. The streamer palette is the Finance OS amber/amber family (with two
- * deeper navy/bronze tones for depth) so the burst reads luxe, not confetti-loud. Honours
+ * A gradient button (theme-accent signature fill) that throws a small shower of thin
+ * coloured streamers on click — they fly up from the button's top-centre, then arc back
+ * down and fade. The streamer palette is sourced from the brand PRIMITIVE tokens (gold,
+ * amber, deep Atlas-blue) so the burst reads luxe, on-brand and rogue-hex-free. Honours
  * `prefers-reduced-motion`: reduced users get NO streamers (the click still works).
  * Per-click keyed bursts (a seq ref) support rapid re-clicks; each burst self-cleans after
  * the animation. The burst layer is aria-hidden and never intercepts clicks. A CSS @media
@@ -16,8 +16,14 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { EASE_OUT } from '@/lib/motion'
 
-/** Streamer ribbon colours — amber/amber signature trio + bronze + two deeper tones for depth. */
-const STREAMER_COLORS = ['#EEBA2B', '#E68A00', '#F5C95A', '#BE9522', '#C9761A', '#1E3A5F']
+/* Streamer ribbon palette — read from the brand PRIMITIVE tokens (theme-independent), so
+   confetti stays on-brand with zero rogue hex: gold, amber and a deep Atlas-blue for depth. */
+const STREAMER_VARS = ['--p-gold-300', '--p-amber-300', '--p-gold-200', '--p-amber-200', '--p-gold-400', '--p-blue-500']
+function streamerColors(): string[] {
+  if (typeof document === 'undefined') return ['#EEBA2B']
+  const cs = getComputedStyle(document.documentElement)
+  return STREAMER_VARS.map((v) => cs.getPropertyValue(v).trim() || '#EEBA2B')
+}
 
 interface Streamer {
   id: number
@@ -55,11 +61,12 @@ export const CelebrationButton = React.forwardRef<HTMLButtonElement, Celebration
       const key = seq.current++
       // Reduced motion → no streamers at all (the action still fires below).
       const count = reduced ? 0 : particleCount
+      const palette = streamerColors()
       const streamers: Streamer[] = Array.from({ length: count }, (_, i) => ({
         id: i,
         w: 4 + Math.random() * 4, // 4–8px
         h: 10 + Math.random() * 10, // 10–20px
-        color: STREAMER_COLORS[i % STREAMER_COLORS.length],
+        color: palette[i % palette.length],
         x: (Math.random() - 0.5) * 320, // ±160px
         up: 70 + Math.random() * 90, // 70–160px
         fall: 60 + Math.random() * 80, // 60–140px

@@ -27,7 +27,7 @@ export const ImageWash = ({
   className,
 }: ImageWashProps) => (
   <div
-    className={cn('relative overflow-hidden rounded-md border border-border', className)}
+    className={cn('relative max-w-full overflow-hidden rounded-md border border-border', className)}
     style={{ background, aspectRatio: ratio }}
   >
     {(label || Icon) && (

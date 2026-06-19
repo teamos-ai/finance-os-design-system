@@ -74,7 +74,7 @@ function SavingsCalculator() {
   const reset = () => setSpend(initialSpend)
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_1fr]">
       {/* Inputs — current tool spend */}
       <div className="rounded-md border border-border bg-surface p-6">
         <div className="flex items-center justify-between gap-3">
@@ -360,7 +360,7 @@ export function LeadMagnetsSection() {
           <MonoLabel tone="accent" dot>
             The motion vocabulary · built in
           </MonoLabel>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {MOTION_VOCAB.map((m) => (
               <div key={m.t} className="flex items-start gap-3 rounded-md border border-border bg-surface p-4">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-accent-soft text-accent-text">
@@ -378,7 +378,7 @@ export function LeadMagnetsSection() {
         {/* Flip */}
         <div>
           <MonoLabel tone="subtle">Turn the pages — flip</MonoLabel>
-          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+          <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <EbookTemplate />
             <MagazineTemplate />
           </div>
@@ -387,7 +387,7 @@ export function LeadMagnetsSection() {
         {/* Interactive */}
         <div>
           <MonoLabel tone="subtle">Interactive — swipe · tick · count-up</MonoLabel>
-          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+          <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <SwipeFileTemplate />
             <ChecklistTemplate />
             <QuizTemplate />
@@ -401,7 +401,7 @@ export function LeadMagnetsSection() {
         {/* Documents */}
         <div>
           <MonoLabel tone="subtle">Documents</MonoLabel>
-          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+          <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <CheatSheetTemplate />
             <GuideTemplate />
             <WorkbookTemplate />
@@ -415,7 +415,7 @@ export function LeadMagnetsSection() {
         {/* Opt-in & utility */}
         <div>
           <MonoLabel tone="subtle">Opt-in &amp; utility</MonoLabel>
-          <div className="mt-4 grid items-start gap-6 lg:grid-cols-2">
+          <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
             <NewsletterTemplate />
             <EmailCourseTemplate />
             <WebinarTemplate />
@@ -445,7 +445,7 @@ export function LeadMagnetsSection() {
             </Demo>
 
             <Demo label="Gated download & opt-in">
-              <div className="grid gap-6 lg:grid-cols-2">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <GatedDownload />
                 <OptInForm />
               </div>

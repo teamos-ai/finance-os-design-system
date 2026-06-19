@@ -5,8 +5,9 @@
  * dimensions per size (h/w) so the target is predictable regardless of the icon child.
  * `aria-label` is required, since there is no visible text.
  *
- * 8px squircle, amber focus ring, active scale, reduced-motion safe (no JS motion).
- * The `accent` variant is the amber CTA fill, mirroring Button's primary tokens.
+ * 8px squircle, accent focus ring, active scale, reduced-motion safe (no JS motion).
+ * The `accent` variant uses the theme-pinned accent fill (orange in dark, blue in light,
+ * gold in paper), mirroring Button's primary tokens.
  */
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'

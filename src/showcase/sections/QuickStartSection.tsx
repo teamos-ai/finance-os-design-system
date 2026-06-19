@@ -140,7 +140,7 @@ const FILE_TREE = `src/
 │  ├─ cn.ts             clsx + tailwind-merge (font-size fix)
 │  ├─ theme.tsx         ThemeProvider + useTheme
 │  ├─ motion.tsx        FadeIn, Stagger, reduced-motion safe
-│  └─ accents.ts        amber | amber | blue | green | neutral
+│  └─ accents.ts        amber | blue | green | neutral
 ├─ components/ui/       Button, Card, Badge, Input, …
 └─ data/system.ts       BRAND, FEATURES, STATS, PRICING`
 
@@ -155,7 +155,7 @@ export function QuickStartSection() {
       lead="Clone the repo, import the token layer, wrap your app in the provider, then drop in a component. It inherits the active theme with no extra wiring."
     >
       {/* Numbered steps */}
-      <Stagger className="grid gap-5 md:grid-cols-2">
+      <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {STEPS.map((step) => (
           <StaggerItem key={step.n}>
             <article className="flex h-full flex-col gap-4 rounded-lg border border-border bg-surface p-6">
@@ -201,7 +201,7 @@ export function QuickStartSection() {
 
       {/* Short notes */}
       <FadeIn>
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
           <article className="rounded-lg border border-border bg-surface p-6">
             <div className="mb-3 flex items-center gap-3">
               <span

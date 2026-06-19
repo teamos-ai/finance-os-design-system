@@ -43,7 +43,7 @@ export const MonoLabel = ({
     <span
       className={cn(
         'inline-flex items-center gap-2 font-mono font-bold uppercase',
-        size === 'sm' ? 'text-[0.625rem] tracking-[0.14em]' : 'text-mono-xs',
+        size === 'sm' ? 'text-mono-2xs tracking-[0.14em]' : 'text-mono-xs',
         t.text,
         className,
       )}

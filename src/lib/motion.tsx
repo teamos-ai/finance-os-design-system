@@ -143,21 +143,22 @@ export const HoverLift = ({
   )
 }
 
-/* ── Glow — signature amber/amber radial wash behind a hero/banner ──────────────
-   Pure CSS radial gradients at low alpha, blurred. aria-hidden, no pointer events. */
+/* ── Glow — signature accent radial wash behind a hero/banner ──────────────────
+   Theme-aware via color-mix on --c-accent (orange/blue/gold), low alpha, blurred.
+   aria-hidden, no pointer events. */
 export const Glow = ({ className }: { className?: string }) => (
   <div aria-hidden className={cn('pointer-events-none absolute inset-0 -z-10 overflow-hidden', className)}>
     <div
       className="absolute left-1/2 top-[-18%] h-[620px] w-[min(1100px,120%)] -translate-x-1/2 rounded-sm blur-3xl opacity-70"
       style={{
         background:
-          'radial-gradient(closest-side, rgba(230, 138, 0,0.30), rgba(230,138,0,0.14) 55%, transparent 75%)',
+          'radial-gradient(closest-side, color-mix(in srgb, var(--c-accent) 30%, transparent), color-mix(in srgb, var(--c-accent) 14%, transparent) 55%, transparent 75%)',
       }}
     />
   </div>
 )
 
-/* ── BorderGlow — animated amber sweep around an accent surface ─────────────── */
+/* ── BorderGlow — animated accent sweep around an accent surface ────────────── */
 export const BorderGlow = ({ className, children }: { className?: string; children: React.ReactNode }) => {
   const reduced = useReducedMotion()
   return (
@@ -166,7 +167,7 @@ export const BorderGlow = ({ className, children }: { className?: string; childr
         <motion.div
           aria-hidden
           className="pointer-events-none absolute -inset-px rounded-lg opacity-60"
-          style={{ background: 'conic-gradient(from 0deg, transparent, rgba(230, 138, 0,0.5), transparent 30%)' }}
+          style={{ background: 'conic-gradient(from 0deg, transparent, color-mix(in srgb, var(--c-accent) 50%, transparent), transparent 30%)' }}
           animate={{ rotate: 360 }}
           transition={{ duration: 6, ease: 'linear', repeat: Infinity }}
         />

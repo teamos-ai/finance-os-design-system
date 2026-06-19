@@ -42,7 +42,7 @@ export function TypographySection() {
           </div>
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {DISPLAY.map((r) => (
-              <div key={r.token} className="grid gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
+              <div key={r.token} className="grid grid-cols-1 gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
                 <div className="flex flex-col gap-1">
                   <code className="font-mono text-mono-xs text-accent-text">.{r.token}</code>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
@@ -61,7 +61,7 @@ export function TypographySection() {
           </div>
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {BODY.map((r) => (
-              <div key={r.token} className="grid gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
+              <div key={r.token} className="grid grid-cols-1 gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
                 <div className="flex flex-col gap-1">
                   <code className="font-mono text-mono-xs text-accent-text">.{r.token}</code>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>

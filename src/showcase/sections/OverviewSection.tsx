@@ -31,7 +31,7 @@ export function OverviewSection() {
       lead="Finance OS is built Ruler-first: structure, order and authority, softened by the Sage's clarity. Every surface assembles from locked tokens — switch the theme and only the semantic layer moves."
     >
       {/* principles */}
-      <Stagger className="grid gap-4 sm:grid-cols-2">
+      <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {PRINCIPLES.map((p) => (
           <StaggerItem key={p.title}>
             <Card tone="surface" padding="md" interactive className="h-full">
@@ -50,7 +50,7 @@ export function OverviewSection() {
       </Stagger>
 
       {/* archetype blend */}
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {PILLARS.map((pillar) => {
           const a = ACCENTS[pillar.accent]
           return (
@@ -70,7 +70,7 @@ export function OverviewSection() {
       {/* theme set */}
       <div className="mt-10 rounded-lg border border-border bg-surface p-6">
         <MonoLabel tone="subtle">Theme set · one semantic layer</MonoLabel>
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {THEMES.map((t) => (
             <div key={t.label} className="rounded-md border border-border bg-canvas p-4">
               <p className="font-display text-title-sm text-fg">{t.label}</p>
