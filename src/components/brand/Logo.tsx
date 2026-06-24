@@ -1,8 +1,9 @@
 /**
- * Logo — the real Finance OS brand marks (PNG assets in /public).
- *   • mark      → the square gradient "OS" monogram (works on any background; favicon).
- *   • full/rect → the FINANCE OS rectangle lockup, theme-aware: the white-outline version
- *     on dark, the gradient-fill version on light/paper.
+ * Logo — the real Finance OS brand marks (PNG assets in /public). Theme-aware:
+ *   • mark      → the square "OS" monogram. Amber on dark/paper, BLUE in light mode
+ *     (matches the light-mode accent). Used across the chrome + favicon.
+ *   • full/rect → the FINANCE OS rectangle lockup: white-outline on dark, BLUE solid-plate
+ *     in light, amber gradient-plate on paper.
  */
 import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
@@ -20,15 +21,19 @@ const RECT: Record<Size, string> = {
   lg: 'h-12',
 }
 
-export const LogoMark = ({ size = 'md', className }: { size?: Size; className?: string }) => (
-  <img
-    src="/logo-square.png"
-    alt="Finance OS"
-    width={48}
-    height={48}
-    className={cn('block shrink-0 object-contain', MARK[size], className)}
-  />
-)
+export const LogoMark = ({ size = 'md', className }: { size?: Size; className?: string }) => {
+  const { theme } = useTheme()
+  const src = theme === 'light' ? '/logo-square-blue.png' : '/logo-square.png'
+  return (
+    <img
+      src={src}
+      alt="Finance OS"
+      width={48}
+      height={48}
+      className={cn('block shrink-0 object-contain', MARK[size], className)}
+    />
+  )
+}
 
 export interface LogoProps {
   variant?: 'mark' | 'full' | 'rect' | 'wordmark'
@@ -39,8 +44,9 @@ export interface LogoProps {
 export const Logo = ({ variant = 'full', size = 'md', className }: LogoProps) => {
   const { theme } = useTheme()
   if (variant === 'mark') return <LogoMark size={size} className={className} />
-  // Rectangle lockup — white-outline version reads on dark; gradient-fill on light/paper.
-  const src = theme === 'dark' ? '/logo-rect-white.png' : '/logo-rect.png'
+  // Rectangle lockup — white-outline reads on dark, blue solid-plate in light, amber plate on paper.
+  const src =
+    theme === 'dark' ? '/logo-rect-white.png' : theme === 'light' ? '/logo-rect-blue.png' : '/logo-rect.png'
   return (
     <img
       src={src}

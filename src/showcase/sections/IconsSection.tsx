@@ -37,9 +37,9 @@ function IconCell({ name }: { name: string }) {
 }
 
 const BG_TILES = [
-  { name: 'Dark / Black', bg: '#000000' },
-  { name: 'Light / White', bg: '#FFFFFF' },
-  { name: 'Paper / Ivory', bg: '#F9F6F2' },
+  { name: 'Dark / Black', bg: '#000000', rect: '/logo-rect-white.png', mark: '/logo-square.png' },
+  { name: 'Light / White', bg: '#FFFFFF', rect: '/logo-rect-blue.png', mark: '/logo-square-blue.png' },
+  { name: 'Paper / Ivory', bg: '#F9F6F2', rect: '/logo-rect.png', mark: '/logo-square.png' },
 ]
 
 export function IconsSection() {
@@ -143,14 +143,13 @@ export function IconsSection() {
         </p>
 
         <div>
-          <MonoLabel tone="amber" dot>Logo lockups · both rectangles on every theme</MonoLabel>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <MonoLabel tone="amber" dot>Logo lockups · the mark as it appears in each mode</MonoLabel>
+          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
             {BG_TILES.map((tile) => (
               <div key={tile.name} className="overflow-hidden rounded-lg border border-border">
                 <div className="flex flex-col items-center justify-center gap-6 p-8" style={{ background: tile.bg }}>
-                  <img src="/logo-rect-white.png" alt="Finance OS — white lockup" className="h-9 w-auto object-contain" />
-                  <img src="/logo-rect.png" alt="Finance OS — gradient lockup" className="h-9 w-auto object-contain" />
-                  <img src="/logo-square.png" alt="Finance OS — mark" className="h-10 w-10 object-contain" />
+                  <img src={tile.rect} alt={`Finance OS lockup — ${tile.name}`} className="h-9 w-auto object-contain" />
+                  <img src={tile.mark} alt="Finance OS mark" className="h-10 w-10 object-contain" />
                 </div>
                 <div className="border-t border-border bg-surface px-4 py-2.5">
                   <span className="font-mono text-caption text-fg-subtle">{tile.name}</span>
