@@ -1,11 +1,9 @@
 import { Compass, Square, Sparkle, Gauge } from 'lucide-react'
 import { Section } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { Stagger, StaggerItem } from '@/lib/motion'
 import { ACCENTS } from '@/lib/accents'
-import { SHOWCASE_NAV } from '@/lib/nav'
 import { PILLARS } from '@/data/system'
 
 const PRINCIPLES = [
@@ -22,7 +20,6 @@ const THEMES = [
 ]
 
 export function OverviewSection() {
-  const groups = [...new Set(SHOWCASE_NAV.map((n) => n.group))]
   return (
     <Section
       id="overview"
@@ -80,26 +77,6 @@ export function OverviewSection() {
         </div>
       </div>
 
-      {/* jump nav */}
-      <div className="mt-10">
-        <MonoLabel tone="subtle">Index</MonoLabel>
-        <div className="mt-4 space-y-4">
-          {groups.map((group) => (
-            <div key={group}>
-              <p className="mb-2 font-mono text-caption uppercase tracking-wide text-fg-subtle">{group}</p>
-              <div className="flex flex-wrap gap-2">
-                {SHOWCASE_NAV.filter((n) => n.group === group).map((n) => (
-                  <a key={n.id} href={`#${n.id}`}>
-                    <Badge variant="neutral" className="transition-colors hover:text-fg">
-                      {n.label}
-                    </Badge>
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </Section>
   )
 }

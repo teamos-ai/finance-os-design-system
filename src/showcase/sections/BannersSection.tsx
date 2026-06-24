@@ -14,10 +14,10 @@ export function BannersSection() {
       id="banners"
       eyebrow="14 — Banners"
       title="Banners"
-      lead="Alert, announcement and promo strips for websites, funnels, countdowns and timers. The fixed brand set — black, orange-gradient, blue-gradient, paper and white — is theme-independent: a blue banner stays blue whether the page is dark, light or paper. Drop one at the top of any page."
+      lead="Alert, announcement and promo strips for websites, funnels, countdowns and timers. The fixed brand set — black, orange-gradient, blue-gradient, paper, paper-gradient and white — is theme-independent: a blue banner stays blue whether the page is dark, light or paper. The top-of-page banner is theme-aware (orange in dark, blue in light, paper-gradient in paper)."
     >
       <div className="space-y-6">
-        <MonoLabel tone="subtle">The fixed five — identical in dark · light · paper</MonoLabel>
+        <MonoLabel tone="subtle">The fixed six — identical in dark · light · paper</MonoLabel>
 
         <Demo label="Banner · black  ·  --banner-black-*" padded={false}>
           {dismissed ? (
@@ -69,6 +69,20 @@ export function BannersSection() {
         <Demo label="Banner · paper (notice)  ·  --banner-paper-*" padded={false}>
           <Banner variant="paper" icon={Megaphone}>
             Scheduled maintenance — Sunday 02:00–04:00 AEST
+          </Banner>
+        </Demo>
+
+        <Demo label="Banner · paper gradient  ·  --banner-paper-grad-*" padded={false}>
+          <Banner
+            variant="paper-gradient"
+            icon={Sparkles}
+            action={
+              <Button as="a" href="#hero" variant="dark" size="sm">
+                Explore
+              </Button>
+            }
+          >
+            Warm paper edition — the calm operating system for serious brokers
           </Banner>
         </Demo>
 

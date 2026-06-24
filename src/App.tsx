@@ -1,5 +1,6 @@
 import { Shell } from '@/showcase/Shell'
 import { Ticker } from '@/components/ui/banner'
+import { useTheme } from '@/lib/theme'
 import { TICKER_ITEMS } from '@/data/system'
 import { HeroSection } from '@/showcase/sections/HeroSection'
 import { VideoSection } from '@/showcase/sections/VideoSection'
@@ -22,10 +23,16 @@ import { NotionSection } from '@/showcase/sections/NotionSection'
 import { SocialSection } from '@/showcase/sections/SocialSection'
 import { DemosSection } from '@/showcase/sections/DemosSection'
 
+function TopBanner() {
+  const { theme } = useTheme()
+  // Theme-aware top banner: orange gradient (dark) · blue gradient (light) · paper gradient (paper).
+  return <Ticker items={TICKER_ITEMS} variant={theme === 'paper' ? 'paper-gradient' : 'gradient'} />
+}
+
 export default function App() {
   return (
     <Shell>
-      <Ticker items={TICKER_ITEMS} variant="dark" />
+      <TopBanner />
       <HeroSection />
       <VideoSection />
       <QuickStartSection />

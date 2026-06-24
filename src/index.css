@@ -35,9 +35,10 @@
     border-radius: var(--radius-sm);
   }
 
+  /* Neutral text selection — no accent highlight (brand-quiet). */
   ::selection {
-    background: var(--c-accent);
-    color: var(--c-accent-fg);
+    background: var(--c-border-strong);
+    color: var(--c-fg);
   }
 
   * {

@@ -21,12 +21,13 @@ const FIXED_STYLE = {
   orange: { background: 'var(--banner-orange-bg)', color: 'var(--banner-orange-fg)' },
   blue: { background: 'var(--banner-blue-bg)', color: 'var(--banner-blue-fg)' },
   paper: { background: 'var(--banner-paper-bg)', color: 'var(--banner-paper-fg)', borderColor: 'var(--banner-paper-bd)' },
+  'paper-gradient': { background: 'var(--banner-paper-grad-bg)', color: 'var(--banner-paper-grad-fg)', borderColor: 'var(--banner-paper-grad-bd)' },
   white: { background: 'var(--banner-white-bg)', color: 'var(--banner-white-fg)', borderColor: 'var(--banner-white-bd)' },
 } as const
 
 type FixedVariant = keyof typeof FIXED_STYLE
 const isFixed = (v: string | null | undefined): v is FixedVariant =>
-  v === 'black' || v === 'orange' || v === 'blue' || v === 'paper' || v === 'white'
+  v === 'black' || v === 'orange' || v === 'blue' || v === 'paper' || v === 'paper-gradient' || v === 'white'
 
 const banner = cva('flex items-center gap-3 px-4 py-3 font-mono text-body-sm', {
   variants: {
@@ -35,6 +36,7 @@ const banner = cva('flex items-center gap-3 px-4 py-3 font-mono text-body-sm', {
       orange: '',
       blue: '',
       paper: 'border-y',
+      'paper-gradient': 'border-y',
       white: 'border-y',
       gradient: 'bg-gradient-accent text-accent-fg',
       dark: 'bg-inverse text-inverse-fg',

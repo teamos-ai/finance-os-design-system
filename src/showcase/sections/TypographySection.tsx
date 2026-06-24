@@ -1,5 +1,8 @@
+import * as React from 'react'
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { SegmentedControl } from '@/components/ui/segmented'
+import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
 type Row = { token: string; cls: string; spec: string; sample: string }
@@ -25,20 +28,52 @@ const BODY_COPY = `Most brokers don't lose deals because they're bad at their jo
 
 Finance OS closes those gaps. Every enquiry is captured the moment it arrives, every follow-up fires on time, and every conversation — SMS, email, social — lives in one place. You stay the trusted adviser; the system handles the chase. The result is a pipeline you can actually predict: more settlements, less admin, and a business that runs whether you're in the office or not.`
 
+type ColorKey = 'accent' | 'ink' | 'alt'
+
+/* Heading-colour options are theme-aware. 'accent' = the theme highlight, 'ink' = neutral
+   (white on dark, black on light/paper), 'alt' = the cross-accent. All AA(-large) for the
+   display specimens. Classes appear here as string literals so Tailwind keeps them. */
+const THEME_COLORS: Record<string, { accent: string; ink: string; alt: string; altCls: string }> = {
+  dark: { accent: 'Orange', ink: 'White', alt: 'Blue', altCls: 'text-brand' },
+  light: { accent: 'Blue', ink: 'Black', alt: 'Orange', altCls: 'text-amber-text' },
+  paper: { accent: 'Amber', ink: 'Black', alt: 'Blue', altCls: 'text-brand' },
+}
+
 export function TypographySection() {
+  const { theme } = useTheme()
+  const [color, setColor] = React.useState<ColorKey>('accent')
+  const opts = THEME_COLORS[theme] ?? THEME_COLORS.dark
+  const colorClass = color === 'accent' ? 'text-highlight' : color === 'ink' ? 'text-fg' : opts.altCls
+
   return (
     <Section
       id="typography"
       eyebrow="06 — Typography"
       title="Typography"
-      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Highlighted headings take the THEME ACCENT automatically — orange in dark, blue in light, gold in paper — so type stays on-brand in every mode. Switch the theme (top-right) to preview."
+      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour — each theme offers its accent, a neutral ink, and a cross-accent (e.g. orange · white · blue in dark). Switch the theme (top-right) to see the options change."
     >
       <div className="space-y-8">
-        {/* display specimens — highlighted in the theme accent (text-highlight) */}
+        {/* heading colour toggle — theme-aware options */}
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-surface px-5 py-4">
+          <MonoLabel tone="subtle">Heading colour · per theme</MonoLabel>
+          <SegmentedControl
+            aria-label="Heading colour"
+            value={color}
+            onValueChange={(v) => setColor(v as ColorKey)}
+            size="sm"
+            options={[
+              { value: 'accent', label: opts.accent },
+              { value: 'ink', label: opts.ink },
+              { value: 'alt', label: opts.alt },
+            ]}
+          />
+        </div>
+
+        {/* display specimens — coloured by the toggle */}
         <div>
           <div className="mb-4 flex items-center justify-between">
             <MonoLabel tone="accent" dot>Display · Spline Sans</MonoLabel>
-            <span className="font-mono text-caption text-fg-subtle">font-display · text-highlight</span>
+            <span className="font-mono text-caption text-fg-subtle">font-display</span>
           </div>
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {DISPLAY.map((r) => (
@@ -47,7 +82,7 @@ export function TypographySection() {
                   <code className="font-mono text-mono-xs text-accent-text">.{r.token}</code>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
                 </div>
-                <p className={cn('font-display text-highlight transition-colors duration-base', r.cls)}>{r.sample}</p>
+                <p className={cn('font-display transition-colors duration-base', r.cls, colorClass)}>{r.sample}</p>
               </div>
             ))}
           </div>

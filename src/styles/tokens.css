@@ -6,23 +6,23 @@
    changes between themes. Never reference a --p-* primitive in a component.
 
    Accent is THEME-PINNED: Dark → Momentum Amber (orange), Light → Atlas Blue,
-   Paper → Signal Gold. Buttons: primary = solid accent fill, secondary = accent
-   outline (transparent inside). Dark = true OLED black; Light = pure white;
-   Paper = warm ivory. Each family ships 5 shades.
+   Paper → Momentum Amber (#F0B966 fills, deeper #B86E00 for text/AA). Buttons:
+   primary = solid accent fill, secondary = accent outline. Focus rings are NEUTRAL
+   (never the accent colour). Dark = true OLED black; Light = pure white; Paper = ivory.
    ============================================================================ */
 
 /* ----------------------------------------------------------------------------
    LAYER 1 — PRIMITIVES (theme-independent; 5 shades per family)
    ---------------------------------------------------------------------------- */
 :root {
-  /* Momentum Amber — dark-mode accent (orange) */
+  /* Momentum Amber — dark + paper accent (orange) */
   --p-amber-100: #F0B966;
   --p-amber-200: #EBA133;
   --p-amber-300: #E68A00; /* base */
   --p-amber-400: #B86E00;
   --p-amber-500: #8A5300;
 
-  /* Signal Gold — paper-mode accent */
+  /* Signal Gold — brand swatch (5 shades) */
   --p-gold-100: #FBEAB8;
   --p-gold-200: #F4D472;
   --p-gold-300: #EEBA2B; /* base */
@@ -106,7 +106,7 @@
   --c-info:         var(--p-blue-200);
   --c-info-soft:    rgba(133, 145, 188, 0.16);
 
-  --c-ring:            var(--p-amber-300);
+  --c-ring:            var(--c-fg-subtle); /* NEUTRAL focus ring (no accent highlight) */
   --c-glow-accent:     rgba(230, 138, 0, 0.45);
   --c-gradient-accent: linear-gradient(135deg, var(--p-amber-100) 0%, var(--p-amber-300) 100%);
 
@@ -163,7 +163,7 @@
   --c-info:         var(--p-blue-400);
   --c-info-soft:    rgba(51, 72, 143, 0.10);
 
-  --c-ring:            var(--p-blue-400);
+  --c-ring:            var(--c-fg-subtle); /* NEUTRAL focus ring */
   --c-glow-accent:     rgba(51, 72, 143, 0.28);
   --c-gradient-accent: linear-gradient(135deg, var(--p-blue-300) 0%, var(--p-blue-400) 100%);
 
@@ -175,7 +175,7 @@
 
 /* ----------------------------------------------------------------------------
    LAYER 2 — SEMANTIC  ·  PAPER  (warm ivory — the in-between, matches Health OS)
-   Accent = Signal Gold.
+   Accent = Momentum Amber: #F0B966 for solid fills, deeper #B86E00 for text (AA on ivory).
    ---------------------------------------------------------------------------- */
 [data-theme="paper"] {
   color-scheme: light;
@@ -196,17 +196,17 @@
   --c-border-strong: #D8CBA9;
   --c-border-subtle: rgba(42, 36, 25, 0.08);
 
-  --c-accent:       var(--p-gold-300); /* #EEBA2B Signal Gold (pinned to paper) */
-  --c-accent-hover: var(--p-gold-200);
-  --c-accent-press: var(--p-gold-400);
-  --c-accent-soft:  rgba(238, 186, 43, 0.16);
-  --c-accent-text:  var(--p-gold-500); /* #8A6A16 antique gold — AA on ivory */
-  --c-accent-fg:    #2A2419;           /* ink label on gold fill */
-  --c-highlight:    var(--p-gold-500); /* deep gold headings on ivory */
+  --c-accent:       var(--p-amber-100); /* #F0B966 Momentum Amber — solid fills */
+  --c-accent-hover: var(--p-amber-200);
+  --c-accent-press: var(--p-amber-300);
+  --c-accent-soft:  rgba(240, 185, 102, 0.20);
+  --c-accent-text:  var(--p-amber-500); /* #8A5300 — deep amber, AA-normal on ivory (small accents) */
+  --c-accent-fg:    #2A2419;            /* ink label on amber fill */
+  --c-highlight:    var(--p-amber-400); /* #B86E00 — orange headings on ivory (AA-large) */
 
   --c-amber:      var(--p-amber-300);
-  --c-amber-text: var(--p-amber-500);
-  --c-amber-soft: rgba(230, 138, 0, 0.16);
+  --c-amber-text: var(--p-amber-400);
+  --c-amber-soft: rgba(240, 185, 102, 0.20);
 
   --c-brand:      var(--p-blue-500);
   --c-brand-soft: rgba(31, 43, 86, 0.10);
@@ -220,9 +220,9 @@
   --c-info:         var(--p-blue-500);
   --c-info-soft:    rgba(31, 43, 86, 0.10);
 
-  --c-ring:            var(--p-gold-400);
-  --c-glow-accent:     rgba(238, 186, 43, 0.30);
-  --c-gradient-accent: linear-gradient(135deg, var(--p-gold-200) 0%, var(--p-gold-300) 100%);
+  --c-ring:            var(--c-fg-subtle); /* NEUTRAL focus ring */
+  --c-glow-accent:     rgba(240, 185, 102, 0.32);
+  --c-gradient-accent: linear-gradient(135deg, var(--p-amber-100) 0%, var(--p-amber-300) 100%);
 
   --shadow-sm: 0 1px 2px rgba(42, 36, 25, 0.06);
   --shadow-md: 0 8px 24px -8px rgba(42, 36, 25, 0.12);
@@ -278,7 +278,7 @@
   --c-on-danger: #FFFFFF;
 
   /* ── Fixed brand BANNER surfaces — theme-independent (identical in every mode) ──
-     Five-banner set: black · orange-gradient · blue-gradient · paper · white. */
+     Six-banner set: black · orange-gradient · blue-gradient · paper · paper-gradient · white. */
   --banner-black-bg:  #000000;
   --banner-black-fg:  #F4F4F5;
   --banner-black-bd:  #2A2A2A;
@@ -289,6 +289,9 @@
   --banner-paper-bg:  #F9F6F2;
   --banner-paper-fg:  #2A2419;
   --banner-paper-bd:  #E7E0D8;
+  --banner-paper-grad-bg: linear-gradient(135deg, #FBF8F3 0%, #EFD9B0 100%); /* warm paper → soft amber */
+  --banner-paper-grad-fg: #2A2419;
+  --banner-paper-grad-bd: #E7E0D8;
   --banner-white-bg:  #FFFFFF;
   --banner-white-fg:  #14161B;
   --banner-white-bd:  #E6E8EC;
