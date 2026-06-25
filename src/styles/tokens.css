@@ -90,6 +90,9 @@
   --c-accent-fg:    #1A1206;            /* ink label on orange fill */
   --c-highlight:    var(--p-amber-300); /* #E68A00 — primary orange, 8:1 on black */
 
+  --c-inspect:    var(--p-amber-300); /* inspector FAB — primary orange (dark) */
+  --c-inspect-fg: #1A1206;            /* ink glyph on the orange FAB */
+
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-200);
   --c-amber-soft: rgba(230, 138, 0, 0.16);
@@ -147,6 +150,9 @@
   --c-accent-fg:    #FFFFFF;           /* white label on blue fill */
   --c-highlight:    var(--p-blue-400); /* headings blue on white */
 
+  --c-inspect:    var(--p-blue-400); /* inspector FAB — Atlas Blue (light) */
+  --c-inspect-fg: #FFFFFF;           /* white glyph on the blue FAB */
+
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-500);
   --c-amber-soft: rgba(230, 138, 0, 0.14);
@@ -203,6 +209,9 @@
   --c-accent-text:  var(--p-amber-500); /* #8A5300 — deep amber, AA-normal on ivory (small accents) */
   --c-accent-fg:    #2A2419;            /* ink label on amber fill */
   --c-highlight:    var(--p-amber-400); /* #B86E00 — orange headings on ivory (AA-large) */
+
+  --c-inspect:    var(--p-amber-300); /* inspector FAB — PRIMARY orange #E68A00 (not the lighter paper fill) */
+  --c-inspect-fg: #1A1206;            /* ink glyph on the orange FAB */
 
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-400);

@@ -51,6 +51,7 @@ export default {
         soft: 'var(--c-brand-soft)',
       },
       highlight: 'var(--c-highlight)',
+      inspect: { DEFAULT: 'var(--c-inspect)', fg: 'var(--c-inspect-fg)' },
       success: { DEFAULT: 'var(--c-success)', soft: 'var(--c-success-soft)' },
       warning: { DEFAULT: 'var(--c-warning)', soft: 'var(--c-warning-soft)' },
       danger: {
