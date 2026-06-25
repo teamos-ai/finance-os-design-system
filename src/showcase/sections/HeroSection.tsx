@@ -9,7 +9,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[94vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
+      className="relative isolate flex min-h-[94vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
     >
       <HeroAura />
 
