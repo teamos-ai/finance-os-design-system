@@ -33,6 +33,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
+    // Theme-aware favicon: blue mark in light mode, amber otherwise.
+    const fav = document.querySelector<HTMLLinkElement>("link[rel~='icon']")
+    if (fav) fav.href = theme === 'light' ? '/logo-square-blue.png' : '/favicon.png'
     try {
       localStorage.setItem(STORAGE_KEY, theme)
     } catch {

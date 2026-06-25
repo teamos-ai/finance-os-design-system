@@ -8,7 +8,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[94vh] flex-col items-center justify-center overflow-hidden border-b border-border px-6 py-24 text-center"
+      className="relative flex min-h-[94vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
     >
       <Glow />
 
@@ -38,6 +38,12 @@ export function HeroSection() {
           </StaggerItem>
         ))}
       </Stagger>
+
+      {/* Smooth fade from the hero canvas into the next section's muted ground — no hard line. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent to-canvas-muted"
+      />
     </section>
   )
 }
