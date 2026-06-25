@@ -1,25 +1,19 @@
 /**
- * VideoSection — a single clean, iOS-inspired placeholder video. Header + frame only;
- * drop the real <video> into the frame later. No chrome, captions or usage notes.
+ * VideoSection — one clean, iOS-inspired video with scroll-to-PiP (docks to a bottom-right
+ * mini-player while you scroll and keeps playing). Drop the real file into /public/media.
  */
-import { Play } from 'lucide-react'
 import { Section } from '@/showcase/Section'
+import { VideoPlayer } from '@/components/ui/video-player'
 
 export function VideoSection() {
   return (
     <Section id="video" eyebrow="01 — VIDEO" title="Is Now a Bad Time To...">
+      <p className="mx-auto mb-8 max-w-2xl text-center font-body text-body-lg leading-relaxed text-fg-muted">
+        Get more finance leads, settle more loans, nurture more clients and get more referrals because
+        you have automated more of your back-end operations than ever before?
+      </p>
       <div className="mx-auto max-w-4xl">
-        <div className="group relative aspect-video w-full overflow-hidden rounded-lg border border-border bg-gradient-to-br from-surface to-canvas-muted shadow-lg">
-          <button
-            type="button"
-            aria-label="Play video"
-            className="absolute inset-0 grid place-items-center"
-          >
-            <span className="grid h-20 w-20 place-items-center rounded-full bg-fg/10 ring-1 ring-fg/20 transition-transform duration-base ease-out group-hover:scale-105">
-              <Play className="ml-1 h-8 w-8 fill-current text-fg" strokeWidth={0} aria-hidden />
-            </span>
-          </button>
-        </div>
+        <VideoPlayer src="/media/overview.mp4" poster="/media/overview-poster.jpg" />
       </div>
     </Section>
   )

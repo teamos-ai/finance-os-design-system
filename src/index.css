@@ -99,6 +99,22 @@ main > section:nth-of-type(3n + 2)::before {
   mix-blend-mode: screen;
 }
 
+/* ── Hero → Video gradual transition ─────────────────────────────────────────
+   The video section sits directly under the hero. A tall top gradient paints the
+   video section's top with the hero's own --c-canvas, then fades to transparent —
+   revealing the muted ground + crinkle gently below. The seam is the same colour
+   on both sides, so the black→charcoal (white→grey, ivory→sand) shift has NO hard
+   line. Theme-aware; sits above the crinkle (::before z0) but below content (z1). */
+#video::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 420px;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--c-canvas) 0%, var(--c-canvas) 8%, transparent 100%);
+}
+
 /* Ticker / banner marquee — CSS-driven, two copies translate -50% for a seamless loop. */
 @keyframes fos-marquee {
   from { transform: translateX(0); }

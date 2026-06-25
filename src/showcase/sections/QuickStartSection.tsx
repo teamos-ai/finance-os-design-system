@@ -7,11 +7,13 @@
  * to add a new theme). Self-contained: a small CodeBlock helper lives in-file.
  */
 import * as React from 'react'
-import { Check, Copy, FolderTree, Layers, Palette } from 'lucide-react'
+import { Check, Copy, FolderTree, Layers, Palette, Briefcase, Megaphone, Handshake } from 'lucide-react'
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { Disclosure } from '@/components/ui/disclosure'
 import { IconButton } from '@/components/ui/icon-button'
+import { PlanCard } from '@/components/ui/plan-card'
+import { PdfModal } from '@/components/ui/pdf-modal'
 import { FadeIn, Stagger, StaggerItem } from '@/lib/motion'
 import { copyText } from '@/lib/utils'
 import { cn } from '@/lib/cn'
@@ -146,7 +148,23 @@ const FILE_TREE = `src/
 
 /* -------------------------------------------------------------------------- */
 
+type PlanKey = 'business' | 'marketing' | 'sales'
+interface Plan {
+  key: PlanKey
+  title: string
+  subtitle: string
+  Icon: typeof Briefcase
+  pdf: string
+}
+
+const PLANS: Plan[] = [
+  { key: 'business', title: 'Business Plan', subtitle: 'How the brokerage runs, scales and compounds.', Icon: Briefcase, pdf: '/docs/business-plan.pdf' },
+  { key: 'marketing', title: 'Marketing Plan', subtitle: 'Demand, content and the channels that convert.', Icon: Megaphone, pdf: '/docs/marketing-plan.pdf' },
+  { key: 'sales', title: 'Sales Plan', subtitle: 'From first enquiry to settled loan and referral.', Icon: Handshake, pdf: '/docs/sales-plan.pdf' },
+]
+
 export function QuickStartSection() {
+  const [activePlan, setActivePlan] = React.useState<Plan | null>(null)
   return (
     <Section
       id="quickstart"
@@ -154,6 +172,20 @@ export function QuickStartSection() {
       title="Use it in five minutes"
       lead="Clone the repo, import the token layer, wrap your app in the provider, then drop in a component. It inherits the active theme with no extra wiring."
     >
+      {/* The plans — 3D tilt cards that open the document in a scrollable PDF pop-up */}
+      <div className="mb-12 grid grid-cols-1 gap-5 [perspective:1200px] sm:grid-cols-3">
+        {PLANS.map((p) => (
+          <PlanCard
+            key={p.key}
+            title={p.title}
+            subtitle={p.subtitle}
+            Icon={p.Icon}
+            actionText="View plan"
+            onAction={() => setActivePlan(p)}
+          />
+        ))}
+      </div>
+
       {/* Numbered steps */}
       <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {STEPS.map((step) => (
@@ -245,6 +277,13 @@ export function QuickStartSection() {
           </article>
         </div>
       </FadeIn>
+
+      <PdfModal
+        open={activePlan !== null}
+        onClose={() => setActivePlan(null)}
+        title={activePlan?.title ?? ''}
+        src={activePlan?.pdf ?? ''}
+      />
     </Section>
   )
 }
