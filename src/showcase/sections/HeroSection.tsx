@@ -1,5 +1,4 @@
 import { FadeIn, Stagger, StaggerItem } from '@/lib/motion'
-import { HeroAura } from '@/components/brand/HeroAura'
 import { LogoMark } from '@/components/brand/Logo'
 import { CommandBar } from '@/components/ui/command-bar'
 import { CommandChip } from '@/components/ui/command-chip'
@@ -9,10 +8,8 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-[94vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
+      className="relative flex min-h-[94vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center"
     >
-      <HeroAura />
-
       <FadeIn>
         <LogoMark size="lg" className="mx-auto" />
       </FadeIn>
