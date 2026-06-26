@@ -1,7 +1,8 @@
 /**
  * CommandBar — the command-palette search input that anchors the hero.
  * Leading Search icon, mono placeholder ("type / for commands"), a trailing
- * ⌘K kbd hint. Flat hairline + soft shadow, amber focus ring, zero glass.
+ * ⌘K kbd hint. Flat hairline + soft shadow; a clean accent focus ring (no grey
+ * highlight — the global neutral focus-ring is suppressed on the input). Zero glass.
  *
  * `size="hero"` is the large hero variant; `size="md"` is the in-nav search.
  * It's a real, focusable input — wire `value`/`onChange` if you need it live.
@@ -14,7 +15,7 @@ import { cn } from '@/lib/cn'
 const bar = cva(
   'group flex items-center gap-3 rounded-lg border border-border bg-surface ' +
     'transition-all duration-base ease-out shadow-sm ' +
-    'focus-within:border-border-strong focus-within:shadow-md',
+    'focus-within:border-accent focus-within:shadow-md focus-within:ring-2 focus-within:ring-accent-soft',
   {
     variants: {
       size: {
@@ -51,7 +52,7 @@ export const CommandBar = React.forwardRef<HTMLInputElement, CommandBarProps>(
     return (
       <div className={cn(bar({ size }), containerClassName)}>
         <Search
-          className="shrink-0 text-fg-subtle"
+          className="shrink-0 text-fg-subtle transition-colors group-focus-within:text-accent-text"
           width={iconSize}
           height={iconSize}
           strokeWidth={1.5}
@@ -63,7 +64,7 @@ export const CommandBar = React.forwardRef<HTMLInputElement, CommandBarProps>(
           placeholder={placeholder}
           aria-label={ariaLabel ?? 'Search the platform'}
           className={cn(
-            'w-full bg-transparent font-mono text-fg placeholder:text-fg-subtle focus:outline-none',
+            'w-full bg-transparent font-mono text-fg placeholder:text-fg-subtle focus:outline-none focus-visible:shadow-none',
             size === 'md' ? 'text-body-sm' : 'text-body-md',
             className
           )}
