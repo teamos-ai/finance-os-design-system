@@ -13,8 +13,8 @@
  */
 import * as React from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { Plus, Info, Braces, Code2, Copy, Check } from 'lucide-react'
-import { copyText } from '@/lib/utils'
+import { Plus, Info, Braces, Code2, Copy, Check, Download } from 'lucide-react'
+import { copyText, downloadBlob, downloadHref } from '@/lib/utils'
 import { cn } from '@/lib/cn'
 
 export interface InspectData {
@@ -26,7 +26,16 @@ export interface InspectData {
   token: string
   /** a minimal snippet to reproduce it (monospace, copyable) */
   code: string
+  /**
+   * The real, usable file this asset downloads to. `href` → a static/public asset
+   * (font, logo, PDF); `content` → generated in-memory (icon .svg, colour .css, component .tsx).
+   * Omit to fall back to downloading `code` as `<name>.tsx`.
+   */
+  download?: { filename: string; content?: string; href?: string; mime?: string }
 }
+
+const slug = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
 type Panel = 'explain' | 'token' | 'code'
 
@@ -43,12 +52,24 @@ export function Inspectable({
   explain,
   token,
   code,
+  download,
   children,
   className,
 }: InspectData & { children: React.ReactNode; className?: string }) {
   const [open, setOpen] = React.useState(false)
   const [panel, setPanel] = React.useState<Panel | null>(null)
+  const [saved, setSaved] = React.useState(false)
   const reduced = useReducedMotion()
+
+  // Resolve the download: explicit payload, else fall back to the code snippet as a .tsx file.
+  const dl = download ?? (code ? { filename: `${slug(name)}.tsx`, content: code } : null)
+  const fireDownload = React.useCallback(() => {
+    if (!dl) return
+    if (dl.href) downloadHref(dl.filename, dl.href)
+    else if (dl.content != null) downloadBlob(dl.filename, dl.content, dl.mime)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 1400)
+  }, [dl])
 
   const close = React.useCallback(() => {
     setOpen(false)
@@ -130,6 +151,32 @@ export function Inspectable({
                     </motion.button>
                   )
                 })}
+
+                {dl && (
+                  <motion.button
+                    type="button"
+                    onClick={fireDownload}
+                    aria-label={`Download ${name}`}
+                    initial={reduced ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.92 }}
+                    animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+                    exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.92 }}
+                    transition={{ duration: 0.18, ease: EASE_OUT, delay: reduced ? 0 : ACTIONS.length * 0.04 }}
+                    className={cn(
+                      'flex items-center gap-2 rounded-md border px-3 py-1.5 font-mono text-mono-xs shadow-sm transition-colors',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
+                      saved
+                        ? 'border-transparent bg-inspect text-inspect-fg'
+                        : 'border-border bg-elevated text-fg hover:border-border-strong',
+                    )}
+                  >
+                    <span>{saved ? 'Saved' : 'Download'}</span>
+                    {saved ? (
+                      <Check className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden />
+                    ) : (
+                      <Download className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+                    )}
+                  </motion.button>
+                )}
 
                 <AnimatePresence mode="wait">
                   {panel && (

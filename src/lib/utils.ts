@@ -14,3 +14,21 @@ export async function copyText(text: string): Promise<boolean> {
     return false
   }
 }
+
+/** Download in-memory text as a file (icons → .svg, colours → .css, components → .tsx …). */
+export function downloadBlob(filename: string, content: string, mime = 'text/plain'): void {
+  const url = URL.createObjectURL(new Blob([content], { type: mime }))
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+/** Download a static/public asset (fonts, logos, PDFs) by URL. */
+export function downloadHref(filename: string, href: string): void {
+  const a = document.createElement('a')
+  a.href = href
+  a.download = filename
+  a.click()
+}

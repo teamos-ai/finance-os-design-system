@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { SegmentedControl } from '@/components/ui/segmented'
+import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
@@ -27,6 +28,22 @@ const BODY: Row[] = [
 const BODY_COPY = `Most brokers don't lose deals because they're bad at their job. They lose them in the gaps — the enquiry that lands at 9pm and gets a reply at noon, the pre-approval that goes quiet, the past client who refinances with someone else because no one followed up.
 
 Finance OS closes those gaps. Every enquiry is captured the moment it arrives, every follow-up fires on time, and every conversation — SMS, email, social — lives in one place. You stay the trusted adviser; the system handles the chase. The result is a pipeline you can actually predict: more settlements, less admin, and a business that runs whether you're in the office or not.`
+
+/** Per-typeface "+" — the font file downloads here; the class tokens live here, not on the page. */
+const DISPLAY_INSPECT: InspectData = {
+  name: 'Spline Sans — Display',
+  explain: 'The display / heading typeface. Weight 600, tight tracking. Carries every heading, figure and hero line.',
+  token: DISPLAY.map((r) => `.${r.token}  ·  ${r.spec}`).join('\n'),
+  code: "font-family: 'Spline Sans', system-ui, sans-serif;\nfont-weight: 600;",
+  download: { filename: 'spline-sans-600.woff2', href: '/fonts/spline-sans-600.woff2' },
+}
+const BODY_INSPECT: InspectData = {
+  name: 'Anonymous Pro — Body & mono',
+  explain: 'The body / mono typeface. Carries body copy, captions, labels and the uppercase overline. Weight 400 (700 for labels).',
+  token: BODY.map((r) => `.${r.token}  ·  ${r.spec}`).join('\n'),
+  code: "font-family: 'Anonymous Pro', ui-monospace, monospace;",
+  download: { filename: 'anonymous-pro-400.woff2', href: '/fonts/anonymous-pro-400.woff2' },
+}
 
 type ColorKey = 'accent' | 'ink' | 'alt'
 
@@ -73,43 +90,43 @@ export function TypographySection() {
         <div>
           <div className="mb-4 flex items-center justify-between">
             <MonoLabel tone="accent" dot>Display · Spline Sans</MonoLabel>
-            <span className="font-mono text-caption text-fg-subtle">font-display</span>
           </div>
+          <Inspectable {...DISPLAY_INSPECT}>
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {DISPLAY.map((r) => (
               <div key={r.token} className="grid grid-cols-1 gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
                 <div className="flex flex-col gap-1">
-                  <code className="font-mono text-mono-xs text-accent-text">.{r.token}</code>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
                 </div>
                 <p className={cn('font-display transition-colors duration-base', r.cls, colorClass)}>{r.sample}</p>
               </div>
             ))}
           </div>
+          </Inspectable>
         </div>
 
         {/* body specimens */}
         <div>
           <div className="mb-4 flex items-center justify-between">
             <MonoLabel tone="subtle">Body &amp; mono · Anonymous Pro</MonoLabel>
-            <span className="font-mono text-caption text-fg-subtle">font-body</span>
           </div>
+          <Inspectable {...BODY_INSPECT}>
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {BODY.map((r) => (
               <div key={r.token} className="grid grid-cols-1 gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
                 <div className="flex flex-col gap-1">
-                  <code className="font-mono text-mono-xs text-accent-text">.{r.token}</code>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
                 </div>
                 <p className={cn('font-body text-fg', r.cls)}>{r.sample}</p>
               </div>
             ))}
           </div>
+          </Inspectable>
         </div>
 
         {/* full body copy specimen */}
         <div className="rounded-lg border border-border bg-surface p-6 md:p-8">
-          <MonoLabel tone="subtle">Body copy · a full paragraph at body-md</MonoLabel>
+          <MonoLabel tone="subtle">Body copy · a full paragraph</MonoLabel>
           <div className="mt-4 max-w-2xl space-y-4">
             {BODY_COPY.split('\n\n').map((para, i) => (
               <p key={i} className="font-body text-body-md leading-relaxed text-fg-muted">{para}</p>

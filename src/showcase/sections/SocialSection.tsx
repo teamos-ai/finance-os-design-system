@@ -14,9 +14,35 @@ import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { LogoMark } from '@/components/brand/Logo'
 import { Quote, TrendingUp, Megaphone } from 'lucide-react'
 import { BRAND } from '@/data/system'
+
+const STUDIO_INSPECT: InspectData = {
+  name: 'Social Post Studio',
+  explain: 'A client-side mini-app: pick a platform and post type, type a headline, and the preview renders on-brand at the right aspect ratio. Square feed posts use the larger display size; wide timeline cards step down so the headline never crowds the frame.',
+  token: 'platform: instagram · linkedin · x\ntype: quote · stat · announcement\nsurface: gradient (1:1) · dark · paper (1.91:1)',
+  code: '// live preview swaps surface recipe + aspect ratio per platform\nconst surface = meta.surface === "gradient"\n  ? "bg-gradient-accent shadow-glow"\n  : meta.surface === "dark" ? "bg-inverse" : "bg-surface border"',
+}
+const QUOTE_INSPECT: InspectData = {
+  name: 'Quote card',
+  explain: 'A feed quote on the signature amber gradient. 1:1 for Instagram.',
+  token: 'bg-gradient-accent · shadow-glow · 1:1',
+  code: '<div class="aspect-square rounded-lg bg-gradient-accent shadow-glow p-6">…</div>',
+}
+const STAT_CARD_INSPECT: InspectData = {
+  name: 'Stat card',
+  explain: 'A data post on the carbon (inverse) surface, with the figure in the accent. 1:1.',
+  token: 'bg-inverse · text-accent-text · 1:1',
+  code: '<div class="aspect-square rounded-lg bg-inverse p-6">…</div>',
+}
+const OG_INSPECT: InspectData = {
+  name: 'OG / share card',
+  explain: 'A link-unfurl preview at 1.91:1 with an 8% safe-zone inset — keep the headline, wordmark and URL inside it so nothing crops behind an avatar or platform chrome. Standard size 1200 × 628.',
+  token: 'aspect 1.91/1 · 8% safe-zone inset',
+  code: '<div style="aspect-ratio: 1.91/1" class="rounded-lg border bg-surface">…</div>',
+}
 
 type Platform = 'instagram' | 'linkedin' | 'x'
 type PostType = 'quote' | 'stat' | 'announcement'
@@ -86,7 +112,7 @@ export function SocialSection() {
         {/* ── 1 · Social Post Studio ──────────────────────────────────────── */}
         <div className="flex flex-col gap-3">
           <MonoLabel tone="amber" number="01">Social Post Studio</MonoLabel>
-          <Demo label={`${meta.name} · ${meta.dims} · ${meta.aspect}`} padded={false}>
+          <Demo label={`${meta.name} · ${meta.dims} · ${meta.aspect}`} padded={false} inspect={STUDIO_INSPECT}>
             <div className="grid gap-0 lg:grid-cols-[minmax(0,20rem)_1fr]">
               {/* Controls */}
               <div className="flex flex-col gap-6 border-b border-border bg-surface p-6 lg:border-b-0 lg:border-r md:p-8">
@@ -122,9 +148,8 @@ export function SocialSection() {
                 />
 
                 <p className="font-mono text-caption leading-relaxed text-fg-subtle">
-                  All rendering is client-side. The canvas swaps surface recipe and aspect ratio per
-                  platform — <span className="text-accent-text">{meta.surface}</span> at{' '}
-                  <span className="text-accent-text">{meta.aspect}</span>.
+                  All rendering is client-side. The canvas swaps its surface and aspect ratio for each
+                  platform — {meta.surface} at {meta.aspect}.
                 </p>
               </div>
 
@@ -159,12 +184,6 @@ export function SocialSection() {
               </div>
             </div>
           </Demo>
-          <p className="font-mono text-caption text-fg-subtle">
-            Controlled with <span className="text-accent-text">useState</span> — no canvas, no export
-            step in the reference. Square feed posts use <span className="text-accent-text">text-display-sm</span>;
-            wide timeline cards step down to <span className="text-accent-text">text-title-lg</span> so the
-            headline never crowds the frame.
-          </p>
         </div>
 
         {/* ── 2 · Static templates ────────────────────────────────────────── */}
@@ -176,7 +195,7 @@ export function SocialSection() {
 
           <div className="grid gap-5 md:grid-cols-3">
             {/* Quote card */}
-            <div className="flex flex-col gap-3">
+            <Inspectable {...QUOTE_INSPECT}>
               <div className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-gradient-accent p-6 shadow-glow">
                 <Quote className="h-6 w-6 text-accent-fg/70" strokeWidth={1.5} aria-hidden />
                 <p className="font-display text-title-md font-semibold leading-snug text-accent-fg">
@@ -187,13 +206,10 @@ export function SocialSection() {
                   <LogoMark size="sm" className="shadow-none" />
                 </div>
               </div>
-              <p className="font-mono text-caption text-fg-subtle">
-                Quote card · <span className="text-accent-text">bg-gradient-accent</span> · 1:1
-              </p>
-            </div>
+            </Inspectable>
 
             {/* Stat card */}
-            <div className="flex flex-col gap-3">
+            <Inspectable {...STAT_CARD_INSPECT}>
               <div className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-inverse p-6">
                 <MonoLabel tone="subtle" size="sm" className="text-inverse-fg/60">By the numbers</MonoLabel>
                 <div className="flex flex-col gap-1">
@@ -205,13 +221,10 @@ export function SocialSection() {
                   <LogoMark size="sm" />
                 </div>
               </div>
-              <p className="font-mono text-caption text-fg-subtle">
-                Stat card · <span className="text-accent-text">bg-inverse</span> · 1:1
-              </p>
-            </div>
+            </Inspectable>
 
             {/* OG / share card */}
-            <div className="flex flex-col gap-3">
+            <Inspectable {...OG_INSPECT}>
               <div
                 className="relative overflow-hidden rounded-lg border border-border bg-surface"
                 style={{ aspectRatio: '1.91 / 1' }}
@@ -232,10 +245,7 @@ export function SocialSection() {
                   </div>
                 </div>
               </div>
-              <p className="font-mono text-caption text-fg-subtle">
-                OG / share card · 1.91:1 · dashed line = safe zone
-              </p>
-            </div>
+            </Inspectable>
           </div>
 
           <p className="max-w-3xl font-body text-body-sm leading-relaxed text-fg-muted">

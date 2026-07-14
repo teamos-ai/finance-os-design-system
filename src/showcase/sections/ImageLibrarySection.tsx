@@ -11,6 +11,15 @@ import { Building2, LineChart, Handshake, ShieldCheck, Check, X } from 'lucide-r
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { ImageWash } from '@/components/ui/image-wash'
+import type { InspectData } from '@/components/ui/inspectable'
+
+const OVERLAY_INSPECT: InspectData = {
+  name: 'Gradient overlay',
+  explain: 'Text never sits on bare photography. A single bottom-anchored scrim guarantees contrast and keeps the eye on the headline. One accent overline max, never a second gradient.',
+  token: 'bottom-up scrim · inverse-fg copy',
+  code: 'background: linear-gradient(to top, rgba(8,12,18,0.88) 0%, transparent 55%);',
+  download: { filename: 'image-overlay.css', content: '.image-scrim {\n  background: linear-gradient(to top, rgba(8,12,18,0.88) 0%, transparent 55%);\n}', mime: 'text/css' },
+}
 
 /** Aspect-ratio frames the system ships against — each a draft wash standing in for a shoot. */
 const FRAMES: ReadonlyArray<{
@@ -73,7 +82,6 @@ export function ImageLibrarySection() {
           <MonoLabel number="17.1" dot>
             Aspect-ratio frames
           </MonoLabel>
-          <span className="font-mono text-caption text-fg-subtle">rounded-md · border-border</span>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {FRAMES.map((frame) => (
@@ -96,10 +104,8 @@ export function ImageLibrarySection() {
           Four ratios cover the system: <span className="text-fg">16 / 9</span> for heroes and
           banners, <span className="text-fg">4 / 3</span> for card media,{' '}
           <span className="text-fg">1 / 1</span> for avatars and bento tiles, and{' '}
-          <span className="text-fg">3 / 4</span> for portraits. Each tile is an{' '}
-          <span className="font-mono text-caption text-accent-text">ImageWash</span> — a CSS wash
-          under a hairline <span className="font-mono text-caption">border-border</span>, rounded to
-          the 8px ceiling and lifted with <span className="font-mono text-caption">shadow-md</span>.
+          <span className="text-fg">3 / 4</span> for portraits. Each tile is a soft CSS wash under a
+          hairline border, rounded to the 8px ceiling and gently lifted.
         </p>
       </div>
 
@@ -111,7 +117,7 @@ export function ImageLibrarySection() {
           </MonoLabel>
           <span className="font-mono text-caption text-fg-subtle">copy over photography</span>
         </div>
-        <Demo label="bottom-up scrim · rgba(8,12,18) → transparent" padded={false}>
+        <Demo label="Copy over photography · bottom-up scrim" padded={false} inspect={OVERLAY_INSPECT}>
           <div className="grid gap-0 md:grid-cols-2">
             {/* Live pattern: a photo draught with the scrim + copy on top */}
             <div
@@ -135,9 +141,8 @@ export function ImageLibrarySection() {
             {/* Anatomy note */}
             <div className="flex flex-col justify-center gap-4 border-t border-border bg-surface p-6 md:border-l md:border-t-0">
               <p className="font-body text-body-md leading-relaxed text-fg-muted">
-                Text never sits on bare photography. A single bottom-anchored scrim —{' '}
-                <span className="font-mono text-caption">rgba(8,12,18,0.88)</span> fading to
-                transparent at the top — guarantees contrast and keeps the eye on the headline.
+                Text never sits on bare photography. A single bottom-anchored scrim, fading to
+                transparent at the top, guarantees contrast and keeps the eye on the headline.
               </p>
               <ul className="flex flex-col gap-2 font-mono text-caption text-fg-subtle">
                 <li>· overlay anchored to the bottom 55% of the frame</li>
@@ -234,10 +239,8 @@ export function ImageLibrarySection() {
           ))}
         </div>
         <p className="mt-5 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          The rules hold across all three themes: same ratios, same{' '}
-          <span className="font-mono text-caption">rounded-md</span> + hairline border, same
-          bottom-up scrim. Only the surrounding canvas shifts — the image-wash and overlay tokens
-          re-point per theme, so a single token change reflows every frame.
+          The rules hold across all three themes: same ratios, same rounded corner + hairline border,
+          same bottom-up scrim. Only the surrounding canvas shifts, so a single change reflows every frame.
         </p>
       </div>
     </Section>

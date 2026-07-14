@@ -4,7 +4,6 @@ import { useTheme } from '@/lib/theme'
 import { TICKER_ITEMS } from '@/data/system'
 import { HeroSection } from '@/showcase/sections/HeroSection'
 import { VideoSection } from '@/showcase/sections/VideoSection'
-import { QuickStartSection } from '@/showcase/sections/QuickStartSection'
 import { OverviewSection } from '@/showcase/sections/OverviewSection'
 import { ColorSection } from '@/showcase/sections/ColorSection'
 import { TypographySection } from '@/showcase/sections/TypographySection'
@@ -35,7 +34,6 @@ export default function App() {
       <TopBanner />
       <HeroSection />
       <VideoSection />
-      <QuickStartSection />
       <OverviewSection />
       <ColorSection />
       <TypographySection />

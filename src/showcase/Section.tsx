@@ -4,6 +4,7 @@
  */
 import type { ReactNode } from 'react'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { FadeIn } from '@/lib/motion'
 import { cn } from '@/lib/cn'
 
@@ -31,27 +32,36 @@ export const Section = ({ id, eyebrow, title, lead, children, className }: Secti
   </section>
 )
 
-/** Small labelled frame for embedding a live component demo. `action` sits top-right. */
+/**
+ * Small labelled frame for embedding a live component demo. `action` sits top-right.
+ * Pass `inspect` to float the "+" inspector (Explain / Token / Code / Download) over the
+ * frame — the FAB is rendered OUTSIDE this frame's `overflow-hidden` so its popover never clips.
+ */
 export const Demo = ({
   label,
   action,
   children,
   className,
   padded = true,
+  inspect,
 }: {
   label?: string
   action?: ReactNode
   children: ReactNode
   className?: string
   padded?: boolean
-}) => (
-  <div className={cn('overflow-hidden rounded-lg border border-border bg-canvas', className)}>
-    {(label || action) && (
-      <div className="flex items-center justify-between gap-3 border-b border-border bg-surface px-4 py-2.5">
-        {label ? <span className="font-mono text-caption text-fg-subtle">{label}</span> : <span />}
-        {action}
-      </div>
-    )}
-    <div className={cn(padded && 'p-6 md:p-8')}>{children}</div>
-  </div>
-)
+  inspect?: InspectData
+}) => {
+  const frame = (
+    <div className={cn('overflow-hidden rounded-lg border border-border bg-canvas', className)}>
+      {(label || action) && (
+        <div className="flex items-center justify-between gap-3 border-b border-border bg-surface px-4 py-2.5">
+          {label ? <span className="font-mono text-caption text-fg-subtle">{label}</span> : <span />}
+          {action}
+        </div>
+      )}
+      <div className={cn(padded && 'p-6 md:p-8')}>{children}</div>
+    </div>
+  )
+  return inspect ? <Inspectable {...inspect}>{frame}</Inspectable> : frame
+}

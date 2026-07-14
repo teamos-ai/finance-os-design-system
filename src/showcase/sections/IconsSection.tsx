@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { Icon, iconToSvg } from '@/components/ui/icon'
+import { Inspectable } from '@/components/ui/inspectable'
 import { ICONS, ICON_CATEGORIES } from '@/data/icons'
 import { copyText } from '@/lib/utils'
 import { cn } from '@/lib/cn'
@@ -137,24 +138,32 @@ export function IconsSection() {
 
         <p className="font-mono text-caption leading-relaxed text-fg-subtle">
           Original artwork — our own geometry in a duotone-filled style, drawn fresh (no icon pack reproduced) with the
-          free Pikaicons &amp; Untitled UI line only as aesthetic reference. SVGs use{' '}
-          <span className="text-accent-text">currentColor</span>, so they take any brand colour; the downloaded pack
-          defaults to Momentum Amber. v1 core set — expanding in reviewed batches.
+          free Pikaicons &amp; Untitled UI line only as aesthetic reference. Each icon takes any brand colour; the
+          downloaded pack defaults to Momentum Amber. v1 core set — expanding in reviewed batches.
         </p>
 
         <div>
           <MonoLabel tone="amber" dot>Logo lockups · the mark as it appears in each mode</MonoLabel>
           <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
             {BG_TILES.map((tile) => (
-              <div key={tile.name} className="overflow-hidden rounded-lg border border-border">
-                <div className="flex flex-col items-center justify-center gap-6 p-8" style={{ background: tile.bg }}>
-                  <img src={tile.rect} alt={`Finance OS lockup — ${tile.name}`} className="h-9 w-auto object-contain" />
-                  <img src={tile.mark} alt="Finance OS mark" className="h-10 w-10 object-contain" />
+              <Inspectable
+                key={tile.name}
+                name={`Logo — ${tile.name}`}
+                explain={`The Finance OS logo as it appears on a ${tile.name.toLowerCase()} background: the rectangular lockup and the square mark.`}
+                token={`${tile.rect}\n${tile.mark}`}
+                code={`<img src="${tile.rect}" alt="Finance OS" />`}
+                download={{ filename: tile.rect.split('/').pop() as string, href: tile.rect }}
+              >
+                <div className="overflow-hidden rounded-lg border border-border">
+                  <div className="flex flex-col items-center justify-center gap-6 p-8" style={{ background: tile.bg }}>
+                    <img src={tile.rect} alt={`Finance OS lockup — ${tile.name}`} className="h-9 w-auto object-contain" />
+                    <img src={tile.mark} alt="Finance OS mark" className="h-10 w-10 object-contain" />
+                  </div>
+                  <div className="border-t border-border bg-surface px-4 py-2.5">
+                    <span className="font-mono text-caption text-fg-subtle">{tile.name}</span>
+                  </div>
                 </div>
-                <div className="border-t border-border bg-surface px-4 py-2.5">
-                  <span className="font-mono text-caption text-fg-subtle">{tile.name}</span>
-                </div>
-              </div>
+              </Inspectable>
             ))}
           </div>
         </div>

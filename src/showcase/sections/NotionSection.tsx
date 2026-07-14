@@ -2,8 +2,7 @@
  * NotionSection — a Notion-style document template rendered on-system. A believable
  * broker SOP ("New enquiry → first contact") composed from on-brand inline blocks:
  * Callout (info / warn / success), Toggle (Disclosure), a hairline Table, a CodeBlock,
- * and database-style status Cards. The showcase IS the documentation — each block is
- * annotated with its token recipe in a MonoLabel above the live document.
+ * and database-style status Cards. The block-level tokens live in the document's "+" inspector.
  */
 import * as React from 'react'
 import {
@@ -12,8 +11,15 @@ import {
 } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { Disclosure } from '@/components/ui/disclosure'
-import { MonoLabel } from '@/components/ui/mono-label'
+import type { InspectData } from '@/components/ui/inspectable'
 import { cn } from '@/lib/cn'
+
+const NOTION_INSPECT: InspectData = {
+  name: 'Notion document',
+  explain: 'A Notion-style page composed from on-brand blocks — callouts (info / warn / success), toggles, a hairline table, database cards and a code block — assembled into a believable broker SOP.',
+  token: 'Callout · Toggle (Disclosure) · Table · Database cards · Code block',
+  code: '<Callout tone="info">…</Callout>\n<Disclosure title="…">…</Disclosure>\n<StageTable />\n<DatabaseCards />',
+}
 
 /* ── Callout ─────────────────────────────────────────────────────────────────
    A tinted aside: icon + soft well + body copy. Three intents map to the state
@@ -143,7 +149,7 @@ export function NotionSection() {
       title="Notion"
       lead="A Notion-style document template on-system — callouts, toggles, a hairline table and code blocks, composed into a believable broker SOP."
     >
-      <Demo label="document — broker SOP" padded={false}>
+      <Demo label="document — broker SOP" padded={false} inspect={NOTION_INSPECT}>
         {/* Page frame: a centred document column on the canvas, like a Notion page */}
         <div className="bg-canvas px-5 py-8 md:px-10 md:py-12">
           <article className="mx-auto max-w-2xl">
@@ -243,21 +249,6 @@ export function NotionSection() {
           </article>
         </div>
       </Demo>
-
-      {/* Block index — the documentation half of "the showcase IS the docs" */}
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { label: 'Callout', note: 'icon + soft state well + body', tone: 'info' as const },
-          { label: 'Toggle', note: 'Disclosure, smooth expand', tone: 'success' as const },
-          { label: 'Table', note: 'hairline border-subtle rows', tone: 'amber' as const },
-          { label: 'Code block', note: 'pre · font-mono · bg-inset', tone: 'subtle' as const },
-        ].map((b) => (
-          <div key={b.label} className="rounded-md border border-border bg-surface p-4">
-            <MonoLabel tone={b.tone}>{b.label}</MonoLabel>
-            <p className="mt-2 font-body text-body-sm text-fg-muted">{b.note}</p>
-          </div>
-        ))}
-      </div>
     </Section>
   )
 }

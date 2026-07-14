@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
 import {
-  Sparkles, PlayCircle, Rocket, Compass,
+  Sparkles, PlayCircle, Compass,
   Palette, Type, Ruler, Layers, Wand2, Shapes,
   Component, CreditCard, LayoutGrid,
   Megaphone, FileText, Calculator, Image, NotebookPen, Share2, MonitorPlay,
@@ -19,7 +19,6 @@ export interface NavItem {
 export const SHOWCASE_NAV: NavItem[] = [
   { id: 'hero', label: 'Hero', Icon: Sparkles, accent: 'amber', group: 'Start' },
   { id: 'video', label: 'Promo Video', Icon: PlayCircle, accent: 'amber', group: 'Start' },
-  { id: 'quickstart', label: 'Quick Start', Icon: Rocket, accent: 'blue', group: 'Start' },
   { id: 'overview', label: 'Overview', Icon: Compass, accent: 'amber', group: 'Start' },
 
   { id: 'color', label: 'Color', Icon: Palette, accent: 'amber', group: 'Foundations' },

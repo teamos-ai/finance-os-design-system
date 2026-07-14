@@ -1,10 +1,9 @@
 /**
- * CardsSection — the card family. Shows the base Card (Header/Title/Description/
- * Content/Footer), the FeatureCard grid (from FEATURES), a ToolCard row (from
- * TOOLS_REPLACED), a Stat-inside-a-Card outcome figure, and the media card with the
- * on-token wash treatment (placeholderIcon + overlay badge + meta + actions). Every
- * variant rides the shared primitives so the whole family stays on the locked tokens —
- * flat hairline surfaces, one shadow on hover, 8px squircles, zero glass.
+ * CardsSection — the card family. Base Card (Header/Title/Description/Content/Footer),
+ * the FeatureCard grid, a ToolCard row, a Stat-inside-a-Card figure, and the media card
+ * with the on-token wash. The prop docs / tokens live inside each demo's "+" inspector,
+ * so the page shows the cards themselves — flat hairline surfaces, one hover shadow, 8px
+ * squircles, zero glass.
  */
 import {
   Inbox,
@@ -34,6 +33,7 @@ import { Stat } from '@/components/ui/stat'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { MonoLabel } from '@/components/ui/mono-label'
+import type { InspectData } from '@/components/ui/inspectable'
 import type { Accent } from '@/lib/accents'
 import { FEATURES, TOOLS_REPLACED } from '@/data/system'
 
@@ -49,6 +49,37 @@ const TOOL_META: Record<string, { icon: LucideIcon; accent: Accent }> = {
   'Review management': { icon: Star, accent: 'amber' },
 }
 
+const CARD_INSPECT: InspectData = {
+  name: 'Card',
+  explain: 'The base surface — Header, Title, Description, Content, Footer. Flat hairline, one soft shadow on hover, 8px radius. The workhorse the rest of the family is built on.',
+  token: 'tone: surface · elevated · soft\npadding: none · sm · md · lg\nradius: md · lg\ninteractive → hover lift (border darkens + one shadow)',
+  code: '<Card interactive>\n  <CardHeader>\n    <CardTitle>One pipeline, every enquiry</CardTitle>\n    <CardDescription>…</CardDescription>\n  </CardHeader>\n  <CardContent>…</CardContent>\n  <CardFooter>\n    <Button variant="primary" size="sm">View pipeline</Button>\n  </CardFooter>\n</Card>',
+}
+const FEATURE_INSPECT: InspectData = {
+  name: 'FeatureCard',
+  explain: 'The workhorse of feature grids and bento cells. A numbered overline gives the 01·02·03 rhythm; the icon well takes the card accent.',
+  token: 'icon · number · eyebrow · title · description · accent',
+  code: '<FeatureCard\n  icon={Icon}\n  number="01"\n  eyebrow={tagline}\n  title={title}\n  description={description}\n  accent="amber"\n/>',
+}
+const TOOL_INSPECT: InspectData = {
+  name: 'ToolCard',
+  explain: 'A fixed-width tile built for a horizontal carousel — coloured icon, name, mono meta line and a small accent “Replaces” badge. Scrolls on overflow.',
+  token: 'name · meta · icon · accent',
+  code: '<ToolCard name="CRM" meta="Replaced by Finance OS" icon={Inbox} accent="amber" />',
+}
+const STAT_INSPECT: InspectData = {
+  name: 'Stat',
+  explain: 'Drop a Stat into any Card for a dashboard figure. The value counts up (reduced-motion safe); pass a display string for non-numeric figures.',
+  token: 'value (counts up) · prefix · suffix · label · display',
+  code: '<Stat value={200} suffix="+" label="Hours saved monthly" />\n<Stat value={1315} prefix="$" label="Saved vs. stack" />',
+}
+const MEDIA_INSPECT: InspectData = {
+  name: 'Card · media',
+  explain: 'With no image, the media tile renders an on-token diagonal wash from the card accent and centres the placeholder icon — a graceful stand-in until real imagery lands. The last action goes solid, the rest secondary.',
+  token: 'image · wash · placeholderIcon · badge · meta[] · actions[] · accent',
+  code: '<Card\n  accent="amber"\n  placeholderIcon={LineChart}\n  badge={<Badge variant="amber" size="sm">Report</Badge>}\n  meta={[{ icon: CalendarCheck, label: "Monthly" }]}\n  actions={[{ label: "Export" }, { label: "Open report" }]}\n  interactive\n>…</Card>',
+}
+
 export function CardsSection() {
   return (
     <Section
@@ -59,10 +90,7 @@ export function CardsSection() {
     >
       <div className="flex flex-col gap-8">
         {/* Base card — full anatomy */}
-        <Demo
-          label="Base card — Header · Title · Description · Content · Footer"
-          action={<MonoLabel tone="subtle" number="01">Card</MonoLabel>}
-        >
+        <Demo label="Base card — Header · Title · Description · Content · Footer" inspect={CARD_INSPECT}>
           <div className="grid gap-5 lg:grid-cols-2">
             <Card interactive>
               <CardHeader>
@@ -89,30 +117,18 @@ export function CardsSection() {
             <Card tone="soft">
               <CardHeader>
                 <MonoLabel tone="subtle" number="02">Tone · soft</MonoLabel>
-                <CardTitle>Tones, padding & radius</CardTitle>
+                <CardTitle>A calmer surface for context</CardTitle>
               </CardHeader>
               <CardContent>
-                <code className="font-mono text-mono-xs text-fg-subtle">tone</code>{' '}
-                <span className="text-fg-muted">surface · elevated · soft</span>,{' '}
-                <code className="font-mono text-mono-xs text-fg-subtle">padding</code>{' '}
-                <span className="text-fg-muted">none · sm · md · lg</span>,{' '}
-                <code className="font-mono text-mono-xs text-fg-subtle">radius</code>{' '}
-                <span className="text-fg-muted">md · lg</span>. Add{' '}
-                <code className="font-mono text-mono-xs text-fg-subtle">interactive</code>{' '}
-                for the hover lift — the border darkens and a single soft shadow appears.
+                The soft tone recedes a step — ideal for supporting notes, empty states and
+                secondary panels that should sit quietly beside the primary card.
               </CardContent>
             </Card>
           </div>
-          <p className="mt-4 font-mono text-caption text-fg-subtle">
-            Default <code className="text-fg-muted">tone=surface · radius=lg · padding=md</code>. The left card sets <code className="text-fg-muted">interactive</code>; the right uses <code className="text-fg-muted">tone=soft</code>.
-          </p>
         </Demo>
 
         {/* Feature cards — from FEATURES */}
-        <Demo
-          label="Feature cards — icon well · title · body"
-          action={<MonoLabel tone="subtle" number="02">FeatureCard</MonoLabel>}
-        >
+        <Demo label="Feature cards — icon well · title · body" inspect={FEATURE_INSPECT}>
           <div className="grid gap-5 md:grid-cols-3">
             {FEATURES.slice(0, 3).map((f, i) => (
               <FeatureCard
@@ -126,16 +142,10 @@ export function CardsSection() {
               />
             ))}
           </div>
-          <p className="mt-4 font-mono text-caption text-fg-subtle">
-            The workhorse of feature grids and bento cells. The numbered overline gives the <code className="text-fg-muted">01 02 03</code> rhythm; the icon well takes the card's <code className="text-fg-muted">accent</code>.
-          </p>
         </Demo>
 
         {/* Tool cards — from TOOLS_REPLACED */}
-        <Demo
-          label="Tool cards — what Finance OS replaces"
-          action={<MonoLabel tone="subtle" number="03">ToolCard</MonoLabel>}
-        >
+        <Demo label="Tool cards — what Finance OS replaces" inspect={TOOL_INSPECT}>
           <div className="-mx-2 flex gap-5 overflow-x-auto px-2 pb-2">
             {TOOLS_REPLACED.map((name) => {
               const m = TOOL_META[name]
@@ -150,18 +160,12 @@ export function CardsSection() {
               )
             })}
           </div>
-          <p className="mt-4 font-mono text-caption text-fg-subtle">
-            A fixed-width tile built for a horizontal carousel — coloured icon, name, mono meta line and a small accent <code className="text-fg-muted">Replaces</code> badge. Scrolls on overflow.
-          </p>
         </Demo>
 
         {/* Stat card + media card */}
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Stat inside a Card */}
-          <Demo
-            label="Stat card — an outcome figure on a surface"
-            action={<MonoLabel tone="subtle" number="04">Stat</MonoLabel>}
-          >
+          <Demo label="Stat card — an outcome figure on a surface" inspect={STAT_INSPECT}>
             <Card interactive>
               <CardHeader>
                 <MonoLabel tone="success" dot>
@@ -179,16 +183,10 @@ export function CardsSection() {
                 </span>
               </CardFooter>
             </Card>
-            <p className="mt-4 font-mono text-caption text-fg-subtle">
-              Drop <code className="text-fg-muted">Stat</code> into any Card for a dashboard figure. <code className="text-fg-muted">value</code> counts up (reduced-motion safe); pass <code className="text-fg-muted">display</code> for non-numeric figures.
-            </p>
           </Demo>
 
           {/* Media card — wash treatment */}
-          <Demo
-            label="Media card — wash placeholder · badge · meta · actions"
-            action={<MonoLabel tone="subtle" number="05">Card · media</MonoLabel>}
-          >
+          <Demo label="Media card — wash placeholder · badge · meta · actions" inspect={MEDIA_INSPECT}>
             <Card
               accent="amber"
               placeholderIcon={LineChart}
@@ -209,9 +207,6 @@ export function CardsSection() {
                 Lead sources, conversion and settlement velocity — refreshed as deals move.
               </CardDescription>
             </Card>
-            <p className="mt-4 font-mono text-caption text-fg-subtle">
-              With no <code className="text-fg-muted">image</code>, the media tile renders an on-token diagonal <code className="text-fg-muted">wash</code> from the card's accent and centres the <code className="text-fg-muted">placeholderIcon</code> — a graceful stand-in until real imagery lands. The last action goes solid, the rest secondary.
-            </p>
           </Demo>
         </div>
       </div>

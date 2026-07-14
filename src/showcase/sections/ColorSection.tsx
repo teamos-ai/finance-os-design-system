@@ -3,6 +3,7 @@ import { ChevronDown, Check } from 'lucide-react'
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { GradientSwatch } from '@/components/ui/swatch'
+import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { copyText } from '@/lib/utils'
 import { cn } from '@/lib/cn'
 
@@ -51,6 +52,21 @@ const PRIMARIES: Primary[] = [
   },
 ]
 
+/** Build the "+" inspector payload for a colour family — tokens/CSS live here, not on the page. */
+function familyInspect(c: Primary): InspectData {
+  const css = [
+    `/* ${c.name} — ${c.role} */`,
+    ...c.shades.map((s) => `--${c.key}-${s.label.toLowerCase()}: ${s.hex};`),
+  ].join('\n')
+  return {
+    name: c.name,
+    explain: `${c.role}. In light mode: ${c.light}. In dark mode: ${c.dark}.`,
+    token: c.shades.map((s) => `${c.key}-${s.label}${s.main ? '  (base)' : ''}  →  ${s.hex}`).join('\n'),
+    code: css,
+    download: { filename: `color-${c.key}.css`, content: css, mime: 'text/css' },
+  }
+}
+
 function useCopy() {
   const [copied, setCopied] = React.useState(false)
   const copy = async (v: string) => {
@@ -93,7 +109,7 @@ function ColorCard({ c }: { c: Primary }) {
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="flex w-full items-center gap-4 p-4 text-left transition-colors duration-fast hover:bg-canvas-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+        className="flex w-full items-center gap-4 p-4 pr-14 text-left transition-colors duration-fast hover:bg-canvas-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
       >
         <span className="h-12 w-12 shrink-0 rounded-md border border-border-subtle" style={{ background: c.hex }} aria-hidden />
         <span className="min-w-0 flex-1">
@@ -145,27 +161,24 @@ export function ColorSection() {
     >
       <div className="space-y-3">
         {PRIMARIES.map((c) => (
-          <ColorCard key={c.key} c={c} />
+          <Inspectable key={c.key} {...familyInspect(c)}>
+            <ColorCard c={c} />
+          </Inspectable>
         ))}
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
-        <div>
-          <MonoLabel tone="amber" dot>Signature gradient</MonoLabel>
-          <div className="mt-3">
-            <GradientSwatch label="gradient-accent · amber sweep" css="linear-gradient(135deg, #F0B966 0%, #E68A00 100%)" />
-          </div>
-        </div>
-        <div className="rounded-lg border border-border bg-surface p-5">
-          <MonoLabel tone="subtle">Semantic tokens components call</MonoLabel>
-          <p className="mt-3 font-body text-body-sm leading-relaxed text-fg-muted">
-            <code className="text-accent-text">accent</code> (amber) ·{' '}
-            <code className="text-accent-text">brand</code> (blue) ·{' '}
-            <code className="text-accent-text">highlight</code> (heading orange) ·{' '}
-            <code className="text-accent-text">canvas / surface / elevated</code> ·{' '}
-            <code className="text-accent-text">fg / fg-muted / fg-subtle</code> ·{' '}
-            <code className="text-accent-text">border</code> · state colours. Switching theme moves only this layer.
-          </p>
+      <div className="mt-8">
+        <MonoLabel tone="amber" dot>Signature gradient</MonoLabel>
+        <div className="mt-3">
+          <Inspectable
+            name="Signature gradient"
+            explain="The amber sweep — Momentum Amber 100 → 300 at 135°. The system's one gradient; used for the hero accent and gradient banner. Everything else stays flat."
+            token={'gradient-accent\n--c-gradient-accent'}
+            code={'background: linear-gradient(135deg, #F0B966 0%, #E68A00 100%);'}
+            download={{ filename: 'gradient-accent.css', content: '.gradient-accent {\n  background: linear-gradient(135deg, #F0B966 0%, #E68A00 100%);\n}', mime: 'text/css' }}
+          >
+            <GradientSwatch label="Amber sweep" css="linear-gradient(135deg, #F0B966 0%, #E68A00 100%)" />
+          </Inspectable>
         </div>
       </div>
     </Section>

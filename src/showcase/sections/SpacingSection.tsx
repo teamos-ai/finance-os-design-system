@@ -1,9 +1,11 @@
 /**
- * SpacingSection — documents the 8px space scale, container widths, breakpoints
- * and the 12-column grid. Built inline with tokenised divs; no new components.
+ * SpacingSection — the 8px space scale, container widths, breakpoints and the 12-column grid.
+ * Px values stay on the page (design info); the utility-class tokens + CSS live inside each
+ * block's "+" inspector.
  */
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import type { InspectData } from '@/components/ui/inspectable'
 
 /** The 8px-derived spacing scale. Each step renders a live amber ruler. */
 const SPACE_SCALE: { token: string; px: number; note: string }[] = [
@@ -34,6 +36,35 @@ const BREAKPOINTS: { token: string; px: string; note: string }[] = [
   { token: 'xl', px: '1280px', note: 'Desktop — shell at rest' },
 ]
 
+const SPACE_INSPECT: InspectData = {
+  name: 'Spacing scale',
+  explain: 'Everything sits on an 8px grid. Reach for a named step, never an arbitrary value — drift off the grid is the first thing that reads as untidy.',
+  token: SPACE_SCALE.map((s) => `${s.token}  ·  ${s.px}px  ·  ${s.note}`).join('\n'),
+  code: SPACE_SCALE.map((s) => `--${s.token}: ${s.px}px;`).join('\n'),
+  download: { filename: 'spacing.css', content: ':root {\n' + SPACE_SCALE.map((s) => `  --${s.token}: ${s.px}px;`).join('\n') + '\n}', mime: 'text/css' },
+}
+const CONTAINER_INSPECT: InspectData = {
+  name: 'Container widths',
+  explain: 'A small ladder of max-widths — from the reading column up to the full application shell.',
+  token: CONTAINERS.map((c) => `${c.token}  ·  ${c.px}  ·  ${c.use}`).join('\n'),
+  code: CONTAINERS.map((c) => `.${c.token} { max-width: ${c.px}; }`).join('\n'),
+  download: { filename: 'containers.css', content: CONTAINERS.map((c) => `.${c.token} { max-width: ${c.px}; }`).join('\n'), mime: 'text/css' },
+}
+const BREAKPOINT_INSPECT: InspectData = {
+  name: 'Breakpoints',
+  explain: 'Mobile-first thresholds. Design for the smallest width, then layer up. Grids stack below their threshold.',
+  token: BREAKPOINTS.map((b) => `${b.token}  ·  ${b.px}  ·  ${b.note}`).join('\n'),
+  code: BREAKPOINTS.map((b) => `@media (min-width: ${b.px}) { /* ${b.token} */ }`).join('\n'),
+  download: { filename: 'breakpoints.css', content: BREAKPOINTS.map((b) => `@media (min-width: ${b.px}) { /* ${b.token} */ }`).join('\n'), mime: 'text/css' },
+}
+const GRID_INSPECT: InspectData = {
+  name: '12-column grid',
+  explain: 'Twelve columns divide cleanly into halves, thirds, quarters and sixths, with a 16px gutter. Spans collapse to full width below the md breakpoint.',
+  token: 'grid-cols-12 · gap-4 (16px gutter)\ncol-span-12 md:col-span-8  +  col-span-12 md:col-span-4',
+  code: '<div class="grid grid-cols-12 gap-4">\n  <div class="col-span-12 md:col-span-8">main</div>\n  <div class="col-span-12 md:col-span-4">aside</div>\n</div>',
+  download: { filename: 'grid-12.html', content: '<div class="grid grid-cols-12 gap-4">\n  <div class="col-span-12 md:col-span-8">main</div>\n  <div class="col-span-12 md:col-span-4">aside</div>\n</div>', mime: 'text/html' },
+}
+
 export function SpacingSection() {
   // widest bar (64px) sets the track length the rulers scale within.
   const maxPx = 64
@@ -55,23 +86,18 @@ export function SpacingSection() {
             <span className="font-mono text-mono-xs text-fg-subtle">base unit = 8px</span>
           </div>
 
-          <Demo label="space scale · live rulers">
+          <Demo label="space scale · live rulers" inspect={SPACE_INSPECT}>
             <div className="flex flex-col">
               {SPACE_SCALE.map((step, i) => (
                 <div
                   key={step.token}
                   className={
-                    'grid grid-cols-[6.5rem_1fr] items-center gap-4 py-3 sm:grid-cols-[7rem_minmax(0,1fr)_12rem]' +
+                    'grid grid-cols-[4rem_1fr] items-center gap-4 py-3 sm:grid-cols-[4.5rem_minmax(0,1fr)_12rem]' +
                     (i !== 0 ? ' border-t border-border-subtle' : '')
                   }
                 >
-                  {/* token + px */}
-                  <div className="flex flex-col">
-                    <span className="font-mono text-mono-xs text-fg">{step.token}</span>
-                    <span className="font-mono text-mono-xs tabular-nums text-fg-subtle">
-                      {step.px}px
-                    </span>
-                  </div>
+                  {/* px value */}
+                  <span className="font-mono text-mono-xs tabular-nums text-fg">{step.px}px</span>
 
                   {/* the amber ruler */}
                   <div className="flex items-center gap-3">
@@ -92,13 +118,6 @@ export function SpacingSection() {
               ))}
             </div>
           </Demo>
-
-          <p className="font-body text-body-sm text-fg-subtle">
-            Steps map to Tailwind spacing utilities (<span className="font-mono">p-2</span>,{' '}
-            <span className="font-mono">gap-4</span>, <span className="font-mono">mt-6</span>…). Reach
-            for the named step rather than an arbitrary value — drift off the grid is the first thing
-            that reads as untidy.
-          </p>
         </div>
 
         {/* CONTAINERS + BREAKPOINTS ------------------------------------ */}
@@ -108,7 +127,7 @@ export function SpacingSection() {
             <MonoLabel tone="accent" dot>
               Container widths
             </MonoLabel>
-            <Demo label="max-width ladder" padded={false}>
+            <Demo label="max-width ladder" padded={false} inspect={CONTAINER_INSPECT}>
               <div className="flex flex-col">
                 {CONTAINERS.map((c, i) => (
                   <div
@@ -118,12 +137,7 @@ export function SpacingSection() {
                       (i !== 0 ? ' border-t border-border-subtle' : '')
                     }
                   >
-                    <div className="flex items-baseline justify-between gap-3">
-                      <span className="font-mono text-mono-xs text-fg">{c.token}</span>
-                      <span className="font-mono text-mono-xs tabular-nums text-fg-subtle">
-                        {c.px}
-                      </span>
-                    </div>
+                    <span className="font-mono text-mono-xs tabular-nums text-fg">{c.px}</span>
                     <span className="font-body text-body-sm text-fg-muted">{c.use}</span>
                   </div>
                 ))}
@@ -136,13 +150,10 @@ export function SpacingSection() {
             <MonoLabel tone="accent" dot>
               Breakpoints
             </MonoLabel>
-            <Demo label="responsive thresholds" padded={false}>
+            <Demo label="responsive thresholds" padded={false} inspect={BREAKPOINT_INSPECT}>
               <table className="w-full border-collapse text-left">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="px-5 py-3 font-mono text-mono-xs uppercase text-fg-subtle">
-                      Prefix
-                    </th>
                     <th className="px-5 py-3 font-mono text-mono-xs uppercase text-fg-subtle">
                       Min width
                     </th>
@@ -154,9 +165,6 @@ export function SpacingSection() {
                 <tbody>
                   {BREAKPOINTS.map((b) => (
                     <tr key={b.token} className="border-b border-border-subtle last:border-b-0">
-                      <td className="px-5 py-3.5">
-                        <span className="font-mono text-body-sm text-accent-text">{b.token}:</span>
-                      </td>
                       <td className="px-5 py-3.5 font-mono text-body-sm tabular-nums text-fg">
                         {b.px}
                       </td>
@@ -168,11 +176,6 @@ export function SpacingSection() {
                 </tbody>
               </table>
             </Demo>
-            <p className="font-body text-body-sm text-fg-subtle">
-              Mobile-first: design for the smallest width, then layer up with{' '}
-              <span className="font-mono">md:</span> and <span className="font-mono">lg:</span>{' '}
-              utilities. Grids stack below their threshold.
-            </p>
           </div>
         </div>
 
@@ -182,10 +185,10 @@ export function SpacingSection() {
             <MonoLabel tone="amber" dot>
               12-column grid
             </MonoLabel>
-            <span className="font-mono text-mono-xs text-fg-subtle">gutter = space-4 (16px)</span>
+            <span className="font-mono text-mono-xs text-fg-subtle">16px gutter</span>
           </div>
 
-          <Demo label="grid · 12 columns, 16px gutter">
+          <Demo label="grid · 12 columns, 16px gutter" inspect={GRID_INSPECT}>
             <div className="flex flex-col gap-5">
               {/* the column track */}
               <div className="grid grid-cols-12 gap-4">
@@ -204,24 +207,14 @@ export function SpacingSection() {
               {/* a representative span layout */}
               <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 flex h-14 items-center rounded-sm bg-surface px-4 md:col-span-8">
-                  <span className="font-mono text-mono-xs text-fg-muted">
-                    col-span-12 · md:col-span-8
-                  </span>
+                  <span className="font-body text-body-sm text-fg-muted">8 columns</span>
                 </div>
                 <div className="col-span-12 flex h-14 items-center rounded-sm border border-border bg-canvas px-4 md:col-span-4">
-                  <span className="font-mono text-mono-xs text-fg-muted">
-                    col-span-12 · md:col-span-4
-                  </span>
+                  <span className="font-body text-body-sm text-fg-muted">4 columns</span>
                 </div>
               </div>
             </div>
           </Demo>
-
-          <p className="font-body text-body-sm text-fg-subtle">
-            Twelve columns divide cleanly into halves, thirds, quarters and sixths. Spans collapse to
-            full width below <span className="font-mono">md</span>, so the same markup reads on a
-            phone and a trading desk.
-          </p>
         </div>
       </div>
     </Section>
