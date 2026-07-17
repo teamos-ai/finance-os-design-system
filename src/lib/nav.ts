@@ -26,7 +26,7 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'spacing', label: 'Spacing & Layout', Icon: Ruler, accent: 'blue', group: 'Foundations' },
   { id: 'elevation', label: 'Radius & Elevation', Icon: Layers, accent: 'amber', group: 'Foundations' },
   { id: 'motion', label: 'Motion', Icon: Wand2, accent: 'amber', group: 'Foundations' },
-  { id: 'icons', label: 'Icons & Logo', Icon: Shapes, accent: 'blue', group: 'Foundations' },
+  { id: 'logo', label: 'Logo', Icon: Shapes, accent: 'blue', group: 'Foundations' },
 
   { id: 'components', label: 'Components', Icon: Component, accent: 'amber', group: 'Library' },
   { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'amber', group: 'Library' },

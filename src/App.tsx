@@ -10,7 +10,7 @@ import { TypographySection } from '@/showcase/sections/TypographySection'
 import { SpacingSection } from '@/showcase/sections/SpacingSection'
 import { ElevationSection } from '@/showcase/sections/ElevationSection'
 import { MotionSection } from '@/showcase/sections/MotionSection'
-import { IconsSection } from '@/showcase/sections/IconsSection'
+import { LogoSection } from '@/showcase/sections/LogoSection'
 import { ComponentsSection } from '@/showcase/sections/ComponentsSection'
 import { CardsSection } from '@/showcase/sections/CardsSection'
 import { BentoSection } from '@/showcase/sections/BentoSection'
@@ -40,7 +40,7 @@ export default function App() {
       <SpacingSection />
       <ElevationSection />
       <MotionSection />
-      <IconsSection />
+      <LogoSection />
       <ComponentsSection />
       <CardsSection />
       <BentoSection />
