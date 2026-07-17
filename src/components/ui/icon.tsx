@@ -6,7 +6,9 @@
 import { ICONS } from '@/data/icons'
 import { cn } from '@/lib/cn'
 
-const MAP: Record<string, string> = Object.fromEntries(ICONS.map((i) => [i.name, i.body]))
+const MAP: Record<string, { body: string; viewBox: string }> = Object.fromEntries(
+  ICONS.map((i) => [i.name, { body: i.body, viewBox: i.viewBox }]),
+)
 
 export interface IconProps {
   name: string
@@ -16,11 +18,11 @@ export interface IconProps {
 }
 
 export function Icon({ name, size = 24, title, className }: IconProps) {
-  const body = MAP[name]
-  if (!body) return null
+  const icon = MAP[name]
+  if (!icon) return null
   return (
     <svg
-      viewBox="0 0 24 24"
+      viewBox={icon.viewBox}
       width={size}
       height={size}
       fill="currentColor"
@@ -28,14 +30,14 @@ export function Icon({ name, size = 24, title, className }: IconProps) {
       aria-hidden={title ? undefined : true}
       aria-label={title}
       className={cn('inline-block shrink-0', className)}
-      dangerouslySetInnerHTML={{ __html: body }}
+      dangerouslySetInnerHTML={{ __html: icon.body }}
     />
   )
 }
 
 /** Serialise an icon to a standalone SVG string (for copy / download). */
 export function iconToSvg(name: string, color = 'currentColor'): string {
-  const body = MAP[name]
-  if (!body) return ''
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="${color}">${body}</svg>`
+  const icon = MAP[name]
+  if (!icon) return ''
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${icon.viewBox}" width="24" height="24" fill="${color}">${icon.body}</svg>`
 }

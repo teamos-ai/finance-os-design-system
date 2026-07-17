@@ -7,7 +7,7 @@ import { SegmentedControl } from '@/components/ui/segmented'
 import { Icon, iconToSvg } from '@/components/ui/icon'
 import { Inspectable } from '@/components/ui/inspectable'
 import { ICONS, ICON_CATEGORIES } from '@/data/icons'
-import { copyText } from '@/lib/utils'
+import { copyText, downloadHref } from '@/lib/utils'
 import { cn } from '@/lib/cn'
 
 type Tint = 'ink' | 'amber' | 'blue'
@@ -52,32 +52,17 @@ export function IconsSection() {
     ? ICONS.filter((i) => `${i.name} ${i.keywords} ${i.category}`.toLowerCase().includes(q))
     : ICONS
 
-  // Download the whole pack as one on-brand (Momentum Amber) duotone SVG sheet.
-  const downloadPack = () => {
-    const COLS = 8
-    const CELL = 48
-    const rows = Math.ceil(ICONS.length / COLS)
-    let body = ''
-    ICONS.forEach((ic, i) => {
-      const x = (i % COLS) * CELL + (CELL - 24) / 2
-      const y = Math.floor(i / COLS) * CELL + (CELL - 24) / 2
-      body += `<g transform="translate(${x},${y})" fill="#E68A00">${ic.body}</g>`
-    })
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${COLS * CELL}" height="${rows * CELL}" viewBox="0 0 ${COLS * CELL} ${rows * CELL}">${body}</svg>`
-    const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }))
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'finance-os-icons.svg'
-    a.click()
-    URL.revokeObjectURL(url)
-  }
+  // Download the whole pack — a ZIP of individual SVGs (each fill="currentColor",
+  // recolour with a CSS color) plus the licence notice. Pre-built by
+  // scripts/build-icons.mjs and served as a static asset.
+  const downloadPack = () => downloadHref('finance-os-icons.zip', '/finance-os-icons.zip')
 
   return (
     <Section
       id="icons"
       eyebrow="10 — Icons & Logo"
       title="Icons & Logo"
-      lead="An original Finance OS icon set — filled, duotone-in-one-colour, drawn on a 24px grid with the brand spark woven in. Search, recolour, click to copy an SVG, or download the whole pack. The logo lockups follow below."
+      lead="The Finance OS icon set — solid, geometric, single-colour. Every glyph inherits the brand colour (amber on dark, blue on light, white on accent fills), so it recolours with the theme. Search, switch the tint, click to copy an SVG, or download the whole pack as a ZIP. The logo lockups follow below."
     >
       <div className="space-y-12">
         <div>
@@ -86,7 +71,7 @@ export function IconsSection() {
               Finance OS icon system · {ICONS.length} icons
             </MonoLabel>
             <Button variant="primary" size="sm" leadingIcon={<Icon name="download" size={16} />} onClick={downloadPack}>
-              Download pack (.svg)
+              Download pack (.zip)
             </Button>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -137,9 +122,10 @@ export function IconsSection() {
         </div>
 
         <p className="font-mono text-caption leading-relaxed text-fg-subtle">
-          Original artwork — our own geometry in a duotone-filled style, drawn fresh (no icon pack reproduced) with the
-          free Pikaicons &amp; Untitled UI line only as aesthetic reference. Each icon takes any brand colour; the
-          downloaded pack defaults to Momentum Amber. v1 core set — expanding in reviewed batches.
+          Solid icons built on Phosphor Icons (Fill), MIT-licensed. Each SVG uses{' '}
+          <span className="text-fg">fill=&quot;currentColor&quot;</span>, so a CSS colour recolours it — the set here is
+          driven by the brand tokens. The downloadable ZIP bundles every icon as an individual SVG plus the MIT licence
+          notice, free to reuse in your own sites and projects.
         </p>
 
         <div>
