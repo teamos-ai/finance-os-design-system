@@ -23,8 +23,8 @@ const PRIMARIES: Primary[] = [
   {
     key: 'amber', name: 'Momentum Amber', role: 'Primary accent · CTAs, focus, the gradient',
     hex: '#E68A00', rgb: '230, 138, 0',
-    shades: [{ label: '100', hex: '#F0B966' }, { label: '200', hex: '#EBA133' }, { label: '300', hex: '#E68A00', main: true }, { label: '400', hex: '#B86E00' }, { label: '500', hex: '#8A5300' }],
-    light: 'Fill #E68A00 (300) · AA text #8A5300 (500)', dark: 'Fill #E68A00 (300) · AA text #EBA133 (200)',
+    shades: [{ label: '100', hex: '#F0B966' }, { label: '200', hex: '#EBA133' }, { label: '300', hex: '#E68A00', main: true }],
+    light: 'Fill only — amber never as text (ink for AA)', dark: 'Fill #E68A00 (300) · AA text #EBA133 (200)',
   },
   {
     key: 'gold', name: 'Signal Gold', role: 'Brand highlight · accents & emphasis',

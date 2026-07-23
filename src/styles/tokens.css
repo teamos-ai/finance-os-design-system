@@ -6,7 +6,8 @@
    changes between themes. Never reference a --p-* primitive in a component.
 
    Accent is THEME-PINNED: Dark → Momentum Amber (orange), Light → Atlas Blue,
-   Paper → Momentum Amber (#F0B966 fills, deeper #B86E00 for text/AA). Buttons:
+   Paper → Momentum Amber (#F0B966 fills; on light surfaces amber is fills-only —
+   readable foreground is ink/blue, since no light amber passes AA on ivory). Buttons:
    primary = solid accent fill, secondary = accent outline. Focus rings are NEUTRAL
    (never the accent colour). Dark = true OLED black; Light = pure white; Paper = ivory.
    ============================================================================ */
@@ -15,12 +16,12 @@
    LAYER 1 — PRIMITIVES (theme-independent; 5 shades per family)
    ---------------------------------------------------------------------------- */
 :root {
-  /* Momentum Amber — dark + paper accent (orange) */
+  /* Momentum Amber — dark + paper accent (orange). 3-shade ramp: the deep browns
+     #B86E00 / #8A5300 were removed (off-brand; they only ever served as AA text on
+     light surfaces, where amber is now fills-only). */
   --p-amber-100: #F0B966;
   --p-amber-200: #EBA133;
   --p-amber-300: #E68A00; /* base */
-  --p-amber-400: #B86E00;
-  --p-amber-500: #8A5300;
 
   /* Signal Gold — brand swatch (5 shades) */
   --p-gold-100: #FBEAB8;
@@ -84,8 +85,8 @@
 
   --c-accent:       var(--p-amber-300); /* #E68A00 orange (pinned to dark) */
   --c-accent-hover: var(--p-amber-200);
-  --c-accent-press: var(--p-amber-400);
-  --c-accent-soft:  rgba(230, 138, 0, 0.16);
+  --c-accent-press: var(--p-amber-100); /* brighter-on-press (was brown #B86E00) */
+  --c-accent-soft:  rgba(240, 185, 102, 0.20); /* lighter warm hover/select glow (was #E68A00 @16% → read as dim brown on black) */
   --c-accent-text:  var(--p-amber-200); /* AA on black */
   --c-accent-fg:    #1A1206;            /* ink label on orange fill */
   --c-highlight:    var(--p-amber-300); /* #E68A00 — primary orange, 8:1 on black */
@@ -95,7 +96,7 @@
 
   --c-amber:      var(--p-amber-300);
   --c-amber-text: var(--p-amber-200);
-  --c-amber-soft: rgba(230, 138, 0, 0.16);
+  --c-amber-soft: rgba(240, 185, 102, 0.20); /* lighter warm tint (matches accent-soft) */
 
   --c-brand:      var(--p-blue-200);
   --c-brand-soft: rgba(133, 145, 188, 0.16);
@@ -154,7 +155,7 @@
   --c-inspect-fg: #FFFFFF;           /* white glyph on the blue FAB */
 
   --c-amber:      var(--p-amber-300);
-  --c-amber-text: var(--p-amber-500);
+  --c-amber-text: var(--c-fg); /* fills-only on light: readable amber text = ink (was brown #8A5300) */
   --c-amber-soft: rgba(230, 138, 0, 0.14);
 
   --c-brand:      var(--p-blue-400);
@@ -162,8 +163,8 @@
 
   --c-success:      var(--p-green-700);
   --c-success-soft: rgba(19, 138, 94, 0.12);
-  --c-warning:      var(--p-amber-500);
-  --c-warning-soft: rgba(138, 83, 0, 0.12);
+  --c-warning:      var(--c-fg); /* warning = amber tint + icon; text/icon ink for AA (no light amber is AA) */
+  --c-warning-soft: rgba(230, 138, 0, 0.12); /* base-amber tint (was brown #8A5300) */
   --c-danger:       var(--p-red-700);
   --c-danger-soft:  rgba(213, 41, 47, 0.10);
   --c-info:         var(--p-blue-400);
@@ -181,7 +182,8 @@
 
 /* ----------------------------------------------------------------------------
    LAYER 2 — SEMANTIC  ·  PAPER  (warm ivory — the in-between, matches Health OS)
-   Accent = Momentum Amber: #F0B966 for solid fills, deeper #B86E00 for text (AA on ivory).
+   Accent = Momentum Amber: #F0B966 solid fills only; foreground text = warm ink,
+   heading highlight = Atlas Blue (no light amber is AA as text on ivory).
    ---------------------------------------------------------------------------- */
 [data-theme="paper"] {
   color-scheme: light;
@@ -206,15 +208,15 @@
   --c-accent-hover: var(--p-amber-200);
   --c-accent-press: var(--p-amber-300);
   --c-accent-soft:  rgba(240, 185, 102, 0.20);
-  --c-accent-text:  var(--p-amber-500); /* #8A5300 — deep amber, AA-normal on ivory (small accents) */
+  --c-accent-text:  var(--c-fg);        /* fills-only: readable accent text/icons = warm ink (was brown #8A5300) */
   --c-accent-fg:    #2A2419;            /* ink label on amber fill */
-  --c-highlight:    var(--p-amber-400); /* #B86E00 — orange headings on ivory (AA-large) */
+  --c-highlight:    var(--p-blue-400);  /* heading pop = Atlas Blue on ivory (amber not AA as text; matches light) */
 
   --c-inspect:    var(--p-amber-300); /* inspector FAB — PRIMARY orange #E68A00 (not the lighter paper fill) */
   --c-inspect-fg: #1A1206;            /* ink glyph on the orange FAB */
 
   --c-amber:      var(--p-amber-300);
-  --c-amber-text: var(--p-amber-400);
+  --c-amber-text: var(--c-fg);        /* fills-only on paper; readable text = warm ink (was brown #B86E00) */
   --c-amber-soft: rgba(240, 185, 102, 0.20);
 
   --c-brand:      var(--p-blue-500);
@@ -222,8 +224,8 @@
 
   --c-success:      var(--p-green-700);
   --c-success-soft: rgba(14, 107, 73, 0.12);
-  --c-warning:      var(--p-amber-500);
-  --c-warning-soft: rgba(138, 83, 0, 0.12);
+  --c-warning:      var(--c-fg); /* warning = amber tint + icon; text/icon warm ink for AA */
+  --c-warning-soft: rgba(230, 138, 0, 0.12); /* base-amber tint (was brown #8A5300) */
   --c-danger:       var(--p-red-700);
   --c-danger-soft:  rgba(168, 30, 35, 0.10);
   --c-info:         var(--p-blue-500);

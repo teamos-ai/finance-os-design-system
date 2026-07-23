@@ -37,18 +37,18 @@ const themes = {
   light: {
     canvas: '#F6F7F9', surface: '#FFFFFF', elevated: '#FFFFFF',
     fg: '#10131B', fgMuted: '#474E5C', fgSubtle: '#646C7D',
-    accent: '#EEBA2B', accentText: '#8A5300', accentFg: '#1A1206',
-    amberText: '#8A5300', brand: '#33488F',
-    success: '#0E6B49', warning: '#8A5300', danger: '#A81E23', info: '#33488F',
-    soft: { success: [19,138,94,0.12], warning: [138,83,0,0.12], danger: [213,41,47,0.10], info: [51,72,143,0.10], accent: [238,186,43,0.16] },
+    accent: '#EEBA2B', accentText: '#33488F', accentFg: '#1A1206',
+    amberText: '#14161B', brand: '#33488F',
+    success: '#0E6B49', warning: '#14161B', danger: '#A81E23', info: '#33488F',
+    soft: { success: [19,138,94,0.12], warning: [230,138,0,0.12], danger: [213,41,47,0.10], info: [51,72,143,0.10], accent: [238,186,43,0.16] },
   },
   paper: {
     canvas: '#FBF6EA', surface: '#FFFDF8', elevated: '#FFFFFF',
     fg: '#2A2419', fgMuted: '#6B6149', fgSubtle: '#71674B',
-    accent: '#E68A00', accentText: '#8A5300', accentFg: '#1A1206',
-    amberText: '#8A5300', brand: '#293A72',
-    success: '#0E6B49', warning: '#8A5300', danger: '#A81E23', info: '#293A72',
-    soft: { success: [14,107,73,0.12], warning: [138,83,0,0.12], danger: [168,30,35,0.10], info: [41,58,114,0.10], accent: [230,138,0,0.14] },
+    accent: '#E68A00', accentText: '#2A2419', accentFg: '#1A1206',
+    amberText: '#2A2419', brand: '#293A72',
+    success: '#0E6B49', warning: '#2A2419', danger: '#A81E23', info: '#293A72',
+    soft: { success: [14,107,73,0.12], warning: [230,138,0,0.12], danger: [168,30,35,0.10], info: [41,58,114,0.10], accent: [230,138,0,0.14] },
   },
 }
 
