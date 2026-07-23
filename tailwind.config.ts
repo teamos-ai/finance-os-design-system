@@ -21,6 +21,7 @@ export default {
       surface: 'var(--c-surface)',
       elevated: 'var(--c-elevated)',
       inset: 'var(--c-inset)',
+      selected: 'var(--c-selected)',
       overlay: 'var(--c-overlay)',
       fg: {
         DEFAULT: 'var(--c-fg)',

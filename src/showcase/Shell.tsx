@@ -83,7 +83,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <button
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             onClick={() => setCollapsed((c) => !c)}
-            className="grid h-8 w-8 place-items-center rounded-md text-fg-subtle transition-colors hover:bg-accent-soft hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="grid h-8 w-8 place-items-center rounded-md text-fg-subtle transition-colors hover:bg-selected hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {collapsed ? <PanelLeft className="h-4 w-4" strokeWidth={1.75} /> : <PanelLeftClose className="h-4 w-4" strokeWidth={1.75} />}
           </button>
@@ -106,11 +106,14 @@ export function Shell({ children }: { children: React.ReactNode }) {
                         title={item.label}
                         aria-current={on ? 'true' : undefined}
                         className={cn(
-                          'group flex items-center gap-3 rounded-md px-2 py-2 text-body-sm transition-colors',
-                          on ? cn(a.well, a.text) : 'text-fg-muted hover:bg-accent-soft hover:text-fg',
+                          'group relative flex items-center gap-3 rounded-md px-2 py-2 text-body-sm transition-colors',
+                          on ? cn('bg-selected', a.text) : 'text-fg-muted hover:bg-selected hover:text-fg',
                           collapsed && 'justify-center',
                         )}
                       >
+                        {on && !collapsed && (
+                          <span aria-hidden className={cn('absolute inset-y-1.5 left-0 w-0.5 rounded-full', a.dot)} />
+                        )}
                         <item.Icon className="h-4 w-4 shrink-0" strokeWidth={1.75} />
                         {!collapsed && <span className="truncate">{item.label}</span>}
                       </a>
