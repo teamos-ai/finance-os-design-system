@@ -29,8 +29,8 @@ const PRIMARIES: Primary[] = [
   {
     key: 'gold', name: 'Signal Gold', role: 'Brand highlight · accents & emphasis',
     hex: '#EEBA2B', rgb: '238, 186, 43',
-    shades: [{ label: '100', hex: '#FBEAB8' }, { label: '200', hex: '#F4D472' }, { label: '300', hex: '#EEBA2B', main: true }, { label: '400', hex: '#C2941F' }, { label: '500', hex: '#8A6A16' }],
-    light: 'Emphasis #EEBA2B · AA text #8A6A16 (500)', dark: 'Emphasis #EEBA2B (300) reads on black',
+    shades: [{ label: '100', hex: '#FBEAB8' }, { label: '200', hex: '#F4D472' }, { label: '300', hex: '#EEBA2B', main: true }],
+    light: 'Emphasis / fills only — never as text (not AA)', dark: 'Emphasis #EEBA2B (300) reads on black',
   },
   {
     key: 'blue', name: 'Atlas Blue', role: 'Secondary accent · info, structure, links',

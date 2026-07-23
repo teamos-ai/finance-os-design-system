@@ -18,7 +18,7 @@ import { EASE_OUT } from '@/lib/motion'
 
 /* Streamer ribbon palette — read from the brand PRIMITIVE tokens (theme-independent), so
    confetti stays on-brand with zero rogue hex: gold, amber and a deep Atlas-blue for depth. */
-const STREAMER_VARS = ['--p-gold-300', '--p-amber-300', '--p-gold-200', '--p-amber-200', '--p-gold-400', '--p-blue-500']
+const STREAMER_VARS = ['--p-gold-300', '--p-amber-300', '--p-gold-200', '--p-amber-200', '--p-gold-100', '--p-blue-500']
 function streamerColors(): string[] {
   if (typeof document === 'undefined') return ['#EEBA2B']
   const cs = getComputedStyle(document.documentElement)

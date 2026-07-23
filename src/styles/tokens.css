@@ -23,12 +23,11 @@
   --p-amber-200: #EBA133;
   --p-amber-300: #E68A00; /* base */
 
-  /* Signal Gold — brand swatch (5 shades) */
+  /* Signal Gold — brand swatch (3 shades). Deep golds #C2941F / #8A6A16 removed
+     (off-brand brown-golds); gold is emphasis/fills only — never AA text on light. */
   --p-gold-100: #FBEAB8;
   --p-gold-200: #F4D472;
   --p-gold-300: #EEBA2B; /* base */
-  --p-gold-400: #C2941F;
-  --p-gold-500: #8A6A16;
 
   /* Atlas Blue — light-mode accent (blue) */
   --p-blue-100: #ADB6D2;
