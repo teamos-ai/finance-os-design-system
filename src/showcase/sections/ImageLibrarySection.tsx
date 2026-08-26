@@ -208,39 +208,39 @@ export function ImageLibrarySection() {
         </div>
       </div>
 
-      {/* Per-theme note */}
+      {/* Image treatment */}
       <div>
         <MonoLabel number="17.4" dot className="mb-5">
-          Images across themes
+          Image treatment
         </MonoLabel>
         <div className="grid gap-4 sm:grid-cols-3">
           {[
             {
               Icon: ShieldCheck,
-              theme: 'Dark-OLED',
-              body: 'Frames glow against true black. A faint amber wash at the corner ties the image to the accent without a visible border seam.',
+              title: 'Framing',
+              body: 'Every frame keeps a hairline border-border and an 8px rounded corner, so photography never floats on the white canvas.',
             },
             {
               Icon: Building2,
-              theme: 'Light',
-              body: 'Warm-paper canvas. Photography keeps a hairline border-border so it never floats; the scrim stays the same dark recipe.',
+              title: 'Scrim',
+              body: 'A bottom-up dark scrim sits under any overlaid text, so headlines stay legible over the busiest image.',
             },
             {
               Icon: LineChart,
-              theme: 'Paper',
-              body: 'Highest warmth. Images read slightly softer — lean on the wash, not added saturation, to keep the calm register.',
+              title: 'Wash',
+              body: 'A faint amber wash at one corner ties the image to the accent without a visible border seam.',
             },
-          ].map(({ Icon, theme, body }) => (
-            <div key={theme} className="rounded-md border border-border bg-surface p-5">
+          ].map(({ Icon, title, body }) => (
+            <div key={title} className="rounded-md border border-border bg-surface p-5">
               <Icon className="h-5 w-5 text-accent-text" strokeWidth={1.5} aria-hidden />
-              <h3 className="mt-3 font-display text-title-sm text-fg">{theme}</h3>
+              <h3 className="mt-3 font-display text-title-sm text-fg">{title}</h3>
               <p className="mt-1.5 font-body text-body-sm leading-relaxed text-fg-muted">{body}</p>
             </div>
           ))}
         </div>
         <p className="mt-5 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          The rules hold across all three themes: same ratios, same rounded corner + hairline border,
-          same bottom-up scrim. Only the surrounding canvas shifts, so a single change reflows every frame.
+          One recipe everywhere: same ratios, same rounded corner + hairline border, same bottom-up
+          scrim — so a single change reflows every frame.
         </p>
       </div>
     </Section>

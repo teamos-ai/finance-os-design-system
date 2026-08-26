@@ -3,13 +3,12 @@
  *
  * Two full applied screens, each inside a Demo frame, assembled ONLY from tokens
  * and components:
- *   1. "Landing — dark"  — a marketing page: a hero band (LogoMark + headline +
+ *   1. "Marketing landing" — a marketing page: a hero band (LogoMark + headline +
  *      two Buttons over a Glow), a feature grid (FEATURES via FeatureCard), a
  *      gradient CTA banner, and the TESTIMONIAL.
- *   2. "CRM dashboard — light" — the product surface: a top bar, a row of Stat
+ *   2. "CRM dashboard" — the product surface: a top bar, a row of Stat
  *      cards, a deals table (borrower / amount / stage Badge), and an inbox /
- *      activity list. Scoped to the light theme with a `data-theme="light"`
- *      wrapper — every token class inside resolves to light values, no rewiring.
+ *      activity list. Uses the standard light tokens — no rewiring.
  *
  * Self-contained: small in-file helpers, decorative on-brand data. Voice stays
  * calm and grounded; zero rogue hex (the only rgba lives in the documented Glow).
@@ -90,7 +89,7 @@ const initials = (name: string): string =>
     .toUpperCase()
 
 /* -------------------------------------------------------------------------- */
-/* Screen 1 — marketing landing (dark)                                         */
+/* Screen 1 — marketing landing                                                */
 /* -------------------------------------------------------------------------- */
 
 const Landing = () => (
@@ -191,7 +190,7 @@ const Landing = () => (
 /* -------------------------------------------------------------------------- */
 
 const Dashboard = () => (
-  <div data-theme="light" className="bg-canvas text-fg">
+  <div className="bg-canvas text-fg">
     {/* Top bar */}
     <div className="flex items-center justify-between gap-4 border-b border-border bg-surface px-5 py-3.5">
       <div className="flex items-center gap-3">
@@ -337,17 +336,17 @@ export function DemosSection() {
       id="demos"
       eyebrow="20 - Live Demo Pages"
       title="Live Demo Pages"
-      lead="Two full applied screens — a dark marketing landing and a light CRM dashboard — assembled only from the tokens and components above. Same system, two themes, no bespoke styling."
+      lead="Two full applied screens — a marketing landing and a CRM dashboard — assembled only from the tokens and components above. Same system, same tokens, no bespoke styling."
     >
       <div className="flex flex-col gap-10">
         <FadeIn>
-          <Demo label="Landing — dark" padded={false}>
+          <Demo label="Marketing landing" padded={false}>
             <Landing />
           </Demo>
         </FadeIn>
 
         <FadeIn>
-          <Demo label="CRM dashboard — light" padded={false}>
+          <Demo label="CRM dashboard" padded={false}>
             <Dashboard />
           </Demo>
         </FadeIn>

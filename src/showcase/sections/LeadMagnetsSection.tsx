@@ -352,7 +352,7 @@ export function LeadMagnetsSection() {
       id="leadmagnets"
       eyebrow="16 - Lead Magnets"
       title="Lead Magnets"
-      lead="A template library and framework for spinning up on-brand lead magnets — with motion built in: page-flip for ebooks and magazines, swipe for swipe files, and a checkbox tick for checklists and quizzes. Drop your content into any frame and ship. Switch the theme (top-right) to watch every magnet restyle itself."
+      lead="A template library and framework for spinning up on-brand lead magnets — with motion built in: page-flip for ebooks and magazines, swipe for swipe files, and a checkbox tick for checklists and quizzes. Drop your content into any frame and ship."
     >
       <div className="flex flex-col gap-12">
         {/* Built-in motion vocabulary */}

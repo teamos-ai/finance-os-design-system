@@ -8,7 +8,6 @@ import { Github, PanelLeftClose, PanelLeft } from 'lucide-react'
 import { SHOWCASE_NAV } from '@/lib/nav'
 import { ACCENTS } from '@/lib/accents'
 import { Logo } from '@/components/brand/Logo'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { cn } from '@/lib/cn'
 
 const REPO_URL = 'https://github.com/teamos-ai/finance-os-design-system'
@@ -66,9 +65,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-canvas">
       {/* mobile header */}
-      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
+      <header className="sticky top-0 z-30 flex items-center border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
         <Logo size="sm" />
-        <ThemeToggle />
       </header>
 
       {/* sidebar */}
@@ -126,7 +124,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </nav>
 
         <div className={cn('border-t border-border py-4', collapsed ? 'flex flex-col items-center gap-3' : 'space-y-3')}>
-          {!collapsed && <ThemeToggle />}
           <a
             href={REPO_URL}
             target="_blank"

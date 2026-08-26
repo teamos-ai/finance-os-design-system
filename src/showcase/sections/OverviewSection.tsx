@@ -13,11 +13,6 @@ const PRINCIPLES = [
   { Icon: Gauge, title: 'Gentle motion', body: 'Quiet fades, small translates and a calm glow. Everything honours reduced-motion.' },
 ]
 
-const THEMES = [
-  { label: 'Dark · OLED', note: 'Primary — the luxury marketing surface' },
-  { label: 'Light · Clarity', note: 'The product-dashboard surface' },
-  { label: 'Paper', note: 'Warm off-white for long-form' },
-]
 
 export function OverviewSection() {
   return (
@@ -25,7 +20,7 @@ export function OverviewSection() {
       id="overview"
       eyebrow="04 — Overview"
       title="The system at a glance"
-      lead="Finance OS is built Ruler-first: structure, order and authority, softened by the Sage's clarity. Every surface assembles from locked tokens — switch the theme and only the semantic layer moves."
+      lead="Finance OS is built Ruler-first: structure, order and authority, softened by the Sage's clarity. Every surface assembles from one locked semantic token layer — matched to the production site."
     >
       {/* principles */}
       <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -64,17 +59,14 @@ export function OverviewSection() {
         })}
       </div>
 
-      {/* theme set */}
+      {/* single theme */}
       <div className="mt-10 rounded-lg border border-border bg-surface p-6">
-        <MonoLabel tone="subtle">Theme set · one semantic layer</MonoLabel>
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {THEMES.map((t) => (
-            <div key={t.label} className="rounded-md border border-border bg-canvas p-4">
-              <p className="font-display text-title-sm text-fg">{t.label}</p>
-              <p className="mt-1 font-mono text-caption text-fg-subtle">{t.note}</p>
-            </div>
-          ))}
-        </div>
+        <MonoLabel tone="subtle">One theme · one semantic layer</MonoLabel>
+        <p className="mt-3 font-display text-title-sm text-fg">Light · Clarity</p>
+        <p className="mt-1 font-body text-body-md leading-relaxed text-fg-muted">
+          Pure white with the Atlas Blue accent — matched to the production site. Every surface
+          composes from one semantic token layer on <code className="font-mono text-body-sm text-fg">:root</code>.
+        </p>
       </div>
 
     </Section>

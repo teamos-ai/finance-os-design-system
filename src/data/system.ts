@@ -82,7 +82,6 @@ export const TESTIMONIAL = {
 export const COMMANDS: string[] = [
   'browse the components',
   'copy a token',
-  'switch the theme',
   'open the live demo',
   'read the business plan',
   'read the marketing plan',

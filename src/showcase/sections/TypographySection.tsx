@@ -3,7 +3,6 @@ import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
-import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
 type Row = { token: string; cls: string; spec: string; sample: string }
@@ -47,19 +46,14 @@ const BODY_INSPECT: InspectData = {
 
 type ColorKey = 'accent' | 'ink' | 'alt'
 
-/* Heading-colour options are theme-aware. 'accent' = the theme highlight, 'ink' = neutral
-   (white on dark, black on light/paper), 'alt' = the cross-accent. All AA(-large) for the
-   display specimens. Classes appear here as string literals so Tailwind keeps them. */
-const THEME_COLORS: Record<string, { accent: string; ink: string; alt: string; altCls: string }> = {
-  dark: { accent: 'Orange', ink: 'White', alt: 'Blue', altCls: 'text-brand' },
-  light: { accent: 'Blue', ink: 'Black', alt: 'Orange', altCls: 'text-amber-text' },
-  paper: { accent: 'Amber', ink: 'Black', alt: 'Blue', altCls: 'text-brand' },
-}
+/* Heading-colour options. 'accent' = Atlas Blue highlight, 'ink' = neutral black,
+   'alt' = the warm cross-accent (amber). All AA(-large) for the display specimens.
+   Classes appear here as string literals so Tailwind keeps them. */
+const HEADING_COLORS = { accent: 'Blue', ink: 'Black', alt: 'Orange', altCls: 'text-amber-text' }
 
 export function TypographySection() {
-  const { theme } = useTheme()
   const [color, setColor] = React.useState<ColorKey>('accent')
-  const opts = THEME_COLORS[theme] ?? THEME_COLORS.dark
+  const opts = HEADING_COLORS
   const colorClass = color === 'accent' ? 'text-highlight' : color === 'ink' ? 'text-fg' : opts.altCls
 
   return (
@@ -67,7 +61,7 @@ export function TypographySection() {
       id="typography"
       eyebrow="06 — Typography"
       title="Typography"
-      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour — each theme offers its accent, a neutral ink, and a cross-accent (e.g. orange · white · blue in dark). Switch the theme (top-right) to see the options change."
+      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour — Atlas Blue accent, a neutral ink, or the warm amber cross-accent."
     >
       <div className="space-y-8">
         {/* heading colour toggle — theme-aware options */}

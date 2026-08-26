@@ -1,11 +1,8 @@
 /**
- * Logo — the real Finance OS brand marks (PNG assets in /public). Theme-aware:
- *   • mark      → the square "OS" monogram. Amber on dark/paper, BLUE in light mode
- *     (matches the light-mode accent). Used across the chrome + favicon.
- *   • full/rect → the FINANCE OS rectangle lockup: white-outline on dark, BLUE solid-plate
- *     in light, amber gradient-plate on paper.
+ * Logo — the real Finance OS brand marks (PNG assets in /public). Single Light theme:
+ *   • mark      → the square "OS" monogram, BLUE (matches the Atlas-Blue accent).
+ *   • full/rect → the FINANCE OS rectangle lockup, BLUE solid-plate on white.
  */
-import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/cn'
 
 type Size = 'sm' | 'md' | 'lg'
@@ -22,8 +19,7 @@ const RECT: Record<Size, string> = {
 }
 
 export const LogoMark = ({ size = 'md', className }: { size?: Size; className?: string }) => {
-  const { theme } = useTheme()
-  const src = theme === 'light' ? '/logo-square-blue.png' : '/logo-square.png'
+  const src = '/logo-square-blue.png'
   return (
     <img
       src={src}
@@ -42,11 +38,9 @@ export interface LogoProps {
 }
 
 export const Logo = ({ variant = 'full', size = 'md', className }: LogoProps) => {
-  const { theme } = useTheme()
   if (variant === 'mark') return <LogoMark size={size} className={className} />
-  // Rectangle lockup — white-outline reads on dark, blue solid-plate in light, amber plate on paper.
-  const src =
-    theme === 'dark' ? '/logo-rect-white.png' : theme === 'light' ? '/logo-rect-blue.png' : '/logo-rect.png'
+  // Rectangle lockup — blue solid-plate on white.
+  const src = '/logo-rect-blue.png'
   return (
     <img
       src={src}

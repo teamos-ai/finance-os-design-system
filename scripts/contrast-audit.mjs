@@ -25,30 +25,15 @@ function ratio(fg, bg) {
   return (hi + 0.05) / (lo + 0.05)
 }
 
+// Single theme — Light / Clarity (values mirror :root in src/styles/tokens.css).
 const themes = {
-  dark: {
-    canvas: '#0A0C12', surface: '#10131B', elevated: '#181B22',
-    fg: '#F6F7F9', fgMuted: '#AEB5C2', fgSubtle: '#8B93A3',
-    accent: '#EEBA2B', accentText: '#F1C855', accentFg: '#1A1206',
-    amberText: '#EBA133', brand: '#8591BC',
-    success: '#5FE0A6', warning: '#EBA133', danger: '#FF8A8E', info: '#8591BC',
-    soft: { success: [47,182,122,0.16], warning: [235,161,51,0.16], danger: [255,97,102,0.16], info: [133,145,188,0.16], accent: [238,186,43,0.12] },
-  },
   light: {
-    canvas: '#F6F7F9', surface: '#FFFFFF', elevated: '#FFFFFF',
-    fg: '#10131B', fgMuted: '#474E5C', fgSubtle: '#646C7D',
-    accent: '#EEBA2B', accentText: '#33488F', accentFg: '#1A1206',
+    canvas: '#FFFFFF', surface: '#FFFFFF', elevated: '#FFFFFF',
+    fg: '#14161B', fgMuted: '#474E5C', fgSubtle: '#646C7D',
+    accent: '#33488F', accentText: '#33488F', accentFg: '#FFFFFF',
     amberText: '#14161B', brand: '#33488F',
     success: '#0E6B49', warning: '#14161B', danger: '#A81E23', info: '#33488F',
-    soft: { success: [19,138,94,0.12], warning: [230,138,0,0.12], danger: [213,41,47,0.10], info: [51,72,143,0.10], accent: [238,186,43,0.16] },
-  },
-  paper: {
-    canvas: '#FBF6EA', surface: '#FFFDF8', elevated: '#FFFFFF',
-    fg: '#2A2419', fgMuted: '#6B6149', fgSubtle: '#71674B',
-    accent: '#E68A00', accentText: '#2A2419', accentFg: '#1A1206',
-    amberText: '#2A2419', brand: '#293A72',
-    success: '#0E6B49', warning: '#2A2419', danger: '#A81E23', info: '#293A72',
-    soft: { success: [14,107,73,0.12], warning: [230,138,0,0.12], danger: [168,30,35,0.10], info: [41,58,114,0.10], accent: [230,138,0,0.14] },
+    soft: { success: [19,138,94,0.12], warning: [230,138,0,0.12], danger: [213,41,47,0.10], info: [51,72,143,0.10], accent: [51,72,143,0.12] },
   },
 }
 

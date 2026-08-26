@@ -8,7 +8,7 @@ import type { Config } from 'tailwindcss'
    toggling [data-theme] with no class changes. */
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
-  darkMode: ['selector', '[data-theme="dark"]'],
+  darkMode: 'class', // single Light theme — no dark: utilities in use
   theme: {
     colors: {
       transparent: 'transparent',

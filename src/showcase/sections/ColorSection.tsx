@@ -15,40 +15,39 @@ type Primary = {
   hex: string
   rgb: string
   shades: Shade[]
-  light: string
-  dark: string
+  usage: string
 }
 
 const PRIMARIES: Primary[] = [
   {
-    key: 'amber', name: 'Momentum Amber', role: 'Primary accent · CTAs, focus, the gradient',
+    key: 'amber', name: 'Momentum Amber', role: 'Warm accent · fills & emphasis',
     hex: '#E68A00', rgb: '230, 138, 0',
     shades: [{ label: '100', hex: '#F0B966' }, { label: '200', hex: '#EBA133' }, { label: '300', hex: '#E68A00', main: true }],
-    light: 'Fill only — amber never as text (ink for AA)', dark: 'Fill #E68A00 (300) · AA text #EBA133 (200)',
+    usage: 'Fill only — amber is never used as text (ink for AA on white).',
   },
   {
     key: 'gold', name: 'Signal Gold', role: 'Brand highlight · accents & emphasis',
     hex: '#EEBA2B', rgb: '238, 186, 43',
     shades: [{ label: '100', hex: '#FBEAB8' }, { label: '200', hex: '#F4D472' }, { label: '300', hex: '#EEBA2B', main: true }],
-    light: 'Emphasis / fills only — never as text (not AA)', dark: 'Emphasis #EEBA2B (300) reads on black',
+    usage: 'Emphasis / fills only — never as text (not AA on white).',
   },
   {
-    key: 'blue', name: 'Atlas Blue', role: 'Secondary accent · info, structure, links',
+    key: 'blue', name: 'Atlas Blue', role: 'Primary accent · CTAs, focus, links, the gradient',
     hex: '#33488F', rgb: '51, 72, 143',
     shades: [{ label: '100', hex: '#ADB6D2' }, { label: '200', hex: '#8591BC' }, { label: '300', hex: '#5C6DA5' }, { label: '400', hex: '#33488F', main: true }, { label: '500', hex: '#1F2B56' }],
-    light: 'Fill / text #33488F (400)', dark: 'Text #8591BC (200) · fill #33488F (400)',
+    usage: 'Fill and text — #33488F (400) on white. The primary accent.',
   },
   {
-    key: 'black', name: 'Black', role: 'Dark canvas & ink',
-    hex: '#000000', rgb: '0, 0, 0',
-    shades: [{ label: 'Canvas', hex: '#000000', main: true }, { label: 'Muted', hex: '#0E0E0E' }, { label: 'Carbon', hex: '#161616' }, { label: 'Charcoal', hex: '#1F1F1F' }, { label: 'Line', hex: '#2A2A2A' }],
-    light: 'Ink only — #14161B text on white', dark: 'Canvas #000 · surface #161616 · elevated #1F1F1F',
+    key: 'black', name: 'Black', role: 'Ink & inverse surface',
+    hex: '#14161B', rgb: '20, 22, 27',
+    shades: [{ label: 'Ink', hex: '#14161B', main: true }, { label: 'Muted', hex: '#474E5C' }, { label: 'Subtle', hex: '#646C7D' }, { label: 'Inverse', hex: '#141414' }, { label: 'Line', hex: '#E6E8EC' }],
+    usage: 'Ink #14161B for text on white; #141414 is the inverse-surface + black banner.',
   },
   {
-    key: 'white', name: 'White', role: 'Light canvas & paper',
+    key: 'white', name: 'White', role: 'Canvas & surfaces',
     hex: '#FFFFFF', rgb: '255, 255, 255',
-    shades: [{ label: 'Canvas', hex: '#FFFFFF', main: true }, { label: 'Muted', hex: '#F6F7F9' }, { label: 'Line', hex: '#E6E8EC' }, { label: 'Ivory', hex: '#F9F6F2' }, { label: 'Ivory-2', hex: '#F1ECE4' }],
-    light: 'Canvas #FFF · muted #F6F7F9 · paper ivory #F9F6F2', dark: 'Text — #F5F5F5 on black',
+    shades: [{ label: 'Canvas', hex: '#FFFFFF', main: true }, { label: 'Muted', hex: '#F6F7F9' }, { label: 'Selected', hex: '#EDEFF2' }, { label: 'Line', hex: '#E6E8EC' }, { label: 'Line-2', hex: '#CDD2DA' }],
+    usage: 'Canvas #FFF · muted #F6F7F9 rhythm ground · #EDEFF2 selected lift.',
   },
 ]
 
@@ -60,7 +59,7 @@ function familyInspect(c: Primary): InspectData {
   ].join('\n')
   return {
     name: c.name,
-    explain: `${c.role}. In light mode: ${c.light}. In dark mode: ${c.dark}.`,
+    explain: `${c.role}. ${c.usage}`,
     token: c.shades.map((s) => `${c.key}-${s.label}${s.main ? '  (base)' : ''}  →  ${s.hex}`).join('\n'),
     code: css,
     download: { filename: `color-${c.key}.css`, content: css, mime: 'text/css' },
@@ -134,14 +133,10 @@ function ColorCard({ c }: { c: Primary }) {
             <div className="mt-2.5 grid grid-cols-5 gap-2">
               {c.shades.map((s) => <ShadeChip key={s.label} shade={s} />)}
             </div>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <div className="mt-5">
               <div className="rounded-md border border-border bg-canvas p-3">
-                <MonoLabel tone="subtle" size="sm">In light mode</MonoLabel>
-                <p className="mt-1.5 font-body text-body-sm leading-relaxed text-fg-muted">{c.light}</p>
-              </div>
-              <div className="rounded-md border border-border bg-canvas p-3">
-                <MonoLabel tone="amber" size="sm">In dark mode</MonoLabel>
-                <p className="mt-1.5 font-body text-body-sm leading-relaxed text-fg-muted">{c.dark}</p>
+                <MonoLabel tone="subtle" size="sm">Usage</MonoLabel>
+                <p className="mt-1.5 font-body text-body-sm leading-relaxed text-fg-muted">{c.usage}</p>
               </div>
             </div>
           </div>
@@ -157,7 +152,7 @@ export function ColorSection() {
       id="color"
       eyebrow="05 — Color"
       title="Color"
-      lead="Five locked primaries with their hex + RGB. Click any card to drop down its shade ramp and see exactly which shade to use in light vs dark mode. Components always name a semantic token, never a raw hex."
+      lead="Five locked primaries with their hex + RGB. Click any card to drop down its shade ramp and see exactly which shade to use. Components always name a semantic token, never a raw hex."
     >
       <div className="space-y-3">
         {PRIMARIES.map((c) => (

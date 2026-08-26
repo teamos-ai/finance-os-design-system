@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { ThemeProvider } from './lib/theme'
 
 // Self-hosted brand faces — Spline Sans (display) + Anonymous Pro (body/mono).
 // No external (Google Fonts) dependency: faster, offline, private, deploy-safe.
@@ -17,8 +16,6 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <App />
   </React.StrictMode>,
 )
