@@ -15,6 +15,7 @@ import { CardsSection } from '@/showcase/sections/CardsSection'
 import { BentoSection } from '@/showcase/sections/BentoSection'
 import { BannersSection } from '@/showcase/sections/BannersSection'
 import { BlogsSection } from '@/showcase/sections/BlogsSection'
+import { WarmupSection } from '@/showcase/sections/WarmupSection'
 import { LeadMagnetsSection } from '@/showcase/sections/LeadMagnetsSection'
 import { ImageLibrarySection } from '@/showcase/sections/ImageLibrarySection'
 import { NotionSection } from '@/showcase/sections/NotionSection'
@@ -44,6 +45,7 @@ export default function App() {
       <BentoSection />
       <BannersSection />
       <BlogsSection />
+      <WarmupSection />
       <LeadMagnetsSection />
       <ImageLibrarySection />
       <NotionSection />

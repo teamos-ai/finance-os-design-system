@@ -3,7 +3,7 @@ import {
   Sparkles, PlayCircle, Compass,
   Palette, Type, Ruler, Layers, Wand2, Shapes,
   Component, CreditCard, LayoutGrid,
-  Megaphone, FileText, Calculator, Image, NotebookPen, Share2, MonitorPlay,
+  Megaphone, FileText, Calculator, Image, NotebookPen, Share2, MonitorPlay, MailPlus,
 } from 'lucide-react'
 import type { Accent } from './accents'
 
@@ -34,6 +34,7 @@ export const SHOWCASE_NAV: NavItem[] = [
 
   { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'amber', group: 'Applied' },
   { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'amber', group: 'Applied' },
+  { id: 'warmup', label: 'Domain Warm-up', Icon: MailPlus, accent: 'blue', group: 'Applied' },
   { id: 'leadmagnets', label: 'Lead Magnets', Icon: Calculator, accent: 'blue', group: 'Applied' },
   { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'amber', group: 'Applied' },
   { id: 'notion', label: 'Notion', Icon: NotebookPen, accent: 'amber', group: 'Applied' },
