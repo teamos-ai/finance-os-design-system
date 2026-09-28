@@ -16,7 +16,7 @@ import type { Accent } from '@/lib/accents'
 
 /** Theme-aware diagonal washes built from semantic tokens — no raw hex, adapts per theme. */
 const FIGURE_WASH =
-  'linear-gradient(135deg, var(--c-accent-soft) 0%, var(--c-elevated) 55%, var(--c-amber-soft) 100%)'
+  'linear-gradient(135deg, var(--c-accent-soft) 0%, var(--c-elevated) 55%, var(--c-brand-soft) 100%)'
 
 interface RelatedPost {
   eyebrow: string
@@ -33,7 +33,7 @@ const RELATED: RelatedPost[] = [
     description:
       'Speed-to-lead is the single highest-leverage habit in a broker pipeline. Here is how to automate it.',
     readTime: '4 min read',
-    accent: 'amber',
+    accent: 'blue',
   },
   {
     eyebrow: 'Pipeline',
@@ -41,7 +41,7 @@ const RELATED: RelatedPost[] = [
     description:
       'Most pipelines carry stages nobody uses. A short, honest list is the one brokers keep up to date.',
     readTime: '6 min read',
-    accent: 'amber',
+    accent: 'blue',
   },
   {
     eyebrow: 'Nurture',
@@ -72,7 +72,7 @@ export function BlogsSection() {
         <article className="mx-auto max-w-2xl">
           {/* Article header */}
           <header>
-            <MonoLabel tone="amber" dot>
+            <MonoLabel tone="brand" dot>
               Pipeline
             </MonoLabel>
             <h1 className="mt-4 font-display text-display-md leading-tight text-fg">

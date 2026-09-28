@@ -7,7 +7,7 @@ import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import type { InspectData } from '@/components/ui/inspectable'
 
-/** The 8px-derived spacing scale. Each step renders a live amber ruler. */
+/** The 8px-derived spacing scale. Each step renders a live Atlas Blue ruler. */
 const SPACE_SCALE: { token: string; px: number; note: string }[] = [
   { token: 'space-1', px: 4, note: 'Hairline gaps, icon insets' },
   { token: 'space-2', px: 8, note: 'Base unit — tight stacks' },
@@ -80,7 +80,7 @@ export function SpacingSection() {
         {/* SPACE SCALE -------------------------------------------------- */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <MonoLabel tone="amber" dot>
+            <MonoLabel tone="brand" dot>
               The 8px scale
             </MonoLabel>
             <span className="font-mono text-mono-xs text-fg-subtle">base unit = 8px</span>
@@ -99,7 +99,7 @@ export function SpacingSection() {
                   {/* px value */}
                   <span className="font-mono text-mono-xs tabular-nums text-fg">{step.px}px</span>
 
-                  {/* the amber ruler */}
+                  {/* the Atlas Blue ruler */}
                   <div className="flex items-center gap-3">
                     <div className="h-6 w-full max-w-[16rem] overflow-hidden rounded-xs bg-inset">
                       <div
@@ -182,7 +182,7 @@ export function SpacingSection() {
         {/* 12-COLUMN GRID --------------------------------------------- */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <MonoLabel tone="amber" dot>
+            <MonoLabel tone="brand" dot>
               12-column grid
             </MonoLabel>
             <span className="font-mono text-mono-xs text-fg-subtle">16px gutter</span>

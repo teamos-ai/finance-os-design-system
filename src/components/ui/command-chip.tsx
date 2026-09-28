@@ -1,6 +1,6 @@
 /**
  * CommandChip — the `/command` pill. Card surface, hairline border,
- * Anonymous Pro, the leading "/" picked out in amber. Sits beneath the command bar as
+ * Anonymous Pro, the leading "/" picked out in Atlas Blue. Sits beneath the command bar as
  * a quick-action suggestion. Renders a button; pass `onClick` to wire it.
  */
 import * as React from 'react'

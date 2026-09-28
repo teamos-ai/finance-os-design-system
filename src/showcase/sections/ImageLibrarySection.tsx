@@ -5,7 +5,7 @@
  * direction; a closing note covers how images behave per theme. Calm, broker-grade.
  *
  * Self-contained: the wash CSS strings are documented signature-gradient + glow draughts
- * built only from the locked amber/amber/navy family (rgba allowed inside a documented glow).
+ * built only from the locked blue/navy family (rgba allowed inside a documented glow).
  */
 import { Building2, LineChart, Handshake, ShieldCheck, Check, X } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
@@ -32,24 +32,24 @@ const FRAMES: ReadonlyArray<{
   {
     ratio: '16/9',
     label: 'Hero & banner',
-    note: '16 / 9 · amber glow',
+    note: '16 / 9 · Atlas Blue glow',
     background:
-      'radial-gradient(120% 140% at 0% 0%, rgba(238,186,43,0.20), transparent 60%), linear-gradient(135deg, #1b2433, #0e131c)',
+      'radial-gradient(120% 140% at 0% 0%, rgba(51,72,143,0.20), transparent 60%), linear-gradient(135deg, #1b2433, #0e131c)',
     dark: true,
   },
   {
     ratio: '4/3',
     label: 'Card media',
-    note: '4 / 3 · amber wash',
+    note: '4 / 3 · blue wash',
     background:
-      'radial-gradient(120% 120% at 100% 0%, rgba(230,138,0,0.18), transparent 55%), linear-gradient(135deg, #f4ede0, #e7dccb)',
+      'radial-gradient(120% 120% at 100% 0%, rgba(51,72,143,0.18), transparent 55%), linear-gradient(135deg, #EEF2F9, #E2E8F2)',
   },
   {
     ratio: '1/1',
     label: 'Avatar & tile',
     note: '1 / 1 · navy depth',
     background:
-      'radial-gradient(110% 110% at 50% 0%, rgba(238,186,43,0.16), transparent 60%), linear-gradient(160deg, #182233, #0c111a)',
+      'radial-gradient(110% 110% at 50% 0%, rgba(51,72,143,0.16), transparent 60%), linear-gradient(160deg, #182233, #0c111a)',
     dark: true,
   },
   {
@@ -57,7 +57,7 @@ const FRAMES: ReadonlyArray<{
     label: 'Portrait',
     note: '3 / 4 · paper warmth',
     background:
-      'radial-gradient(120% 120% at 0% 100%, rgba(238,186,43,0.14), transparent 55%), linear-gradient(200deg, #f6f1e8, #e9ded0)',
+      'radial-gradient(120% 120% at 0% 100%, rgba(51,72,143,0.14), transparent 55%), linear-gradient(200deg, #F1F4FA, #E2E8F2)',
   },
 ]
 
@@ -74,7 +74,7 @@ export function ImageLibrarySection() {
       id="imagery"
       eyebrow="17 - Image Library"
       title="Image Library"
-      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Until shoots land, washes built from the signature amber-amber-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
+      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Until shoots land, washes built from the signature blue-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
     >
       {/* Aspect-ratio frames */}
       <div className="mb-14">
@@ -126,7 +126,7 @@ export function ImageLibrarySection() {
             >
               <div className="absolute inset-0" style={{ background: OVERLAY }} aria-hidden />
               <div className="absolute inset-0 z-10 flex flex-col justify-end gap-2 p-6">
-                <MonoLabel tone="amber" number="01" dot className="text-inverse-fg/70">
+                <MonoLabel tone="brand" number="01" dot className="text-inverse-fg/70">
                   Private Credit
                 </MonoLabel>
                 <h3 className="font-display text-title-md text-inverse-fg">
@@ -170,7 +170,7 @@ export function ImageLibrarySection() {
             </div>
             <div className="p-5">
               <ImageWash
-                background="radial-gradient(120% 120% at 100% 0%, rgba(238,186,43,0.16), transparent 55%), linear-gradient(135deg, #1b2433, #0e131c)"
+                background="radial-gradient(120% 120% at 100% 0%, rgba(51,72,143,0.16), transparent 55%), linear-gradient(135deg, #1b2433, #0e131c)"
                 label="Considered, calm, real"
                 note="natural light · muted · on-brand wash"
                 icon={Handshake}
@@ -179,7 +179,7 @@ export function ImageLibrarySection() {
               />
               <p className="mt-4 font-body text-body-sm leading-relaxed text-fg-muted">
                 Documentary tone, restrained colour, advisors mid-work. Warmth comes from a faint
-                amber glow — never a filter. Subjects look composed, not staged.
+                Atlas Blue glow — never a filter. Subjects look composed, not staged.
               </p>
             </div>
           </div>
@@ -228,7 +228,7 @@ export function ImageLibrarySection() {
             {
               Icon: LineChart,
               title: 'Wash',
-              body: 'A faint amber wash at one corner ties the image to the accent without a visible border seam.',
+              body: 'A faint blue wash at one corner ties the image to the accent without a visible border seam.',
             },
           ].map(({ Icon, title, body }) => (
             <div key={title} className="rounded-md border border-border bg-surface p-5">

@@ -17,27 +17,27 @@ export interface NavItem {
 
 /** The single source of truth for the showcase. App renders one Section per id, in order. */
 export const SHOWCASE_NAV: NavItem[] = [
-  { id: 'hero', label: 'Hero', Icon: Sparkles, accent: 'amber', group: 'Start' },
-  { id: 'video', label: 'Promo Video', Icon: PlayCircle, accent: 'amber', group: 'Start' },
-  { id: 'overview', label: 'Overview', Icon: Compass, accent: 'amber', group: 'Start' },
+  { id: 'hero', label: 'Hero', Icon: Sparkles, accent: 'blue', group: 'Start' },
+  { id: 'video', label: 'Promo Video', Icon: PlayCircle, accent: 'blue', group: 'Start' },
+  { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Start' },
 
-  { id: 'color', label: 'Color', Icon: Palette, accent: 'amber', group: 'Foundations' },
-  { id: 'typography', label: 'Typography', Icon: Type, accent: 'amber', group: 'Foundations' },
+  { id: 'color', label: 'Color', Icon: Palette, accent: 'blue', group: 'Foundations' },
+  { id: 'typography', label: 'Typography', Icon: Type, accent: 'blue', group: 'Foundations' },
   { id: 'spacing', label: 'Spacing & Layout', Icon: Ruler, accent: 'blue', group: 'Foundations' },
-  { id: 'elevation', label: 'Radius & Elevation', Icon: Layers, accent: 'amber', group: 'Foundations' },
-  { id: 'motion', label: 'Motion', Icon: Wand2, accent: 'amber', group: 'Foundations' },
+  { id: 'elevation', label: 'Radius & Elevation', Icon: Layers, accent: 'blue', group: 'Foundations' },
+  { id: 'motion', label: 'Motion', Icon: Wand2, accent: 'blue', group: 'Foundations' },
   { id: 'logo', label: 'Logo', Icon: Shapes, accent: 'blue', group: 'Foundations' },
 
-  { id: 'components', label: 'Components', Icon: Component, accent: 'amber', group: 'Library' },
-  { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'amber', group: 'Library' },
+  { id: 'components', label: 'Components', Icon: Component, accent: 'blue', group: 'Library' },
+  { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'blue', group: 'Library' },
   { id: 'bento', label: 'Bento Box', Icon: LayoutGrid, accent: 'blue', group: 'Library' },
 
-  { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'amber', group: 'Applied' },
-  { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'amber', group: 'Applied' },
+  { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'blue', group: 'Applied' },
+  { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'blue', group: 'Applied' },
   { id: 'warmup', label: 'Domain Warm-up', Icon: MailPlus, accent: 'blue', group: 'Applied' },
   { id: 'leadmagnets', label: 'Lead Magnets', Icon: Calculator, accent: 'blue', group: 'Applied' },
-  { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'amber', group: 'Applied' },
-  { id: 'notion', label: 'Notion', Icon: NotebookPen, accent: 'amber', group: 'Applied' },
+  { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'blue', group: 'Applied' },
+  { id: 'notion', label: 'Notion', Icon: NotebookPen, accent: 'blue', group: 'Applied' },
   { id: 'social', label: 'Social Media', Icon: Share2, accent: 'blue', group: 'Applied' },
-  { id: 'demos', label: 'Live Demo Pages', Icon: MonitorPlay, accent: 'amber', group: 'Applied' },
+  { id: 'demos', label: 'Live Demo Pages', Icon: MonitorPlay, accent: 'blue', group: 'Applied' },
 ]

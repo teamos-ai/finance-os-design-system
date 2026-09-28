@@ -5,12 +5,11 @@
 import * as React from 'react'
 import { cn } from '@/lib/cn'
 
-export type MonoTone = 'fg' | 'accent' | 'amber' | 'brand' | 'success' | 'info' | 'subtle'
+export type MonoTone = 'fg' | 'accent' | 'brand' | 'success' | 'info' | 'subtle'
 
 const TONE: Record<MonoTone, { text: string; mark: string }> = {
   fg: { text: 'text-fg-muted', mark: 'bg-fg-subtle' },
   accent: { text: 'text-accent-text', mark: 'bg-accent' },
-  amber: { text: 'text-amber-text', mark: 'bg-amber' },
   brand: { text: 'text-brand', mark: 'bg-brand' },
   success: { text: 'text-success', mark: 'bg-success' },
   info: { text: 'text-info', mark: 'bg-info' },

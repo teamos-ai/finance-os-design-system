@@ -4,11 +4,13 @@
    →  component (component-scoped, references semantic).
 
    SINGLE THEME — Light / Clarity (pure white, Atlas Blue accent), matched to the
-   production site financeos.au. (Dark-OLED and Paper were removed.) The semantic
-   layer lives on :root; components compose from --c-* only — never a --p-* primitive.
+   production site financeos.au. BLUE-ONLY: there is no orange, gold or amber — the
+   sole brand accent is Atlas Blue (#33488F). Semantic state hues (success green,
+   danger red) remain, since they are functional signals, not brand colour.
+   The semantic layer lives on :root; components compose from --c-* only.
 
-   Accent = Atlas Blue (#33488F). Buttons: primary = solid blue fill (white label),
-   secondary = blue outline. Focus rings are NEUTRAL (never the accent colour).
+   Buttons: primary = solid blue fill (white label), secondary = blue outline.
+   Focus rings are NEUTRAL (never the accent colour).
    Foundations: pure white canvas · 8px-max squircles · no glassmorphism.
    ============================================================================ */
 
@@ -16,19 +18,8 @@
    LAYER 1 — PRIMITIVES (raw brand ramps)
    ---------------------------------------------------------------------------- */
 :root {
-  /* Momentum Amber — secondary warm accent (fills only on light). 3-shade ramp:
-     the deep browns #B86E00 / #8A5300 were removed (off-brand). */
-  --p-amber-100: #F0B966;
-  --p-amber-200: #EBA133;
-  --p-amber-300: #E68A00; /* base */
-
-  /* Signal Gold — brand swatch (3 shades). Deep golds #C2941F / #8A6A16 removed
-     (off-brand brown-golds); gold is emphasis/fills only — never AA text on white. */
-  --p-gold-100: #FBEAB8;
-  --p-gold-200: #F4D472;
-  --p-gold-300: #EEBA2B; /* base */
-
-  /* Atlas Blue — the primary accent (blue) */
+  /* Atlas Blue — THE brand accent. 6-shade ramp (50 = light wash → 500 = deep). */
+  --p-blue-50:  #EEF2F9;
   --p-blue-100: #ADB6D2;
   --p-blue-200: #8591BC;
   --p-blue-300: #5C6DA5;
@@ -44,7 +35,7 @@
   --p-white: #FFFFFF;
   --p-black: #000000;
 
-  /* State hues (semantic only — not shown as ramps) */
+  /* State hues (functional signals only — not brand, not shown as ramps) */
   --p-green-500: #138A5E;
   --p-green-700: #0E6B49;
   --p-red-500: #D5292F;
@@ -86,21 +77,17 @@
   --c-inspect:    var(--p-blue-400); /* inspector FAB — Atlas Blue */
   --c-inspect-fg: #FFFFFF;           /* white glyph on the blue FAB */
 
-  --c-amber:      var(--p-amber-300);
-  --c-amber-text: var(--c-fg); /* fills-only on white: readable amber text = ink */
-  --c-amber-soft: rgba(230, 138, 0, 0.14);
-
   --c-brand:      var(--p-blue-400);
   --c-brand-soft: rgba(51, 72, 143, 0.10);
 
   --c-success:      var(--p-green-700);
   --c-success-soft: rgba(19, 138, 94, 0.12);
-  --c-warning:      var(--c-fg); /* warning = amber tint + icon; text/icon ink for AA */
-  --c-warning-soft: rgba(230, 138, 0, 0.12); /* base-amber tint */
+  --c-warning:      var(--c-fg);              /* warning = neutral caution tint + ink icon (no warm hue) */
+  --c-warning-soft: rgba(16, 19, 27, 0.06);   /* neutral grey caution surface — distinct from blue info */
   --c-danger:       var(--p-red-700);
   --c-danger-soft:  rgba(213, 41, 47, 0.10);
-  --c-info:         var(--p-blue-400);
-  --c-info-soft:    rgba(51, 72, 143, 0.10);
+  --c-info:         var(--p-blue-300);        /* lighter blue so 'info' stays legible vs the #33488F accent */
+  --c-info-soft:    rgba(92, 109, 165, 0.14);
 
   --c-ring:            var(--c-fg-subtle); /* NEUTRAL focus ring */
   --c-glow-accent:     rgba(51, 72, 143, 0.28);
@@ -159,20 +146,12 @@
   --c-danger-solid: #B42318; /* solid danger fill, AA with white */
   --c-on-danger: #FFFFFF;
 
-  /* ── Fixed brand BANNER surfaces (the Banners showcase set — theme-independent) ── */
+  /* ── Fixed brand BANNER surfaces (the Banners showcase set) — black · blue · white ── */
   --banner-black-bg:  #000000;
   --banner-black-fg:  #F4F4F5;
   --banner-black-bd:  #2A2A2A;
-  --banner-orange-bg: linear-gradient(135deg, #F0B966 0%, #E68A00 100%);
-  --banner-orange-fg: #1A1206;
   --banner-blue-bg:   linear-gradient(135deg, #5C6DA5 0%, #33488F 100%);
   --banner-blue-fg:   #FFFFFF;
-  --banner-paper-bg:  #F9F6F2;
-  --banner-paper-fg:  #2A2419;
-  --banner-paper-bd:  #E7E0D8;
-  --banner-paper-grad-bg: linear-gradient(135deg, #FBF8F3 0%, #EFD9B0 100%);
-  --banner-paper-grad-fg: #2A2419;
-  --banner-paper-grad-bd: #E7E0D8;
   --banner-white-bg:  #FFFFFF;
   --banner-white-fg:  #14161B;
   --banner-white-bd:  #E6E8EC;

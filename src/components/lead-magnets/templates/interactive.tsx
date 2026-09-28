@@ -26,7 +26,7 @@ export function SwipeFileTemplate() {
     id: h.id,
     content: (
       <div className="flex h-full flex-col p-5">
-        <Badge variant="amber" size="sm">
+        <Badge variant="blue" size="sm">
           {h.tag}
         </Badge>
         <p className="mt-4 flex-1 font-display text-title-md leading-snug text-fg">“{h.copy}”</p>
@@ -246,7 +246,7 @@ export function ScorecardTemplate() {
             <CountUp to={overall} />
           </p>
           <p className="font-mono text-caption text-accent-text">/ 100 overall</p>
-          <Badge variant="amber" size="sm" >
+          <Badge variant="blue" size="sm" >
             Top 30%
           </Badge>
         </div>

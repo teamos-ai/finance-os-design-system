@@ -31,10 +31,10 @@ const SHADOW_INSPECT: InspectData = {
 }
 const GLOW_INSPECT: InspectData = {
   name: 'Signature glow',
-  explain: 'A soft amber halo that replaces heavy drop-shadows on brand surfaces — reserved for the gradient CTA and the logo mark.',
+  explain: 'A soft Atlas Blue halo that replaces heavy drop-shadows on brand surfaces — reserved for the gradient CTA and the logo mark.',
   token: 'shadow-glow\n--shadow-glow',
-  code: 'box-shadow: 0 0 40px -8px rgba(230,138,0,0.45);',
-  download: { filename: 'glow.css', content: '.shadow-glow {\n  box-shadow: 0 0 40px -8px rgba(230,138,0,0.45);\n}', mime: 'text/css' },
+  code: 'box-shadow: 0 8px 30px -10px rgba(51,72,143,0.28);',
+  download: { filename: 'glow.css', content: '.shadow-glow {\n  box-shadow: 0 8px 30px -10px rgba(51,72,143,0.28);\n}', mime: 'text/css' },
 }
 
 export function ElevationSection() {
@@ -43,11 +43,11 @@ export function ElevationSection() {
       id="elevation"
       eyebrow="08 — Radius & Elevation"
       title="Radius & Elevation"
-      lead="A tight corner scale — 2, 4, 6 and 8px, with no pills or full rounds. Depth stays restrained: soft neutral shadows plus the signature amber glow on brand surfaces."
+      lead="A tight corner scale — 2, 4, 6 and 8px, with no pills or full rounds. Depth stays restrained: soft neutral shadows plus the signature Atlas Blue glow on brand surfaces."
     >
       <div className="space-y-10">
         <div>
-          <MonoLabel tone="amber" dot>Radius · 8px maximum</MonoLabel>
+          <MonoLabel tone="brand" dot>Radius · 8px maximum</MonoLabel>
           <Inspectable {...RADIUS_INSPECT} className="mt-4">
             <div className="grid grid-cols-2 gap-4 rounded-lg sm:grid-cols-4">
               {RADII.map((r) => (
@@ -76,16 +76,16 @@ export function ElevationSection() {
         </div>
 
         <div>
-          <MonoLabel tone="amber" dot>Signature glow</MonoLabel>
+          <MonoLabel tone="brand" dot>Signature glow</MonoLabel>
           <Inspectable {...GLOW_INSPECT} className="mt-4">
             <div className="grid gap-4 rounded-lg sm:grid-cols-2">
               <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-border bg-surface p-8">
                 <div className="h-16 w-16 rounded-lg bg-gradient-accent shadow-glow" />
-                <p className="font-mono text-caption text-fg-subtle">amber glow on an accent tile</p>
+                <p className="font-mono text-caption text-fg-subtle">Atlas Blue glow on an accent tile</p>
               </div>
               <div className="flex items-center rounded-lg border border-border bg-surface p-8">
                 <p className="font-body text-body-sm leading-relaxed text-fg-muted">
-                  The glow replaces heavy drop-shadows on brand surfaces — a soft amber halo that reads
+                  The glow replaces heavy drop-shadows on brand surfaces — a soft Atlas Blue halo that reads
                   as luxury, not noise. Reserved for the gradient CTA and the logo mark.
                 </p>
               </div>

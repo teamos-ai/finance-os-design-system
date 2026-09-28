@@ -7,8 +7,8 @@
  * (Framer's `useInView`, mirroring the lib CountUp). The live Countdown ticks
  * on a single setInterval that is cleared on unmount.
  *
- * Tokens only: font-display figures, font-mono labels, success (up) / amber
- * (warm, down) deltas — both AA on the page ground. Flat, 8px-max squircle
+ * Tokens only: font-display figures, font-mono labels, success (up) / muted
+ * (down) deltas — both AA on the page ground. Flat, 8px-max squircle
  * bars, neutral shadows, no glass.
  *
  * Exports: Counter · StatTrend · SeatsRemaining · TicketsSold · MembersCount · Countdown
@@ -93,7 +93,7 @@ export const Counter = ({
 }
 
 /* ── StatTrend — a figure with a percentage delta + directional arrow ──
-   Success (up) / amber (warm, down) — both AA on the page ground. */
+   Success (up) / muted (down) — both AA on the page ground. */
 export interface StatTrendProps {
   /** the headline figure */
   value: number
@@ -144,7 +144,7 @@ export const StatTrend = ({
         <span
           className={cn(
             'inline-flex items-center gap-0.5 rounded-sm px-1.5 py-0.5 font-mono text-caption font-bold tabular-nums',
-            up ? 'bg-success-soft text-success' : 'bg-amber-soft text-amber-text',
+            up ? 'bg-success-soft text-success' : 'bg-elevated text-fg-muted',
           )}
         >
           <Arrow className="h-3 w-3" strokeWidth={1.5} aria-hidden />
@@ -175,7 +175,7 @@ export const SeatsRemaining = ({
   total,
   noun = 'seats',
   count = 'taken',
-  accent = 'amber',
+  accent = 'blue',
   duration = 1.4,
   className,
 }: SeatsRemainingProps) => {

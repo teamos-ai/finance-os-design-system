@@ -32,7 +32,6 @@ type Period = 'daily' | 'weekly' | 'monthly'
 
 const BADGE_VARIANTS: { variant: NonNullable<BadgeProps['variant']>; label: string }[] = [
   { variant: 'neutral', label: 'Neutral' },
-  { variant: 'amber', label: 'Amber' },
   { variant: 'blue', label: 'Blue' },
   { variant: 'success', label: 'Funded' },
   { variant: 'warn', label: 'Review' },
@@ -51,20 +50,20 @@ export function ComponentsSection() {
       id="components"
       eyebrow="11 - Components"
       title="Components"
-      lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and a theme-pinned accent — orange (dark), blue (light), gold (paper) — throughout. Tap the inspect button on any item for its explanation, tokens and code."
+      lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and the Atlas Blue accent throughout. Tap the inspect button on any item for its explanation, tokens and code."
     >
       <div className="flex flex-col gap-4">
         {/* Button intents — primary (solid accent) vs secondary (outline); accent is theme-pinned */}
         <Inspectable
           name="Button intents"
-          explain="Primary is the single solid call-to-action per view; secondary is its outline-only supporting action. Both ride the theme-pinned accent — orange (dark), blue (light), amber (paper)."
-          token={`primary    → bg-accent · text-accent-fg\nsecondary  → border-accent-text · text-accent-text\n--c-accent (theme-pinned: orange / blue / amber)`}
+          explain="Primary is the single solid call-to-action per view; secondary is its outline-only supporting action. Both ride the Atlas Blue accent."
+          token={`primary    → bg-accent · text-accent-fg\nsecondary  → border-accent-text · text-accent-text\n--c-accent = Atlas Blue (#33488F)`}
           code={`<Button variant="primary">Book a call</Button>\n<Button variant="secondary">Compare plans</Button>`}
         >
           <Demo label="Button intents — primary (solid) &amp; secondary (outline)">
             <div className="flex flex-col gap-5">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <MonoLabel tone="subtle">Accent follows the theme · orange (dark) · blue (light) · gold (paper)</MonoLabel>
+                <MonoLabel tone="subtle">Accent · Atlas Blue (#33488F)</MonoLabel>
                 <SegmentedControl
                   aria-label="Button intent"
                   value={intent}
@@ -98,7 +97,7 @@ export function ComponentsSection() {
                   </div>
                   <p className="font-body text-body-sm leading-relaxed text-fg-muted">
                     {intent === 'primary'
-                      ? 'The main call to action — one per view. Solid, in the theme accent (orange · blue · gold).'
+                      ? 'The main call to action — one per view. Solid, in the Atlas Blue accent.'
                       : 'The supporting action — outline only, transparent inside, in the same theme accent.'}
                   </p>
                 </div>
@@ -205,7 +204,7 @@ export function ComponentsSection() {
         <Inspectable
           name="Badge"
           explain="A small status pill for state and taxonomy. Each variant maps to a semantic colour, and an optional leading dot reinforces the meaning at a glance."
-          token={`variant: neutral · amber · blue · success · warn · danger · info · outline\n--c-success / --c-warning / --c-danger / --c-info (soft fills)`}
+          token={`variant: neutral · blue · success · warn · danger · info · outline\n--c-success / --c-warning / --c-danger / --c-info (soft fills)`}
           code={`<Badge variant="success" dot>Funded</Badge>`}
         >
           <Demo label="Badge — every variant">
@@ -314,8 +313,8 @@ export function ComponentsSection() {
         {/* Save + celebrate */}
         <Inspectable
           name="Confirmation buttons"
-          explain="Two buttons with built-in feedback motion — Save sends up a few green check chips, Mark settled throws a brief shower of amber streamers. Both honour prefers-reduced-motion."
-          token={`success chips → --c-success\nstreamers → --p-amber-* primitives`}
+          explain="Two buttons with built-in feedback motion — Save sends up a few green check chips, Mark settled throws a brief shower of blue streamers. Both honour prefers-reduced-motion."
+          token={`success chips → --c-success\nstreamers → --p-blue-* primitives`}
           code={`<SaveButton>Save changes</SaveButton>\n<CelebrationButton>Mark settled</CelebrationButton>`}
         >
           <Demo label="SaveButton + CelebrationButton — confirmation motion">
@@ -325,7 +324,7 @@ export function ComponentsSection() {
                 <CelebrationButton>Mark settled</CelebrationButton>
               </div>
               <p className="font-body text-body-sm text-fg-muted">
-                Save sends up a few green check chips; Mark settled throws a brief shower of amber
+                Save sends up a few green check chips; Mark settled throws a brief shower of blue
                 streamers. Both honour <span className="font-mono">prefers-reduced-motion</span>.
               </p>
             </div>

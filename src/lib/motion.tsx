@@ -2,7 +2,7 @@
  * Motion primitives — Finance OS's quiet Framer Motion vocabulary.
  *
  * Every primitive honours `prefers-reduced-motion`. Vocabulary = fade + small
- * translate + gentle marquee + soft hover lift + count-up + signature amber glow.
+ * translate + gentle marquee + soft hover lift + count-up + signature Atlas Blue glow.
  * No bounce / wobble / elastic / autoplay. Durations stay subtle (<= 480ms).
  * Use at most ONE reveal per viewport band so the page reads calm.
  *
@@ -144,7 +144,7 @@ export const HoverLift = ({
 }
 
 /* ── Glow — signature accent radial wash behind a hero/banner ──────────────────
-   Theme-aware via color-mix on --c-accent (orange/blue/gold), low alpha, blurred.
+   Via color-mix on --c-accent (Atlas Blue), low alpha, blurred.
    aria-hidden, no pointer events. */
 export const Glow = ({ className }: { className?: string }) => (
   <div aria-hidden className={cn('pointer-events-none absolute inset-0 -z-10 overflow-hidden', className)}>
@@ -218,7 +218,7 @@ export const Reveal = ({
   )
 }
 
-/* ── GradientShimmer — gentle moving amber→amber sheen on text/labels ───────── */
+/* ── GradientShimmer — gentle moving blue sheen on text/labels ───────── */
 export const GradientShimmer = ({ className, children }: { className?: string; children: React.ReactNode }) => {
   const reduced = useReducedMotion()
   return (

@@ -42,11 +42,6 @@ export default {
         text: 'var(--c-accent-text)',
         fg: 'var(--c-accent-fg)',
       },
-      amber: {
-        DEFAULT: 'var(--c-amber)',
-        text: 'var(--c-amber-text)',
-        soft: 'var(--c-amber-soft)',
-      },
       brand: {
         DEFAULT: 'var(--c-brand)',
         soft: 'var(--c-brand-soft)',

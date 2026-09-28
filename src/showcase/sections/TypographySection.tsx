@@ -44,29 +44,28 @@ const BODY_INSPECT: InspectData = {
   download: { filename: 'anonymous-pro-400.woff2', href: '/fonts/anonymous-pro-400.woff2' },
 }
 
-type ColorKey = 'accent' | 'ink' | 'alt'
+type ColorKey = 'accent' | 'ink'
 
-/* Heading-colour options. 'accent' = Atlas Blue highlight, 'ink' = neutral black,
-   'alt' = the warm cross-accent (amber). All AA(-large) for the display specimens.
+/* Heading-colour options. 'accent' = Atlas Blue highlight, 'ink' = neutral black.
    Classes appear here as string literals so Tailwind keeps them. */
-const HEADING_COLORS = { accent: 'Blue', ink: 'Black', alt: 'Orange', altCls: 'text-amber-text' }
+const HEADING_COLORS = { accent: 'Blue', ink: 'Black' }
 
 export function TypographySection() {
   const [color, setColor] = React.useState<ColorKey>('accent')
   const opts = HEADING_COLORS
-  const colorClass = color === 'accent' ? 'text-highlight' : color === 'ink' ? 'text-fg' : opts.altCls
+  const colorClass = color === 'accent' ? 'text-highlight' : 'text-fg'
 
   return (
     <Section
       id="typography"
       eyebrow="06 — Typography"
       title="Typography"
-      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour — Atlas Blue accent, a neutral ink, or the warm amber cross-accent."
+      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour — the Atlas Blue accent or a neutral ink."
     >
       <div className="space-y-8">
         {/* heading colour toggle — theme-aware options */}
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-surface px-5 py-4">
-          <MonoLabel tone="subtle">Heading colour · per theme</MonoLabel>
+          <MonoLabel tone="subtle">Heading colour</MonoLabel>
           <SegmentedControl
             aria-label="Heading colour"
             value={color}
@@ -75,7 +74,6 @@ export function TypographySection() {
             options={[
               { value: 'accent', label: opts.accent },
               { value: 'ink', label: opts.ink },
-              { value: 'alt', label: opts.alt },
             ]}
           />
         </div>

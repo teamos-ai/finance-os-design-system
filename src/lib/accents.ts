@@ -3,11 +3,11 @@
  * ToolCard, MonoLabel…) never hand-write per-accent colour sets; they read ACCENTS[accent].
  * Every value is a SEMANTIC token class — zero rogue hex.
  *
- * Accent is theme-pinned (orange/blue/gold); these decorative recipes (amber/blue/green/
- * neutral) are independent tonal sets for cards and labels — pick one explicitly.
+ * Accent is Atlas Blue; these decorative recipes (blue/green/neutral) are independent
+ * tonal sets for cards and labels — pick one explicitly.
  */
-export type Accent = 'amber' | 'blue' | 'green' | 'neutral'
-export const ACCENTS_LIST: Accent[] = ['amber', 'blue', 'green', 'neutral']
+export type Accent = 'blue' | 'green' | 'neutral'
+export const ACCENTS_LIST: Accent[] = ['blue', 'green', 'neutral']
 
 export interface AccentRecipe {
   /** soft tinted background well */
@@ -27,15 +27,6 @@ export interface AccentRecipe {
 }
 
 export const ACCENTS: Record<Accent, AccentRecipe> = {
-  amber: {
-    well: 'bg-amber-soft',
-    text: 'text-amber-text',
-    dot: 'bg-amber',
-    badge: 'amber',
-    wash: 'bg-gradient-to-br from-amber-soft to-transparent',
-    washIcon: 'text-amber-text',
-    ring: 'ring-amber',
-  },
   blue: {
     well: 'bg-brand-soft',
     text: 'text-brand',

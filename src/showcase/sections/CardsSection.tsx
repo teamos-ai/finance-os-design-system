@@ -39,14 +39,14 @@ import { FEATURES, TOOLS_REPLACED } from '@/data/system'
 
 /** Per-tool icon + accent for the ToolCard row, keyed off the TOOLS_REPLACED strings. */
 const TOOL_META: Record<string, { icon: LucideIcon; accent: Accent }> = {
-  CRM: { icon: Inbox, accent: 'amber' },
-  'Email marketing': { icon: Mail, accent: 'amber' },
+  CRM: { icon: Inbox, accent: 'blue' },
+  'Email marketing': { icon: Mail, accent: 'blue' },
   'SMS platform': { icon: MessageSquare, accent: 'blue' },
-  'Funnel builder': { icon: Filter, accent: 'amber' },
-  'Website builder': { icon: Globe, accent: 'amber' },
+  'Funnel builder': { icon: Filter, accent: 'blue' },
+  'Website builder': { icon: Globe, accent: 'blue' },
   'Booking software': { icon: CalendarCheck, accent: 'blue' },
-  Automation: { icon: Workflow, accent: 'amber' },
-  'Review management': { icon: Star, accent: 'amber' },
+  Automation: { icon: Workflow, accent: 'blue' },
+  'Review management': { icon: Star, accent: 'blue' },
 }
 
 const CARD_INSPECT: InspectData = {
@@ -59,13 +59,13 @@ const FEATURE_INSPECT: InspectData = {
   name: 'FeatureCard',
   explain: 'The workhorse of feature grids and bento cells. A numbered overline gives the 01·02·03 rhythm; the icon well takes the card accent.',
   token: 'icon · number · eyebrow · title · description · accent',
-  code: '<FeatureCard\n  icon={Icon}\n  number="01"\n  eyebrow={tagline}\n  title={title}\n  description={description}\n  accent="amber"\n/>',
+  code: '<FeatureCard\n  icon={Icon}\n  number="01"\n  eyebrow={tagline}\n  title={title}\n  description={description}\n  accent="blue"\n/>',
 }
 const TOOL_INSPECT: InspectData = {
   name: 'ToolCard',
   explain: 'A fixed-width tile built for a horizontal carousel — coloured icon, name, mono meta line and a small accent “Replaces” badge. Scrolls on overflow.',
   token: 'name · meta · icon · accent',
-  code: '<ToolCard name="CRM" meta="Replaced by Finance OS" icon={Inbox} accent="amber" />',
+  code: '<ToolCard name="CRM" meta="Replaced by Finance OS" icon={Inbox} accent="blue" />',
 }
 const STAT_INSPECT: InspectData = {
   name: 'Stat',
@@ -77,7 +77,7 @@ const MEDIA_INSPECT: InspectData = {
   name: 'Card · media',
   explain: 'With no image, the media tile renders an on-token diagonal wash from the card accent and centres the placeholder icon — a graceful stand-in until real imagery lands. The last action goes solid, the rest secondary.',
   token: 'image · wash · placeholderIcon · badge · meta[] · actions[] · accent',
-  code: '<Card\n  accent="amber"\n  placeholderIcon={LineChart}\n  badge={<Badge variant="amber" size="sm">Report</Badge>}\n  meta={[{ icon: CalendarCheck, label: "Monthly" }]}\n  actions={[{ label: "Export" }, { label: "Open report" }]}\n  interactive\n>…</Card>',
+  code: '<Card\n  accent="blue"\n  placeholderIcon={LineChart}\n  badge={<Badge variant="blue" size="sm">Report</Badge>}\n  meta={[{ icon: CalendarCheck, label: "Monthly" }]}\n  actions={[{ label: "Export" }, { label: "Open report" }]}\n  interactive\n>…</Card>',
 }
 
 export function CardsSection() {
@@ -155,7 +155,7 @@ export function CardsSection() {
                   name={name}
                   meta="Replaced by Finance OS"
                   icon={m?.icon ?? Inbox}
-                  accent={m?.accent ?? 'amber'}
+                  accent={m?.accent ?? 'blue'}
                 />
               )
             })}
@@ -188,10 +188,10 @@ export function CardsSection() {
           {/* Media card — wash treatment */}
           <Demo label="Media card — wash placeholder · badge · meta · actions" inspect={MEDIA_INSPECT}>
             <Card
-              accent="amber"
+              accent="blue"
               placeholderIcon={LineChart}
               badge={
-                <Badge variant="amber" size="sm">
+                <Badge variant="blue" size="sm">
                   Report
                 </Badge>
               }

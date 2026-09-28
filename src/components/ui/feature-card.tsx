@@ -61,7 +61,7 @@ export const FeatureCard = ({
   icon: Icon,
   title,
   description,
-  accent = 'amber',
+  accent = 'blue',
   number,
   eyebrow,
   image,

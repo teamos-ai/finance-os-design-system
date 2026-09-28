@@ -101,7 +101,7 @@ export const CardMedia = ({
   src,
   alt = '',
   ratio = '16/9',
-  accent = 'amber',
+  accent = 'blue',
   placeholderIcon: Icon,
   badge,
   badgeAlign = 'start',
@@ -174,7 +174,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       badgeAlign,
       meta,
       actions,
-      accent = 'amber',
+      accent = 'blue',
       placeholderIcon,
       zoom,
       children,
@@ -275,7 +275,7 @@ export const renderBadge = (badge: BadgeShorthand | React.ReactNode): React.Reac
   if (badge != null && typeof badge === 'object' && !React.isValidElement(badge) && 'label' in (badge as object)) {
     const b = badge as BadgeShorthand
     return (
-      <Badge variant={b.variant ?? 'amber'} size="sm" emoji={b.emoji}>
+      <Badge variant={b.variant ?? 'blue'} size="sm" emoji={b.emoji}>
         {b.label}
       </Badge>
     )

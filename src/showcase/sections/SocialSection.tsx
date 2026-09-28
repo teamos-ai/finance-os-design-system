@@ -27,7 +27,7 @@ const STUDIO_INSPECT: InspectData = {
 }
 const QUOTE_INSPECT: InspectData = {
   name: 'Quote card',
-  explain: 'A feed quote on the signature amber gradient. 1:1 for Instagram.',
+  explain: 'A feed quote on the signature blue gradient. 1:1 for Instagram.',
   token: 'bg-gradient-accent · shadow-glow · 1:1',
   code: '<div class="aspect-square rounded-lg bg-gradient-accent shadow-glow p-6">…</div>',
 }
@@ -111,7 +111,7 @@ export function SocialSection() {
       <div className="flex flex-col gap-12">
         {/* ── 1 · Social Post Studio ──────────────────────────────────────── */}
         <div className="flex flex-col gap-3">
-          <MonoLabel tone="amber" number="01">Social Post Studio</MonoLabel>
+          <MonoLabel tone="brand" number="01">Social Post Studio</MonoLabel>
           <Demo label={`${meta.name} · ${meta.dims} · ${meta.aspect}`} padded={false} inspect={STUDIO_INSPECT}>
             <div className="grid gap-0 lg:grid-cols-[minmax(0,20rem)_1fr]">
               {/* Controls */}
@@ -189,7 +189,7 @@ export function SocialSection() {
         {/* ── 2 · Static templates ────────────────────────────────────────── */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between gap-3">
-            <MonoLabel tone="amber" number="02">Templates</MonoLabel>
+            <MonoLabel tone="brand" number="02">Templates</MonoLabel>
             <Badge variant="outline" size="sm">3 layouts</Badge>
           </div>
 
@@ -264,7 +264,7 @@ export function SocialSection() {
           </p>
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             {[
-              { name: 'Gradient', wrap: 'bg-gradient-accent', fg: 'text-accent-fg', note: 'Signature amber — feed quotes & hero posts.' },
+              { name: 'Gradient', wrap: 'bg-gradient-accent', fg: 'text-accent-fg', note: 'Signature blue — feed quotes & hero posts.' },
               { name: 'Dark', wrap: 'bg-inverse', fg: 'text-inverse-fg', note: 'Carbon — stat cards & data posts.' },
               { name: 'Paper', wrap: 'bg-surface border border-border', fg: 'text-fg', note: 'Quiet light — timeline & link cards.' },
             ].map((recipe) => (

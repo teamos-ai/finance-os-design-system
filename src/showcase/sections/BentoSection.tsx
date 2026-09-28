@@ -74,7 +74,7 @@ export function BentoSection() {
           {/* Stat cell — the outcome figure, right column. */}
           <StaggerItem className="md:col-span-1">
             <div className="flex h-full flex-col justify-between gap-6 rounded-lg border border-border bg-surface p-6">
-              <MonoLabel tone="amber">Outcome</MonoLabel>
+              <MonoLabel tone="brand">Outcome</MonoLabel>
               <Stat
                 value={OUTCOME.value}
                 suffix={OUTCOME.suffix}
@@ -91,7 +91,7 @@ export function BentoSection() {
               icon={ShieldCheck}
               label="Pipeline view"
               note="First enquiry → settlement, tracked in one place"
-              background="radial-gradient(120% 140% at 12% 0%, rgba(238,186,43,0.22), transparent 60%), linear-gradient(135deg, var(--c-inset), var(--c-canvas))"
+              background="radial-gradient(120% 140% at 12% 0%, rgba(51,72,143,0.22), transparent 60%), linear-gradient(135deg, var(--c-inset), var(--c-canvas))"
               className="h-full"
             />
           </StaggerItem>
@@ -113,7 +113,7 @@ export function BentoSection() {
           <StaggerItem className="md:col-span-3">
             <div className="flex h-full flex-col items-start justify-between gap-5 rounded-lg border border-border bg-elevated p-6 md:flex-row md:items-center md:p-8">
               <div className="flex flex-col gap-2">
-                <Badge variant="amber" size="sm" dot>
+                <Badge variant="blue" size="sm" dot>
                   Replaces 8 tools
                 </Badge>
                 <h3 className="font-display text-title-lg text-fg">

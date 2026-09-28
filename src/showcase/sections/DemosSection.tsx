@@ -38,11 +38,7 @@ import { cn } from '@/lib/cn'
 /* Decorative data for the CRM screen                                          */
 /* -------------------------------------------------------------------------- */
 
-type Stage =
-  | { label: string; variant: 'amber' }
-  | { label: string; variant: 'blue' }
-  | { label: string; variant: 'amber' }
-  | { label: string; variant: 'success' }
+type Stage = { label: string; variant: 'blue' | 'success' }
 
 interface Deal {
   borrower: string
@@ -53,8 +49,8 @@ interface Deal {
 
 const DEALS: Deal[] = [
   { borrower: 'Harper & Vale', product: 'Owner-occupier refinance', amount: '$840,000', stage: { label: 'Application', variant: 'blue' } },
-  { borrower: 'M. Okonkwo', product: 'First home buyer', amount: '$520,000', stage: { label: 'Pre-approval', variant: 'amber' } },
-  { borrower: 'Sandhu Holdings', product: 'Commercial term loan', amount: '$1,250,000', stage: { label: 'Assessment', variant: 'amber' } },
+  { borrower: 'M. Okonkwo', product: 'First home buyer', amount: '$520,000', stage: { label: 'Pre-approval', variant: 'blue' } },
+  { borrower: 'Sandhu Holdings', product: 'Commercial term loan', amount: '$1,250,000', stage: { label: 'Assessment', variant: 'blue' } },
   { borrower: 'R. Delacroix', product: 'Investment property', amount: '$675,000', stage: { label: 'Settled', variant: 'success' } },
 ]
 
@@ -63,18 +59,17 @@ interface Activity {
   what: string
   when: string
   icon: typeof Mail
-  accent: 'amber' | 'blue' | 'amber'
+  accent: 'blue'
 }
 
 const INBOX: Activity[] = [
-  { who: 'Maya Robinson', what: 'replied to your follow-up', when: '4m', icon: Mail, accent: 'amber' },
+  { who: 'Maya Robinson', what: 'replied to your follow-up', when: '4m', icon: Mail, accent: 'blue' },
   { who: 'James Patel', what: 'booked a discovery call', when: '21m', icon: CalendarCheck, accent: 'blue' },
-  { who: 'Sana Kaur', what: 'sent two documents', when: '1h', icon: MessageSquare, accent: 'amber' },
-  { who: 'Leo Marsh', what: 'opened your rate review', when: '3h', icon: Mail, accent: 'amber' },
+  { who: 'Sana Kaur', what: 'sent two documents', when: '1h', icon: MessageSquare, accent: 'blue' },
+  { who: 'Leo Marsh', what: 'opened your rate review', when: '3h', icon: Mail, accent: 'blue' },
 ]
 
-const ACCENT_WELL: Record<'amber' | 'blue', string> = {
-  amber: 'bg-amber-soft text-amber-text',
+const ACCENT_WELL: Record<'blue', string> = {
   blue: 'bg-brand-soft text-brand',
 }
 

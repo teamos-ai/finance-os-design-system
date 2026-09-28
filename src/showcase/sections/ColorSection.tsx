@@ -20,18 +20,6 @@ type Primary = {
 
 const PRIMARIES: Primary[] = [
   {
-    key: 'amber', name: 'Momentum Amber', role: 'Warm accent · fills & emphasis',
-    hex: '#E68A00', rgb: '230, 138, 0',
-    shades: [{ label: '100', hex: '#F0B966' }, { label: '200', hex: '#EBA133' }, { label: '300', hex: '#E68A00', main: true }],
-    usage: 'Fill only — amber is never used as text (ink for AA on white).',
-  },
-  {
-    key: 'gold', name: 'Signal Gold', role: 'Brand highlight · accents & emphasis',
-    hex: '#EEBA2B', rgb: '238, 186, 43',
-    shades: [{ label: '100', hex: '#FBEAB8' }, { label: '200', hex: '#F4D472' }, { label: '300', hex: '#EEBA2B', main: true }],
-    usage: 'Emphasis / fills only — never as text (not AA on white).',
-  },
-  {
     key: 'blue', name: 'Atlas Blue', role: 'Primary accent · CTAs, focus, links, the gradient',
     hex: '#33488F', rgb: '51, 72, 143',
     shades: [{ label: '100', hex: '#ADB6D2' }, { label: '200', hex: '#8591BC' }, { label: '300', hex: '#5C6DA5' }, { label: '400', hex: '#33488F', main: true }, { label: '500', hex: '#1F2B56' }],
@@ -163,16 +151,16 @@ export function ColorSection() {
       </div>
 
       <div className="mt-8">
-        <MonoLabel tone="amber" dot>Signature gradient</MonoLabel>
+        <MonoLabel tone="brand" dot>Signature gradient</MonoLabel>
         <div className="mt-3">
           <Inspectable
             name="Signature gradient"
-            explain="The amber sweep — Momentum Amber 100 → 300 at 135°. The system's one gradient; used for the hero accent and gradient banner. Everything else stays flat."
+            explain="The Atlas Blue sweep — Blue 300 → 400 at 135°. The system's one gradient; used for the hero accent and gradient banner. Everything else stays flat."
             token={'gradient-accent\n--c-gradient-accent'}
-            code={'background: linear-gradient(135deg, #F0B966 0%, #E68A00 100%);'}
-            download={{ filename: 'gradient-accent.css', content: '.gradient-accent {\n  background: linear-gradient(135deg, #F0B966 0%, #E68A00 100%);\n}', mime: 'text/css' }}
+            code={'background: linear-gradient(135deg, #5C6DA5 0%, #33488F 100%);'}
+            download={{ filename: 'gradient-accent.css', content: '.gradient-accent {\n  background: linear-gradient(135deg, #5C6DA5 0%, #33488F 100%);\n}', mime: 'text/css' }}
           >
-            <GradientSwatch label="Amber sweep" css="linear-gradient(135deg, #F0B966 0%, #E68A00 100%)" />
+            <GradientSwatch label="Atlas Blue sweep" css="linear-gradient(135deg, #5C6DA5 0%, #33488F 100%)" />
           </Inspectable>
         </div>
       </div>

@@ -12,7 +12,6 @@ const badge = cva(
     variants: {
       variant: {
         neutral: 'bg-elevated text-fg-muted',
-        amber: 'bg-amber-soft text-amber-text',
         blue: 'bg-brand-soft text-brand',
         success: 'bg-success-soft text-success',
         warn: 'bg-warning-soft text-warning',

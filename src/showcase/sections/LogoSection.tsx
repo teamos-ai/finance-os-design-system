@@ -3,9 +3,9 @@ import { MonoLabel } from '@/components/ui/mono-label'
 import { Inspectable } from '@/components/ui/inspectable'
 
 const BG_TILES = [
-  { name: 'Dark / Black', bg: '#000000', rect: '/logo-rect-white.png', mark: '/logo-square.png' },
-  { name: 'Light / White', bg: '#FFFFFF', rect: '/logo-rect-blue.png', mark: '/logo-square-blue.png' },
-  { name: 'Paper / Ivory', bg: '#F9F6F2', rect: '/logo-rect.png', mark: '/logo-square.png' },
+  { name: 'White', bg: '#FFFFFF', rect: '/logo-rect-blue.png', mark: '/logo-square-blue.png' },
+  { name: 'Muted', bg: '#F6F7F9', rect: '/logo-rect-blue.png', mark: '/logo-square-blue.png' },
+  { name: 'Black', bg: '#000000', rect: '/logo-rect-white.png', mark: '/logo-square-blue.png' },
 ]
 
 export function LogoSection() {
@@ -14,10 +14,10 @@ export function LogoSection() {
       id="logo"
       eyebrow="10 — Logo"
       title="Logo"
-      lead="The Finance OS mark and lockup, as they appear on each of the three canvases. The logo is theme-aware — amber on dark and paper, Atlas Blue on light."
+      lead="The Finance OS mark and lockup across surfaces — Atlas Blue on white, white on black."
     >
       <div>
-        <MonoLabel tone="amber" dot>Logo lockups · the mark as it appears in each mode</MonoLabel>
+        <MonoLabel tone="brand" dot>Logo lockups · the mark across surfaces</MonoLabel>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
           {BG_TILES.map((tile) => (
             <Inspectable

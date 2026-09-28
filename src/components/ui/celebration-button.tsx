@@ -3,8 +3,8 @@
  *
  * A gradient button (theme-accent signature fill) that throws a small shower of thin
  * coloured streamers on click — they fly up from the button's top-centre, then arc back
- * down and fade. The streamer palette is sourced from the brand PRIMITIVE tokens (gold,
- * amber, deep Atlas-blue) so the burst reads luxe, on-brand and rogue-hex-free. Honours
+ * down and fade. The streamer palette is sourced from the Atlas Blue PRIMITIVE ramp so the
+ * burst reads luxe, on-brand and rogue-hex-free. Honours
  * `prefers-reduced-motion`: reduced users get NO streamers (the click still works).
  * Per-click keyed bursts (a seq ref) support rapid re-clicks; each burst self-cleans after
  * the animation. The burst layer is aria-hidden and never intercepts clicks. A CSS @media
@@ -16,13 +16,13 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { EASE_OUT } from '@/lib/motion'
 
-/* Streamer ribbon palette — read from the brand PRIMITIVE tokens (theme-independent), so
-   confetti stays on-brand with zero rogue hex: gold, amber and a deep Atlas-blue for depth. */
-const STREAMER_VARS = ['--p-gold-300', '--p-amber-300', '--p-gold-200', '--p-amber-200', '--p-gold-100', '--p-blue-500']
+/* Streamer ribbon palette — read from the Atlas Blue PRIMITIVE ramp (light → deep), so
+   confetti stays on-brand with zero rogue hex. */
+const STREAMER_VARS = ['--p-blue-100', '--p-blue-200', '--p-blue-300', '--p-blue-400', '--p-blue-500']
 function streamerColors(): string[] {
-  if (typeof document === 'undefined') return ['#EEBA2B']
+  if (typeof document === 'undefined') return ['#33488F']
   const cs = getComputedStyle(document.documentElement)
-  return STREAMER_VARS.map((v) => cs.getPropertyValue(v).trim() || '#EEBA2B')
+  return STREAMER_VARS.map((v) => cs.getPropertyValue(v).trim() || '#33488F')
 }
 
 interface Streamer {

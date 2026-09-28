@@ -6,8 +6,7 @@
  * `aria-label` is required, since there is no visible text.
  *
  * 8px squircle, accent focus ring, active scale, reduced-motion safe (no JS motion).
- * The `accent` variant uses the theme-pinned accent fill (orange in dark, blue in light,
- * gold in paper), mirroring Button's primary tokens.
+ * The `accent` variant uses the Atlas Blue accent fill, mirroring Button's primary tokens.
  */
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'

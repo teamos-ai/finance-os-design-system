@@ -1,9 +1,8 @@
 /**
  * Banner — alert / announcement strips for websites, funnels, countdowns and timers.
  *
- * FIXED brand set (theme-independent — identical in dark, light AND paper):
- *   black · orange (amber gradient) · blue (Atlas-blue gradient) · paper (ivory) · white.
- * Plus theme-semantic variants: `gradient` (theme accent), `dark`, `soft`, `info`.
+ * FIXED brand set: black · blue (Atlas-blue gradient) · white.
+ * Plus semantic variants: `gradient` (Atlas Blue accent), `dark`, `soft`, `info`.
  * Optional leading icon, trailing action, dismiss. `Ticker` = scrolling marquee.
  * Token-only; reduced-motion safe.
  */
@@ -13,39 +12,33 @@ import { X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
-/* The five fixed brand surfaces draw from theme-independent --banner-* tokens, so a
-   "blue banner" stays blue in every mode. Gradients need background-image, so colour
-   is applied via inline style referencing the tokens (still zero rogue hex). */
+/* The three fixed brand surfaces draw from --banner-* tokens. Gradients need
+   background-image, so colour is applied via inline style referencing the tokens
+   (still zero rogue hex). */
 const FIXED_STYLE = {
   black: { background: 'var(--banner-black-bg)', color: 'var(--banner-black-fg)', borderColor: 'var(--banner-black-bd)' },
-  orange: { background: 'var(--banner-orange-bg)', color: 'var(--banner-orange-fg)' },
   blue: { background: 'var(--banner-blue-bg)', color: 'var(--banner-blue-fg)' },
-  paper: { background: 'var(--banner-paper-bg)', color: 'var(--banner-paper-fg)', borderColor: 'var(--banner-paper-bd)' },
-  'paper-gradient': { background: 'var(--banner-paper-grad-bg)', color: 'var(--banner-paper-grad-fg)', borderColor: 'var(--banner-paper-grad-bd)' },
   white: { background: 'var(--banner-white-bg)', color: 'var(--banner-white-fg)', borderColor: 'var(--banner-white-bd)' },
 } as const
 
 type FixedVariant = keyof typeof FIXED_STYLE
 const isFixed = (v: string | null | undefined): v is FixedVariant =>
-  v === 'black' || v === 'orange' || v === 'blue' || v === 'paper' || v === 'paper-gradient' || v === 'white'
+  v === 'black' || v === 'blue' || v === 'white'
 
 const banner = cva('flex items-center gap-3 px-4 py-3 font-mono text-body-sm', {
   variants: {
     variant: {
       black: 'border-y',
-      orange: '',
       blue: '',
-      paper: 'border-y',
-      'paper-gradient': 'border-y',
       white: 'border-y',
       gradient: 'bg-gradient-accent text-accent-fg',
       dark: 'bg-inverse text-inverse-fg',
-      soft: 'bg-amber-soft text-amber-text border-y border-border',
+      soft: 'bg-brand-soft text-brand border-y border-border',
       info: 'bg-brand-soft text-brand border-y border-border',
     },
     align: { left: 'justify-start text-left', center: 'justify-center text-center' },
   },
-  defaultVariants: { variant: 'orange', align: 'center' },
+  defaultVariants: { variant: 'blue', align: 'center' },
 })
 
 export interface BannerProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof banner> {

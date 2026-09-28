@@ -1,7 +1,7 @@
 /**
  * Button — Finance OS.
  *
- * Accent is THEME-PINNED: orange (dark) · blue (light) · gold (paper).
+ * Accent is Atlas Blue (#33488F) — solid fill for primary, outline for secondary.
  * Primary CTA = `variant="primary"` (solid accent fill, AA label). Secondary =
  * `variant="secondary"` (accent OUTLINE only — transparent inside). The signature
  * gradient CTA = `variant="gradient"` (accent glow, use sparingly); dark luxury =

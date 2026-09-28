@@ -81,7 +81,7 @@ export function MagazineTemplate() {
         <span>Q2 ’26</span>
       </div>
       <div>
-        <Badge variant="amber" size="sm">
+        <Badge variant="blue" size="sm">
           Cover story
         </Badge>
         <h3 className="mt-3 font-display text-display-sm leading-tight">The 30-minute broker workday</h3>

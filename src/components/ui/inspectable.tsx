@@ -8,7 +8,7 @@
  * The FAB is a sibling of the wrapped item (not inside its overflow-hidden), so the popover
  * is never clipped, and any future tokenised item gets the same treatment by wrapping it.
  *
- * Colour is theme-pinned via --c-inspect: primary orange (dark + paper), Atlas Blue (light).
+ * Colour is pinned via --c-inspect: Atlas Blue (#33488F).
  * Motion is transform/opacity only, ease-out, staggered, and reduced-motion safe.
  */
 import * as React from 'react'
