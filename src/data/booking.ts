@@ -6,6 +6,7 @@
  * and sender block are shared with the warm-up sequence (`src/data/warmup.ts`), so the booking
  * mail and the warm-up mail read as one system.
  *
+ * Written for any finance business (brokers, advisers, lenders, accountants), not one niche.
  * Voice per the Brand Bible: Ruler 70 / Sage 30, calm, clear, direct, Australian English. CTAs are
  * verb-first. Nothing here quotes a result, because no Finance OS client outcome is on record.
  */
@@ -46,7 +47,7 @@ export const CALENDAR = {
   length: '45 minutes',
   /** Pasted into GHL > Calendar > Basic details > Description. Shows on the booking page. */
   description:
-    "A 45-minute call for Australian mortgage brokers. We map where enquiries slip between first contact and settlement, show you the system that closes each gap, and tell you plainly whether Finance OS fits your business. Bring your numbers. Leave with a clear next step, whichever way you go.",
+    "A 45-minute call for finance businesses, from brokers and advisers to lenders and accountants. We map where enquiries slip between first contact and a signed client, show you the system that closes each gap, and tell you plainly whether Finance OS fits your business. Bring your numbers. Leave with a clear next step, whichever way you go.",
 } as const
 
 export type Block =
@@ -83,7 +84,7 @@ export interface BookingSms {
 
 const p = (text: string): Block => ({ kind: 'p', text })
 
-const SIGN = ['Tumai and Ariki', 'Finance OS']
+const SIGN = ['The Finance OS team']
 
 const MANAGE: Block = {
   kind: 'links',
@@ -117,7 +118,7 @@ export const BOOKING_EMAILS: BookingEmail[] = [
       {
         kind: 'list',
         items: [
-          'Where your enquiries come from today, and where they slip before settlement.',
+          'Where your enquiries come from today, and where they slip before they become clients.',
           'The system that closes each gap: lead capture, follow-up and client retention.',
           'A straight answer on whether Finance OS fits your business. If it does not, we will say so.',
         ],
@@ -142,11 +143,11 @@ export const BOOKING_EMAILS: BookingEmail[] = [
         kind: 'list',
         items: [
           'How many new enquiries you get in a typical month, and where they come from.',
-          'How many of those settle.',
+          'How many of those become paying clients.',
           'The tools you pay for today: CRM, email, forms, scheduling and anything else.',
         ],
       },
-      p('That is enough for us to show you where the pipeline leaks and what one extra funded deal a month would change.'),
+      p('That is enough for us to show you where the pipeline leaks and what one extra client a month would change.'),
       MANAGE,
     ],
     signoff: SIGN,
@@ -176,7 +177,7 @@ export const BOOKING_EMAILS: BookingEmail[] = [
     role: 'Recovers the booking without guilt. One action: rebook.',
     blocks: [
       p(`Hi ${APPT.firstName},`),
-      p("We didn't connect for your call today. It happens, broking weeks rarely go to plan."),
+      p("We didn't connect for your call today. It happens, weeks in finance rarely go to plan."),
       p('The offer stands. 45 minutes to map where your enquiries slip and what it would take to close the gaps. Choose a time that suits you.'),
       { kind: 'cta', label: 'Pick a new time', url: APPT.reschedule },
       p('If now is not the right time, reply and let us know. We will close the loop on our end.'),
@@ -196,7 +197,7 @@ export const BOOKING_SMS: BookingSms[] = [
     n: 2,
     slug: 'reminder-24h',
     when: '24 hours before',
-    text: `Hi ${APPT.firstName}, reminder: your Finance OS call is tomorrow at ${APPT.time}. Have your monthly enquiry and settlement numbers handy, rough is fine. Reschedule: ${APPT.reschedule}`,
+    text: `Hi ${APPT.firstName}, reminder: your Finance OS call is tomorrow at ${APPT.time}. Have your monthly enquiry and new-client numbers handy, rough is fine. Reschedule: ${APPT.reschedule}`,
   },
   {
     n: 3,
