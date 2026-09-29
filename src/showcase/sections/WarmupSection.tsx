@@ -11,14 +11,17 @@
  * is the only thing that moves.
  */
 import * as React from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Copy } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
-import { CopyButton } from '@/components/ui/copy-button'
+import { Button } from '@/components/ui/button'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { WARMUP, PLAN, RULES, type WarmupEmail } from '@/data/warmup'
 import { allPlainText, toHtml, toPlainText } from '@/lib/warmup-render'
 import { cn } from '@/lib/cn'
+
+/** How long the "Copied" label and its live announcement hold. Not a motion duration. */
+const COPIED_RESET_MS = 1200
 
 type View = 'preview' | 'text' | 'html'
 
@@ -27,6 +30,34 @@ const VIEWS = [
   { value: 'text' as const, label: 'Plain text' },
   { value: 'html' as const, label: 'HTML' },
 ]
+
+/** CopyButton — ghost, swaps its own label for 1.2s and announces the swap to a screen reader. */
+const CopyButton = ({ value, children }: { value: string; children: React.ReactNode }) => {
+  const [copied, setCopied] = React.useState(false)
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="sm"
+        leadingIcon={<Copy className="h-4 w-4" strokeWidth={1.75} aria-hidden />}
+        onClick={async () => {
+          try {
+            await navigator.clipboard.writeText(value)
+            setCopied(true)
+            setTimeout(() => setCopied(false), COPIED_RESET_MS)
+          } catch {
+            /* clipboard blocked: the panel below is selectable, so there is still a way through */
+          }
+        }}
+      >
+        {copied ? 'Copied' : children}
+      </Button>
+      <span role="status" aria-live="polite" className="sr-only">
+        {copied ? 'Copied to clipboard' : ''}
+      </span>
+    </>
+  )
+}
 
 /**
  * One email, collapsed to its header until opened. The whole header row is the trigger, so the
