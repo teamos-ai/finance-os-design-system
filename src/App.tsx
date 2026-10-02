@@ -21,6 +21,7 @@ import { ImageLibrarySection } from '@/showcase/sections/ImageLibrarySection'
 import { NotionSection } from '@/showcase/sections/NotionSection'
 import { SocialSection } from '@/showcase/sections/SocialSection'
 import { DemosSection } from '@/showcase/sections/DemosSection'
+import { AuditSection } from '@/showcase/sections/AuditSection'
 
 function TopBanner() {
   // Blue-gradient ticker (the single Light · Clarity theme).
@@ -51,6 +52,7 @@ export default function App() {
       <NotionSection />
       <SocialSection />
       <DemosSection />
+      <AuditSection />
     </Shell>
   )
 }

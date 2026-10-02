@@ -4,6 +4,7 @@ import {
   Palette, Type, Ruler, Layers, Wand2, Shapes,
   Component, CreditCard, LayoutGrid,
   Megaphone, FileText, Calculator, Image, NotebookPen, Share2, MonitorPlay, MailPlus,
+  ClipboardList,
 } from 'lucide-react'
 import type { Accent } from './accents'
 
@@ -40,4 +41,5 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'notion', label: 'Notion', Icon: NotebookPen, accent: 'blue', group: 'Applied' },
   { id: 'social', label: 'Social Media', Icon: Share2, accent: 'blue', group: 'Applied' },
   { id: 'demos', label: 'Live Demo Pages', Icon: MonitorPlay, accent: 'blue', group: 'Applied' },
+  { id: 'audit', label: 'Client Audit', Icon: ClipboardList, accent: 'blue', group: 'Applied' },
 ]

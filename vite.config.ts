@@ -12,6 +12,14 @@ export default defineConfig({
     // realpath() resolves Q:\ back to the spaced (and mangled) UNC path and the
     // build fails. preserveSymlinks keeps the clean drive-letter path.
     preserveSymlinks: true,
+    // preserveSymlinks defeats Vite's automatic React deduping, which lets a
+    // dependency (react-router-dom) pre-bundle against a second React copy and
+    // throws "Invalid hook call" at runtime. Pin them explicitly.
+    dedupe: ['react', 'react-dom'],
+  },
+  // Pre-bundle the router with everything else so it shares one React instance.
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-dom/client', 'react-router-dom'],
   },
   server: {
     watch: { usePolling: true, interval: 300 },
