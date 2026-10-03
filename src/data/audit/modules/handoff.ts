@@ -144,6 +144,7 @@ export const MODULE_SCOPE: Module = {
                 'Price each ticked item separately, or write down in front of them that it is out of scope for now.',
             },
           ],
+          allowOther: true,
           choices: [
             {
               value: 'custom-forms-surveys',
@@ -520,6 +521,7 @@ export const MODULE_INPUTS: Module = {
           kind: 'single',
           why: 'The sending domain, every funnel and every tracking record wait on this person. If they will not engage, the build stalls.',
           source: 'db-finance-os/01-company/production-layer.md',
+          allowOther: true,
           choices: [
             { value: 'i-control-it', label: 'I do' },
             {
@@ -768,6 +770,7 @@ export const MODULE_INPUTS: Module = {
           why: 'What exists gets loaded. What does not exist gets invented, and invention is what the custom items quietly are.',
           source: 'db-finance-os/02-offer-and-pricing/onboarding-and-delivery.md',
           followUp: 'Who can send those across, and by when?',
+          allowOther: true,
           choices: [
             { value: 'call-scripts', label: 'Call scripts or talk tracks' },
             { value: 'lender-product-lists', label: 'Lender or product lists' },
@@ -852,6 +855,7 @@ export const MODULE_ACCESS: Module = {
           kind: 'multi',
           why: 'The list the hands-on pass runs off. An audit that has to come back and ask for one more login is an audit that does not happen.',
           source: 'db-finance-os/01-company/client-engagements.md',
+          allowOther: true,
           choices: [
             { value: 'crm-admin', label: 'CRM, admin level' },
             {
@@ -1034,6 +1038,7 @@ export const MODULE_ACCESS: Module = {
           kind: 'multi',
           why: 'Read ahead of the pass, so the time in their systems goes on what a file cannot show.',
           source: 'db-finance-os/01-company/client-engagements.md',
+          allowOther: true,
           choices: [
             { value: 'contact-export', label: 'A full contact export' },
             { value: 'live-deals', label: 'A list of live deals and what stage each is at' },

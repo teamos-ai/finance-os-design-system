@@ -33,6 +33,7 @@ export const MODULE_DATA: Module = {
           source: '11-operations/ghl-data-audit.md',
           hint: 'Read the list out loud. People forget the phone and the mail client until prompted.',
           followUp: 'Which of those does a new enquiry land in first?',
+          allowOther: true,
           choices: [
             { value: 'aggregator-crm', label: "The aggregator's CRM" },
             { value: 'lodgement', label: 'The lodgement platform' },
@@ -168,6 +169,7 @@ export const MODULE_DATA: Module = {
           why: 'The lifecycle dates are the ones that matter. A sequence that reads a date the record does not carry never fires.',
           source: '02-offer-and-pricing/capabilities-unverified-and-roadmap.md',
           hint: 'Read each one. Pause on settlement date and fixed rate expiry, they are the two that decide the retention work.',
+          allowOther: true,
           choices: [
             { value: 'mobile', label: 'Mobile number' },
             { value: 'email', label: 'Email address' },
@@ -579,6 +581,7 @@ export const MODULE_PIPELINE: Module = {
           kind: 'single',
           why: 'Decides whether intake data lands somewhere structured or has to be retyped later.',
           source: '11-operations/calendars-forms-and-links.md',
+          allowOther: true,
           choices: [
             { value: 'digital-structured', label: 'A digital form that writes into the system' },
             { value: 'digital-unstructured', label: 'A digital form, but we retype the answers', flag: 'watch', flagNote: 'Retyping is where data quality is lost. Ask how long it takes per deal and multiply it by their monthly volume.' },
@@ -593,6 +596,7 @@ export const MODULE_PIPELINE: Module = {
           kind: 'single',
           why: 'The document chase is the most repeated manual task in a brokerage. Establishes whether anything stops the chasing automatically.',
           source: '11-operations/sequence-architecture.md',
+          allowOther: true,
           choices: [
             { value: 'automated-stops', label: 'An automated chase that stops when the documents arrive' },
             { value: 'automated-manual-stop', label: 'An automated chase someone has to switch off', flag: 'watch', flagNote: 'A chaser with a manual stop eventually chases someone who already sent the documents. Ask if that has happened.' },
@@ -627,6 +631,7 @@ export const MODULE_PIPELINE: Module = {
           kind: 'multi',
           why: 'Milestone dates are what any later timing reads. Missing ones cannot be reconstructed after the fact.',
           source: '12-decisions-and-conflicts/OPEN-QUESTIONS.md',
+          allowOther: true,
           choices: [
             { value: 'enquiry', label: 'Enquiry received' },
             { value: 'appointment', label: 'Appointment booked' },
@@ -661,6 +666,7 @@ export const MODULE_PIPELINE: Module = {
           source: '07-compliance-and-guardrails/layer-b/best-interests-duty-rg273.md',
           hint: 'Ask it neutrally. Do not offer a view on whether their record keeping stands up. That is for their own adviser to say.',
           followUp: 'If a file from last year was reviewed, where would that record be found?',
+          allowOther: true,
           choices: [
             { value: 'aggregator-record', label: "In the aggregator's own file record" },
             { value: 'crm-note', label: 'A file note in the CRM' },
@@ -715,6 +721,7 @@ export const MODULE_PIPELINE: Module = {
           kind: 'multi',
           why: 'Names the segment. The complex pipeline is only worth building for what they actually write.',
           source: '02-offer-and-pricing/micro-apps.md',
+          allowOther: true,
           choices: [
             { value: 'commercial', label: 'Commercial' },
             { value: 'asset-finance', label: 'Asset and equipment finance' },
@@ -784,6 +791,7 @@ export const MODULE_PIPELINE: Module = {
           why: 'Separates what they intend from what runs. Only unticked items are the gap.',
           source: '11-operations/sequence-architecture.md',
           hint: 'Press on the word actually. Intentions tick a lot of boxes here.',
+          allowOther: true,
           choices: [
             { value: 'check-in-30', label: '30-day post-settlement check-in' },
             { value: 'annual-review', label: 'Annual review' },
@@ -893,6 +901,7 @@ export const MODULE_PIPELINE: Module = {
           kind: 'single',
           why: 'A pipeline nobody updates reports confidently on state that is weeks old.',
           source: '11-operations/tags-and-segments.md',
+          allowOther: true,
           choices: [
             { value: 'each-broker-live', label: 'Each broker, as things happen' },
             { value: 'support-daily', label: 'Support staff, daily' },
@@ -908,6 +917,7 @@ export const MODULE_PIPELINE: Module = {
           why: 'A lost deal with no reason records that deals were lost and nothing about why. That is a required field decision, made once.',
           source: '11-operations/tags-and-segments.md',
           followUp: 'How many of those in the last twelve months, and could you tell me the top reason?',
+          allowOther: true,
           choices: [
             { value: 'lost-with-reason', label: 'Marked lost with a required reason' },
             { value: 'lost-no-reason', label: 'Marked lost, no reason captured', flag: 'watch', flagNote: 'They know the count and not the cause, so nothing about the losses can be acted on.' },

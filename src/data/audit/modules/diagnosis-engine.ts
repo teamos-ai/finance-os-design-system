@@ -215,6 +215,7 @@ export const MODULE_CAPTURE: Module = {
           prompt: 'What do you give somebody in exchange for their details?',
           kind: 'single',
           why: 'Establishes whether an opt-in layer exists at all, and what the nurture would hang off.',
+          allowOther: true,
           choices: [
             { value: 'gated', label: 'A guide or checklist, gated behind a form' },
             {
@@ -308,6 +309,7 @@ export const MODULE_CAPTURE: Module = {
           prompt: 'How do client documents actually reach you?',
           kind: 'multi',
           why: 'Sets what the document chaser has to cover and where the completion signal comes from.',
+          allowOther: true,
           choices: [
             { value: 'email-attachment', label: 'Email attachments' },
             {
@@ -436,6 +438,7 @@ export const MODULE_CAPTURE: Module = {
           prompt: 'What happens to a call nobody picks up?',
           kind: 'single',
           why: 'The single cheapest gap to demonstrate, and it comes from their own phone records.',
+          allowOther: true,
           choices: [
             {
               value: 'rings-out',
@@ -523,6 +526,7 @@ export const MODULE_FOLLOWUP: Module = {
             'Which of these happen today without somebody deciding to make them happen?',
           kind: 'multi',
           why: 'The inventory of what is genuinely automated. Everything unticked is a person remembering.',
+          allowOther: true,
           choices: [
             { value: 'enquiry-ack', label: 'An acknowledgement when an enquiry arrives' },
             { value: 'appt-confirm', label: 'An appointment confirmation' },
@@ -682,6 +686,7 @@ export const MODULE_FOLLOWUP: Module = {
           prompt: 'Where did each part of that list come from?',
           kind: 'multi',
           why: 'Affects whether a segment can be messaged at all. The sender carries the evidential burden for consent.',
+          allowOther: true,
           choices: [
             { value: 'site-forms', label: 'Forms on your own site' },
             { value: 'phone-enquiries', label: 'Phone enquiries you typed in' },
@@ -825,6 +830,7 @@ export const MODULE_FOLLOWUP: Module = {
           prompt: 'What happens to an address that hard bounces?',
           kind: 'single',
           why: 'Affects sender reputation and the prohibition on sending to an address that does not exist.',
+          allowOther: true,
           choices: [
             { value: 'suppressed', label: 'Permanently suppressed' },
             {
@@ -857,6 +863,7 @@ export const MODULE_FOLLOWUP: Module = {
           prompt: 'What do you use text messages for?',
           kind: 'multi',
           why: 'Separates transactional use from marketing use. The two carry different obligations and different volumes.',
+          allowOther: true,
           choices: [
             { value: 'appt-reminders', label: 'Appointment reminders' },
             { value: 'doc-chasing', label: 'Chasing documents' },
@@ -934,6 +941,7 @@ export const MODULE_CONVERSATION: Module = {
           prompt: 'What number do clients ring?',
           kind: 'single',
           why: 'Decides whether the number can be ported, recorded against a record, or handed to anybody else.',
+          allowOther: true,
           choices: [
             { value: 'business-line', label: 'A business landline or VoIP number' },
             { value: 'platform-number', label: 'A virtual number inside a platform' },
@@ -988,6 +996,7 @@ export const MODULE_CONVERSATION: Module = {
           prompt: 'What happens to a missed call now, without anybody doing anything?',
           kind: 'single',
           why: 'The clearest single demonstration of the gap, and it comes entirely from their own answer.',
+          allowOther: true,
           choices: [
             { value: 'text-back', label: 'A text goes back automatically' },
             { value: 'task-created', label: 'A task or a notification is created' },
@@ -1055,6 +1064,7 @@ export const MODULE_CONVERSATION: Module = {
           kind: 'multi',
           why: 'The count is the finding. Each channel is a separate place something can be missed.',
           hint: 'Tick everything, including the ones they say nobody uses. Those are the ones that go unwatched.',
+          allowOther: true,
           choices: [
             { value: 'sms', label: 'Text message' },
             { value: 'email', label: 'Email' },
@@ -1189,6 +1199,7 @@ export const MODULE_CONVERSATION: Module = {
             'Is anything automated in your conversations today? Chat widget, auto-replies, anything answering the phone?',
           kind: 'multi',
           why: 'Establishes the surface. Each one pulls in a different set of obligations on their side.',
+          allowOther: true,
           choices: [
             { value: 'web-chat', label: 'A chat widget on the website' },
             { value: 'sms-auto', label: 'An automatic text reply' },
@@ -1273,6 +1284,7 @@ export const MODULE_CONVERSATION: Module = {
             question: 'x5.ai-surfaces',
             equals: ['web-chat', 'sms-auto', 'social-auto', 'email-auto', 'voice-in', 'voice-out'],
           },
+          allowOther: true,
           choices: [
             { value: 'stop', label: 'A request to stop, leave or unsubscribe' },
             { value: 'human', label: 'A request to speak to a person' },

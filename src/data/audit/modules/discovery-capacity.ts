@@ -38,6 +38,7 @@ export const MODULE_STACK: Module = {
           hint: 'Tick everything that holds a client or a deal, even partly.',
           followUp: 'Which of those would you call the real one if two of them disagreed?',
           source: 'db-finance-os/06-competitors-and-market/competitors/brokerengine.md',
+          allowOther: true,
           choices: [
             { value: 'brokerengine-classic', label: 'BrokerEngine (Classic)' },
             { value: 'brokerengine-plus', label: 'BrokerEngine Plus', hint: 'The aggregator-owned tier' },
@@ -76,6 +77,7 @@ export const MODULE_STACK: Module = {
           why: 'Names what could be consolidated and what could not, and who holds the sending identity.',
           followUp: 'And who physically presses send?',
           source: 'db-finance-os/06-competitors-and-market/competitors/activecampaign.md',
+          allowOther: true,
           choices: [
             { value: 'activecampaign', label: 'ActiveCampaign' },
             { value: 'hubspot-marketing', label: 'HubSpot' },
@@ -117,6 +119,7 @@ export const MODULE_STACK: Module = {
           hint: 'This is their credit work. Capture it, price it, and do not build towards it.',
           followUp: 'How many times a week does that get opened?',
           source: 'db-finance-os/06-competitors-and-market/not-our-lane.md',
+          allowOther: true,
           choices: [
             { value: 'quickli', label: 'Quickli' },
             { value: 'lender-calculators', label: 'Each lender’s own calculator' },
@@ -135,6 +138,7 @@ export const MODULE_STACK: Module = {
           why: 'Decides whether the conversation is about software at all, or only about configuration.',
           followUp: 'Who built it, when, and is any of it written down?',
           source: 'db-finance-os/06-competitors-and-market/competitors/gohighlevel.md',
+          allowOther: true,
           choices: [
             { value: 'ghl-own-account', label: 'GoHighLevel, my own account' },
             { value: 'tekmatix-substrate', label: 'Tekmatix' },
@@ -169,6 +173,7 @@ export const MODULE_STACK: Module = {
           kind: 'multi',
           why: 'Finds the small subscriptions that never make it onto a stack list.',
           source: 'db-finance-os/02-offer-and-pricing/what-we-replace.md',
+          allowOther: true,
           choices: [
             { value: 'esign', label: 'E-signature', hint: 'DocuSign, Annature, or the aggregator’s own' },
             { value: 'doc-collection', label: 'Document collection' },
@@ -305,6 +310,7 @@ export const MODULE_STACK: Module = {
           why: 'Separates the stack they pay for from the stack they use.',
           followUp: 'And which one does your support person live in all day?',
           source: 'db-finance-os/06-competitors-and-market/competitors/quickli.md',
+          allowOther: true,
           choices: [
             { value: 'used-crm', label: 'The CRM' },
             { value: 'used-serviceability', label: 'The serviceability tool' },
@@ -390,6 +396,7 @@ export const MODULE_STACK: Module = {
           why: 'An audit is a political act. Every outside party is either an ally or an obstacle.',
           followUp: 'What are they actually contracted to deliver, and until when?',
           source: 'db-finance-os/06-competitors-and-market/README.md',
+          allowOther: true,
           choices: [
             { value: 'ozimedia', label: 'ozimedia' },
             { value: 'basic-solutions', label: 'Basic Solutions' },
@@ -553,6 +560,7 @@ export const MODULE_PEOPLE: Module = {
           kind: 'single',
           why: 'Decides whether the build has anyone to hand to, or lands back on the principal.',
           source: 'db-finance-os/03-audience-and-icp/segments.md',
+          allowOther: true,
           choices: [
             {
               value: 'nobody',
@@ -620,6 +628,7 @@ export const MODULE_PEOPLE: Module = {
           kind: 'multi',
           why: 'Separates what they believe is documented from what a new starter could follow.',
           source: 'db-finance-os/11-operations/workflows.md',
+          allowOther: true,
           choices: [
             { value: 'enquiry-process', label: 'What happens when a new enquiry lands' },
             { value: 'fact-find-checklist', label: 'A fact find checklist' },
@@ -683,6 +692,7 @@ export const MODULE_PEOPLE: Module = {
           kind: 'single',
           why: 'Separates a capture problem from a follow-up problem, which are different builds.',
           source: 'db-finance-os/11-operations/workflows.md',
+          allowOther: true,
           choices: [
             { value: 'nobody-saw-it', label: 'Nobody saw it' },
             { value: 'saw-it-too-late', label: 'Someone saw it too late' },
@@ -780,6 +790,7 @@ export const MODULE_AMBITION: Module = {
           kind: 'multi',
           why: 'Decides whether there is a book to work or an audience to build, which are different jobs.',
           source: 'db-finance-os/03-audience-and-icp/disqualifiers.md',
+          allowOther: true,
           choices: [
             { value: 'existing-database', label: 'The people already in my database' },
             { value: 'repeat-refinance', label: 'Repeat business and refinances' },
@@ -881,6 +892,7 @@ export const MODULE_AMBITION: Module = {
           kind: 'multi',
           why: 'Names the failure mode that will repeat unless the build is shaped around it.',
           source: 'db-finance-os/03-audience-and-icp/buyer-psychology.md',
+          allowOther: true,
           choices: [
             { value: 'never-set-up', label: 'It was never set up properly' },
             {

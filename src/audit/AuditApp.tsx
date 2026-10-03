@@ -10,7 +10,6 @@
  */
 import * as React from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
 import type { Block, Module, Part } from '@/audit/types'
 import { readView, writeView, type AuditStore } from '@/audit/state'
 import { raisedFlags } from '@/audit/flags'
@@ -24,6 +23,19 @@ import { TopBar } from '@/audit/parts/TopBar'
 import { Button } from '@/components/ui/button'
 import { EASE_OUT } from '@/lib/motion'
 import { cn } from '@/lib/cn'
+
+/** The arrow key, printed on the button that it drives. */
+const Key = ({ children, onAccent = false }: { children: React.ReactNode; onAccent?: boolean }) => (
+  <kbd
+    aria-hidden
+    className={cn(
+      'grid h-5 w-5 place-items-center rounded-sm font-mono text-mono-2xs leading-none',
+      onAccent ? 'bg-black/15 text-accent-fg' : 'bg-inset text-fg-subtle',
+    )}
+  >
+    {children}
+  </kbd>
+)
 
 /** Every block of a part, flattened, so ← / → walk the whole part in order. */
 function flatten(part: Part): { module: Module; block: Block; indexInModule: number; ofModule: number }[] {
@@ -119,20 +131,41 @@ export function AuditApp({ store, onExit }: { store: AuditStore; onExit: () => v
     [reduced],
   )
 
-  /* Global shortcuts. Modifier-based so typing into a field never triggers them. */
+  /* Global shortcuts.
+     ← / → move between screens, because on a call the auditor is talking and typing at once
+     and a two-key chord is one thing too many. They are suppressed wherever an arrow already
+     means something: inside a text field (caret movement), and inside the part switcher,
+     which has its own roving-tabindex arrow handling. ⌘←/⌘→ keep working regardless, so the
+     chord still moves you on even while the caret is in a box. */
   React.useEffect(() => {
+    const typingTarget = (): boolean => {
+      const el = document.activeElement
+      if (!(el instanceof HTMLElement)) return false
+      if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) return true
+      if (el.isContentEditable) return true
+      return Boolean(el.closest('[role="tablist"]'))
+    }
+
     const onKey = (e: KeyboardEvent) => {
       const mod = e.metaKey || e.ctrlKey
+
+      /* Escape steps out of a box, so the arrows work again without reaching for the mouse. */
+      if (e.key === 'Escape' && typingTarget()) {
+        ;(document.activeElement as HTMLElement | null)?.blur()
+        return
+      }
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        if (!mod && (typingTarget() || e.altKey || e.shiftKey)) return
+        e.preventDefault()
+        go(e.key === 'ArrowRight' ? 1 : -1)
+        return
+      }
+
       if (!mod) return
       if (e.key === 'k') {
         e.preventDefault()
         setJumperOpen((o) => !o)
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault()
-        go(1)
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault()
-        go(-1)
       } else if (e.key === '.') {
         e.preventDefault()
         setPanelOpen((o) => {
@@ -208,18 +241,29 @@ export function AuditApp({ store, onExit }: { store: AuditStore; onExit: () => v
             </motion.div>
           </AnimatePresence>
 
-          {/* move */}
+          {/* move — the key is printed on the control so it does not have to be remembered */}
           <div className="mx-auto flex w-full max-w-2xl items-center justify-between gap-4 border-t border-border px-6 py-6 md:px-10">
-            <Button variant="ghost" size="sm" onClick={() => go(-1)} disabled={position === 0}>
-              <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => go(-1)}
+              disabled={position === 0}
+              title="Previous screen (left arrow)"
+            >
+              <Key>&larr;</Key>
               Back
             </Button>
             <span className="font-mono text-caption tabular-nums text-fg-subtle">
               {position + 1} of {sequence.length}
             </span>
-            <Button size="sm" onClick={() => go(1)} disabled={position === sequence.length - 1}>
+            <Button
+              size="sm"
+              onClick={() => go(1)}
+              disabled={position === sequence.length - 1}
+              title="Next screen (right arrow)"
+            >
               Next
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden />
+              <Key onAccent>&rarr;</Key>
             </Button>
           </div>
         </main>

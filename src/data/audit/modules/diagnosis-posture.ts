@@ -88,6 +88,7 @@ export const MODULE_COMPLIANCE: Module = {
             'Has any part of that list been built from addresses published online, bought in, or brought across from a previous business or a previous aggregator?',
           kind: 'multi',
           why: 'Spam Act Sch 2 cl 4(1): consent cannot be inferred from the mere fact an address is published. A segment like this gets kept separate, not merged.',
+          allowOther: true,
           choices: [
             {
               value: 'own-capture',
@@ -282,6 +283,7 @@ export const MODULE_COMPLIANCE: Module = {
           kind: 'multi',
           why: 'DNC Act s 11(9): an arrangement under which a contractor makes the calls can still be the client causing them. A synthetic voice is a voice call.',
           showIf: { question: 'x9.cold-calling', equals: ['yes', 'unsure'] },
+          allowOther: true,
           choices: [
             { value: 'you', label: 'You personally' },
             { value: 'in-house', label: 'In-house staff' },
@@ -570,6 +572,7 @@ export const MODULE_COMPLIANCE: Module = {
             'Which of these carry live consumer-facing copy today? I want the full list, because a review that misses a surface passes and ships anyway.',
           kind: 'multi',
           why: 'The template gate binds every one of these, including subject lines, button labels, form headings and the AI prompt, not only body copy.',
+          allowOther: true,
           choices: [
             { value: 'email', label: 'Email templates' },
             { value: 'sms', label: 'SMS templates' },
@@ -649,6 +652,7 @@ export const MODULE_COMPLIANCE: Module = {
           kind: 'multi',
           why: 'RG 234.136, .137 and .140 to .142 on suitability and approval language; NCCP s 160B and s 160C on prohibited self-descriptions; s 13(1) on a representation about a future matter.',
           hint: 'Check the button labels and the subject lines too. That is where these survive a copy pass.',
+          allowOther: true,
           choices: [
             {
               value: 'qualify-or-preapproved',
@@ -802,6 +806,7 @@ export const MODULE_COMPLIANCE: Module = {
           prompt: 'What is automated in your conversations today?',
           kind: 'multi',
           why: 'Each surface pulls a different rule set. A synthetic voice is a voice call, so an outbound agent pulls in the Telemarketing Standard as well as everything else here.',
+          allowOther: true,
           choices: [
             { value: 'web-chat', label: 'Website chat widget' },
             { value: 'sms-auto', label: 'SMS or Messenger auto-reply' },
@@ -852,6 +857,7 @@ export const MODULE_COMPLIANCE: Module = {
           prompt: 'Which of these does it hand to a person, immediately and without conditions?',
           kind: 'multi',
           why: 'The seven escalation triggers. An automated reply to someone in hardship is the highest-harm failure available and no disclaimer covers it.',
+          allowOther: true,
           choices: [
             { value: 'stop', label: 'A request to stop, leave, unsubscribe, or "not interested"' },
             { value: 'human', label: 'A request to speak to a person' },

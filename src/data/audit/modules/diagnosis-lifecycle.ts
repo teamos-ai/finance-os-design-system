@@ -102,6 +102,7 @@ export const MODULE_BOOKING: Module = {
           kind: 'multi',
           why: 'Different conversations need different lengths, buffers and confirmations. One calendar for all of them is a finding.',
           source: 'db-finance-os/11-operations/calendars-forms-and-links.md',
+          allowOther: true,
           choices: [
             { value: 'discovery', label: 'Discovery or first chat' },
             { value: 'client-appointment', label: 'Client appointment or application meeting' },
@@ -306,6 +307,7 @@ export const MODULE_BOOKING: Module = {
           kind: 'multi',
           why: 'Channel decides whether a reminder is seen, and which sender identity has to exist first.',
           source: 'db-finance-os/07-compliance-and-guardrails/layer-c/sender-identity-and-opt-out.md',
+          allowOther: true,
           choices: [
             { value: 'email', label: 'Email' },
             { value: 'sms', label: 'SMS' },
@@ -506,6 +508,7 @@ export const MODULE_RETENTION: Module = {
           kind: 'single',
           why: 'The referral ask, the anniversary, the annual review and the fixed rate window all key off it. A field type is permanent once set.',
           source: 'db-finance-os/11-operations/custom-fields.md',
+          allowOther: true,
           choices: [
             { value: 'date-field-in-crm', label: 'A date field on the client record' },
             {
@@ -810,6 +813,7 @@ export const MODULE_RETENTION: Module = {
           kind: 'multi',
           why: 'Each one is a date that has to exist on the record before anything can be scheduled against it.',
           source: 'db-finance-os/11-operations/custom-fields.md',
+          allowOther: true,
           choices: [
             { value: 'birthday', label: 'Birthday' },
             { value: 'settlement-anniversary', label: 'Settlement anniversary' },
@@ -983,6 +987,7 @@ export const MODULE_MARKET: Module = {
           why: 'Existing footage and existing writing shorten the content runway more than anything else on this screen.',
           source: 'db-finance-os/02-offer-and-pricing/onboarding-and-delivery.md',
           followUp: 'Where do the files live, and who holds the channel?',
+          allowOther: true,
           choices: [
             { value: 'long-video', label: 'Long form video or YouTube' },
             { value: 'short-video', label: 'Reels or short video' },
@@ -1021,6 +1026,7 @@ export const MODULE_MARKET: Module = {
           why: 'Each item has its own requirements about what must appear beside it. Catalogue them, do not rule on them.',
           source: 'db-finance-os/07-compliance-and-guardrails/layer-b/rg234-advertising.md',
           hint: 'Website, ads, social, email signature, decks, PDFs, on hold messages.',
+          allowOther: true,
           choices: [
             {
               value: 'a-rate',
@@ -1214,6 +1220,7 @@ export const MODULE_MARKET: Module = {
           kind: 'multi',
           why: 'Placement decides how many surfaces have to change if any one of them has to.',
           source: 'db-finance-os/07-compliance-and-guardrails/layer-a/testimonials-reviews-and-ai-claims.md',
+          allowOther: true,
           choices: [
             { value: 'homepage', label: 'The homepage' },
             { value: 'dedicated-page', label: 'A reviews or testimonials page' },
@@ -1235,6 +1242,7 @@ export const MODULE_MARKET: Module = {
           kind: 'multi',
           why: 'A mark implies an association, and each one needs a permission or licence record behind it.',
           source: 'db-finance-os/07-compliance-and-guardrails/registers/third-party-marks-and-ip.md',
+          allowOther: true,
           choices: [
             {
               value: 'lender-logos',

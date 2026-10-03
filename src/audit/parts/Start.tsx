@@ -319,7 +319,7 @@ export function Start({
               <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden />
             </Button>
             <span className="font-mono text-caption text-fg-subtle">
-              ⌘K jumps anywhere · ⌘. opens notes · 1–9 picks an answer
+              ← → move between screens · 1–9 picks an answer · ⌘K jumps anywhere · ⌘. opens notes
             </span>
           </div>
         </FadeIn>

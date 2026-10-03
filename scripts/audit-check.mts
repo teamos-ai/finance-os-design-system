@@ -9,6 +9,7 @@
  *
  * Run: npm run check:audit
  */
+import { OTHER_VALUE } from '../src/audit/types'
 import { AUDIT_PARTS } from '../src/data/audit/index'
 import { AUDIT_PART_SUMMARY, AUDIT_SHAPE } from '../src/data/audit/build-spec'
 
@@ -50,6 +51,15 @@ for (const part of AUDIT_PARTS) {
           problems.push(`${q.id}: "${q.kind}" with no choices`)
         }
         if (q.kind === 'table' && !q.columns?.length) problems.push(`${q.id}: table with no columns`)
+
+        /* allowOther only means anything on a choice question, and the sentinel it uses
+           must not collide with a real choice value or the tile and the option fight. */
+        if (q.allowOther && q.kind !== 'single' && q.kind !== 'multi') {
+          problems.push(`${q.id}: allowOther on a "${q.kind}" question, which has no choices`)
+        }
+        if (q.choices?.some((c) => c.value === OTHER_VALUE)) {
+          problems.push(`${q.id}: a choice uses the reserved value "${OTHER_VALUE}"`)
+        }
         if (q.kind === 'scale' && !q.scaleLabels) problems.push(`${q.id}: scale with no scaleLabels`)
 
         const seen = new Set<string>()

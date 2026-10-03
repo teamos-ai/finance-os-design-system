@@ -35,6 +35,7 @@ export const MODULE_DEMAND: Module = {
           kind: 'multi',
           why: 'Separates the routes they run from the routes they talk about. Sets the segmentation the build reads.',
           source: '99-source-material/snapshot/docs/03-custom-fields-approval-table.md',
+          allowOther: true,
           choices: [
             { value: 'referral-past-client', label: 'Past client referrals' },
             { value: 'repeat-client', label: 'Repeat business from existing clients' },
@@ -205,6 +206,7 @@ export const MODULE_DEMAND: Module = {
           kind: 'multi',
           why: 'Partner type is a structured value in the build, so capturing it here means the records load rather than needing mapping.',
           source: '99-source-material/snapshot/docs/03-custom-fields-approval-table.md',
+          allowOther: true,
           choices: [
             { value: 'real-estate-agent', label: 'Real estate agent' },
             { value: 'buyers-agent', label: 'Buyers agent' },
@@ -304,6 +306,7 @@ export const MODULE_DEMAND: Module = {
           kind: 'multi',
           why: 'Reward shape decides what has to be tracked, and whether a disclosure question is in play.',
           source: '02-offer-and-pricing/micro-apps.md',
+          allowOther: true,
           choices: [
             { value: 'gift-card', label: 'Gift card or a bottle' },
             {
@@ -365,6 +368,7 @@ export const MODULE_DEMAND: Module = {
           kind: 'multi',
           why: 'Bought leads carry exclusivity and consent questions the client owns.',
           source: '06-competitors-and-market/market-context.md',
+          allowOther: true,
           choices: [
             { value: 'aggregator-lead-flow', label: 'Paid lead flow from the aggregator' },
             {
@@ -457,6 +461,7 @@ export const MODULE_DEMAND: Module = {
           kind: 'single',
           why: 'Names the thing they have already spent attention on. Usually where the last failed attempt is buried.',
           source: '08-channels-and-playbooks/funnels.md',
+          allowOther: true,
           choices: [
             { value: 'website', label: 'The website' },
             { value: 'google', label: 'Google, paid or unpaid' },
@@ -643,6 +648,7 @@ export const MODULE_JOURNEY: Module = {
           kind: 'single',
           why: 'The largest unattended group in most brokerages, and the one the client can size.',
           source: '11-operations/sequence-architecture.md',
+          allowOther: true,
           choices: [
             {
               value: 'nothing',
@@ -899,6 +905,7 @@ export const MODULE_JOURNEY: Module = {
           kind: 'single',
           why: 'Keeping clients informed well enough that they stop ringing is one of the two motives on file from a paying buyer.',
           source: '03-audience-and-icp/buyer-psychology.md',
+          allowOther: true,
           choices: [
             {
               value: 'lender-email',
@@ -933,6 +940,7 @@ export const MODULE_JOURNEY: Module = {
           kind: 'multi',
           why: 'Every downstream trigger reads a date. A date held as text or in a note cannot fire anything, and field type is permanent once set.',
           source: '11-operations/custom-fields.md',
+          allowOther: true,
           choices: [
             { value: 'conditional-approval', label: 'Conditional approval' },
             { value: 'formal-approval', label: 'Formal approval' },
@@ -1071,6 +1079,7 @@ export const MODULE_JOURNEY: Module = {
           why: 'Compliance-sensitive. A rate or fixed-expiry trigger is not itself the issue, but what gets sent on it may sit inside the regulated perimeter, because suggesting a consumer act on a particular credit contract is credit assistance.',
           hint: 'Record what they do. The perimeter question is for their own adviser, not for this call.',
           source: '07-compliance-and-guardrails/layer-b/nccp-credit-activity-and-assistance.md',
+          allowOther: true,
           choices: [
             { value: 'fixed-rate-expiry', label: 'Fixed rate expiry coming up' },
             { value: 'annual-review', label: 'An annual review date' },

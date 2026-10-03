@@ -11,8 +11,8 @@
  * testing and wrong in front of a client.
  */
 import * as React from 'react'
-import { Check, Plus, X } from 'lucide-react'
-import type { AnswerValue, Question, Row, TableColumn } from '@/audit/types'
+import { Check, PencilLine, Plus, X } from 'lucide-react'
+import { OTHER_VALUE, type AnswerValue, type Question, type Row, type TableColumn } from '@/audit/types'
 import { cn } from '@/lib/cn'
 
 export interface FieldProps {
@@ -21,6 +21,9 @@ export interface FieldProps {
   onChange: (v: AnswerValue) => void
   /** focus this field when the screen opens */
   autoFocus?: boolean
+  /** the typed text behind a `allowOther` selection */
+  otherValue?: string
+  onOtherChange?: (v: string) => void
 }
 
 /* ── Shared shells ─────────────────────────────────────────────────────────── */
@@ -46,7 +49,14 @@ const KeyHint = ({ index, on }: { index: number; on: boolean }) =>
 
 /* ── Choice (single / multi) ───────────────────────────────────────────────── */
 
-function ChoiceField({ question, value, onChange, multi }: FieldProps & { multi: boolean }) {
+function ChoiceField({
+  question,
+  value,
+  onChange,
+  multi,
+  otherValue,
+  onOtherChange,
+}: FieldProps & { multi: boolean }) {
   const selected = React.useMemo<string[]>(
     () => (multi ? ((value as string[]) ?? []) : value ? [value as string] : []),
     [value, multi],
@@ -64,6 +74,15 @@ function ChoiceField({ question, value, onChange, multi }: FieldProps & { multi:
     [multi, onChange, value],
   )
 
+  const otherOn = selected.includes(OTHER_VALUE)
+  const otherRef = React.useRef<HTMLInputElement>(null)
+
+  /* Selecting "something else" is only half the answer — put the caret in the box so the
+     auditor types straight on, without reaching for the mouse mid-sentence. */
+  React.useEffect(() => {
+    if (otherOn) otherRef.current?.focus()
+  }, [otherOn])
+
   /* Number keys pick a choice — but never while the auditor is typing in the notes. */
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -72,14 +91,17 @@ function ChoiceField({ question, value, onChange, multi }: FieldProps & { multi:
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const n = Number(e.key)
       if (!Number.isInteger(n) || n < 1 || n > 9) return
-      const choice = question.choices?.[n - 1]
+      const list = question.allowOther
+        ? [...(question.choices ?? []), { value: OTHER_VALUE, label: '' }]
+        : (question.choices ?? [])
+      const choice = list[n - 1]
       if (!choice) return
       e.preventDefault()
       toggle(choice.value)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [question.choices, toggle])
+  }, [question.choices, question.allowOther, toggle])
 
   const long = (question.choices?.length ?? 0) > 6
 
@@ -125,6 +147,56 @@ function ChoiceField({ question, value, onChange, multi }: FieldProps & { multi:
           </button>
         )
       })}
+
+      {question.allowOther && (
+        <div className={cn(long && 'sm:col-span-2')}>
+          <button
+            type="button"
+            role={multi ? 'checkbox' : 'radio'}
+            aria-checked={otherOn}
+            onClick={() => toggle(OTHER_VALUE)}
+            className={cn(
+              'group flex w-full items-start gap-3 rounded-md border border-dashed px-4 py-3 text-left transition-all duration-fast ease-out',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
+              otherOn
+                ? 'border-accent bg-accent-soft'
+                : 'border-border-strong bg-surface hover:border-accent hover:bg-inset',
+            )}
+          >
+            <KeyHint index={question.choices?.length ?? 0} on={otherOn} />
+            <span className="min-w-0 flex-1">
+              <span
+                className={cn(
+                  'block font-body text-body-md leading-snug',
+                  otherOn ? 'text-accent-text' : 'text-fg-muted',
+                )}
+              >
+                {question.otherLabel ?? 'Something else — type it'}
+              </span>
+            </span>
+            <PencilLine
+              aria-hidden
+              className={cn(
+                'mt-0.5 h-4 w-4 shrink-0 transition-colors duration-fast',
+                otherOn ? 'text-accent' : 'text-fg-subtle',
+              )}
+              strokeWidth={1.75}
+            />
+          </button>
+
+          {otherOn && (
+            <input
+              ref={otherRef}
+              type="text"
+              value={otherValue ?? ''}
+              onChange={(e) => onOtherChange?.(e.target.value)}
+              placeholder="In their words…"
+              aria-label={`${question.prompt} — other`}
+              className={cn(inputClass, 'mt-2 py-2.5')}
+            />
+          )}
+        </div>
+      )}
     </div>
   )
 }

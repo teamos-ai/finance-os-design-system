@@ -111,6 +111,7 @@ export const MODULE_BUSINESS: Module = {
           source: '03-audience-and-icp/disqualifiers.md',
           followUp:
             'How long does that usually take, and has anything ever come back knocked on the head?',
+          allowOther: true,
           choices: [
             { value: 'me', label: 'Me' },
             {
@@ -275,6 +276,7 @@ export const MODULE_BUSINESS: Module = {
           why: 'More than one clock in the client base changes how message timing has to be set, and it makes state a required field on the contact.',
           hint: 'Where the clients physically sit, not where the office is.',
           source: '11-operations/send-windows-and-rate-rules.md',
+          allowOther: true,
           choices: [
             { value: 'nsw', label: 'New South Wales' },
             { value: 'vic', label: 'Victoria' },
@@ -393,6 +395,7 @@ export const MODULE_NUMBERS: Module = {
           kind: 'single',
           why: 'Decides whether there is a source of truth to report against, or whether the baseline has to be built before anything can be measured.',
           source: '03-audience-and-icp/disqualifiers.md',
+          allowOther: true,
           choices: [
             {
               value: 'settled-report',

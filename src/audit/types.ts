@@ -21,6 +21,12 @@ export type AnswerValue = string | number | string[] | Row[] | undefined
 
 export type Answers = Record<string, AnswerValue>
 
+/** The reserved choice value that means "the auditor typed it in". */
+export const OTHER_VALUE = '__other'
+
+/** Where the typed text for `allowOther` lives, alongside the question's own answer. */
+export const otherKey = (questionId: string): string => `${questionId}:other`
+
 /* ── Questions ─────────────────────────────────────────────────────────────── */
 
 export type FieldKind =
@@ -86,6 +92,17 @@ export interface Question {
   placeholder?: string
   hint?: string
   choices?: Choice[]
+  /**
+   * Add a typed "Something else" option to a `single` or `multi` question.
+   *
+   * On a live call the client names a tool, a lender, a person or a reason that is not on
+   * the list, and the auditor has to catch it without breaking the conversation. Selecting
+   * it reveals a text box; the text is stored under `otherKey(question.id)` so the choice
+   * value stays clean for flags and the export prints what was actually said.
+   */
+  allowOther?: boolean
+  /** Overrides the default "Something else" label. */
+  otherLabel?: string
   columns?: TableColumn[]
   /** Rows the table opens with, for a structure that is already known — a four-step
    *  funnel, the six benchmark pipelines. Saves the auditor typing the scaffolding

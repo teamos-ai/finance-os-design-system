@@ -24,6 +24,7 @@ const PART_ICON = { discovery: Compass, diagnosis: Stethoscope, handoff: Package
 /** The field kinds the audit needed and the library did not ship. */
 const NEW_FIELDS = [
   { name: 'single / multi', note: 'Large choice tiles with a 1–9 key hint. Not a radio dot — the auditor answers without looking down.' },
+  { name: 'allowOther', note: 'A typed “something else” on any open choice set. Selecting it focuses the box, so a name nobody anticipated still gets captured mid-sentence.' },
   { name: 'yesno', note: 'Three states. “Not sure” is itself a finding, so it is a first-class answer.' },
   { name: 'scale', note: 'A 1–5 read the auditor makes, not the client. Endpoint captions, no slider.' },
   { name: 'currency / number / percent', note: 'Holds the typed string and parses on read, so “7.05” survives the keystroke after the dot.' },

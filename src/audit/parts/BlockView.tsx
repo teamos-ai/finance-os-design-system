@@ -10,7 +10,7 @@
  * only useful while the client is still on the call.
  */
 import { AlertTriangle, ArrowRight, Eye, Lightbulb } from 'lucide-react'
-import type { Answers, AnswerValue, Block, FlagLevel, Module, Part } from '@/audit/types'
+import { otherKey, type Answers, type AnswerValue, type Block, type FlagLevel, type Module, type Part } from '@/audit/types'
 import { blockFlags, isAnswered, isVisible } from '@/audit/flags'
 import { Field } from '@/audit/fields/Field'
 import { MonoLabel } from '@/components/ui/mono-label'
@@ -67,7 +67,7 @@ export function BlockView({
       </FadeIn>
 
       <div className="flex flex-col gap-10">
-        {visible.map((q, i) => {
+        {visible.map((q) => {
           const answered = isAnswered(answers[q.id])
           return (
             <section key={q.id} id={`q-${q.id}`} className="scroll-mt-24">
@@ -85,7 +85,8 @@ export function BlockView({
                 question={q}
                 value={answers[q.id]}
                 onChange={(v) => onAnswer(q.id, v)}
-                autoFocus={i === 0 && !answered && (q.kind === 'short' || q.kind === 'long')}
+                otherValue={(answers[otherKey(q.id)] as string | undefined) ?? ''}
+                onOtherChange={(v) => onAnswer(otherKey(q.id), v || undefined)}
               />
 
               {answered && q.followUp && (

@@ -8,13 +8,19 @@
  * outcome, a saving, a turnaround or a recommendation dressed as a fact — the same rule
  * that governs every other Finance OS surface.
  */
-import type { Answers, Part, Question, RaisedFlag, Row, Session } from './types'
+import { OTHER_VALUE, otherKey, type Answers, type Part, type Question, type RaisedFlag, type Row, type Session } from './types'
 import { isAnswered, isVisible, raisedFlags } from './flags'
 
 /* ── Formatting ────────────────────────────────────────────────────────────── */
 
-function formatValue(q: Question, v: Answers[string]): string {
+function formatValue(q: Question, v: Answers[string], other?: string): string {
   if (!isAnswered(v)) return '—'
+
+  /* A typed "something else" prints what was actually said, not the sentinel. */
+  const label = (value: string): string => {
+    if (value === OTHER_VALUE) return other?.trim() ? other.trim() : 'Something else (not recorded)'
+    return q.choices?.find((c) => c.value === value)?.label ?? value
+  }
 
   if (q.kind === 'table' && Array.isArray(v) && typeof v[0] === 'object') {
     const rows = v as Row[]
@@ -26,16 +32,16 @@ function formatValue(q: Question, v: Answers[string]): string {
   }
 
   if (Array.isArray(v)) {
-    const labels = (v as string[]).map((x) => q.choices?.find((c) => c.value === x)?.label ?? x)
-    return labels.join(', ')
+    return (v as string[]).map(label).join(', ')
   }
 
   if (typeof v === 'number') {
     return q.kind === 'scale' ? `${v} of 5` : String(v)
   }
 
-  const label = q.choices?.find((c) => c.value === v)?.label
-  if (label) return label
+  if (typeof v === 'string' && (v === OTHER_VALUE || q.choices?.some((c) => c.value === v))) {
+    return label(v)
+  }
 
   const s = String(v)
   if (q.kind === 'currency') return `$${s}`
@@ -154,7 +160,7 @@ export function toMarkdown(session: Session, parts: Part[]): string {
         for (const q of qs) {
           out.push(`**${q.prompt}**`)
           out.push('')
-          out.push(formatValue(q, answers[q.id]))
+          out.push(formatValue(q, answers[q.id], answers[otherKey(q.id)] as string | undefined))
           out.push('')
         }
 
