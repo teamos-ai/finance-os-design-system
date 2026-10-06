@@ -12,12 +12,6 @@ import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { ImageWash } from '@/components/ui/image-wash'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
-import {
-  PixelMountains,
-  mountainSvg,
-  MOUNTAIN_VARIANTS,
-  type MountainVariant,
-} from '@/components/brand/pixel-mountains'
 
 const OVERLAY_INSPECT: InspectData = {
   name: 'Gradient overlay',
@@ -27,15 +21,24 @@ const OVERLAY_INSPECT: InspectData = {
   download: { filename: 'image-overlay.css', content: '.image-scrim {\n  background: linear-gradient(to top, rgba(8,12,18,0.88) 0%, transparent 55%);\n}', mime: 'text/css' },
 }
 
-/** Each background tile carries its own inspector: a real, standalone .svg download. */
-function backgroundInspect(v: MountainVariant, index: number): InspectData {
+/** Pixel-art mountain backgrounds — production WEBP, tagged for website backdrops. */
+const BACKGROUNDS: ReadonlyArray<{ id: string; label: string; note: string }> = [
+  { id: 'still-waters', label: 'Still Waters', note: 'lake · central peak' },
+  { id: 'dense-range', label: 'Dense Range', note: 'dithered ridgeline' },
+  { id: 'river-valley', label: 'River Valley', note: 'valley · winding river' },
+  { id: 'rolling-mist', label: 'Rolling Mist', note: 'soft haze layers' },
+]
+
+/** Each background tile carries its own inspector: a real .webp download. */
+function backgroundInspect(b: (typeof BACKGROUNDS)[number]): InspectData {
+  const file = `/images/backgrounds/${b.id}.webp`
   return {
-    name: v.label,
+    name: b.label,
     explain:
-      'A true-vector pixel-mountain background, built in-code from the Atlas Blue ramp — no raster, no autotrace. Drop it behind a hero or section: it scales to any width, themes to the blue system, and a handful of light pixels twinkle gently (frozen under reduced-motion).',
-    token: 'Atlas Blue ramp · 16/9 · shape-rendering: crispEdges · fos-twinkle',
-    code: `import { PixelMountains, MOUNTAIN_VARIANTS } from '@/components/brand/pixel-mountains'\n\n<div className="relative aspect-[16/9]">\n  <PixelMountains variant={MOUNTAIN_VARIANTS[${index}]} className="absolute inset-0 h-full w-full" />\n</div>`,
-    download: { filename: `bg-${v.id}.svg`, content: mountainSvg(v), mime: 'image/svg+xml' },
+      'A production-grade pixel-art mountain background in the Atlas Blue palette, for section and hero backdrops. High-resolution WEBP — drop it behind content and add the bottom-up scrim (below) whenever copy sits on top.',
+    token: 'WEBP · 16/9 · Atlas Blue palette',
+    code: `<div className="relative aspect-[16/9] overflow-hidden rounded-md border border-border">\n  <img src="${file}" alt="${b.label}" className="absolute inset-0 h-full w-full object-cover" />\n</div>`,
+    download: { filename: `bg-${b.id}.webp`, href: file },
   }
 }
 
@@ -92,45 +95,48 @@ export function ImageLibrarySection() {
       id="imagery"
       eyebrow="17 - Image Library"
       title="Image Library"
-      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Backgrounds are true vector, built in-code from the Atlas Blue ramp. Until shoots land, washes from the same blue-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
+      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Backgrounds are production-grade pixel-art WEBP in the Atlas Blue palette. Until shoots land, washes from the same blue-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
     >
-      {/* Backgrounds — vector website backdrops */}
+      {/* Backgrounds — pixel-art website backdrops (WEBP) */}
       <div className="mb-14">
         <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
           <MonoLabel number="17.1" dot>
             Backgrounds
           </MonoLabel>
-          <span className="font-mono text-caption text-fg-subtle">vector · website use · twinkle</span>
+          <span className="font-mono text-caption text-fg-subtle">WEBP · website use</span>
         </div>
         <p className="mb-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          Retro-pixel blue mountain scenes for section and hero backdrops — true SVG, so they scale to
-          any width and stay razor-sharp. Every tone is drawn from the Atlas Blue ramp, and a handful of
-          light pixels twinkle gently, almost below notice (and freeze under reduced-motion). Open any
-          tile’s <span className="font-mono text-caption">+</span> to download a standalone, self-animating{' '}
-          <span className="font-mono text-caption">.svg</span>.
+          Retro pixel-art blue mountain scenes for section and hero backdrops — high-resolution WEBP, drawn
+          from the Atlas Blue palette. Pair with the bottom-up scrim (17.3) whenever copy sits on top. Open
+          any tile’s <span className="font-mono text-caption">+</span> to download the{' '}
+          <span className="font-mono text-caption">.webp</span>.
         </p>
         <div className="grid gap-5 md:grid-cols-2">
-          {MOUNTAIN_VARIANTS.map((v, i) => (
-            <div key={v.id}>
-              <Inspectable {...backgroundInspect(v, i)}>
+          {BACKGROUNDS.map((b) => (
+            <div key={b.id}>
+              <Inspectable {...backgroundInspect(b)}>
                 <div className="overflow-hidden rounded-md border border-border shadow-md">
                   <div className="relative aspect-[16/9]">
-                    <PixelMountains variant={v} className="absolute inset-0 h-full w-full" />
+                    <img
+                      src={`/images/backgrounds/${b.id}.webp`}
+                      alt={`${b.label} — pixel-art mountain background`}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
                   </div>
                 </div>
               </Inspectable>
               <div className="mt-2 flex items-baseline justify-between gap-2">
-                <span className="font-display text-body-md font-medium text-fg">{v.label}</span>
-                <span className="font-mono text-caption text-fg-subtle">{v.note}</span>
+                <span className="font-display text-body-md font-medium text-fg">{b.label}</span>
+                <span className="font-mono text-caption text-fg-subtle">{b.note}</span>
               </div>
             </div>
           ))}
         </div>
         <p className="mt-5 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          Add a background by appending one entry to <span className="font-mono text-caption">MOUNTAIN_VARIANTS</span>{' '}
-          in <span className="font-mono text-caption">pixel-mountains.tsx</span> — a new seed and feature
-          (<span className="font-mono text-caption">lake · dense · valley · mist</span>) renders a fresh scene
-          and its download, no new assets to manage.
+          Add a background by dropping a 16/9 WEBP into{' '}
+          <span className="font-mono text-caption">public/images/backgrounds</span> and appending an entry to{' '}
+          <span className="font-mono text-caption">BACKGROUNDS</span> here — id, label and note.
         </p>
       </div>
 
