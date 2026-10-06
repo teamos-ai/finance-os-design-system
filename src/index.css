@@ -99,6 +99,17 @@ main > section:nth-of-type(3n + 2)::before {
   animation: fos-marquee 40s linear infinite;
 }
 
+/* Pixel-mountain backgrounds — a handful of light pixels breathe on/off, almost unnoticed.
+   Per-star delay/duration + opacity range come from inline style; the guard below freezes it. */
+@keyframes fos-twinkle {
+  0%, 100% { opacity: var(--tw-min, 0.1); }
+  50% { opacity: var(--tw-max, 0.4); }
+}
+.fos-twinkle {
+  opacity: var(--tw-min, 0.1);
+  animation: fos-twinkle 4s ease-in-out infinite;
+}
+
 /* Respect reduced-motion globally (brief requirement) */
 @media (prefers-reduced-motion: reduce) {
   *,

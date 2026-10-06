@@ -11,7 +11,13 @@ import { Building2, LineChart, Handshake, ShieldCheck, Check, X } from 'lucide-r
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { ImageWash } from '@/components/ui/image-wash'
-import type { InspectData } from '@/components/ui/inspectable'
+import { Inspectable, type InspectData } from '@/components/ui/inspectable'
+import {
+  PixelMountains,
+  mountainSvg,
+  MOUNTAIN_VARIANTS,
+  type MountainVariant,
+} from '@/components/brand/pixel-mountains'
 
 const OVERLAY_INSPECT: InspectData = {
   name: 'Gradient overlay',
@@ -19,6 +25,18 @@ const OVERLAY_INSPECT: InspectData = {
   token: 'bottom-up scrim · inverse-fg copy',
   code: 'background: linear-gradient(to top, rgba(8,12,18,0.88) 0%, transparent 55%);',
   download: { filename: 'image-overlay.css', content: '.image-scrim {\n  background: linear-gradient(to top, rgba(8,12,18,0.88) 0%, transparent 55%);\n}', mime: 'text/css' },
+}
+
+/** Each background tile carries its own inspector: a real, standalone .svg download. */
+function backgroundInspect(v: MountainVariant, index: number): InspectData {
+  return {
+    name: v.label,
+    explain:
+      'A true-vector pixel-mountain background, built in-code from the Atlas Blue ramp — no raster, no autotrace. Drop it behind a hero or section: it scales to any width, themes to the blue system, and a handful of light pixels twinkle gently (frozen under reduced-motion).',
+    token: 'Atlas Blue ramp · 16/9 · shape-rendering: crispEdges · fos-twinkle',
+    code: `import { PixelMountains, MOUNTAIN_VARIANTS } from '@/components/brand/pixel-mountains'\n\n<div className="relative aspect-[16/9]">\n  <PixelMountains variant={MOUNTAIN_VARIANTS[${index}]} className="absolute inset-0 h-full w-full" />\n</div>`,
+    download: { filename: `bg-${v.id}.svg`, content: mountainSvg(v), mime: 'image/svg+xml' },
+  }
 }
 
 /** Aspect-ratio frames the system ships against — each a draft wash standing in for a shoot. */
@@ -74,12 +92,52 @@ export function ImageLibrarySection() {
       id="imagery"
       eyebrow="17 - Image Library"
       title="Image Library"
-      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Until shoots land, washes built from the signature blue-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
+      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Backgrounds are true vector, built in-code from the Atlas Blue ramp. Until shoots land, washes from the same blue-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
     >
-      {/* Aspect-ratio frames */}
+      {/* Backgrounds — vector website backdrops */}
       <div className="mb-14">
         <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
           <MonoLabel number="17.1" dot>
+            Backgrounds
+          </MonoLabel>
+          <span className="font-mono text-caption text-fg-subtle">vector · website use · twinkle</span>
+        </div>
+        <p className="mb-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
+          Retro-pixel blue mountain scenes for section and hero backdrops — true SVG, so they scale to
+          any width and stay razor-sharp. Every tone is drawn from the Atlas Blue ramp, and a handful of
+          light pixels twinkle gently, almost below notice (and freeze under reduced-motion). Open any
+          tile’s <span className="font-mono text-caption">+</span> to download a standalone, self-animating{' '}
+          <span className="font-mono text-caption">.svg</span>.
+        </p>
+        <div className="grid gap-5 md:grid-cols-2">
+          {MOUNTAIN_VARIANTS.map((v, i) => (
+            <div key={v.id}>
+              <Inspectable {...backgroundInspect(v, i)}>
+                <div className="overflow-hidden rounded-md border border-border shadow-md">
+                  <div className="relative aspect-[16/9]">
+                    <PixelMountains variant={v} className="absolute inset-0 h-full w-full" />
+                  </div>
+                </div>
+              </Inspectable>
+              <div className="mt-2 flex items-baseline justify-between gap-2">
+                <span className="font-display text-body-md font-medium text-fg">{v.label}</span>
+                <span className="font-mono text-caption text-fg-subtle">{v.note}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-5 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
+          Add a background by appending one entry to <span className="font-mono text-caption">MOUNTAIN_VARIANTS</span>{' '}
+          in <span className="font-mono text-caption">pixel-mountains.tsx</span> — a new seed and feature
+          (<span className="font-mono text-caption">lake · dense · valley · mist</span>) renders a fresh scene
+          and its download, no new assets to manage.
+        </p>
+      </div>
+
+      {/* Aspect-ratio frames */}
+      <div className="mb-14">
+        <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
+          <MonoLabel number="17.2" dot>
             Aspect-ratio frames
           </MonoLabel>
         </div>
@@ -112,7 +170,7 @@ export function ImageLibrarySection() {
       {/* Gradient overlay over image */}
       <div className="mb-14">
         <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
-          <MonoLabel number="17.2" dot>
+          <MonoLabel number="17.3" dot>
             Gradient overlay
           </MonoLabel>
           <span className="font-mono text-caption text-fg-subtle">copy over photography</span>
@@ -156,7 +214,7 @@ export function ImageLibrarySection() {
 
       {/* Approved / forbidden */}
       <div className="mb-14">
-        <MonoLabel number="17.3" dot className="mb-5">
+        <MonoLabel number="17.4" dot className="mb-5">
           Direction — approved &amp; forbidden
         </MonoLabel>
         <div className="grid gap-5 md:grid-cols-2">
@@ -210,7 +268,7 @@ export function ImageLibrarySection() {
 
       {/* Image treatment */}
       <div>
-        <MonoLabel number="17.4" dot className="mb-5">
+        <MonoLabel number="17.5" dot className="mb-5">
           Image treatment
         </MonoLabel>
         <div className="grid gap-4 sm:grid-cols-3">
