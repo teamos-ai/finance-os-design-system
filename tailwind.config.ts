@@ -111,6 +111,18 @@ export default {
         'gradient-accent': 'var(--c-gradient-accent)',
       },
 
+      /* Aurora background — slow horizontal drift of the light columns.
+         Frozen for prefers-reduced-motion by the global guard in index.css. */
+      animation: {
+        aurora: 'aurora 60s linear infinite',
+      },
+      keyframes: {
+        aurora: {
+          from: { backgroundPosition: '50% 50%, 50% 50%' },
+          to: { backgroundPosition: '350% 50%, 350% 50%' },
+        },
+      },
+
       transitionTimingFunction: {
         out: 'var(--ease-out)',
         'in-out': 'var(--ease-in-out)',

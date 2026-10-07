@@ -12,6 +12,7 @@ import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { ImageWash } from '@/components/ui/image-wash'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
+import { AuroraBackground, type AuroraTone } from '@/components/ui/aurora-background'
 
 const OVERLAY_INSPECT: InspectData = {
   name: 'Gradient overlay',
@@ -72,6 +73,29 @@ function backgroundInspect(b: Bg): InspectData {
     token: 'WEBP · 16/9 · Atlas Blue palette',
     code: `<div className="relative aspect-[16/9] overflow-hidden rounded-md border border-border">\n  <img src="${file}" alt="${b.label}" className="absolute inset-0 h-full w-full object-cover" />\n</div>`,
     download: { filename: `bg-${b.id}.webp`, href: file },
+  }
+}
+
+/** Aurora backgrounds — the live animated component, two blue + two grey tones. */
+const AURORA_TONES: ReadonlyArray<{ tone: AuroraTone; label: string; note: string }> = [
+  { tone: 'blue', label: 'Blue', note: 'Atlas Blue aurora' },
+  { tone: 'sky', label: 'Sky', note: 'pale blue aurora' },
+  { tone: 'slate', label: 'Slate', note: 'neutral grey aurora' },
+  { tone: 'mist', label: 'Mist', note: 'pale grey aurora' },
+]
+
+function auroraInspect(a: (typeof AURORA_TONES)[number]): InspectData {
+  return {
+    name: `Aurora — ${a.label}`,
+    explain:
+      'Animated aurora light-columns drifting over the white canvas — a full-bleed section or hero backdrop that sits behind content. Colours are tokenised (blue ramp / neutral ramp); the 60s drift freezes under prefers-reduced-motion.',
+    token: `AuroraBackground · tone="${a.tone}" · animate-aurora 60s`,
+    code: `import { AuroraBackground } from '@/components/ui/aurora-background'\n\n<AuroraBackground tone="${a.tone}" className="h-screen">\n  {/* hero content */}\n</AuroraBackground>`,
+    download: {
+      filename: `aurora-${a.tone}.tsx`,
+      content: `<AuroraBackground tone="${a.tone}" className="h-screen">\n  {/* hero content */}\n</AuroraBackground>\n`,
+      mime: 'text/plain',
+    },
   }
 }
 
@@ -136,15 +160,15 @@ export function ImageLibrarySection() {
           <MonoLabel number="17.1" dot>
             Backgrounds
           </MonoLabel>
-          <span className="font-mono text-caption text-fg-subtle">WEBP · website use</span>
+          <span className="font-mono text-caption text-fg-subtle">WEBP + live aurora · website use</span>
         </div>
         <p className="mb-8 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          Retro pixel-art backdrops for sections and heroes — high-resolution WEBP, drawn from the Atlas Blue
-          palette, in three weights: full <span className="text-fg">Scenes</span>, faded{' '}
-          <span className="text-fg">Horizons</span>, and plain <span className="text-fg">Washes</span>. Pair with
-          the bottom-up scrim (17.3) whenever copy sits on top. Open any tile’s{' '}
-          <span className="font-mono text-caption">+</span> to download the{' '}
-          <span className="font-mono text-caption">.webp</span>.
+          Backdrops for sections and heroes — drawn from the Atlas Blue palette. Four weights: full{' '}
+          <span className="text-fg">Scenes</span>, faded <span className="text-fg">Horizons</span>, plain{' '}
+          <span className="text-fg">Washes</span> (all high-resolution WEBP), and a live, animated{' '}
+          <span className="text-fg">Aurora</span> component. Pair with the bottom-up scrim (17.3) whenever copy
+          sits on top. Open any tile’s <span className="font-mono text-caption">+</span> to download the asset or
+          its usage snippet.
         </p>
         {BG_GROUPS.map((g) => (
           <div key={g.group} className="mb-9 last:mb-0">
@@ -178,10 +202,40 @@ export function ImageLibrarySection() {
             </div>
           </div>
         ))}
+        {/* Aurora — the live animated component (2 blue + 2 grey tones) */}
+        <div className="mb-9">
+          <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span className="font-mono text-caption font-bold uppercase tracking-[0.1em] text-fg">
+              Aurora
+            </span>
+            <span className="font-body text-body-sm text-fg-muted">
+              Live light-columns (a component, not an image) — drifts gently, freezes under reduced-motion.
+            </span>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {AURORA_TONES.map((a) => (
+              <div key={a.tone}>
+                <Inspectable {...auroraInspect(a)}>
+                  <div className="overflow-hidden rounded-md border border-border shadow-md">
+                    <div className="relative aspect-[16/9]">
+                      <AuroraBackground tone={a.tone} className="absolute inset-0 h-full min-h-0" />
+                    </div>
+                  </div>
+                </Inspectable>
+                <div className="mt-2 flex items-baseline justify-between gap-2">
+                  <span className="font-display text-body-md font-medium text-fg">{a.label}</span>
+                  <span className="font-mono text-caption text-fg-subtle">{a.note}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         <p className="mt-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          Add a background by dropping a 16/9 WEBP into{' '}
-          <span className="font-mono text-caption">public/images/backgrounds</span> and appending an entry to the
-          matching group in <span className="font-mono text-caption">BG_GROUPS</span> here — id, label and note.
+          Add a still background by dropping a 16/9 WEBP into{' '}
+          <span className="font-mono text-caption">public/images/backgrounds</span> and appending to a group in{' '}
+          <span className="font-mono text-caption">BG_GROUPS</span>; the live{' '}
+          <span className="font-mono text-caption">&lt;AuroraBackground&gt;</span> takes{' '}
+          <span className="font-mono text-caption">blue · sky · slate · mist</span>.
         </p>
       </div>
 
