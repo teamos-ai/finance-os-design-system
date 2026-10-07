@@ -21,21 +21,54 @@ const OVERLAY_INSPECT: InspectData = {
   download: { filename: 'image-overlay.css', content: '.image-scrim {\n  background: linear-gradient(to top, rgba(8,12,18,0.88) 0%, transparent 55%);\n}', mime: 'text/css' },
 }
 
-/** Pixel-art mountain backgrounds — production WEBP, tagged for website backdrops. */
-const BACKGROUNDS: ReadonlyArray<{ id: string; label: string; note: string }> = [
-  { id: 'still-waters', label: 'Still Waters', note: 'lake · central peak' },
-  { id: 'dense-range', label: 'Dense Range', note: 'dithered ridgeline' },
-  { id: 'river-valley', label: 'River Valley', note: 'valley · winding river' },
-  { id: 'rolling-mist', label: 'Rolling Mist', note: 'soft haze layers' },
+/** Pixel-art backgrounds — production WEBP, tagged for website backdrops. Grouped by kind. */
+interface Bg {
+  id: string
+  label: string
+  note: string
+}
+const BG_GROUPS: ReadonlyArray<{ group: string; blurb: string; items: Bg[] }> = [
+  {
+    group: 'Scenes',
+    blurb: 'Full pixel-art landscapes — section heroes and feature panels.',
+    items: [
+      { id: 'still-waters', label: 'Still Waters', note: 'lake · central peak' },
+      { id: 'dense-range', label: 'Dense Range', note: 'dithered ridgeline' },
+      { id: 'river-valley', label: 'River Valley', note: 'valley · winding river' },
+      { id: 'rolling-mist', label: 'Rolling Mist', note: 'soft haze layers' },
+    ],
+  },
+  {
+    group: 'Horizons',
+    blurb: 'Faded ridgelines dissolving into white — calm backdrops that leave room for copy.',
+    items: [
+      { id: 'mist-pale', label: 'Pale', note: 'pale haze → white' },
+      { id: 'mist-sky', label: 'Sky', note: 'sky blue → white' },
+      { id: 'mist-blue', label: 'Blue', note: 'blue haze → white' },
+      { id: 'mist-navy', label: 'Navy', note: 'navy haze → white' },
+    ],
+  },
+  {
+    group: 'Washes',
+    blurb: 'Plain vertical gradients fading to white — the quietest backdrop, including two neutral greys.',
+    items: [
+      { id: 'wash-pale', label: 'Pale', note: 'pale blue → white' },
+      { id: 'wash-sky', label: 'Sky', note: 'sky blue → white' },
+      { id: 'wash-blue', label: 'Blue', note: 'blue → white' },
+      { id: 'wash-navy', label: 'Navy', note: 'navy → white' },
+      { id: 'wash-stone', label: 'Stone', note: 'grey #EDEFF2 → white' },
+      { id: 'wash-cloud', label: 'Cloud', note: 'grey #F6F7F9 → white' },
+    ],
+  },
 ]
 
 /** Each background tile carries its own inspector: a real .webp download. */
-function backgroundInspect(b: (typeof BACKGROUNDS)[number]): InspectData {
+function backgroundInspect(b: Bg): InspectData {
   const file = `/images/backgrounds/${b.id}.webp`
   return {
     name: b.label,
     explain:
-      'A production-grade pixel-art mountain background in the Atlas Blue palette, for section and hero backdrops. High-resolution WEBP — drop it behind content and add the bottom-up scrim (below) whenever copy sits on top.',
+      'A production-grade pixel-art background in the Atlas Blue palette, for section and hero backdrops. High-resolution WEBP — drop it behind content and add the bottom-up scrim (17.3) whenever copy sits on top.',
     token: 'WEBP · 16/9 · Atlas Blue palette',
     code: `<div className="relative aspect-[16/9] overflow-hidden rounded-md border border-border">\n  <img src="${file}" alt="${b.label}" className="absolute inset-0 h-full w-full object-cover" />\n</div>`,
     download: { filename: `bg-${b.id}.webp`, href: file },
@@ -105,38 +138,50 @@ export function ImageLibrarySection() {
           </MonoLabel>
           <span className="font-mono text-caption text-fg-subtle">WEBP · website use</span>
         </div>
-        <p className="mb-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          Retro pixel-art blue mountain scenes for section and hero backdrops — high-resolution WEBP, drawn
-          from the Atlas Blue palette. Pair with the bottom-up scrim (17.3) whenever copy sits on top. Open
-          any tile’s <span className="font-mono text-caption">+</span> to download the{' '}
+        <p className="mb-8 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
+          Retro pixel-art backdrops for sections and heroes — high-resolution WEBP, drawn from the Atlas Blue
+          palette, in three weights: full <span className="text-fg">Scenes</span>, faded{' '}
+          <span className="text-fg">Horizons</span>, and plain <span className="text-fg">Washes</span>. Pair with
+          the bottom-up scrim (17.3) whenever copy sits on top. Open any tile’s{' '}
+          <span className="font-mono text-caption">+</span> to download the{' '}
           <span className="font-mono text-caption">.webp</span>.
         </p>
-        <div className="grid gap-5 md:grid-cols-2">
-          {BACKGROUNDS.map((b) => (
-            <div key={b.id}>
-              <Inspectable {...backgroundInspect(b)}>
-                <div className="overflow-hidden rounded-md border border-border shadow-md">
-                  <div className="relative aspect-[16/9]">
-                    <img
-                      src={`/images/backgrounds/${b.id}.webp`}
-                      alt={`${b.label} — pixel-art mountain background`}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
+        {BG_GROUPS.map((g) => (
+          <div key={g.group} className="mb-9 last:mb-0">
+            <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="font-mono text-caption font-bold uppercase tracking-[0.1em] text-fg">
+                {g.group}
+              </span>
+              <span className="font-body text-body-sm text-fg-muted">{g.blurb}</span>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              {g.items.map((b) => (
+                <div key={b.id}>
+                  <Inspectable {...backgroundInspect(b)}>
+                    <div className="overflow-hidden rounded-md border border-border shadow-md">
+                      <div className="relative aspect-[16/9]">
+                        <img
+                          src={`/images/backgrounds/${b.id}.webp`}
+                          alt={`${b.label} — ${g.group} background`}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </Inspectable>
+                  <div className="mt-2 flex items-baseline justify-between gap-2">
+                    <span className="font-display text-body-md font-medium text-fg">{b.label}</span>
+                    <span className="font-mono text-caption text-fg-subtle">{b.note}</span>
                   </div>
                 </div>
-              </Inspectable>
-              <div className="mt-2 flex items-baseline justify-between gap-2">
-                <span className="font-display text-body-md font-medium text-fg">{b.label}</span>
-                <span className="font-mono text-caption text-fg-subtle">{b.note}</span>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <p className="mt-5 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
+          </div>
+        ))}
+        <p className="mt-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
           Add a background by dropping a 16/9 WEBP into{' '}
-          <span className="font-mono text-caption">public/images/backgrounds</span> and appending an entry to{' '}
-          <span className="font-mono text-caption">BACKGROUNDS</span> here — id, label and note.
+          <span className="font-mono text-caption">public/images/backgrounds</span> and appending an entry to the
+          matching group in <span className="font-mono text-caption">BG_GROUPS</span> here — id, label and note.
         </p>
       </div>
 
