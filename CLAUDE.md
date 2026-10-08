@@ -14,13 +14,22 @@ not a showcase exhibit — it is used live on client calls.
 - **ONE theme: Light / Clarity.** Pure white canvas, `#F6F7F9` rhythm ground. There is no dark
   mode, no paper mode, and no theme toggle. `src/lib/theme.tsx` and `theme-toggle.tsx` do not
   exist; `tokens.css` has no `[data-theme]` blocks.
-- **BLUE-ONLY.** The sole brand accent is **Atlas Blue `#33488F`** (ramp `--p-blue-50…500`).
-  **There is no Signal Gold, no Momentum Amber, no orange and no gold anywhere.** They were
-  removed in `bc4297a` (theme unification) and `ec1384f` (blue-only migration) to match the
-  production site financeos.au. Do not reintroduce them, and do not trust any doc that says
-  otherwise.
-- Semantic state hues (success green, danger red) remain — they are functional signals, not
-  brand colour. `warning` is deliberately a neutral grey tint, not a warm hue.
+- **BLUE-PRIMARY.** The sole brand accent is **Atlas Blue `#33488F`** (ramp `--p-blue-50…500`),
+  and **it owns ALL typographic highlight** — headings and any emphasised word inside a header or
+  body copy use `text-highlight` / `--c-accent-text` (blue), never a second hue. **There is no gold
+  and no orange anywhere**, and blue is never traded out of type emphasis.
+- **AMBER is a functional STATUS signal only** — `#D99A3E` base / `#8A5A0F` AA text /
+  `rgba(217,154,62,.16)` soft (tokens `--p-amber-*` and `--c-amber` / `--c-amber-text` /
+  `--c-amber-soft`; Tailwind `amber` / `amber-text` / `amber-soft`; `Badge variant="amber"`). It
+  marks attention/pending state (overdue, awaiting, at-risk) and star ratings, used **sparingly
+  (≈ one amber moment per view)**. Never a brand accent, never a CTA, never applied to type or
+  headings, never a ribbon. (This reinstates a narrow amber that `ec1384f` had removed —
+  intentional, approved 2026-10-08; any doc still saying "no amber anywhere" is stale.)
+- Semantic state hues (success green, danger red) remain — functional signals, not brand colour.
+  `warning` now resolves to **amber** (attention/pending), reversing the earlier neutral-grey tint.
+- **NO RIBBONS (hard rule).** Never put an accent side-rail, vertical bar, left-edge strip, corner
+  or diagonal banner, or edge-clipped tag on any card, box, panel or button — anywhere in the DS or
+  the site. Emphasis comes from elevation, a full border, scale, or a CENTERED top badge only.
 - Buttons: primary = solid blue fill with a white label; secondary = blue outline. **Focus rings
   are NEUTRAL (`--c-ring` = `--c-fg-subtle`), never the accent.**
 - Type: **Spline Sans** (display/headings) + **Anonymous Pro** (body/mono), self-hosted via

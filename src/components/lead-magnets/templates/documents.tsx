@@ -150,7 +150,7 @@ export function CaseStudyTemplate() {
           </div>
         ))}
       </div>
-      <div className="mt-4 rounded-md border-l-2 border-accent bg-canvas-muted p-4">
+      <div className="mt-4 rounded-md border border-border bg-canvas-muted p-4">
         <Quote className="h-5 w-5 text-accent-text" strokeWidth={1.5} />
         <p className="mt-2 font-body text-body-sm italic leading-relaxed text-fg">
           “We stopped losing the 9pm enquiries. That alone changed the quarter.”

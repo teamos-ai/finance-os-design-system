@@ -7,3 +7,6 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 *.log
+
+# playwright-cli local snapshots (tooling)
+.playwright-cli/

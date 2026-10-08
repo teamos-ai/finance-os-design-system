@@ -1,6 +1,6 @@
 /**
- * Card — flat hairline surface. 1px border, soft neutral shadow on hover only.
- * Zero glass. `interactive` adds the hover lift + border darken.
+ * Card — hairline surface with a calm resting lift (layered shadow-sm). 1px border.
+ * Zero glass. `interactive` deepens the shadow + nudges the card up on hover.
  *
  * Compose with CardHeader / CardTitle / CardDescription / CardContent / CardFooter,
  * or drop children in. Opt-in PHOTOGRAPHY: pass `image` (+ `imageAlt`) for a photo with
@@ -18,7 +18,7 @@ import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
 
-const card = cva('relative border transition-all duration-base ease-out', {
+const card = cva('relative border shadow-sm transition-all duration-base ease-out', {
   variants: {
     tone: {
       surface: 'bg-surface border-border',
@@ -27,10 +27,14 @@ const card = cva('relative border transition-all duration-base ease-out', {
     },
     radius: { md: 'rounded-md', lg: 'rounded-lg' },
     padding: { none: 'p-0', sm: 'p-4', md: 'p-6', lg: 'p-8' },
-    interactive: { true: 'hover:border-border-strong hover:shadow-md', false: '' },
+    interactive: { true: 'hover:-translate-y-0.5 hover:border-border-strong hover:shadow-md', false: '' },
   },
   defaultVariants: { tone: 'surface', radius: 'lg', padding: 'md', interactive: false },
 })
+
+/** Inner-content padding map — used for the media-card content column so it does NOT
+ *  inherit the card's border/shadow/bg from a card() reuse. */
+const PAD = { none: 'p-0', sm: 'p-4', md: 'p-6', lg: 'p-8' } as const
 
 /** One item in the meta row — a small mono caption, optionally led by an icon. */
 export interface MetaItem {
@@ -211,7 +215,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     )
 
     const content = (
-      <div className={cn('flex flex-1 flex-col', card({ padding: pad }))}>
+      <div className={cn('flex flex-1 flex-col', PAD[pad])}>
         {meta &&
           (isMetaArray(meta) ? (
             meta.length > 0 && <MetaRow items={meta} className="mb-3" />

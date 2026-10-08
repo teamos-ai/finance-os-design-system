@@ -51,7 +51,7 @@ const TOOL_META: Record<string, { icon: LucideIcon; accent: Accent }> = {
 
 const CARD_INSPECT: InspectData = {
   name: 'Card',
-  explain: 'The base surface — Header, Title, Description, Content, Footer. Flat hairline, one soft shadow on hover, 8px radius. The workhorse the rest of the family is built on.',
+  explain: 'The base surface — Header, Title, Description, Content, Footer. Hairline border with a calm resting lift that deepens on hover, 8px radius. The workhorse the rest of the family is built on.',
   token: 'tone: surface · elevated · soft\npadding: none · sm · md · lg\nradius: md · lg\ninteractive → hover lift (border darkens + one shadow)',
   code: '<Card interactive>\n  <CardHeader>\n    <CardTitle>One pipeline, every enquiry</CardTitle>\n    <CardDescription>…</CardDescription>\n  </CardHeader>\n  <CardContent>…</CardContent>\n  <CardFooter>\n    <Button variant="primary" size="sm">View pipeline</Button>\n  </CardFooter>\n</Card>',
 }
@@ -86,7 +86,7 @@ export function CardsSection() {
       id="cards"
       eyebrow="12 - Cards"
       title="Cards"
-      lead="The card family — a flat hairline surface that scales from a plain text block to a feature cell, a tool tile, an outcome figure and a photo-topped record. One shadow on hover, 8px squircles, zero glass."
+      lead="The card family — a flat hairline surface that scales from a plain text block to a feature cell, a tool tile, an outcome figure and a photo-topped record. Calm resting elevation, 8px squircles, zero glass."
     >
       <div className="flex flex-col gap-8">
         {/* Base card — full anatomy */}

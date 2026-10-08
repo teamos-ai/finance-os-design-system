@@ -124,9 +124,9 @@ export function BlogsSection() {
             process you can actually see.
           </p>
 
-          {/* Pull-quote */}
-          <blockquote className="my-9 border-l-2 border-accent pl-5">
-            <p className="font-display text-title-md italic leading-snug text-fg">
+          {/* Pull-quote — centred, framed by hairlines (no side-rail) */}
+          <blockquote className="my-9 border-y border-border py-7 text-center">
+            <p className="mx-auto max-w-2xl font-display text-title-md italic leading-snug text-fg">
               You cannot fix a leak you cannot see. The first job is to make every enquiry
               land somewhere it will be followed up — automatically, every time.
             </p>

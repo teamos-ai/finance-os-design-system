@@ -4,10 +4,12 @@
    →  component (component-scoped, references semantic).
 
    SINGLE THEME — Light / Clarity (pure white, Atlas Blue accent), matched to the
-   production site financeos.au. BLUE-ONLY: there is no orange, gold or amber — the
-   sole brand accent is Atlas Blue (#33488F). Semantic state hues (success green,
-   danger red) remain, since they are functional signals, not brand colour.
-   The semantic layer lives on :root; components compose from --c-* only.
+   production site financeos.au. BLUE-PRIMARY: the sole brand accent is Atlas Blue
+   (#33488F) and it owns ALL typographic highlight (headings, emphasised words).
+   Semantic state hues (success green, danger red) remain as functional signals.
+   AMBER is admitted ONLY as a functional STATUS signal — attention/pending badges
+   and star ratings — never as brand colour and never applied to type. There is no
+   gold and no orange. The semantic layer lives on :root; components compose from --c-* only.
 
    Buttons: primary = solid blue fill (white label), secondary = blue outline.
    Focus rings are NEUTRAL (never the accent colour).
@@ -40,6 +42,13 @@
   --p-green-700: #0E6B49;
   --p-red-500: #D5292F;
   --p-red-700: #A81E23;
+
+  /* Amber — functional STATUS signal only (attention/pending states, star ratings).
+     NOT a brand accent and NEVER applied to type/headings. Text shade darkened to
+     clear WCAG AA on white (#8A5A0F = 5.9:1). See the "amber = status only" rule. */
+  --p-amber-300: #E8B866;
+  --p-amber-400: #D99A3E; /* base — fills, dots, stars */
+  --p-amber-500: #8A5A0F; /* AA text on white */
 }
 
 /* ----------------------------------------------------------------------------
@@ -82,8 +91,12 @@
 
   --c-success:      var(--p-green-700);
   --c-success-soft: rgba(19, 138, 94, 0.12);
-  --c-warning:      var(--c-fg);              /* warning = neutral caution tint + ink icon (no warm hue) */
-  --c-warning-soft: rgba(16, 19, 27, 0.06);   /* neutral grey caution surface — distinct from blue info */
+  /* amber = functional STATUS signal (attention/pending badges + star ratings). Status-only, never on type. */
+  --c-amber:        var(--p-amber-400);
+  --c-amber-text:   var(--p-amber-500);       /* AA on white (5.9:1) */
+  --c-amber-soft:   rgba(217, 154, 62, 0.16);
+  --c-warning:      var(--c-amber-text);      /* attention/pending now reads amber (reversed from the old neutral tint) */
+  --c-warning-soft: var(--c-amber-soft);
   --c-danger:       var(--p-red-700);
   --c-danger-soft:  rgba(213, 41, 47, 0.10);
   --c-info:         var(--p-blue-300);        /* lighter blue so 'info' stays legible vs the #33488F accent */
@@ -92,10 +105,19 @@
   --c-ring:            var(--c-fg-subtle); /* NEUTRAL focus ring */
   --c-glow-accent:     rgba(51, 72, 143, 0.28);
   --c-gradient-accent: linear-gradient(135deg, var(--p-blue-300) 0%, var(--p-blue-400) 100%);
+  --c-img-outline:     rgba(16, 19, 27, 0.10); /* neutral media/image hairline — inset, never tinted */
 
-  --shadow-sm: 0 1px 2px rgba(16, 19, 27, 0.06);
-  --shadow-md: 0 8px 24px -8px rgba(16, 19, 27, 0.12);
-  --shadow-lg: 0 20px 50px -16px rgba(16, 19, 27, 0.16);
+  /* grey-blue scroll-rhythm grounds — calm section washes (subtle; subtle text still clears AA) */
+  --wash-mist: linear-gradient(180deg, #FBFCFE 0%, #F2F5FB 100%);
+  --wash-haze: linear-gradient(180deg, #F6F8FC 0%, #ECF1F9 100%);
+  --wash-tint: radial-gradient(120% 130% at 100% 0%, rgba(51, 72, 143, 0.08), transparent 55%),
+               linear-gradient(180deg, #F4F7FC 0%, #EBF0F8 100%);
+  --wash-deep: linear-gradient(180deg, #F2F6FC 0%, #E8EEF8 100%);
+
+  /* elevation — calm LAYERED lift (not one flat blur); pairs with the hairline border. */
+  --shadow-sm: 0 1px 2px -1px rgba(16, 19, 27, 0.06), 0 2px 6px -2px rgba(16, 19, 27, 0.05);
+  --shadow-md: 0 4px 10px -4px rgba(16, 19, 27, 0.09), 0 12px 24px -10px rgba(22, 32, 60, 0.10);
+  --shadow-lg: 0 10px 22px -12px rgba(22, 32, 60, 0.13), 0 24px 44px -24px rgba(22, 32, 60, 0.16);
   --shadow-glow: 0 8px 30px -10px var(--c-glow-accent);
 }
 

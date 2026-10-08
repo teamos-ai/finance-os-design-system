@@ -35,6 +35,7 @@ const BADGE_VARIANTS: { variant: NonNullable<BadgeProps['variant']>; label: stri
   { variant: 'blue', label: 'Blue' },
   { variant: 'success', label: 'Funded' },
   { variant: 'warn', label: 'Review' },
+  { variant: 'amber', label: 'Awaiting' },
   { variant: 'danger', label: 'Overdue' },
   { variant: 'info', label: 'Info' },
   { variant: 'outline', label: 'Outline' },
@@ -204,7 +205,7 @@ export function ComponentsSection() {
         <Inspectable
           name="Badge"
           explain="A small status pill for state and taxonomy. Each variant maps to a semantic colour, and an optional leading dot reinforces the meaning at a glance."
-          token={`variant: neutral · blue · success · warn · danger · info · outline\n--c-success / --c-warning / --c-danger / --c-info (soft fills)`}
+          token={`variant: neutral · blue · success · warn · amber · danger · info · outline\n--c-success / --c-warning / --c-amber / --c-danger / --c-info (soft fills)`}
           code={`<Badge variant="success" dot>Funded</Badge>`}
         >
           <Demo label="Badge — every variant">

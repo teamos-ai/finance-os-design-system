@@ -50,6 +50,8 @@ export default {
       inspect: { DEFAULT: 'var(--c-inspect)', fg: 'var(--c-inspect-fg)' },
       success: { DEFAULT: 'var(--c-success)', soft: 'var(--c-success-soft)' },
       warning: { DEFAULT: 'var(--c-warning)', soft: 'var(--c-warning-soft)' },
+      /* amber — functional STATUS signal only (attention/pending + stars); never on type */
+      amber: { DEFAULT: 'var(--c-amber)', text: 'var(--c-amber-text)', soft: 'var(--c-amber-soft)' },
       danger: {
         DEFAULT: 'var(--c-danger)',
         soft: 'var(--c-danger-soft)',
@@ -109,6 +111,11 @@ export default {
 
       backgroundImage: {
         'gradient-accent': 'var(--c-gradient-accent)',
+        /* grey-blue scroll-rhythm grounds */
+        'wash-mist': 'var(--wash-mist)',
+        'wash-haze': 'var(--wash-haze)',
+        'wash-tint': 'var(--wash-tint)',
+        'wash-deep': 'var(--wash-deep)',
       },
 
       /* Aurora background — slow horizontal drift of the light columns.
