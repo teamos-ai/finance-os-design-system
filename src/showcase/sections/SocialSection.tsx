@@ -104,7 +104,7 @@ export function SocialSection() {
   return (
     <Section
       id="social"
-      eyebrow="19 - Social Media"
+      eyebrow="26 - Social Media"
       title="Social media"
       lead="The social toolkit plus a client-side Social Post Studio. Pick a platform and a post type, write a headline, and a live preview renders on-brand at the right aspect ratio — square for the feed, wide for the timeline."
     >

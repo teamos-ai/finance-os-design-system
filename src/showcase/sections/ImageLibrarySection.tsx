@@ -150,7 +150,7 @@ export function ImageLibrarySection() {
   return (
     <Section
       id="imagery"
-      eyebrow="17 - Image Library"
+      eyebrow="24 - Image Library"
       title="Image Library"
       lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Backgrounds are production-grade pixel-art WEBP in the Atlas Blue palette. Until shoots land, washes from the same blue-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
     >

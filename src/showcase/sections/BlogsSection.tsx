@@ -57,7 +57,7 @@ export function BlogsSection() {
   return (
     <Section
       id="blogs"
-      eyebrow="15 - Blogs"
+      eyebrow="22 - Blogs"
       title="Blogs"
       lead="The editorial template — article header, a measured prose rhythm with display subheads, an accent pull-quote and inline figure, then a row of related posts."
     >

@@ -39,7 +39,7 @@ export function AuditSection() {
   return (
     <Section
       id="audit"
-      eyebrow="21 - Client Audit"
+      eyebrow="28 - Client Audit"
       title="The client audit instrument"
       lead="A two-call diagnostic for a mortgage or finance brokerage, clicked through live on the conversation. It measures the business against the built broker configuration and produces both a written record and the access checklist for the hands-on pass."
     >

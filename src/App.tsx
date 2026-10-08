@@ -13,6 +13,13 @@ import { LogoSection } from '@/showcase/sections/LogoSection'
 import { ComponentsSection } from '@/showcase/sections/ComponentsSection'
 import { CardsSection } from '@/showcase/sections/CardsSection'
 import { BentoSection } from '@/showcase/sections/BentoSection'
+import { FeaturedSection } from '@/showcase/sections/FeaturedSection'
+import { WidgetsSection } from '@/showcase/sections/WidgetsSection'
+import { TablesSection } from '@/showcase/sections/TablesSection'
+import { PricingSection } from '@/showcase/sections/PricingSection'
+import { FormsSection } from '@/showcase/sections/FormsSection'
+import { TestimonialsSection } from '@/showcase/sections/TestimonialsSection'
+import { ScrollersSection } from '@/showcase/sections/ScrollersSection'
 import { BannersSection } from '@/showcase/sections/BannersSection'
 import { BlogsSection } from '@/showcase/sections/BlogsSection'
 import { WarmupSection } from '@/showcase/sections/WarmupSection'
@@ -44,6 +51,13 @@ export default function App() {
       <ComponentsSection />
       <CardsSection />
       <BentoSection />
+      <FeaturedSection />
+      <WidgetsSection />
+      <TablesSection />
+      <PricingSection />
+      <FormsSection />
+      <TestimonialsSection />
+      <ScrollersSection />
       <BannersSection />
       <BlogsSection />
       <WarmupSection />

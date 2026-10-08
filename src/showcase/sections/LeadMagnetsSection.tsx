@@ -350,7 +350,7 @@ export function LeadMagnetsSection() {
   return (
     <Section
       id="leadmagnets"
-      eyebrow="16 - Lead Magnets"
+      eyebrow="23 - Lead Magnets"
       title="Lead Magnets"
       lead="A template library and framework for spinning up on-brand lead magnets — with motion built in: page-flip for ebooks and magazines, swipe for swipe files, and a checkbox tick for checklists and quizzes. Drop your content into any frame and ship."
     >

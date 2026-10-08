@@ -35,7 +35,7 @@ export function BannersSection() {
   return (
     <Section
       id="banners"
-      eyebrow="14 — Banners"
+      eyebrow="21 — Banners"
       title="Banners"
       lead="Alert, announcement and promo strips for websites, funnels, countdowns and timers. The fixed brand set — black, blue-gradient and white — plus the signature blue-gradient top-of-page banner."
     >

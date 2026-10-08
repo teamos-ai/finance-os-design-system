@@ -3,6 +3,7 @@ import {
   Sparkles, PlayCircle, Compass,
   Palette, Type, Ruler, Layers, Wand2, Shapes,
   Component, CreditCard, LayoutGrid,
+  LayoutTemplate, Gauge, Table, Tags, TextCursorInput, Quote, Images,
   Megaphone, FileText, Calculator, Image, NotebookPen, Share2, MonitorPlay, MailPlus,
   ClipboardList,
 } from 'lucide-react'
@@ -32,6 +33,14 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'components', label: 'Components', Icon: Component, accent: 'blue', group: 'Library' },
   { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'blue', group: 'Library' },
   { id: 'bento', label: 'Bento Box', Icon: LayoutGrid, accent: 'blue', group: 'Library' },
+
+  { id: 'featured', label: 'Featured', Icon: LayoutTemplate, accent: 'blue', group: 'Patterns' },
+  { id: 'widgets', label: 'Dashboard Widgets', Icon: Gauge, accent: 'blue', group: 'Patterns' },
+  { id: 'tables', label: 'Tables', Icon: Table, accent: 'blue', group: 'Patterns' },
+  { id: 'pricing', label: 'Pricing', Icon: Tags, accent: 'blue', group: 'Patterns' },
+  { id: 'forms', label: 'Forms', Icon: TextCursorInput, accent: 'blue', group: 'Patterns' },
+  { id: 'testimonials', label: 'Testimonials', Icon: Quote, accent: 'blue', group: 'Patterns' },
+  { id: 'scrollers', label: 'Scroller Images', Icon: Images, accent: 'blue', group: 'Patterns' },
 
   { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'blue', group: 'Applied' },
   { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'blue', group: 'Applied' },

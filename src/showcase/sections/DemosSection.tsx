@@ -329,7 +329,7 @@ export function DemosSection() {
   return (
     <Section
       id="demos"
-      eyebrow="20 - Live Demo Pages"
+      eyebrow="27 - Live Demo Pages"
       title="Live Demo Pages"
       lead="Two full applied screens — a marketing landing and a CRM dashboard — assembled only from the tokens and components above. Same system, same tokens, no bespoke styling."
     >
