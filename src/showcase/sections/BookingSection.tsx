@@ -1,6 +1,6 @@
 /**
  * BookingSection — everything around one booked "Let's Chat Finance" call: the calendar
- * description, four HTML emails and four SMS, each paste-ready for GHL.
+ * description and invite title, seven HTML emails and five SMS, each paste-ready for GHL.
  *
  * Copy is data (`src/data/booking.ts`); the HTML renders from it via `src/lib/booking-render.ts`.
  * Same budgets as the warm-up section: every control is ghost or outline, the cards collapse and
@@ -12,7 +12,7 @@ import { Section, Demo } from '@/showcase/Section'
 import { CopyButton } from '@/components/ui/copy-button'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { SegmentedControl } from '@/components/ui/segmented'
-import { BOOKING_EMAILS, BOOKING_SMS, CALENDAR, type BookingEmail, type BookingSms } from '@/data/booking'
+import { BOOKING_EMAILS, BOOKING_SMS, CALENDAR, WIRING, type BookingEmail, type BookingSms } from '@/data/booking'
 import { toHtml, withSample } from '@/lib/booking-render'
 import { cn } from '@/lib/cn'
 
@@ -136,27 +136,25 @@ const SmsCard = ({ sms, defaultOpen }: { sms: BookingSms; defaultOpen?: boolean 
   </Collapsible>
 )
 
-const WIRING = [
-  { what: 'Calendar description', where: "Calendars › Let's Chat Finance › Basic details › Description" },
-  { what: 'Email 01 + SMS 01', where: 'Workflow: trigger Customer Booked Appointment, send immediately' },
-  { what: 'Email 02 + SMS 02', where: 'Same workflow: Wait until 24 hours before appointment start' },
-  { what: 'Email 03 + SMS 03', where: 'Same workflow: Wait until 1 hour before appointment start' },
-  { what: 'Email 04 + SMS 04', where: 'Workflow: trigger Appointment Status is No-show' },
-]
-
 export const BookingSection = () => (
   <Section
     id="booking"
     eyebrow="Applied"
     title="Booking emails & SMS"
-    lead="The calendar description, confirmation, reminders and no-show recovery for the Let's Chat Finance call. HTML and SMS are paste-ready for GHL; merge fields stay in the copied code and resolve on send."
+    lead="The calendar description, confirmation, reminders, no-show recovery, cancellation and thank-you for the Let's Chat Finance call. HTML and SMS are paste-ready for GHL; merge fields stay in the copied code and resolve on send."
   >
     <div className="flex flex-col gap-8">
       <Demo label="Calendar description — shows on the booking page" action={<CopyButton value={CALENDAR.description}>Copy</CopyButton>}>
         <p className="max-w-2xl font-body text-body-lg leading-relaxed text-fg">{CALENDAR.description}</p>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <CopyButton value={CALENDAR.inviteTitle}>Copy invite title</CopyButton>
+          <MonoLabel tone="subtle" size="sm">
+            Invite title: {CALENDAR.inviteTitle}
+          </MonoLabel>
+        </div>
       </Demo>
 
-      <Demo label="Where each piece goes in GHL">
+      <Demo label="Where each piece goes in GHL — four workflows, one custom value">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[560px] border-collapse text-left">
             <caption className="sr-only">Where each booking message is set up in GHL</caption>
@@ -183,7 +181,7 @@ export const BookingSection = () => (
 
       <div className="flex flex-col gap-4">
         <MonoLabel tone="subtle" size="sm">
-          Emails — 4
+          Emails — {BOOKING_EMAILS.length}
         </MonoLabel>
         {BOOKING_EMAILS.map((e, i) => (
           <EmailCard key={e.slug} email={e} defaultOpen={i === 0} />
@@ -192,7 +190,7 @@ export const BookingSection = () => (
 
       <div className="flex flex-col gap-4">
         <MonoLabel tone="subtle" size="sm">
-          Text messages — 4
+          Text messages — {BOOKING_SMS.length}
         </MonoLabel>
         {BOOKING_SMS.map((s) => (
           <SmsCard key={s.slug} sms={s} />

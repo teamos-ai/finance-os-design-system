@@ -1,6 +1,7 @@
 /**
- * The "Let's Chat Finance" booking set: the calendar description, the four emails and the four
- * SMS that surround one booked discovery call in GHL.
+ * The "Let's Chat Finance" booking set: the calendar description, the seven emails and the five
+ * SMS that surround one booked discovery call in GHL, from confirmation through no-show recovery,
+ * cancellation and the thank-you after the call.
  *
  * One source per email: `blocks` render the HTML body (`src/lib/booking-render.ts`). The palette
  * and sender block are shared with the warm-up sequence (`src/data/warmup.ts`), so the booking
@@ -29,6 +30,15 @@ export const APPT = {
   outlook: '{{appointment.add_to_ical_outlook}}',
 } as const
 
+/**
+ * The booking page itself, for the sends that follow a missed or cancelled call: the old
+ * appointment's reschedule link is no use once it is cancelled. Create the custom value once in
+ * Settings › Custom Values ("Booking Link"), and every email and SMS picks up a URL change.
+ */
+export const BOOKING_LINK = '{{custom_values.booking_link}}'
+
+const SAMPLE_BOOKING_URL = 'https://start.onestaaack.ai/widget/booking/1bXsWmjEyOigmMazr7HG'
+
 /** What the Preview tab swaps in, so the render reads like a real message. Never sent. */
 export const SAMPLE: Record<string, string> = {
   [APPT.firstName]: 'Ben',
@@ -36,10 +46,11 @@ export const SAMPLE: Record<string, string> = {
   [APPT.time]: '1:30 pm',
   [APPT.timezone]: 'Australia/Melbourne',
   [APPT.location]: 'https://meet.google.com/abc-defg-hij',
-  [APPT.reschedule]: 'https://start.onestaaack.ai/widget/booking/1bXsWmjEyOigmMazr7HG',
-  [APPT.cancel]: 'https://start.onestaaack.ai/widget/booking/1bXsWmjEyOigmMazr7HG',
+  [APPT.reschedule]: SAMPLE_BOOKING_URL,
+  [APPT.cancel]: SAMPLE_BOOKING_URL,
   [APPT.google]: 'https://calendar.google.com',
   [APPT.outlook]: 'https://outlook.live.com/calendar',
+  [BOOKING_LINK]: SAMPLE_BOOKING_URL,
 }
 
 export const CALENDAR = {
@@ -48,6 +59,8 @@ export const CALENDAR = {
   /** Pasted into GHL > Calendar > Basic details > Description. Shows on the booking page. */
   description:
     "A 45-minute call for finance businesses, from brokers and advisers to lenders and accountants. We map where enquiries slip between first contact and a signed client, show you the system that closes each gap, and tell you plainly whether Finance OS fits your business. Bring your numbers. Leave with a clear next step, whichever way you go.",
+  /** GHL > Calendar > Meeting invite title. Shows in the attendee's own calendar. */
+  inviteTitle: `Let's Chat Finance · Finance OS x ${APPT.firstName}`,
 } as const
 
 export type Block =
@@ -171,7 +184,7 @@ export const BOOKING_EMAILS: BookingEmail[] = [
   {
     n: 4,
     slug: 'no-show',
-    when: 'On no-show status',
+    when: 'On No Show status',
     subject: 'We missed you today',
     preheader: 'No problem. Pick a time that suits you better.',
     role: 'Recovers the booking without guilt. One action: rebook.',
@@ -179,8 +192,55 @@ export const BOOKING_EMAILS: BookingEmail[] = [
       p(`Hi ${APPT.firstName},`),
       p("We didn't connect for your call today. It happens, weeks in finance rarely go to plan."),
       p('The offer stands. 45 minutes to map where your enquiries slip and what it would take to close the gaps. Choose a time that suits you.'),
-      { kind: 'cta', label: 'Pick a new time', url: APPT.reschedule },
+      { kind: 'cta', label: 'Pick a new time', url: BOOKING_LINK },
       p('If now is not the right time, reply and let us know. We will close the loop on our end.'),
+    ],
+    signoff: SIGN,
+  },
+  {
+    n: 5,
+    slug: 'no-show-last',
+    when: '2 days after a no-show, if not rebooked',
+    subject: 'One last note about your call',
+    preheader: 'Then we will leave it with you.',
+    role: 'The final touch, and it says so. Ends the follow-up cleanly and leaves the door open.',
+    blocks: [
+      p(`Hi ${APPT.firstName},`),
+      p('One last note about the call we missed. We will not keep following up about it.'),
+      p('If enquiries are still slipping between first contact and a signed client, the calendar stays open. 45 minutes, your numbers, and a plain answer on whether Finance OS fits.'),
+      { kind: 'cta', label: 'Book a time', url: BOOKING_LINK },
+      p('Either way, thank you for your interest in Finance OS.'),
+    ],
+    signoff: SIGN,
+  },
+  {
+    n: 6,
+    slug: 'cancelled',
+    when: 'On Cancelled status',
+    subject: 'Your call is cancelled',
+    preheader: 'If you would like another time, the calendar is open.',
+    role: 'Confirms the cancellation so nobody is left wondering, and makes rebooking one step.',
+    blocks: [
+      p(`Hi ${APPT.firstName},`),
+      p(`Your Let's Chat Finance call on ${APPT.date} at ${APPT.time} has been cancelled. Nothing else is needed from you.`),
+      p('If the time did not suit, choose another. It takes under a minute.'),
+      { kind: 'cta', label: 'Pick a new time', url: BOOKING_LINK },
+      p('If something has changed on your side, reply and let us know.'),
+    ],
+    signoff: SIGN,
+  },
+  {
+    n: 7,
+    slug: 'thank-you',
+    when: '1 hour after Showed status',
+    subject: 'Thank you for your time today',
+    preheader: 'What happens next, and how to reach us.',
+    role: 'Closes the call and opens a reply channel. No recap and no solution: whatever they asked for becomes the agenda of the next conversation.',
+    blocks: [
+      p(`Hi ${APPT.firstName},`),
+      p('Thank you for taking us through your business today.'),
+      p('Anything we agreed to send, you will receive from us directly.'),
+      p('If a question comes to mind after the call, reply to this email. It comes straight to us, and we will add it to our next conversation.'),
     ],
     signoff: SIGN,
   },
@@ -208,7 +268,26 @@ export const BOOKING_SMS: BookingSms[] = [
   {
     n: 4,
     slug: 'no-show',
-    when: 'On no-show status',
-    text: `Hi ${APPT.firstName}, we missed you on today's call. No problem. Pick a new time here: ${APPT.reschedule} - Finance OS`,
+    when: 'On No Show status',
+    text: `Hi ${APPT.firstName}, we missed you on today's call. No problem. Pick a new time here: ${BOOKING_LINK} - Finance OS`,
   },
+  {
+    n: 6,
+    slug: 'cancelled',
+    when: 'On Cancelled status',
+    text: `Hi ${APPT.firstName}, your Finance OS call is cancelled. Want another time? ${BOOKING_LINK} - Finance OS`,
+  },
+]
+
+/** Where each piece is set up in GHL. Four small workflows, one custom value. */
+export const WIRING: ReadonlyArray<{ what: string; where: string }> = [
+  { what: 'Booking link', where: 'Settings › Custom Values › add "Booking Link" = this calendar\'s booking page URL. Emails 04 to 06 and SMS 04 and 06 read it.' },
+  { what: 'Description and invite title', where: `Calendars › ${CALENDAR.name} › Meeting details. Duration ${CALENDAR.length}; meeting location = the video link.` },
+  { what: '1 · Booked: Email 01 + SMS 01', where: 'Trigger Customer Booked Appointment (filter: this calendar). First action Remove From Workflow (No-show, Cancelled), so a rebooking stops the recovery sends. Then send straight away.' },
+  { what: '1 · Booked: Email 02 + SMS 02', where: 'If/Else: appointment start is more than 24 hours away. Yes branch: Wait until 24 hours before the start, then send. A same-day booking skips the "tomorrow" reminder.' },
+  { what: '1 · Booked: Email 03 + SMS 03', where: 'Both branches rejoin: Wait until 1 hour before the start (If date already passed: skip), then send.' },
+  { what: '2 · No-show: Email 04 + SMS 04, then 05', where: 'Trigger Appointment Status = No Show (this calendar). Send 04 straight away. Wait 2 days, then Email 05. A rebooking enters workflow 1, which removes them before 05.' },
+  { what: '3 · Cancelled: Email 06 + SMS 06', where: 'Trigger Appointment Status = Cancelled (this calendar). First action Remove From Workflow (Booked), so no reminders follow. Then send.' },
+  { what: '4 · Showed: Email 07', where: 'Trigger Appointment Status = Showed (this calendar). Wait 1 hour, then send. Mark the call Showed when it ends, or this never goes.' },
+  { what: 'Test once', where: 'Book, reschedule and cancel a test appointment with your own email and phone. Confirm the reminders follow the new time after a reschedule.' },
 ]
