@@ -62,7 +62,7 @@ extends tailwind-merge's font-size group so custom `text-{size}` tokens never dr
 ## Routes
 | Route | What it is |
 |---|---|
-| `/` | The showcase — one long scroll, anchor sidebar nav, 21 sections |
+| `/` | The showcase — one long scroll, anchor sidebar nav, 28 sections |
 | `/audit` | The client audit instrument — full screen, no showcase chrome, lazy-loaded |
 
 `vercel.json` carries the SPA rewrite so `/audit` works on a cold load.
@@ -80,10 +80,10 @@ src/
               pagination pdf-modal plan-card save-button segmented stat swatch tool-card
               video-player
     lead-magnets/
-  showcase/   Shell (sidebar) · Section/Demo · sections/<21 sections>
+  showcase/   Shell (sidebar) · Section/Demo · sections/<28 sections>
   audit/      Audit (route) · AuditApp · state · flags · export · types
               fields/Field · parts/{Start,TopBar,Rail,BlockView,SidePanel,Jumper,ExportDialog}
-  App.tsx     Shell wrapping the 21 sections in order
+  App.tsx     Shell wrapping the 28 sections in order
   main.tsx    Router: / → App, /audit → lazy Audit
 ```
 

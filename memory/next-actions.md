@@ -15,5 +15,12 @@
      other stale copy/assets. Note a second deeper sweep for when the library matures.
   2. a11y / alt-text sweep (item 10) — **deferred to the very end** per Tumai.
 
+- **Flags needing Tumai's call (found in the 2026-11-12 sweep):**
+  1. **Missing promo video** — `VideoSection` references `/media/overview.mp4` + `-poster.jpg`, but
+     `public/media/` doesn't exist, so they 404 in prod. Needs the real video asset, or a placeholder.
+  2. **Legal entity** — the warm-up email sender block (`src/data/warmup.ts`) says "Team OS Pty Ltd";
+     the current operating entity is ONESTAAACK A.I PTY LTD. It's a Spam Act sender identification —
+     confirm the correct registered sender before changing it.
+
 - **Don't forget:** run `npm run check` + `npm run build` before committing; `npm run docs:components`
   after any component change; push `main` → Vercel deploys production.
