@@ -5,6 +5,7 @@
 import type { ReactNode } from 'react'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
+import { SHOWCASE_NAV } from '@/lib/nav'
 import { FadeIn } from '@/lib/motion'
 import { cn } from '@/lib/cn'
 
@@ -17,20 +18,34 @@ export interface SectionProps {
   className?: string
 }
 
-export const Section = ({ id, eyebrow, title, lead, children, className }: SectionProps) => (
-  <section id={id} className={cn('scroll-mt-8 border-b border-border px-6 py-16 md:px-12 md:py-20', className)}>
-    <div className="mx-auto max-w-5xl">
-      <FadeIn>
-        <header className="mb-10 flex flex-col items-center text-center">
-          {eyebrow && <MonoLabel>{eyebrow}</MonoLabel>}
-          <h2 className="mt-3 font-display text-display-md text-fg">{title}</h2>
-          {lead && <p className="mt-4 max-w-2xl font-body text-body-lg leading-relaxed text-fg-muted">{lead}</p>}
-        </header>
-      </FadeIn>
-      {children}
-    </div>
-  </section>
-)
+/**
+ * The section's number is its position in SHOWCASE_NAV (hero = 0, unnumbered), so the running
+ * sequence never gaps or drifts when a section is added, removed or reordered — the nav is the
+ * one source of truth. Any legacy "NN - " prefix in the passed eyebrow is stripped first.
+ */
+const navNumber = (id: string): string | null => {
+  const i = SHOWCASE_NAV.findIndex((n) => n.id === id)
+  return i > 0 ? String(i).padStart(2, '0') : null
+}
+
+export const Section = ({ id, eyebrow, title, lead, children, className }: SectionProps) => {
+  const label = (eyebrow ?? '').replace(/^\s*\d+\s*[-–—]\s*/, '').trim()
+  const shown = [navNumber(id), label].filter(Boolean).join(' - ')
+  return (
+    <section id={id} className={cn('scroll-mt-8 border-b border-border px-6 py-16 md:px-12 md:py-20', className)}>
+      <div className="mx-auto max-w-5xl">
+        <FadeIn>
+          <header className="mb-10 flex flex-col items-center text-center">
+            {shown && <MonoLabel>{shown}</MonoLabel>}
+            <h2 className="mt-3 font-display text-display-md text-fg">{title}</h2>
+            {lead && <p className="mt-4 max-w-2xl font-body text-body-lg leading-relaxed text-fg-muted">{lead}</p>}
+          </header>
+        </FadeIn>
+        {children}
+      </div>
+    </section>
+  )
+}
 
 /**
  * Small labelled frame for embedding a live component demo. `action` sits top-right.

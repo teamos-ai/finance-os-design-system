@@ -159,7 +159,7 @@ export const WarmupSection = () => {
   return (
     <Section
       id="warmup"
-      eyebrow="Applied"
+      eyebrow="Domain Warm-up"
       title="Sending-domain warm-up"
       lead="Six emails over 24 days, written to warm a new sending sub-domain rather than to sell anything. Copy is data; the plain-text and HTML bodies render from the same source, so they cannot drift. Both are paste-ready for LC Email."
     >

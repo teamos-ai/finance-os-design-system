@@ -129,7 +129,7 @@ export function FormsSection() {
   return (
     <Section
       id="forms"
-      eyebrow="18 - Forms"
+      eyebrow="Forms"
       title="Forms"
       lead="Capture, qualify and book. Every field sits on a neutral focus ring with a blue primary action; validation speaks plainly — green for clear, red for fix — and the booking flow stays calm across three steps."
     >

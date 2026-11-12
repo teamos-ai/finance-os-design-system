@@ -72,7 +72,7 @@ export function SpacingSection() {
   return (
     <Section
       id="spacing"
-      eyebrow="07 - Spacing & Layout"
+      eyebrow="Spacing & Layout"
       title="Spacing & Layout"
       lead="Everything sits on an 8px grid. The scale below, a small set of container widths and four breakpoints give every surface the same quiet, predictable rhythm."
     >

@@ -12,7 +12,7 @@ export function LogoSection() {
   return (
     <Section
       id="logo"
-      eyebrow="10 — Logo"
+      eyebrow="Logo"
       title="Logo"
       lead="The Finance OS mark and lockup across surfaces — Atlas Blue on white, white on black."
     >

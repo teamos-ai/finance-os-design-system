@@ -35,7 +35,7 @@ export function WidgetsSection() {
   return (
     <Section
       id="widgets"
-      eyebrow="15 - Dashboard Widgets"
+      eyebrow="Dashboard Widgets"
       title="Dashboard Widgets"
       lead="Self-contained tiles for the broker cockpit — progress, capacity, trend, people, schedule and sentiment. Blue-mono data, green only for movement, every ring and gauge drawn as inline SVG."
     >

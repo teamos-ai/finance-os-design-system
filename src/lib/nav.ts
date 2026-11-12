@@ -30,9 +30,10 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'motion', label: 'Motion', Icon: Wand2, accent: 'blue', group: 'Foundations' },
   { id: 'logo', label: 'Logo', Icon: Shapes, accent: 'blue', group: 'Foundations' },
 
-  { id: 'components', label: 'Components', Icon: Component, accent: 'blue', group: 'Library' },
-  { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'blue', group: 'Library' },
-  { id: 'bento', label: 'Bento Box', Icon: LayoutGrid, accent: 'blue', group: 'Library' },
+  { id: 'components', label: 'Components', Icon: Component, accent: 'blue', group: 'Components' },
+  { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'blue', group: 'Components' },
+
+  { id: 'bento', label: 'Bento Box', Icon: LayoutGrid, accent: 'blue', group: 'Patterns' },
 
   { id: 'featured', label: 'Featured', Icon: LayoutTemplate, accent: 'blue', group: 'Patterns' },
   { id: 'widgets', label: 'Dashboard Widgets', Icon: Gauge, accent: 'blue', group: 'Patterns' },
@@ -42,13 +43,14 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'testimonials', label: 'Testimonials', Icon: Quote, accent: 'blue', group: 'Patterns' },
   { id: 'scrollers', label: 'Scroller Images', Icon: Images, accent: 'blue', group: 'Patterns' },
 
-  { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'blue', group: 'Applied' },
-  { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'blue', group: 'Applied' },
-  { id: 'warmup', label: 'Domain Warm-up', Icon: MailPlus, accent: 'blue', group: 'Applied' },
-  { id: 'leadmagnets', label: 'Lead Magnets', Icon: Calculator, accent: 'blue', group: 'Applied' },
-  { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'blue', group: 'Applied' },
-  { id: 'notion', label: 'Notion', Icon: NotebookPen, accent: 'blue', group: 'Applied' },
-  { id: 'social', label: 'Social Media', Icon: Share2, accent: 'blue', group: 'Applied' },
-  { id: 'demos', label: 'Live Demo Pages', Icon: MonitorPlay, accent: 'blue', group: 'Applied' },
-  { id: 'audit', label: 'Client Audit', Icon: ClipboardList, accent: 'blue', group: 'Applied' },
+  { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'blue', group: 'Templates' },
+  { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'blue', group: 'Templates' },
+  { id: 'warmup', label: 'Domain Warm-up', Icon: MailPlus, accent: 'blue', group: 'Templates' },
+  { id: 'leadmagnets', label: 'Lead Magnets', Icon: Calculator, accent: 'blue', group: 'Templates' },
+  { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'blue', group: 'Templates' },
+  { id: 'notion', label: 'Notion', Icon: NotebookPen, accent: 'blue', group: 'Templates' },
+  { id: 'social', label: 'Social Media', Icon: Share2, accent: 'blue', group: 'Templates' },
+  { id: 'demos', label: 'Live Demo Pages', Icon: MonitorPlay, accent: 'blue', group: 'Templates' },
+
+  { id: 'audit', label: 'Client Audit', Icon: ClipboardList, accent: 'blue', group: 'Tools' },
 ]

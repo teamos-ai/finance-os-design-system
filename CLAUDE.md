@@ -1,5 +1,16 @@
 # CLAUDE.md — Finance OS Design System
 
+## How to drive this project (commands)
+
+Run these in **Claude Code** (or paste the prompt in Codex). In **ChatGPT**, feed it this
+file + the `memory/` files first, then use the same words — it can't run commands, but it
+will understand them.
+
+- `/new-project` — start a new build the System Pilot way (5 questions → writes CLAUDE.md + memory/). *New projects only.*
+- `/brainstorm` — read `memory/`, catch up, then think it through with me (one question at a time).
+- `/save` — checkpoint: update progress, decisions, next-actions + the Current State block below.
+- `/handoff` — write a portable brief to paste into ChatGPT or another agent.
+
 ## What this is
 A reusable, faithfully-tokenized design system for **Finance OS** (a broker-specific CRM /
 operating system), delivered as a living React + Vite + TS + Tailwind + Framer Motion
@@ -51,7 +62,9 @@ like `text-fg`.
 ## Routes
 Two surfaces, split in `src/main.tsx` with `react-router-dom`:
 - **`/`** — the showcase. One long scroll, anchor-based sidebar nav (`src/lib/nav.ts` is the
-  single source: add an entry there and render the section in `App.tsx`). 21 sections.
+  single source: add an entry there and render the section in `App.tsx`; the section number is
+  derived from nav order, so it never gaps). Groups: Start · Foundations · Components · Patterns ·
+  Templates · Tools. 28 sections.
 - **`/audit`** — the client audit instrument, full-screen, outside the showcase chrome. It is
   **lazy-loaded** so its question bank stays out of the showcase bundle. Deep links need the SPA
   rewrite in `vercel.json`.

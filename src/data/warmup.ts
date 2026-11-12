@@ -31,7 +31,6 @@ export const MAIL = {
   meta: '#646C7D', // --c-fg-subtle      eyebrow, footer
   accent: '#33488F', // --c-accent         Atlas Blue: links and the one filled CTA
   accentFg: '#FFFFFF', // --c-accent-fg      white label on the blue fill
-  gold: '#EEBA2B', // --p-gold-300       Signal Gold: the wordmark rule only
 } as const
 
 /** GHL merge fields. LC Email resolves these in both bodies. */

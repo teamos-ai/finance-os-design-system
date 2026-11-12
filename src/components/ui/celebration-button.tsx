@@ -20,9 +20,9 @@ import { EASE_OUT } from '@/lib/motion'
    confetti stays on-brand with zero rogue hex. */
 const STREAMER_VARS = ['--p-blue-100', '--p-blue-200', '--p-blue-300', '--p-blue-400', '--p-blue-500']
 function streamerColors(): string[] {
-  if (typeof document === 'undefined') return ['#33488F']
+  if (typeof document === 'undefined') return []
   const cs = getComputedStyle(document.documentElement)
-  return STREAMER_VARS.map((v) => cs.getPropertyValue(v).trim() || '#33488F')
+  return STREAMER_VARS.map((v) => cs.getPropertyValue(v).trim()).filter(Boolean)
 }
 
 interface Streamer {
@@ -59,9 +59,9 @@ export const CelebrationButton = React.forwardRef<HTMLButtonElement, Celebration
 
     const fire = (e: React.MouseEvent<HTMLButtonElement>) => {
       const key = seq.current++
-      // Reduced motion → no streamers at all (the action still fires below).
-      const count = reduced ? 0 : particleCount
       const palette = streamerColors()
+      // Reduced motion → no streamers; also skip if tokens could not be read (keeps it rogue-hex-free).
+      const count = reduced || palette.length === 0 ? 0 : particleCount
       const streamers: Streamer[] = Array.from({ length: count }, (_, i) => ({
         id: i,
         w: 4 + Math.random() * 4, // 4–8px

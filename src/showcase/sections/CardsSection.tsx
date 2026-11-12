@@ -84,7 +84,7 @@ export function CardsSection() {
   return (
     <Section
       id="cards"
-      eyebrow="12 - Cards"
+      eyebrow="Cards"
       title="Cards"
       lead="The card family — a flat hairline surface that scales from a plain text block to a feature cell, a tool tile, an outcome figure and a photo-topped record. Calm resting elevation, 8px squircles, zero glass."
     >

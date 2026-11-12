@@ -99,7 +99,7 @@ export function TestimonialsSection() {
   return (
     <Section
       id="testimonials"
-      eyebrow="19 - Testimonials"
+      eyebrow="Testimonials"
       title="Testimonials"
       lead="Grounded, broker-grade proof — a quote card with a result metric, a portrait testimonial, and a wall of short quotes. Elevation and a quiet lift carry emphasis; no ribbons, no hype."
     >

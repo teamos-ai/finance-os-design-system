@@ -18,7 +18,7 @@ export function OverviewSection() {
   return (
     <Section
       id="overview"
-      eyebrow="04 — Overview"
+      eyebrow="Overview"
       title="The system at a glance"
       lead="Finance OS is built Ruler-first: structure, order and authority, softened by the Sage's clarity. Every surface assembles from one locked semantic token layer — matched to the production site."
     >

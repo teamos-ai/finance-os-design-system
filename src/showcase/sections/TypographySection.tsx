@@ -58,7 +58,7 @@ export function TypographySection() {
   return (
     <Section
       id="typography"
-      eyebrow="06 — Typography"
+      eyebrow="Typography"
       title="Typography"
       lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour — the Atlas Blue accent or a neutral ink."
     >

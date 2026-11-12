@@ -41,7 +41,7 @@ export function ElevationSection() {
   return (
     <Section
       id="elevation"
-      eyebrow="08 — Radius & Elevation"
+      eyebrow="Radius & Elevation"
       title="Radius & Elevation"
       lead="A tight corner scale — 2, 4, 6 and 8px, with no pills or full rounds. Depth stays restrained: soft neutral shadows plus the signature Atlas Blue glow on brand surfaces."
     >

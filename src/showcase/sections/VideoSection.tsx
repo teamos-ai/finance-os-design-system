@@ -7,7 +7,7 @@ import { VideoPlayer } from '@/components/ui/video-player'
 
 export function VideoSection() {
   return (
-    <Section id="video" eyebrow="01 — VIDEO" title="Is Now a Bad Time To...">
+    <Section id="video" eyebrow="VIDEO" title="Is Now a Bad Time To...">
       <p className="mx-auto mb-8 max-w-2xl text-center font-body text-body-lg leading-relaxed text-fg-muted">
         Get more finance leads, settle more loans, nurture more clients and get more referrals because
         you have automated more of your back-end operations than ever before?

@@ -25,7 +25,7 @@ export function BentoSection() {
   return (
     <Section
       id="bento"
-      eyebrow="13 - Bento Box"
+      eyebrow="Bento Box"
       title="Bento box"
       lead="The responsive bento grid — a hero, feature cells, an outcome figure, a media wash and a closing CTA composed into one expressive panel. Lift the whole arrangement, or any single cell."
     >

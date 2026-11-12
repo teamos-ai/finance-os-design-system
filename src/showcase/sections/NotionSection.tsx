@@ -145,7 +145,7 @@ export function NotionSection() {
   return (
     <Section
       id="notion"
-      eyebrow="25 - Notion"
+      eyebrow="Notion"
       title="Notion"
       lead="A Notion-style document template on-system — callouts, toggles, a hairline table and code blocks, composed into a believable broker SOP."
     >

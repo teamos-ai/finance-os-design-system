@@ -153,7 +153,7 @@ export function TablesSection() {
   return (
     <Section
       id="tables"
-      eyebrow="16 - Tables"
+      eyebrow="Tables"
       title="Tables"
       lead="Three table patterns tuned for broker-grade claims — a comparison, a capability matrix and a clean data table. Measured, sourced, and honest about what is reported versus verified."
     >

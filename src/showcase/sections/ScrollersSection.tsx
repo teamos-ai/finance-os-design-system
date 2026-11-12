@@ -345,7 +345,7 @@ export function ScrollersSection() {
   return (
     <Section
       id="scrollers"
-      eyebrow="20 - Scroller Images"
+      eyebrow="Scroller Images"
       title="Scroller Images"
       lead="Three scroll-driven ways to show the product on the marketing site — a sticky split that walks the pipeline as you scroll, a continuous screen marquee, and a partner signal strip. Every tile is an on-token placeholder; motion pauses on hover and freezes under reduced motion."
     >

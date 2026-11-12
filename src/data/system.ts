@@ -83,8 +83,7 @@ export const COMMANDS: string[] = [
   'browse the components',
   'copy a token',
   'open the live demo',
-  'read the business plan',
-  'read the marketing plan',
+  'run a client audit',
   'view on github',
 ]
 

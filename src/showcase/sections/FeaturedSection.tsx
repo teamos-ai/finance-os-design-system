@@ -152,7 +152,7 @@ export function FeaturedSection() {
   return (
     <Section
       id="featured"
-      eyebrow="14 - Featured"
+      eyebrow="Featured"
       title="Featured"
       lead="Feature spotlights — the calm, high-intent blocks that put one capability in front of a brokerage. A split layout pairs the promise with a working pipeline view, and a full-width banner closes on a single clear call to action. One blue highlight, never more."
     >

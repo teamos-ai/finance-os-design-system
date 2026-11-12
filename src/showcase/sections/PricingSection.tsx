@@ -150,7 +150,7 @@ export function PricingSection() {
   return (
     <Section
       id="pricing"
-      eyebrow="17 - Pricing"
+      eyebrow="Pricing"
       title="Pricing"
       lead="Plans for every stage of the book — from a solo broker working their first hundred enquiries to a multi-broker team forecasting settlements. One instrument, priced to the size of the pipeline."
     >

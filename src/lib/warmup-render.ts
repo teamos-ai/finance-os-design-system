@@ -140,13 +140,13 @@ export function toHtml(e: WarmupEmail): string {
     <td align="center" style="padding:32px 16px;">
       <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="fos-shell" style="width:600px;max-width:600px;">
 
-        <!-- wordmark: a gold rule and the name. No remote image on a cold domain. -->
+        <!-- wordmark: a blue rule and the name. No remote image on a cold domain. -->
         <tr>
           <td class="fos-pad" style="padding:0 40px 20px 40px;">
             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="18" style="width:18px;">
-                  <div style="width:18px;height:3px;background-color:${MAIL.gold};border-radius:2px;font-size:1px;line-height:3px;">&nbsp;</div>
+                  <div style="width:18px;height:3px;background-color:${MAIL.accent};border-radius:2px;font-size:1px;line-height:3px;">&nbsp;</div>
                 </td>
                 <td style="padding-left:10px;font-family:${MONO};font-size:12px;line-height:14px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${MAIL.fg};">Finance OS</td>
               </tr>

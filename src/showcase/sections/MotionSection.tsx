@@ -6,7 +6,7 @@ export function MotionSection() {
   return (
     <Section
       id="motion"
-      eyebrow="09 — Motion"
+      eyebrow="Motion"
       title="Motion"
       lead="Cleared for a fresh motion direction. The slots below are reserved — durations, easings and presets will be defined here next."
     >
