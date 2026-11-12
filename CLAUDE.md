@@ -45,6 +45,10 @@ not a showcase exhibit — it is used live on client calls.
   are NEUTRAL (`--c-ring` = `--c-fg-subtle`), never the accent.**
 - Type: **Spline Sans** (display/headings) + **Anonymous Pro** (body/mono), self-hosted via
   `@fontsource`, imported in `main.tsx`. No Google Fonts request at runtime.
+- **Logos: use ONLY the provided real assets — never draw, recolour, fabricate or AI-generate a
+  logo, monogram or favicon.** Square mark → `/logo-square-blue.png`; rectangle long lockup →
+  `/logo-rect-blue.png` (on light) / `/logo-rect-white.png` (on dark/photo). The favicon is the
+  real square logo, set in `index.html`. `src/components/brand/Logo.tsx` is the only logo component.
 - Foundations: **8px-max squircles** (radius scale is 2/4/6/8 only — no pills, no full rounds) ·
   gentle Framer motion · **NO glassmorphism**.
 
