@@ -1,10 +1,10 @@
 # Component reference
 
-> **Generated** by `npm run docs:components` from `src/components/**`. Do not hand-edit —
-> re-run the generator after adding or changing a component (see CONTRIBUTING.md). The living
-> API — props, variants, states, tokens and copy-paste code — is the **showcase** at `/`,
-> where every demo carries an inspector (Explain · Tokens · Code · Download). This file is the
-> index that keeps the kit discoverable.
+> **Generated** by `npm run docs:components` from `src/components/**` (subdirectories
+> auto-discovered). Do not hand-edit — re-run the generator after adding or changing a component
+> (see CONTRIBUTING.md). The living API — props, variants, states, tokens and copy-paste code — is
+> the **showcase** at `/`, where every demo carries an inspector (Explain · Tokens · Code ·
+> Download). This file is the index that keeps the kit discoverable.
 
 ## UI kit `src/components/ui`
 
@@ -58,5 +58,32 @@ Opt-in templates and their primitives.
 | `CheatSheetTemplate` `GuideTemplate` `WorkbookTemplate` `CaseStudyTemplate` `ReportTemplate` | designed, downloadable lead magnets: Cheat Sheet, Guide, Workbook (fillable), Case Study, Whitepaper / Report. |  | `lead-magnets/templates/documents.tsx` |
 | `EbookTemplate` `MagazineTemplate` | lead magnets that turn pages (Flipbook primitive): Ebook + Magazine. |  | `lead-magnets/templates/flip.tsx` |
 | `SwipeFileTemplate` `ChecklistTemplate` `QuizTemplate` `CalculatorTemplate` `ScorecardTemplate` | lead magnets with real state + motion: Swipe File (SwipeDeck), Checklist (tick), Quiz (tick + score), Calculator + Scorecard (count-up). |  | `lead-magnets/templates/interactive.tsx` |
+
+## Calculators `src/components/calculators`
+
+Broker calculators — repayments, borrowing power, stamp duty.
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `AnimatedCurrency` | the calculators' headline figure. |  | `calculators/AnimatedCurrency.tsx` |
+| `BorrowingPowerCalculator` | an indicative serviceability estimate. |  | `calculators/BorrowingPowerCalculator.tsx` |
+| `RepaymentCalculator` | home-loan repayments from property value, deposit, rate, term and frequency. |  | `calculators/RepaymentCalculator.tsx` |
+| `StampDutyCalculator` | indicative AU transfer (stamp) duty for NSW / VIC / QLD. |  | `calculators/StampDutyCalculator.tsx` |
+
+## Dashboards `src/components/dashboards`
+
+Tokenised inline-SVG charts for broker dashboards.
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `BarChart` `LineChart` `DonutChart` | tokenised inline-SVG primitives for the broker dashboards. |  | `dashboards/charts.tsx` |
+
+## Email signature `src/components/signature`
+
+Broker email-signature block + preview.
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `SignaturePreview` | the live Finance OS email-signature block, the on-brand twin of the email-safe HTML in signature.ts. |  | `signature/SignaturePreview.tsx` |
 
 _Regenerate with `npm run docs:components`._

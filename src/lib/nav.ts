@@ -1,10 +1,10 @@
 import type { LucideIcon } from 'lucide-react'
 import {
   Sparkles, PlayCircle, Compass,
-  Palette, Type, Ruler, Layers, Wand2, Shapes,
-  Component, CreditCard, LayoutGrid,
-  LayoutTemplate, Gauge, Table, Tags, TextCursorInput, Quote, Images,
-  Megaphone, FileText, Calculator, Image, NotebookPen, Share2, MonitorPlay, MailPlus,
+  Palette, Boxes, Type, Ruler, Layers, Wand2, Shapes, Sticker,
+  Component, CreditCard,
+  LayoutGrid, LayoutTemplate, Gauge, LayoutDashboard, Calculator, Table, Tags, TextCursorInput, Quote, Images,
+  Megaphone, FileText, MailPlus, Mail, PenLine, Magnet, Image, NotebookPen, Share2, MonitorPlay,
   ClipboardList,
 } from 'lucide-react'
 import type { Accent } from './accents'
@@ -24,11 +24,13 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Start' },
 
   { id: 'color', label: 'Color', Icon: Palette, accent: 'blue', group: 'Foundations' },
+  { id: 'tokens', label: 'Tokens', Icon: Boxes, accent: 'blue', group: 'Foundations' },
   { id: 'typography', label: 'Typography', Icon: Type, accent: 'blue', group: 'Foundations' },
   { id: 'spacing', label: 'Spacing & Layout', Icon: Ruler, accent: 'blue', group: 'Foundations' },
   { id: 'elevation', label: 'Radius & Elevation', Icon: Layers, accent: 'blue', group: 'Foundations' },
   { id: 'motion', label: 'Motion', Icon: Wand2, accent: 'blue', group: 'Foundations' },
   { id: 'logo', label: 'Logo', Icon: Shapes, accent: 'blue', group: 'Foundations' },
+  { id: 'icons', label: 'Icons', Icon: Sticker, accent: 'blue', group: 'Foundations' },
 
   { id: 'components', label: 'Components', Icon: Component, accent: 'blue', group: 'Components' },
   { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'blue', group: 'Components' },
@@ -37,6 +39,8 @@ export const SHOWCASE_NAV: NavItem[] = [
 
   { id: 'featured', label: 'Featured', Icon: LayoutTemplate, accent: 'blue', group: 'Patterns' },
   { id: 'widgets', label: 'Dashboard Widgets', Icon: Gauge, accent: 'blue', group: 'Patterns' },
+  { id: 'dashboards', label: 'Dashboards', Icon: LayoutDashboard, accent: 'blue', group: 'Patterns' },
+  { id: 'calculators', label: 'Calculators', Icon: Calculator, accent: 'blue', group: 'Patterns' },
   { id: 'tables', label: 'Tables', Icon: Table, accent: 'blue', group: 'Patterns' },
   { id: 'pricing', label: 'Pricing', Icon: Tags, accent: 'blue', group: 'Patterns' },
   { id: 'forms', label: 'Forms', Icon: TextCursorInput, accent: 'blue', group: 'Patterns' },
@@ -46,7 +50,9 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'blue', group: 'Templates' },
   { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'blue', group: 'Templates' },
   { id: 'warmup', label: 'Domain Warm-up', Icon: MailPlus, accent: 'blue', group: 'Templates' },
-  { id: 'leadmagnets', label: 'Lead Magnets', Icon: Calculator, accent: 'blue', group: 'Templates' },
+  { id: 'client-emails', label: 'Client Emails', Icon: Mail, accent: 'blue', group: 'Templates' },
+  { id: 'email-signature', label: 'Email Signature', Icon: PenLine, accent: 'blue', group: 'Templates' },
+  { id: 'leadmagnets', label: 'Lead Magnets', Icon: Magnet, accent: 'blue', group: 'Templates' },
   { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'blue', group: 'Templates' },
   { id: 'notion', label: 'Notion', Icon: NotebookPen, accent: 'blue', group: 'Templates' },
   { id: 'social', label: 'Social Media', Icon: Share2, accent: 'blue', group: 'Templates' },

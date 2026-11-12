@@ -5,16 +5,20 @@ import { HeroSection } from '@/showcase/sections/HeroSection'
 import { VideoSection } from '@/showcase/sections/VideoSection'
 import { OverviewSection } from '@/showcase/sections/OverviewSection'
 import { ColorSection } from '@/showcase/sections/ColorSection'
+import { TokensSection } from '@/showcase/sections/TokensSection'
 import { TypographySection } from '@/showcase/sections/TypographySection'
 import { SpacingSection } from '@/showcase/sections/SpacingSection'
 import { ElevationSection } from '@/showcase/sections/ElevationSection'
 import { MotionSection } from '@/showcase/sections/MotionSection'
 import { LogoSection } from '@/showcase/sections/LogoSection'
+import { IconsSection } from '@/showcase/sections/IconsSection'
 import { ComponentsSection } from '@/showcase/sections/ComponentsSection'
 import { CardsSection } from '@/showcase/sections/CardsSection'
 import { BentoSection } from '@/showcase/sections/BentoSection'
 import { FeaturedSection } from '@/showcase/sections/FeaturedSection'
 import { WidgetsSection } from '@/showcase/sections/WidgetsSection'
+import { DashboardsSection } from '@/showcase/sections/DashboardsSection'
+import { CalculatorsSection } from '@/showcase/sections/CalculatorsSection'
 import { TablesSection } from '@/showcase/sections/TablesSection'
 import { PricingSection } from '@/showcase/sections/PricingSection'
 import { FormsSection } from '@/showcase/sections/FormsSection'
@@ -23,6 +27,8 @@ import { ScrollersSection } from '@/showcase/sections/ScrollersSection'
 import { BannersSection } from '@/showcase/sections/BannersSection'
 import { BlogsSection } from '@/showcase/sections/BlogsSection'
 import { WarmupSection } from '@/showcase/sections/WarmupSection'
+import { EmailsSection } from '@/showcase/sections/EmailsSection'
+import { SignatureSection } from '@/showcase/sections/SignatureSection'
 import { LeadMagnetsSection } from '@/showcase/sections/LeadMagnetsSection'
 import { ImageLibrarySection } from '@/showcase/sections/ImageLibrarySection'
 import { NotionSection } from '@/showcase/sections/NotionSection'
@@ -43,16 +49,20 @@ export default function App() {
       <VideoSection />
       <OverviewSection />
       <ColorSection />
+      <TokensSection />
       <TypographySection />
       <SpacingSection />
       <ElevationSection />
       <MotionSection />
       <LogoSection />
+      <IconsSection />
       <ComponentsSection />
       <CardsSection />
       <BentoSection />
       <FeaturedSection />
       <WidgetsSection />
+      <DashboardsSection />
+      <CalculatorsSection />
       <TablesSection />
       <PricingSection />
       <FormsSection />
@@ -61,6 +71,8 @@ export default function App() {
       <BannersSection />
       <BlogsSection />
       <WarmupSection />
+      <EmailsSection />
+      <SignatureSection />
       <LeadMagnetsSection />
       <ImageLibrarySection />
       <NotionSection />

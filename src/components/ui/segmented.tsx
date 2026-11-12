@@ -98,7 +98,7 @@ export function SegmentedControl<T extends string = string>({
             tabIndex={isActive ? 0 : -1}
             onClick={() => select(opt.value)}
             className={cn(
-              'rounded-sm font-display font-medium transition-all duration-fast ease-out',
+              'rounded-sm font-display font-medium transition-[background-color,color,box-shadow] duration-fast ease-out active:scale-[0.96]',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
               pad,
               isActive
