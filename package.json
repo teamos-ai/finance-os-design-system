@@ -8,7 +8,14 @@
     "build": "tsc --noEmit && npm run check:audit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "check:audit": "tsx scripts/audit-check.mts"
+    "check:audit": "tsx scripts/audit-check.mts",
+    "check:contrast": "node scripts/contrast-audit.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run check:audit && npm run check:contrast",
+    "check": "npm run typecheck && npm run lint && npm run test"
   },
   "dependencies": {
     "@fontsource/anonymous-pro": "^5.2.8",
@@ -23,15 +30,23 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^15.15.0",
     "postcss": "^8.4.49",
+    "prettier": "^3.10.1",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "vite": "^6.0.7",
-    "tsx": "^4.19.2"
+    "typescript-eslint": "^8.72.2",
+    "vite": "^6.0.7"
   }
 }

@@ -64,7 +64,10 @@ export function Inspectable({
   const reduced = useReducedMotion()
 
   // Resolve the download: explicit payload, else fall back to the code snippet as a .tsx file.
-  const dl = download ?? (code ? { filename: `${slug(name)}.tsx`, content: code } : null)
+  const dl = React.useMemo(
+    () => download ?? (code ? { filename: `${slug(name)}.tsx`, content: code } : null),
+    [download, code, name],
+  )
   const fireDownload = React.useCallback(() => {
     if (!dl) return
     if (dl.href) downloadHref(dl.filename, dl.href)
