@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "check:audit": "tsx scripts/audit-check.mts",
     "check:contrast": "node scripts/contrast-audit.mjs",
+    "docs:components": "node scripts/gen-component-docs.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

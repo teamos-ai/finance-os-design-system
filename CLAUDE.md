@@ -107,6 +107,20 @@ Vercel accepts the deploy.
 ## Checks
 - `npm run build` → `tsc --noEmit` + `check:audit` + `vite build`
 - `node scripts/contrast-audit.mjs` → WCAG AA over the semantic pairs (currently 21/21)
+- `npm run check` → typecheck + lint + test (audit + contrast) — the local gate before a commit
+- `npm run docs:components` → regenerates `docs/COMPONENTS.md` after any component change
+
+## Memory Map & Current State
+
+- **Docs:** `README.md` (entry) · `CONTRIBUTING.md` (how to work + keep component docs in sync) ·
+  `docs/COMPONENTS.md` (generated index) · this file (the agent constitution) · `HANDOVER.md`
+  (migration history). `AGENTS.md` points Codex here.
+- **Memory:** `memory/` — read `next-actions.md` first, then `task_plan.md`, `decisions.md`,
+  `progress.md`, `findings.md`. Keeping them current is what `/save` does.
+- **Current State (2026-11-12):** handoff-hardening pass — 9 of 13 audit items shipped + deployed
+  (gold purge, nav regroup, self-healing numbers, inspector pop-up, chunk split, lint/test, docs).
+  **Next:** 6 new sections (Tokens, Icons, Calculators, Dashboards, Emails, Signature) to be built
+  **under Ultra Code**; then the a11y sweep (deferred to the end). See `memory/next-actions.md`.
 
 ---
 

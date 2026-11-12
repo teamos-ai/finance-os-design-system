@@ -12,10 +12,11 @@ working client audit instrument at `/audit`.
 
 > **The brand direction changed, and older notes did not.** This system was built as dark-mode
 > luxury with Signal Gold and Momentum Amber across three themes. It is now a **single light
-> theme with no gold, no amber and no orange**, matched to financeos.au — see `bc4297a` (theme
-> unification) and `ec1384f` (blue-only migration). There is no theme toggle, no
-> `src/lib/theme.tsx` and no `[data-theme]` block in `tokens.css`. **If a document disagrees with
-> the code, the code wins.**
+> theme — Atlas Blue only, no gold, no orange** — matched to financeos.au (see `bc4297a` theme
+> unification + `ec1384f` blue-only migration). **Amber survives as a functional STATUS signal
+> only** (overdue / awaiting / at-risk badges and ★ ratings — never on type, never a CTA, never a
+> ribbon; reinstated 2026-10-08). There is no theme toggle, no `src/lib/theme.tsx` and no
+> `[data-theme]` block in `tokens.css`. **If a document disagrees with the code, the code wins.**
 
 ## Stack
 React 18 · Vite 6 · TypeScript (strict) · Tailwind CSS 3 · Framer Motion 11 · react-router-dom 6 ·
@@ -46,8 +47,9 @@ router was added. `vite.config.ts` pins `resolve.dedupe: ['react','react-dom']` 
 
 ## Token architecture (three layers)
 `src/styles/tokens.css`:
-- **primitive** `--p-*` — Atlas Blue ramp (`50`–`500`), neutrals, and two functional state hues
-  (green, red). **No gold, amber or orange ramp exists.**
+- **primitive** `--p-*` — Atlas Blue ramp (`50`–`500`), neutrals, functional state hues (green,
+  red), and an amber ramp (`--p-amber-*`) used **only** for the status signal. **No gold or orange
+  ramp exists.**
 - **semantic** `--c-*` — intent (canvas/surface/elevated/fg/border/accent/state), on `:root`.
   One theme, so there is no per-theme override layer.
 - **component** — `--btn-*`, `--card-*`, `--input-*`, radius (2/4/6/8 only), motion, plus fixed
