@@ -2,6 +2,18 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-12 — Energize Phase 1: 6 new sections via Ultra Code (`e046712`)
+
+Ran an Ultra Code workflow (14 agents: 6 build + 6 make-interfaces review + 2 refine) to build
+Tokens, Icons, Calculators, Dashboards, Client Emails, Email Signature — governed by
+`docs/ENERGIZE-PLAN.md` with CLAUDE.md as ground truth. Agents wrote only their own files;
+integration (nav + App wiring, auto-numbering → 34 sections, distinct icons, a SegmentedControl
+`transition-all` fix, generator auto-discovery) done centrally. Verified: build green, check 21/21,
+console clean, playwright screenshots on-brand (blue-primary, amber-status, no ribbons, 8px, real
+logos). Also fixed the two sweep flags (video placeholder, ONESTAAACK A.I PTY LTD sender).
+Highlights: Tokens shows the 3-layer resolution + compile guardrail; Dashboards ships a tokenised
+bar/line/donut chart kit; Calculators compute live (repayment $4,399/mo on the sample inputs).
+
 ## 2026-11-12 — Handoff hardening (13-item audit) + docs
 
 Shipped and pushed to `main` (through `6788425`), build green, `npm run check` 21/21:
