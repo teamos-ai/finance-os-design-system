@@ -21,6 +21,20 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-dom/client', 'react-router-dom'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Split the heavy vendors into their own chunks so the entry JS stays small and
+        // cacheable. react + react-dom + react-router MUST stay in ONE chunk (one React
+        // instance) — never separate them, or the dedupe above can't prevent "Invalid hook call".
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          motion: ['framer-motion'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
+  },
   server: {
     watch: { usePolling: true, interval: 300 },
   },
