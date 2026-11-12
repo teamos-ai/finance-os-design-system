@@ -34,6 +34,13 @@ import { ImageLibrarySection } from '@/showcase/sections/ImageLibrarySection'
 import { NotionSection } from '@/showcase/sections/NotionSection'
 import { SocialSection } from '@/showcase/sections/SocialSection'
 import { DemosSection } from '@/showcase/sections/DemosSection'
+import { PositioningHeroSection } from '@/showcase/sections/PositioningHeroSection'
+import { SectionFoldersSection } from '@/showcase/sections/SectionFoldersSection'
+import { PlatformDashboardSection } from '@/showcase/sections/PlatformDashboardSection'
+import { LandscapeTableSection } from '@/showcase/sections/LandscapeTableSection'
+import { TransformationTableSection } from '@/showcase/sections/TransformationTableSection'
+import { ThisVsThatSection } from '@/showcase/sections/ThisVsThatSection'
+import { ScrollBlueSection } from '@/showcase/sections/ScrollBlueSection'
 import { AuditSection } from '@/showcase/sections/AuditSection'
 
 function TopBanner() {
@@ -78,6 +85,13 @@ export default function App() {
       <NotionSection />
       <SocialSection />
       <DemosSection />
+      <PositioningHeroSection />
+      <SectionFoldersSection />
+      <PlatformDashboardSection />
+      <LandscapeTableSection />
+      <TransformationTableSection />
+      <ThisVsThatSection />
+      <ScrollBlueSection />
       <AuditSection />
     </Shell>
   )

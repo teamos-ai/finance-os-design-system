@@ -86,4 +86,37 @@ Broker email-signature block + preview.
 |---|---|:---:|---|
 | `SignaturePreview` | the live Finance OS email-signature block, the on-brand twin of the email-safe HTML in signature.ts. |  | `signature/SignaturePreview.tsx` |
 
+## platform-dashboard `src/components/platform-dashboard`
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `DemoVideoModal` | opens the Finance OS product demo in a centred modal. |  | `platform-dashboard/DemoVideoModal.tsx` |
+| `FlipCard` | a reduced-motion-safe 3D flip between a front and a back face. |  | `platform-dashboard/FlipCard.tsx` |
+| `PlatformAppShell` `PlatformOverview` | the "platform in motion" app-shell mock (FRONT) and a plain-language overview (BACK) for the flip card. |  | `platform-dashboard/PlatformDashboard.tsx` |
+
+## positioning-hero `src/components/positioning-hero`
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `ContourField` | the React host for the vendored topographic survey map (./contour-map). |  | `positioning-hero/ContourField.tsx` |
+| `PositioningSearch` | the hero's fuzzy command search over the positioning. |  | `positioning-hero/PositioningSearch.tsx` |
+
+## scroll-blue `src/components/scroll-blue`
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `BlueStatTile` `BlueAreaChart` | surface viz primitives for the Scroll Blue Band — the on-blue twins of the broker dashboard charts. |  | `scroll-blue/blue-viz.tsx` |
+
+## section-folders `src/components/section-folders`
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `SectionFolder` | one positioning section, filed as a folder. |  | `section-folders/SectionFolder.tsx` |
+
+## this-vs-that `src/components/this-vs-that`
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `ComparePair` | the green/red comparison primitive. |  | `this-vs-that/ThisVsThat.tsx` |
+
 _Regenerate with `npm run docs:components`._
