@@ -13,7 +13,8 @@ export function VideoSection() {
         you have automated more of your back-end operations than ever before?
       </p>
       <div className="mx-auto max-w-4xl">
-        <VideoPlayer src="/media/overview.mp4" poster="/media/overview-poster.jpg" />
+        {/* Placeholder frame until the real promo video lands in /public/media. */}
+        <VideoPlayer hint="Promo video — coming soon" />
       </div>
     </Section>
   )

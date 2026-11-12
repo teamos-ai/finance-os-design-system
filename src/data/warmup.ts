@@ -45,7 +45,7 @@ export const MERGE = {
  * confirmed by the owner on 18 September 2026.
  */
 export const SENDER = {
-  legal: 'Finance OS is a product of Team OS Pty Ltd.',
+  legal: 'Finance OS is a product of ONESTAAACK A.I PTY LTD.',
   address: 'PO Box 8439, Tarneit VIC 3029',
   email: 'hello@financeos.au',
 } as const
@@ -255,7 +255,7 @@ export const RULES: ReadonlyArray<{ title: string; text: string }> = [
   },
   {
     title: 'The footer is not optional',
-    text: 'Every send carries the sender block (Team OS Pty Ltd, PO Box 8439 Tarneit, hello@financeos.au), a working unsubscribe, and a reason line that is true of the person reading it. The Spam Act wants the sender identified and the exit working; the footer this section renders does both, so never strip it to make a send look cleaner.',
+    text: 'Every send carries the sender block (ONESTAAACK A.I PTY LTD, PO Box 8439 Tarneit, hello@financeos.au), a working unsubscribe, and a reason line that is true of the person reading it. The Spam Act wants the sender identified and the exit working; the footer this section renders does both, so never strip it to make a send look cleaner.',
   },
   {
     title: 'Suppress before you segment',
