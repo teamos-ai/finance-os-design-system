@@ -48,6 +48,30 @@ export const Section = ({ id, eyebrow, title, lead, children, className }: Secti
 }
 
 /**
+ * ComposedFrom — a small cross-link row placed under a section header on an ASSEMBLED design,
+ * pointing to the reusable parts it is built from (e.g. a dashboard → its widgets, charts, tables).
+ * Links are in-page anchors, so they jump straight to the part's own section.
+ */
+export const ComposedFrom = ({ items, className }: { items: { label: string; href: string }[]; className?: string }) => (
+  <div
+    className={cn(
+      '-mt-4 mb-10 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-mono-2xs uppercase tracking-[0.12em] text-fg-subtle',
+      className,
+    )}
+  >
+    <span>Composed from</span>
+    {items.map((it, i) => (
+      <span key={it.href} className="inline-flex items-center gap-2">
+        <a href={it.href} className="text-accent-text underline-offset-4 hover:underline">
+          {it.label}
+        </a>
+        {i < items.length - 1 && <span aria-hidden className="opacity-50">·</span>}
+      </span>
+    ))}
+  </div>
+)
+
+/**
  * Small labelled frame for embedding a live component demo. `action` sits top-right.
  * Pass `inspect` to float the "+" inspector (Explain / Token / Code / Download) over the
  * frame — the FAB is rendered OUTSIDE this frame's `overflow-hidden` so its popover never clips.

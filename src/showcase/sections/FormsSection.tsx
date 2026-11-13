@@ -129,8 +129,8 @@ export function FormsSection() {
   return (
     <Section
       id="forms"
-      eyebrow="Forms"
-      title="Forms"
+      eyebrow="Forms & Inputs"
+      title="Forms & Inputs"
       lead="Capture, qualify and book. Every field sits on a neutral focus ring with a blue primary action; validation speaks plainly — green for clear, red for fix — and the booking flow stays calm across three steps."
     >
       <div className="flex flex-col gap-8">

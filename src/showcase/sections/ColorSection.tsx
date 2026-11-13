@@ -138,8 +138,8 @@ export function ColorSection() {
   return (
     <Section
       id="color"
-      eyebrow="Color"
-      title="Color"
+      eyebrow="Colour"
+      title="Colour"
       lead="Five locked primaries with their hex + RGB. Click any card to drop down its shade ramp and see exactly which shade to use. Components always name a semantic token, never a raw hex."
     >
       <div className="space-y-3">

@@ -8,7 +8,7 @@ export function MotionSection() {
       id="motion"
       eyebrow="Motion"
       title="Motion"
-      lead="Cleared for a fresh motion direction. The slots below are reserved — durations, easings and presets will be defined here next."
+      lead="Cleared for a fresh motion direction. The slots below are reserved — durations, easings and presets will be defined here next. For a live scroll-driven example, see the Scroll Blue Band under Library → Images & Backgrounds."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SLOTS.map((label) => (

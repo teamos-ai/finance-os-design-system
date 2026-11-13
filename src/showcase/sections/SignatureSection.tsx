@@ -148,8 +148,8 @@ export function SignatureSection() {
   return (
     <Section
       id="email-signature"
-      eyebrow="Email Signature"
-      title="Email signature"
+      eyebrow="Email Signatures"
+      title="Email Signatures"
       lead="A broker’s sign-off, kept on-brand and built from one model: the live block here and the email-safe HTML behind it. Table layout and inline styles so it survives Gmail and Outlook, the real mark, one Atlas Blue accent on the links, and the regulated details left as merge fields for the broker’s own licensee."
     >
       <div className="flex flex-col gap-8">

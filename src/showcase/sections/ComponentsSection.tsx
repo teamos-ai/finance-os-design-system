@@ -49,8 +49,8 @@ export function ComponentsSection() {
   return (
     <Section
       id="components"
-      eyebrow="Components"
-      title="Components"
+      eyebrow="Buttons & Controls"
+      title="Buttons & Controls"
       lead="The interactive UI library — buttons, inputs, badges and controls. Every variant, state and size, live and on-token. Flat hairline surfaces, the dark-luxury pill, and the Atlas Blue accent throughout. Tap the inspect button on any item for its explanation, tokens and code."
     >
       <div className="flex flex-col gap-4">

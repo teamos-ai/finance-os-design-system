@@ -11,7 +11,7 @@
  * audit-instrument rules). These AXL / MFAA research figures only belong here because the DS is
  * login-gated like the brand page. Blue owns all data; no amber, no second hue.
  */
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
 import { Disclosure } from '@/components/ui/disclosure'
 import { MonoLabel } from '@/components/ui/mono-label'
@@ -84,10 +84,11 @@ export function MarketEvidenceSection() {
   return (
     <Section
       id="market-evidence"
-      eyebrow="Market Evidence"
+      eyebrow="Evidence Layouts"
       title="What the research says"
       lead="The brand-positioning research, visualised — readiness, the customer snapshot, and AXL’s Australian search sample. Every graph fills and counts up as it scrolls into view. Every figure is reported, not verified: the flags and sources travel with the numbers."
     >
+      <ComposedFrom items={[{ label: 'Charts', href: '#charts' }]} />
       <div className="flex flex-col gap-8">
         {/* Band 1 — readiness: the RingStat + a bare count-up figure */}
         <Demo label="Positioning readiness — ring + count-up" inspect={READINESS_INSPECT}>

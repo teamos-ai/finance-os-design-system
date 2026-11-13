@@ -10,7 +10,7 @@
 import * as React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { TrendingUp, TrendingDown } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
 import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
@@ -366,10 +366,17 @@ export function DashboardsSection() {
   return (
     <Section
       id="dashboards"
-      eyebrow="Dashboards"
-      title="Dashboards"
+      eyebrow="Dashboard Layouts"
+      title="Dashboard Layouts"
       lead="Assembled broker dashboards — a KPI stat row, one tokenised chart and a compact status table, switched across Pipeline, Settlements and Commission. Blue-mono data, green only for movement, one amber at-risk moment per view, every chart drawn as inline SVG."
     >
+      <ComposedFrom
+        items={[
+          { label: 'Dashboard Widgets', href: '#widgets' },
+          { label: 'Charts', href: '#charts' },
+          { label: 'Tables', href: '#tables' },
+        ]}
+      />
       <div className="flex flex-col gap-8">
         {/* The live, assembled dashboard */}
         <Demo label="Broker dashboard — switch the view" inspect={DASH_INSPECT}>

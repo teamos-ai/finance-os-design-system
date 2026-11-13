@@ -1,6 +1,7 @@
 /**
- * PositioningHeroSection — the brand-positioning hero, built from the same tokens as the rest of
- * the system so the two documents read as ONE surface. A pure-canvas topographic contour map with
+ * HeroesSection (Library → Website Sections → Heroes) — full-bleed hero compositions. The marquee
+ * exhibit is the Contour Hero (relocated from the former Positioning group), built from the same
+ * tokens as the rest of the system so it reads as ONE surface. A pure-canvas topographic contour map with
  * a pointer-following magnifier loupe (ported from the brand hero, see
  * src/components/positioning-hero/), a prominent command-bar fuzzy search over the positioning, a
  * mono "Finance OS · Brand Positioning" overline, a headline with a single Atlas-Blue phrase, a
@@ -8,7 +9,7 @@
  *
  * Content is the real positioning (src/data/positioning.ts) — nothing about the hero is hardcoded.
  */
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { FadeIn } from '@/lib/motion'
 import { ContourField } from '@/components/positioning-hero/ContourField'
@@ -35,7 +36,7 @@ function HeroHeadline() {
 }
 
 const INSPECT = {
-  name: 'Positioning Hero',
+  name: 'Contour Hero',
   explain:
     'The brand-positioning hero: a tokenised topographic contour canvas with a pointer-following magnifier loupe, a command-bar fuzzy search across the positioning, and a headline with one Atlas-Blue phrase. Use it to open the positioning as one surface with the design system. Reduced-motion renders the map static with no loupe.',
   token:
@@ -60,16 +61,17 @@ const INSPECT = {
   ].join('\n'),
 }
 
-export function PositioningHeroSection() {
+export function HeroesSection() {
   return (
     <Section
-      id="positioning-hero"
-      eyebrow="Positioning"
-      title="Positioning hero"
-      lead="The brand-positioning hero, drawn from the same tokens as every other section: a topographic survey map with a magnifier that follows the pointer, a command-bar search across the positioning, and a single blue-highlighted line. It makes the positioning and the design system read as one system."
+      id="heroes"
+      eyebrow="Heroes"
+      title="Heroes"
+      lead="Full-bleed hero compositions built from the shared tokens. The Contour Hero below pairs a topographic survey map with a pointer-following magnifier, a command-bar search and a single blue-highlighted line — swap in any headline, overline and search index. Its background is also available on its own under Images & Backgrounds → Contour Map."
     >
+      <ComposedFrom items={[{ label: 'Contour Map', href: '#contour-map' }]} />
       <Demo
-        label="Positioning hero — contour map · magnifier loupe · fuzzy positioning search"
+        label="Contour Hero — contour map · magnifier loupe · fuzzy search"
         padded={false}
         inspect={INSPECT}
       >

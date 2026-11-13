@@ -45,8 +45,8 @@ export function CalculatorsSection() {
   return (
     <Section
       id="calculators"
-      eyebrow="Calculators"
-      title="Calculators"
+      eyebrow="Finance Calculators"
+      title="Finance Calculators"
       lead="Three working broker calculators — home-loan repayments, borrowing power and AU stamp duty. Real inputs drive live figures and tokenised inline-SVG breakdowns. Every result is an indicative estimate, never a quote or an approval."
     >
       <div className="flex flex-col gap-8">
