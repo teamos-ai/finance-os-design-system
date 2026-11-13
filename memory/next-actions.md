@@ -32,11 +32,27 @@
   - Verified: build + check green (contrast 21/21); sidebar tree matches the spec exactly; page
     dividers + order match; relocated/new sections render; clean console (desktop).
 
-- **DEFERRED — the website-assets pass (Tumai chose "structure + relocations now"):**
-  - **17 missing Finance Calculators.** DS has 3 (Repayment, Borrowing Power, Stamp Duty). The site
-    lists **20** (financeos.au/discover/assets/calculators): Paying it off (6), Buying (7), Comparing
-    & switching (5), Property & equity (2). Each needs its AU calc logic/assumptions rebuilt. Full
-    slug list captured in the 2026-11-13 web-fetch (in transcript).
+- **WEBSITE-ASSETS PASS — IN PROGRESS (Tumai said "kick off"):**
+  - **Shared calculator defaults (verified self-consistent with the site): loan $600,000 · rate
+    6.25% · term 30yr · serviceability buffer 3%.** (e.g. $600k@6.25%/30 = $3,694.30/mo; offset
+    $40k×6.25% = $2,500; borrowing 6.25%+3% = 9.25%.) Build each to reproduce the site's figures and
+    validate (scratchpad `verify-calc.mjs` pattern).
+  - **finance.ts engine** now has `amortise()` (offset/extra/lump), `balanceAfter()`,
+    `totalInterest()`, `durationLabel()`. **`CalcLayout.tsx`** = shared `CalcShell` + `ResultHeadline`
+    / `MetricRow` / `CompareBars` — every new calculator uses it.
+  - ✅ **Paying it off (6/6) DONE** — Repayment (existing) + Extra, Lump, Offset, IO-vs-P&I, Frequency.
+    Validated to the dollar. In `CalculatorsSection` grouped by the site's categories.
+  - **NEXT batches (14 calculators left):**
+    - **Buying (5 new):** deposit-savings-goal, upfront-costs, lmi-estimate, first-home-schemes, LVR.
+      ⚠ These need published AU tables: extend `stampDuty` from NSW/VIC/QLD to **all 8 states** (site
+      covers 8; validate NSW $27,937 / VIC $40,070 / QLD $26,775 / WA $29,741 at $750k); LMI bands
+      (site points at $750k/$75k dep: 95%→$28,486, 90%→$14,216, 85%→$5,750); first-home price caps
+      (NSW cap $1.5m). Mark all indicative + dated. (Borrowing Power + Stamp Duty already exist.)
+    - **Comparing & switching (5 new):** refinance-savings, compare-two-loans, fixed-vs-variable,
+      split-loan, rent-vs-buy.
+    - **Property & equity (2 new):** usable-equity (80% rule: value×0.8−owing), investment-property-
+      cashflow (rent−costs, negative-gearing; site example $650k/$130k dep/$620pw → ~$207/wk after tax).
+    - Full per-calculator specs captured in the 2026-11-13 web-fetch reports (in transcript).
   - **Stack Audit quiz** — build interactive (5 single-choice Qs captured) + the stage-scoring +
     result screen (result content wasn't visible on the site; re-fetch /quiz result or infer).
   - **Funnels** — inventory financeos.au/discover/assets/funnels and rebuild designs from DS parts.
