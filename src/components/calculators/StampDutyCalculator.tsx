@@ -1,8 +1,8 @@
 /**
- * StampDutyCalculator — indicative AU transfer (stamp) duty for NSW / VIC / QLD. Duty is
- * inherently state-specific, so the state selector is core, not decoration. The headline duty
- * and effective rate update live, and a tokenised "duty by state" bar compares the three at
- * the current price, highlighting the selected one in Atlas Blue.
+ * StampDutyCalculator — indicative AU transfer (stamp) duty for six states (NSW · VIC · QLD · WA ·
+ * SA · TAS; ACT and NT pending). Duty is inherently state-specific, so the state selector is core,
+ * not decoration. The headline duty and effective rate update live, and a tokenised "duty by state"
+ * bar compares them at the current price, highlighting the selected one in Atlas Blue.
  *
  * General rates only (owner-occupier, non first-home). The copy routes verification to the
  * state revenue office rather than asserting a figure. No amber — attention stays reserved.

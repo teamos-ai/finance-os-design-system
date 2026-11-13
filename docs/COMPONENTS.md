@@ -69,18 +69,23 @@ Broker calculators — repayments, borrowing power, stamp duty.
 | `BorrowingPowerCalculator` | an indicative serviceability estimate. |  | `calculators/BorrowingPowerCalculator.tsx` |
 | `CalcShell` `ResultHeadline` `MetricRow` `CompareBars` | shared chrome for the broker calculators, so all of them read as one family: the icon + title + Reset header, the two-column inputs \| result grid, the accent-soft result  |  | `calculators/CalcLayout.tsx` |
 | `CompareTwoLoansCalculator` | two loans against the same balance and term, annual fees included. |  | `calculators/CompareTwoLoansCalculator.tsx` |
+| `DepositSavingsGoalCalculator` | how long to save the deposit plus the costs on top (stamp duty, conveyancing). |  | `calculators/DepositSavingsGoalCalculator.tsx` |
 | `ExtraRepaymentsCalculator` | what paying a little more each month does to a loan. |  | `calculators/ExtraRepaymentsCalculator.tsx` |
+| `FirstHomeSchemesCalculator` | reports whether a purchase sits under the First Home Guarantee (5% Deposit Scheme) price cap, and the first-home stamp-duty saving. |  | `calculators/FirstHomeSchemesCalculator.tsx` |
 | `FixedVsVariableCalculator` | nobody can forecast rates, but the break-even can be worked out. |  | `calculators/FixedVsVariableCalculator.tsx` |
 | `InterestOnlyPICalculator` | interest-only for a period, then the jump when it reverts to principal and interest. |  | `calculators/InterestOnlyPICalculator.tsx` |
 | `InvestmentCashflowCalculator` | what an investment property costs a week, before and after the tax deduction. |  | `calculators/InvestmentCashflowCalculator.tsx` |
+| `LmiEstimateCalculator` | an indicative lender's-mortgage-insurance band. |  | `calculators/LmiEstimateCalculator.tsx` |
 | `LumpSumCalculator` | the effect of a one-off payment partway through the loan. |  | `calculators/LumpSumCalculator.tsx` |
+| `LvrCalculator` | loan-to-value ratio, the number a lender looks at first (it sets whether LMI applies and often the rate). |  | `calculators/LvrCalculator.tsx` |
 | `OffsetCalculator` | what an average offset balance saves over the life of the loan. |  | `calculators/OffsetCalculator.tsx` |
 | `RefinanceSavingsCalculator` | a rate difference netted off against the cost of switching. |  | `calculators/RefinanceSavingsCalculator.tsx` |
 | `RentVsBuyCalculator` | the two financial paths over a period: buying (equity, net of repayments and holding costs) versus renting (rent paid, with the deposit invested instead). |  | `calculators/RentVsBuyCalculator.tsx` |
 | `RepaymentCalculator` | home-loan repayments from property value, deposit, rate, term and frequency. |  | `calculators/RepaymentCalculator.tsx` |
 | `RepaymentFrequencyCalculator` | why paying half the monthly repayment every fortnight clears a loan years early (26 fortnights = 13 monthly repayments a year). |  | `calculators/RepaymentFrequencyCalculator.tsx` |
 | `SplitLoanCalculator` | a part-fixed, part-variable blend: the total repayment, the blended rate, and what a rate rise does to the variable portion only. |  | `calculators/SplitLoanCalculator.tsx` |
-| `StampDutyCalculator` | indicative AU transfer (stamp) duty for NSW / VIC / QLD. |  | `calculators/StampDutyCalculator.tsx` |
+| `StampDutyCalculator` | indicative AU transfer (stamp) duty for six states (NSW · VIC · QLD · WA · SA · TAS; ACT and NT pending). |  | `calculators/StampDutyCalculator.tsx` |
+| `UpfrontCostsCalculator` | the cash due at settlement beyond the deposit. |  | `calculators/UpfrontCostsCalculator.tsx` |
 | `UsableEquityCalculator` | total equity vs the slice a lender will actually lend against (most go to 80% of value before mortgage insurance). |  | `calculators/UsableEquityCalculator.tsx` |
 
 ## Dashboards `src/components/dashboards`

@@ -136,9 +136,9 @@ export function loanFromRepayment(
 }
 
 /* ── AU transfer duty (general rates) ────────────────────────────────────────── */
-export type StateCode = 'NSW' | 'VIC' | 'QLD'
+export type StateCode = 'NSW' | 'VIC' | 'QLD' | 'WA' | 'SA' | 'TAS'
 
-export const STATES: StateCode[] = ['NSW', 'VIC', 'QLD']
+export const STATES: StateCode[] = ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS']
 
 interface Bracket {
   /** top of this bracket (inclusive); null = no ceiling */
@@ -154,13 +154,14 @@ interface Bracket {
 
 /** General / standard transfer-duty schedules (indicative). Owner-occupier, non-FHB. */
 const DUTY: Record<StateCode, Bracket[]> = {
+  // NSW — revenue.nsw.gov.au standard transfer duty, updated Oct 2026. $750k → $27,937.
   NSW: [
-    { upTo: 16000, base: 0, rate: 1.25, over: 0 },
-    { upTo: 35000, base: 200, rate: 1.5, over: 16000 },
-    { upTo: 93000, base: 485, rate: 1.75, over: 35000 },
-    { upTo: 351000, base: 1500, rate: 3.5, over: 93000 },
-    { upTo: 1168000, base: 10530, rate: 4.5, over: 351000 },
-    { upTo: null, base: 47295, rate: 5.5, over: 1168000 },
+    { upTo: 18000, base: 0, rate: 1.25, over: 0 },
+    { upTo: 38000, base: 225, rate: 1.5, over: 18000 },
+    { upTo: 103000, base: 525, rate: 1.75, over: 38000 },
+    { upTo: 387000, base: 1662, rate: 3.5, over: 103000 },
+    { upTo: 1290000, base: 11602, rate: 4.5, over: 387000 },
+    { upTo: null, base: 52237, rate: 5.5, over: 1290000 },
   ],
   VIC: [
     { upTo: 25000, base: 0, rate: 1.4, over: 0 },
@@ -175,6 +176,36 @@ const DUTY: Record<StateCode, Bracket[]> = {
     { upTo: 540000, base: 1050, rate: 3.5, over: 75000 },
     { upTo: 1000000, base: 17325, rate: 4.5, over: 540000 },
     { upTo: null, base: 38025, rate: 5.75, over: 1000000 },
+  ],
+  // WA — wa.gov.au transfer duty (general rate), last updated 30 Jul 2026. $750k → $29,741.
+  WA: [
+    { upTo: 120000, base: 0, rate: 1.9, over: 0 },
+    { upTo: 150000, base: 2280, rate: 2.85, over: 120000 },
+    { upTo: 360000, base: 3135, rate: 3.8, over: 150000 },
+    { upTo: 725000, base: 11115, rate: 4.75, over: 360000 },
+    { upTo: null, base: 28453, rate: 5.15, over: 725000 },
+  ],
+  // SA — revenuesa.sa.gov.au rate of stamp duty. $750k → $35,080.
+  SA: [
+    { upTo: 12000, base: 0, rate: 1.0, over: 0 },
+    { upTo: 30000, base: 120, rate: 2.0, over: 12000 },
+    { upTo: 50000, base: 480, rate: 3.0, over: 30000 },
+    { upTo: 100000, base: 1080, rate: 3.5, over: 50000 },
+    { upTo: 200000, base: 2830, rate: 4.0, over: 100000 },
+    { upTo: 250000, base: 6830, rate: 4.25, over: 200000 },
+    { upTo: 300000, base: 8955, rate: 4.75, over: 250000 },
+    { upTo: 500000, base: 11330, rate: 5.0, over: 300000 },
+    { upTo: null, base: 21330, rate: 5.5, over: 500000 },
+  ],
+  // TAS — sro.tas.gov.au rates of duty (on/after 21 Oct 2013). $750k → $28,935.
+  TAS: [
+    { upTo: 3000, base: 50, rate: 0, over: 0 },
+    { upTo: 25000, base: 50, rate: 1.75, over: 3000 },
+    { upTo: 75000, base: 435, rate: 2.25, over: 25000 },
+    { upTo: 200000, base: 1560, rate: 3.5, over: 75000 },
+    { upTo: 375000, base: 5935, rate: 4.0, over: 200000 },
+    { upTo: 725000, base: 12935, rate: 4.25, over: 375000 },
+    { upTo: null, base: 27810, rate: 4.5, over: 725000 },
   ],
 }
 
@@ -193,6 +224,77 @@ export function stampDuty(state: StateCode, value: number): DutyResult {
   const detail =
     b.over === 0 ? `${b.rate}% of property value` : `${aud0(b.base)} + ${b.rate}% over ${aud0(b.over)}`
   return { duty, detail }
+}
+
+/* ── First-home duty relief (indicative thresholds) ──────────────────────────── */
+/** Full-exemption price and the upper price where the first-home concession phases out to the
+ *  general rate. SA/TAS carry no established-home first-home DUTY relief at present → exempt 0. */
+export const FHB_DUTY: Record<StateCode, { exempt: number; phaseOut: number }> = {
+  NSW: { exempt: 800000, phaseOut: 1000000 },
+  VIC: { exempt: 600000, phaseOut: 750000 },
+  QLD: { exempt: 700000, phaseOut: 800000 },
+  WA: { exempt: 600000, phaseOut: 800000 },
+  SA: { exempt: 0, phaseOut: 0 },
+  TAS: { exempt: 0, phaseOut: 0 },
+}
+
+export type FhbStatus = 'exempt' | 'concession' | 'general' | 'none'
+
+/** Indicative first-home transfer duty. The exact concession taper is state-specific; the
+ *  concession band here is a linear approximation — confirm the amount with the revenue office. */
+export function firstHomeDuty(state: StateCode, value: number): { duty: number; status: FhbStatus } {
+  const general = stampDuty(state, value).duty
+  const b = FHB_DUTY[state]
+  if (b.exempt === 0) return { duty: general, status: 'none' }
+  if (value <= b.exempt) return { duty: 0, status: 'exempt' }
+  if (value <= b.phaseOut) return { duty: general * ((value - b.exempt) / (b.phaseOut - b.exempt)), status: 'concession' }
+  return { duty: general, status: 'general' }
+}
+
+/* ── First Home Guarantee (5% Deposit Scheme) price caps ─────────────────────────
+   firsthomebuyers.gov.au property price caps (Housing Australia). `city` = capital city /
+   regional centre; `rest` = everywhere else in the state. */
+export const FHG_CAPS: Record<StateCode, { city: number; rest: number }> = {
+  NSW: { city: 1500000, rest: 800000 },
+  VIC: { city: 950000, rest: 650000 },
+  QLD: { city: 1000000, rest: 700000 },
+  WA: { city: 850000, rest: 600000 },
+  SA: { city: 900000, rest: 500000 },
+  TAS: { city: 700000, rest: 550000 },
+}
+
+/* ── Lender's mortgage insurance (indicative) ─────────────────────────────────────
+   LMI is priced by the insurer against a confidential matrix, so this is an INDICATIVE band
+   only, calibrated to published reference points (85% ≈ 0.90% of loan · 90% ≈ 2.11% · 95% ≈
+   4.00%). At or below 80% most lenders charge nothing. Never a quote. */
+const LMI_BANDS: { maxLvr: number; rate: number }[] = [
+  { maxLvr: 80, rate: 0 },
+  { maxLvr: 85, rate: 0.902 },
+  { maxLvr: 90, rate: 2.106 },
+  { maxLvr: 95, rate: 3.998 },
+]
+
+export interface LmiResult {
+  premium: number
+  lvr: number
+  loan: number
+  /** deposit needed to reach 80% LVR, where LMI typically falls away */
+  extraDepositFor80: number
+  /** indicative premium at the 85 / 90 / 95 bands for the same property value */
+  curve: { lvr: number; premium: number }[]
+}
+
+export function lmiPremium(value: number, deposit: number): LmiResult {
+  const loan = Math.max(0, value - deposit)
+  const lvr = value > 0 ? (loan / value) * 100 : 0
+  const rateFor = (l: number) => (LMI_BANDS.find((b) => l <= b.maxLvr) ?? LMI_BANDS[LMI_BANDS.length - 1]).rate
+  const premium = (loan * rateFor(lvr)) / 100
+  const extraDepositFor80 = Math.max(0, loan - value * 0.8)
+  const curve = [85, 90, 95].map((p) => {
+    const l = value * (p / 100)
+    return { lvr: p, premium: (l * rateFor(p)) / 100 }
+  })
+  return { premium, lvr, loan, extraDepositFor80, curve }
 }
 
 /* ── Formatting + parsing ─────────────────────────────────────────────────────── */
