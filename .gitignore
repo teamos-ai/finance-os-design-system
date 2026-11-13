@@ -10,3 +10,6 @@ Thumbs.db
 
 # playwright-cli local snapshots (tooling)
 .playwright-cli/
+
+# ephemeral workbench
+.tmp/

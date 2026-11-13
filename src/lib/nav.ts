@@ -5,7 +5,7 @@ import {
   Component, CreditCard,
   LayoutGrid, LayoutTemplate, Gauge, LayoutDashboard, Calculator, Table, Tags, TextCursorInput, Quote, Images,
   Megaphone, FileText, MailPlus, Mail, PenLine, Magnet, Image, NotebookPen, Share2, MonitorPlay,
-  Telescope, FolderOpen, AppWindow, Columns2, Columns3, ArrowRightLeft, MoveVertical,
+  Telescope, FolderOpen, Columns2, Columns3, ArrowRightLeft, MoveVertical,
   ClipboardList,
 } from 'lucide-react'
 import type { Accent } from './accents'
@@ -61,7 +61,6 @@ export const SHOWCASE_NAV: NavItem[] = [
 
   { id: 'positioning-hero', label: 'Positioning Hero', Icon: Telescope, accent: 'blue', group: 'Positioning' },
   { id: 'section-folders', label: 'Section Folders', Icon: FolderOpen, accent: 'blue', group: 'Positioning' },
-  { id: 'platform-dashboard', label: 'Platform Dashboard', Icon: AppWindow, accent: 'blue', group: 'Positioning' },
   { id: 'landscape-table', label: 'Landscape Table', Icon: Columns3, accent: 'blue', group: 'Positioning' },
   { id: 'from-and-to', label: 'From and To', Icon: ArrowRightLeft, accent: 'blue', group: 'Positioning' },
   { id: 'this-vs-that', label: 'This vs That', Icon: Columns2, accent: 'blue', group: 'Positioning' },
