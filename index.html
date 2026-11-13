@@ -7,6 +7,12 @@
     <meta name="description" content="Finance OS — the design system for the broker operating system. One light, luxury system of tokens, components and templates." />
     <title>Finance OS — Design System</title>
 
+    <!-- Cross-document view transition: the login page resolves into the hero (Chromium; graceful elsewhere). -->
+    <style>
+      @view-transition { navigation: auto; }
+      ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.5s; }
+    </style>
+
     <!-- Brand faces are self-hosted via @fontsource (imported in main.tsx) -->
   </head>
   <body>

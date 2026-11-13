@@ -8,7 +8,7 @@ import crypto from 'node:crypto'
 import { signSession, SESSION_COOKIE } from '../_session.mjs'
 
 const SECRET = process.env.PORTAL_SESSION_SECRET || ''
-const PASSWORD = process.env.PORTAL_PASSWORD || ''
+const PASSWORD = (process.env.PORTAL_PASSWORD || '').trim()
 const HOURS = Number(process.env.PORTAL_SESSION_HOURS || 12) || 12
 
 /* crude per-instance rate limit: 10 attempts / 10 min / IP */
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
       body = {}
     }
   }
-  const password = String((body || {}).password || '')
+  const password = String((body || {}).password || '').trim()
   const a = Buffer.from(password)
   const b = Buffer.from(PASSWORD)
   const ok = a.length === b.length && crypto.timingSafeEqual(a, b)

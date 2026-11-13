@@ -33,6 +33,7 @@ export default function middleware(request) {
 
   const { pathname } = new URL(request.url)
   if (PUBLIC.has(pathname)) return next()
+  if (pathname.startsWith('/fonts/')) return next() // brand faces for the public login page
 
   const token = readCookie(request.headers.get('cookie'), SESSION_COOKIE)
   if (verifySession(token, secret)) {
