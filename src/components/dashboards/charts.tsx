@@ -321,6 +321,8 @@ export interface RingStatProps {
   slash?: string
   /** small caption under the figure */
   centerSub?: string
+  /** size/weight of the centred figure — defaults to text-title-lg */
+  figureClass?: string
   ariaLabel: string
   className?: string
   /** false renders statically (no arc sweep / count-up) */
@@ -335,6 +337,7 @@ export function RingStat({
   suffix = '',
   slash,
   centerSub,
+  figureClass = 'text-title-lg',
   ariaLabel,
   className,
   animateIn = true,
@@ -372,12 +375,52 @@ export function RingStat({
         )}
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-        <span className="flex items-baseline font-display text-title-lg leading-none tabular-nums text-fg">
+        <span className={cn('flex items-baseline font-display leading-none tabular-nums text-fg', figureClass)}>
           <CountUp to={value} decimals={decimals} prefix={prefix} suffix={suffix} />
           {slash && <span className="text-title-sm text-fg-subtle">{slash}</span>}
         </span>
         {centerSub && <span className="font-mono text-mono-2xs uppercase tracking-wider text-fg-subtle">{centerSub}</span>}
       </div>
+    </div>
+  )
+}
+
+/* ── FillBar — a horizontal track whose accent fill grows from 0 to `pct` on view.
+      The capacity-meter / leaderboard / progress bar, reduced-motion safe (snaps full).
+      Pass the height (and any rounding) via `className`; `delay` staggers a group. ──────── */
+export interface FillBarProps {
+  /** 0–100 */
+  pct: number
+  /** track classes — at least a height, e.g. "h-2.5" */
+  className?: string
+  /** fill classes — defaults to the one accent */
+  barClassName?: string
+  delay?: number
+  ariaLabel?: string
+  /** false renders statically (no grow-in) */
+  animateIn?: boolean
+}
+
+export function FillBar({ pct, className, barClassName = 'bg-accent', delay = 0, ariaLabel, animateIn = true }: FillBarProps) {
+  const reduced = useReducedMotion()
+  const w = Math.max(0, Math.min(100, pct))
+  return (
+    <div
+      role={ariaLabel ? 'img' : undefined}
+      aria-label={ariaLabel}
+      className={cn('overflow-hidden rounded-sm bg-inset', className)}
+    >
+      {reduced || !animateIn ? (
+        <div className={cn('h-full rounded-sm', barClassName)} style={{ width: `${w}%` }} />
+      ) : (
+        <motion.div
+          className={cn('h-full rounded-sm', barClassName)}
+          initial={{ width: 0 }}
+          whileInView={{ width: `${w}%` }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.6, ease: EASE_OUT, delay }}
+        />
+      )}
     </div>
   )
 }

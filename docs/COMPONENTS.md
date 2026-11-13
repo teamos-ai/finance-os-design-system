@@ -76,7 +76,7 @@ Tokenised inline-SVG charts for broker dashboards.
 
 | Component(s) | Purpose | Variants | Source |
 |---|---|:---:|---|
-| `BarChart` `LineChart` `DonutChart` `RingStat` `RankedBarChart` `SplitTrack` | tokenised inline-SVG primitives for the broker dashboards. |  | `dashboards/charts.tsx` |
+| `BarChart` `LineChart` `DonutChart` `RingStat` `FillBar` `RankedBarChart` `SplitTrack` | tokenised inline-SVG primitives for the broker dashboards. |  | `dashboards/charts.tsx` |
 
 ## Email signature `src/components/signature`
 
