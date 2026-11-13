@@ -28,13 +28,25 @@
   - Verified desktop + mobile; build + check green (contrast 21/21); docs regenerated (45 rows/12
     families). 42 sections total now.
 
-- **Optional next (flag, don't assume):**
-  - **Widgets premium-reveal consistency:** `WidgetsSection.tsx` still renders its ring/bars/figures
-    STATICALLY (no count-up / fill reveal). Could reuse `RingStat` + `CountUp` + in-view fills so the
-    DS's own graph showcase loads as premium as Market Evidence. Touches stable code — ask first.
-  - **Bundle:** main `index` chunk is ~500 kB (135 kB gzip), just over Vite's soft warning; audit is
-    already split. Only act if it matters.
-  - **a11y / alt-text sweep** — Tumai deferred this to the very end.
+- **Also done (2026-11-13), committed, NOT yet pushed (2 commits ahead of origin):**
+  - **Widgets premium-reveal** — `WidgetsSection` now counts up / fills / sweeps on scroll via shared
+    `RingStat` + new `FillBar` + `CountUp` (+ `RingStat` `figureClass` prop). → `7113bce` (pushed)
+  - **Bundle split** — `vite.config.ts` `manualChunks` now peels `ds-core` (ui+lib) + `feat-*` chunks;
+    entry 500 → 291 kB, no >500 kB chunk, warning gone. React kept in ONE chunk; `ds-core` is a shared
+    leaf so no circular chunk deps. Verified against `vite preview`: home + /audit clean console. → `600c20c`
+  - **a11y screen-reader pass** — labelled the last unlabelled inputs (audit TableField cells,
+    Short/Long/Numeric fields via `question.prompt`, SidePanel notes), named the collapsed Shell GitHub
+    link, fixed a TokensSection h2→h4 skip (→h3). Rest of the codebase was already clean. → `8325c0f`
+
+- **NEXT — Tumai pushes** (2 commits: `600c20c` bundle, `8325c0f` a11y):
+  ```
+  git push origin main
+  ```
+
+- **Intentionally LEFT (minor, debatable a11y heading-ranks — don't "fix" without a reason):** the audit
+  Start screen h1→h3 (group labels are `MonoLabel` spans by design), PlatformDashboard mock heading
+  inversions, lead-magnet template heading inconsistency. Promoting `MonoLabel` to headings is shared-
+  component churn for a judgment-call gain.
 
 - **Don't forget:** `npm run check` + `npm run build` before committing; `npm run docs:components`
   after any component change; push `main` → Vercel deploys production. Sources in scratchpad

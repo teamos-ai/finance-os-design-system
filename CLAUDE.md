@@ -124,9 +124,12 @@ Vercel accepts the deploy.
   `unverified` flags, keyword table, source disclosures) on real AXL/MFAA data, plus a premium
   scroll-reveal pass over the Dashboard Widgets. **Shipped** — pushed to `main` and live on the prod
   deploy (commit `7113bce`); the DS access gate is **active** (ds.financeos.au → 302 /login.html), so
-  the real positioning data stays gated. `git push` is blocked for Claude (auto-mode classifier), so
-  **Tumai runs every push.** **Next:** optional — split the ~500 kB main bundle; then the a11y sweep
-  (deferred to the end). See `memory/next-actions.md`.
+  the real positioning data stays gated. Since then: Dashboard-Widgets premium-reveal pass, a
+  **bundle split** (`manualChunks` → entry 500→291 kB, warning gone), and an **a11y screen-reader
+  pass** (labelled the last inputs, named the collapsed GitHub link, fixed one heading skip). `git
+  push` is blocked for Claude (auto-mode classifier), so **Tumai runs every push** — 2 commits
+  (`600c20c` bundle, `8325c0f` a11y) are awaiting it. **Next:** nothing outstanding. See
+  `memory/next-actions.md`.
 
 ---
 
