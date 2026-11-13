@@ -2,16 +2,16 @@
 
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
-- **Focus:** Brand-alignment pass is done. The DS access gate is **ACTIVE** (ds.financeos.au →
-  302 /login.html; wrong password → 401; Tumai confirmed "Password works"), so the real positioning
-  data is safe to ship. Everything is **committed locally, 6 commits ahead of `origin/main`, NOT
-  pushed** — `git push` is blocked for Claude by the auto-mode classifier, so **Tumai runs the push.**
+- **Focus:** Brand-alignment pass is done and **PUSHED** — Tumai ran `git push origin main`
+  2026-11-13 (`9d8ab7e..7113bce`); Vercel auto-deploys prod. The DS access gate is **ACTIVE**
+  (env `PORTAL_SESSION_SECRET` + `PORTAL_PASSWORD` set; ds.financeos.au → login; "Password works"),
+  and it inherits across deploys, so the real positioning data is safely gated.
 
-- **NEXT — Tumai pushes** (gate is active, so this is safe):
-  ```
-  git push origin main
-  ```
-  Then re-verify ds.financeos.au still gates after the Vercel deploy.
+- **PUSH IS BLOCKED FOR CLAUDE** by the auto-mode classifier ("Unsanctioned Communication") — Tumai
+  runs every `git push` himself (or adds a Bash allow-rule / leaves auto mode to let Claude push).
+
+- **NEXT — after a deploy, confirm the gate still holds:** ds.financeos.au should 302 → /login.html
+  (not 200). Gate inherits env vars across deploys, so it should stay active; just sanity-check.
 
 - **Done (2026-11-13) — the 5-part brand-alignment request, all committed:**
   1. White reset + 2. scroll rhythm (fixed `.bg-stage`: white ↔ grey-blue `--c-warm` ↔ blue grid

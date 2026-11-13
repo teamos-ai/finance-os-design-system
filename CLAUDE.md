@@ -121,10 +121,12 @@ Vercel accepts the deploy.
   brand.financeos.au: white reset + scroll-rhythm background (white ↔ grey-blue ↔ blue grid), Spline
   Sans body, the Promo Video flip-to-demo dashboard, and a new **Market Evidence** section porting
   the brand's graph/table vocabulary (`RingStat` · `RankedBarChart` · `SplitTrack`, stat tiles with
-  `unverified` flags, keyword table, source disclosures) on real AXL/MFAA data. The DS access gate is
-  **active**, so the real positioning data is shippable. **6 commits ahead of `origin/main`, unpushed
-  — Tumai runs `git push` (blocked for Claude).** **Next:** push; optional Widgets premium-reveal
-  consistency pass; then the a11y sweep (deferred to the end). See `memory/next-actions.md`.
+  `unverified` flags, keyword table, source disclosures) on real AXL/MFAA data, plus a premium
+  scroll-reveal pass over the Dashboard Widgets. **Shipped** — pushed to `main` and live on the prod
+  deploy (commit `7113bce`); the DS access gate is **active** (ds.financeos.au → 302 /login.html), so
+  the real positioning data stays gated. `git push` is blocked for Claude (auto-mode classifier), so
+  **Tumai runs every push.** **Next:** optional — split the ~500 kB main bundle; then the a11y sweep
+  (deferred to the end). See `memory/next-actions.md`.
 
 ---
 
