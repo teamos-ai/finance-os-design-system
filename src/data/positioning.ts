@@ -10,10 +10,14 @@
  * typographic in the landscape lines). Voice per CLAUDE.md: Ruler 70 / Sage 30 — calm, clear,
  * grounded, authoritative, never hyped.
  *
- * Deliberately left out — not rendered by these seven surfaces, or not publishable:
+ * Deliberately left out — not rendered by these surfaces, or not publishable:
  *   · Internal / founder-reported metrics and targets — the current-customer count and channel
- *     split, the MFAA and AXL demographic and search figures, and the qualified-call
- *     progression-rate baseline and target.
+ *     split, and the qualified-call progression-rate baseline and target.
+ *     (The MFAA demographic and AXL search-demand figures ARE now rendered — by the gated Market
+ *     Evidence surface (`marketEvidence` below), every figure carried through reported-not-verified
+ *     with the `unverified` flags and the source/method disclosures intact, exactly as the gated
+ *     brand page shows them. Admissible because ds.financeos.au is now login-gated like the brand
+ *     page; never surface these on a public build.)
  *   · Deferred or blank blocks — option scoring scores (null), the supporting-proof list (blank),
  *     the measurement-setup table (empty), open questions (none).
  *   · Partner-pack legal / entity and commercial draft lines — the legal entity, template and
@@ -267,4 +271,141 @@ export const dashboard: Dashboard = {
     { name: 'L. Chen', stage: 'New enquiry', value: 380000 },
     { name: 'J. Williams', stage: 'Settled', value: 615000 },
   ],
+}
+
+/* ── Market evidence (section 02 · "Who you are for") ──────────────────────────────
+   The brand-research graphs the showcase visualises: positioning readiness, the customer
+   snapshot, and AXL's Australian search-demand sample. EVERY figure here is reported, not
+   verified — the `unverified` flags and the source/method strings are part of the data and
+   must render with it (brand rule 09; audit-instrument honesty rules). These are founder /
+   third-party research figures, admissible only because the DS is login-gated like the brand
+   page. Sources: Finance OS partner pack · MFAA research · AXL Media SEO & Video Strategy
+   Report, 8 October 2026. Verbatim where the document supplies wording. */
+
+/** A customer-snapshot stat tile. `unverified` appends the reported-not-verified flag. */
+export interface MarketStat {
+  eyebrow: string
+  /** count-up target; omit when `display` carries a non-numeric figure */
+  value?: number
+  display?: string
+  prefix?: string
+  suffix?: string
+  decimals?: number
+  /** group the figure's thousands (e.g. $126,941) */
+  group?: boolean
+  context: string
+  unverified?: boolean
+}
+
+/** One row of AXL's keyword table. A dash (`—`) means the report supplied no value. */
+export interface KeywordRow {
+  kw: string
+  searches: number
+  cpc: string
+  competition: string
+}
+
+export interface MarketEvidence {
+  /** positioning-readiness ring: an accent arc fills to `pct`, figure counts to `value` */
+  readiness: { pct: number; value: number; slash: string; sub: string; caption: string }
+  founderQuestions: { value: number; caption: string }
+  stats: MarketStat[]
+  statsSources: string
+  statsNotMeasured: string
+  searchLead: string
+  /** top AU themes by estimated monthly searches — the ranked bar chart */
+  searchDemand: { label: string; value: number }[]
+  /** AU vs NZ keyword counts — the split track */
+  split: { label: string; value: number }[]
+  keywords: KeywordRow[]
+  searchMethod: string
+  searchSourceCredit: string
+}
+
+export const marketEvidence: MarketEvidence = {
+  readiness: {
+    pct: 100,
+    value: 10,
+    slash: '/10',
+    sub: 'decided',
+    caption: 'Every positioning section decided and signed off.',
+  },
+  founderQuestions: { value: 0, caption: 'None outstanding · signed off 9 Nov 2026' },
+  stats: [
+    {
+      eyebrow: 'Broker age · assumed',
+      display: '35–50',
+      context:
+        'The Broker Ben construct’s assumed age, in a major Australian metro. Broker Ben is a hypothesis with no research sample behind it, so this is not measured customer data — actual age and location are',
+      unverified: true,
+    },
+    {
+      eyebrow: 'Sole operators · 2025',
+      value: 43.2,
+      decimals: 1,
+      suffix: '%',
+      context: 'of reported brokers were sole operators in calendar 2025 (vs 47.1% in 2024).',
+    },
+    {
+      eyebrow: 'Median gross revenue · 2025',
+      value: 126941,
+      prefix: '$',
+      group: true,
+      context: 'median gross broker revenue in calendar 2025, before business costs. Personal income',
+      unverified: true,
+    },
+    {
+      eyebrow: 'Recommended start',
+      display: 'A$297/mo + A$997',
+      context:
+        'Partner is the recommended starting point (monthly subscription and onboarding, incl. GST). Actual plan mix and spend',
+      unverified: true,
+    },
+  ],
+  statsSources:
+    'Finance OS partner pack (Broker Ben — an internal construct and working hypothesis, not research; Market Context; Pricing and Tiers). MFAA research: mfaa.com.au/policy-and-advocacy/research',
+  statsNotMeasured:
+    'The age and metro profile come from the Broker Ben construct, a working hypothesis with no research sample behind it — not a measured customer profile. The MFAA figures are industry context. Australian mortgage and finance brokerage teams are the approved primary audience; actual customer demographics and segment sizes have yet to be measured. Australia is the launch market; New Zealand is an intended expansion market, with no launch date or localised readiness approved, and its keyword data is retained as research context only.',
+  searchLead:
+    'In AXL’s Australian sample, mortgage broker marketing and lead generation had the highest volumes. Broker software and CRM terms give the Compare pages more specific topics to address.',
+  searchDemand: [
+    { label: 'mortgage broker marketing', value: 170 },
+    { label: 'mortgage lead generation', value: 110 },
+    { label: 'mortgage broker software', value: 70 },
+    { label: 'mortgage broker training', value: 70 },
+    { label: 'mortgage technology', value: 30 },
+  ],
+  split: [
+    { label: 'Australia · 24 keywords', value: 24 },
+    { label: 'New Zealand · 20 keywords', value: 20 },
+  ],
+  keywords: [
+    { kw: 'mortgage broker marketing', searches: 170, cpc: '$16.81', competition: 'Medium' },
+    { kw: 'mortgage lead generation', searches: 110, cpc: '$11.14', competition: 'Medium' },
+    { kw: 'mortgage broker software', searches: 70, cpc: '$20.83', competition: 'Medium' },
+    { kw: 'mortgage broker training', searches: 70, cpc: '$7.55', competition: 'Medium' },
+    { kw: 'mortgage technology', searches: 30, cpc: '—', competition: 'Low' },
+    { kw: 'mortgage broker CRM', searches: 30, cpc: '$17.09', competition: 'Medium' },
+    { kw: 'CRM for mortgage brokers', searches: 30, cpc: '$17.09', competition: 'Medium' },
+    { kw: 'loan origination software', searches: 30, cpc: '$35.87', competition: 'Low' },
+    { kw: 'AI for mortgage brokers', searches: 20, cpc: '$4.03', competition: 'Medium' },
+    { kw: 'mortgage broker lead generation', searches: 20, cpc: '$19.48', competition: 'Medium' },
+    { kw: 'mortgage broker social media', searches: 20, cpc: '—', competition: 'Low' },
+    { kw: 'mortgage CRM software', searches: 10, cpc: '—', competition: 'Low' },
+    { kw: 'finance broker CRM', searches: 10, cpc: '—', competition: '—' },
+    { kw: 'CRM for finance brokers', searches: 10, cpc: '—', competition: '—' },
+    { kw: 'best CRM for mortgage brokers', searches: 10, cpc: '$36.78', competition: 'High' },
+    { kw: 'broker CRM software', searches: 10, cpc: '$81.44 *', competition: 'Medium' },
+    { kw: 'finance CRM software', searches: 10, cpc: '—', competition: 'Low' },
+    { kw: 'lending CRM', searches: 10, cpc: '—', competition: 'Low' },
+    { kw: 'mortgage broker tools', searches: 10, cpc: '$5.72', competition: 'Medium' },
+    { kw: 'aggregator CRM', searches: 10, cpc: '—', competition: 'Low' },
+    { kw: 'finance broker software Australia', searches: 10, cpc: '$28.39', competition: 'Medium' },
+    { kw: 'mortgage broker digital marketing', searches: 10, cpc: '$14.24', competition: 'High' },
+    { kw: 'mortgage automation software', searches: 10, cpc: '—', competition: '—' },
+    { kw: 'loan officer CRM', searches: 10, cpc: '$11.27', competition: 'Medium' },
+  ],
+  searchMethod:
+    'Historical monthly search estimates from DataForSEO and Google Ads Keyword Planner, as reported by AXL Media. CPC is a paid-search estimate in local currency; the starred A$81.44 is a high bid; a dash means the report supplied no value. Related terms can overlap. These figures describe search behaviour and do not establish customer demand, ranking potential or Finance OS outcomes. New Zealand is retained as research context.',
+  searchSourceCredit: 'AXL Media · Mortgage CRM SEO & Video Strategy Report · 8 October 2026',
 }

@@ -36,6 +36,7 @@ import { SocialSection } from '@/showcase/sections/SocialSection'
 import { DemosSection } from '@/showcase/sections/DemosSection'
 import { PositioningHeroSection } from '@/showcase/sections/PositioningHeroSection'
 import { SectionFoldersSection } from '@/showcase/sections/SectionFoldersSection'
+import { MarketEvidenceSection } from '@/showcase/sections/MarketEvidenceSection'
 import { LandscapeTableSection } from '@/showcase/sections/LandscapeTableSection'
 import { TransformationTableSection } from '@/showcase/sections/TransformationTableSection'
 import { ThisVsThatSection } from '@/showcase/sections/ThisVsThatSection'
@@ -86,6 +87,7 @@ export default function App() {
       <DemosSection />
       <PositioningHeroSection />
       <SectionFoldersSection />
+      <MarketEvidenceSection />
       <LandscapeTableSection />
       <TransformationTableSection />
       <ThisVsThatSection />

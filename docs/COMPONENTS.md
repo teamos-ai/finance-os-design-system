@@ -76,7 +76,7 @@ Tokenised inline-SVG charts for broker dashboards.
 
 | Component(s) | Purpose | Variants | Source |
 |---|---|:---:|---|
-| `BarChart` `LineChart` `DonutChart` | tokenised inline-SVG primitives for the broker dashboards. |  | `dashboards/charts.tsx` |
+| `BarChart` `LineChart` `DonutChart` `RingStat` `RankedBarChart` `SplitTrack` | tokenised inline-SVG primitives for the broker dashboards. |  | `dashboards/charts.tsx` |
 
 ## Email signature `src/components/signature`
 
@@ -90,7 +90,6 @@ Broker email-signature block + preview.
 
 | Component(s) | Purpose | Variants | Source |
 |---|---|:---:|---|
-| `DemoVideoModal` | opens the Finance OS product demo in a centred modal. |  | `platform-dashboard/DemoVideoModal.tsx` |
 | `FlipCard` | a reduced-motion-safe 3D flip between a front and a back face. |  | `platform-dashboard/FlipCard.tsx` |
 | `PlatformAppShell` `PlatformOverview` | the "platform in motion" app-shell mock (FRONT) and a plain-language overview (BACK) for the flip card. |  | `platform-dashboard/PlatformDashboard.tsx` |
 

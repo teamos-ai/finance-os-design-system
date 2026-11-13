@@ -88,9 +88,11 @@ export interface CountUpProps {
   decimals?: number
   prefix?: string
   suffix?: string
+  /** group the integer part with locale thousands separators (e.g. 126,941) */
+  group?: boolean
   className?: string
 }
-export const CountUp = ({ to, duration = 1.4, decimals = 0, prefix = '', suffix = '', className }: CountUpProps) => {
+export const CountUp = ({ to, duration = 1.4, decimals = 0, prefix = '', suffix = '', group = false, className }: CountUpProps) => {
   const ref = React.useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.4 })
   const reduced = useReducedMotion()
@@ -116,10 +118,14 @@ export const CountUp = ({ to, duration = 1.4, decimals = 0, prefix = '', suffix 
     return () => cancelAnimationFrame(raf)
   }, [inView, reduced, to, duration])
 
+  const formatted = group
+    ? value.toLocaleString('en-AU', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+    : value.toFixed(decimals)
+
   return (
     <span ref={ref} className={cn('tabular-nums', className)}>
       {prefix}
-      {value.toFixed(decimals)}
+      {formatted}
       {suffix}
     </span>
   )

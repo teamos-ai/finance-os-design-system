@@ -11,7 +11,7 @@
  */
 import * as React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { EASE_OUT } from '@/lib/motion'
+import { EASE_OUT, CountUp } from '@/lib/motion'
 import { cn } from '@/lib/cn'
 
 export interface ChartDatum {
@@ -302,6 +302,188 @@ export function DonutChart({ data, centerValue, centerLabel, formatValue, ariaLa
           </li>
         ))}
       </ul>
+    </div>
+  )
+}
+
+/* ── RingStat — a single-value radial gauge. One accent arc sweeps to `pct` on view, a
+      count-up figure settles over it. The brand's "10/10 decided" readiness ring — not a
+      multi-segment donut. Track is the inset token; the arc is the one accent. ─────────── */
+export interface RingStatProps {
+  /** 0–100 — how far the accent arc sweeps */
+  pct: number
+  /** the centred figure, counted up on view */
+  value: number
+  decimals?: number
+  prefix?: string
+  suffix?: string
+  /** static text appended to the figure, e.g. "/10" */
+  slash?: string
+  /** small caption under the figure */
+  centerSub?: string
+  ariaLabel: string
+  className?: string
+  /** false renders statically (no arc sweep / count-up) */
+  animateIn?: boolean
+}
+
+export function RingStat({
+  pct,
+  value,
+  decimals = 0,
+  prefix = '',
+  suffix = '',
+  slash,
+  centerSub,
+  ariaLabel,
+  className,
+  animateIn = true,
+}: RingStatProps) {
+  const reduced = useReducedMotion()
+  const r = 52
+  const C = 2 * Math.PI * r
+  const clamped = Math.max(0, Math.min(100, pct))
+  const off = C * (1 - clamped / 100)
+  const arcProps = {
+    cx: 60,
+    cy: 60,
+    r,
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 10,
+    strokeLinecap: 'round' as const,
+    strokeDasharray: C,
+    transform: 'rotate(-90 60 60)',
+  }
+  return (
+    <div className={cn('relative mx-auto h-[150px] w-[150px]', className)}>
+      <svg viewBox="0 0 120 120" role="img" aria-label={ariaLabel} className="h-full w-full text-accent">
+        <circle cx={60} cy={60} r={r} fill="none" strokeWidth={10} className="stroke-inset" />
+        {reduced || !animateIn ? (
+          <circle {...arcProps} strokeDashoffset={off} />
+        ) : (
+          <motion.circle
+            {...arcProps}
+            initial={{ strokeDashoffset: C }}
+            whileInView={{ strokeDashoffset: off }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.1 }}
+          />
+        )}
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
+        <span className="flex items-baseline font-display text-title-lg leading-none tabular-nums text-fg">
+          <CountUp to={value} decimals={decimals} prefix={prefix} suffix={suffix} />
+          {slash && <span className="text-title-sm text-fg-subtle">{slash}</span>}
+        </span>
+        {centerSub && <span className="font-mono text-mono-2xs uppercase tracking-wider text-fg-subtle">{centerSub}</span>}
+      </div>
+    </div>
+  )
+}
+
+/* ── RankedBarChart — a horizontal ranked list: rank · label · a bar that fills left→right
+      on view (staggered) · a count-up value. The brand's "search demand" graph. One accent,
+      the top row pulled forward (accent-press); the track is the inset token. ───────────── */
+export interface RankedDatum {
+  label: string
+  value: number
+}
+export interface RankedBarChartProps {
+  data: RankedDatum[]
+  ariaLabel: string
+  valueSuffix?: string
+  className?: string
+  /** false renders statically (no bar fill / count-up) */
+  animateIn?: boolean
+}
+
+export function RankedBarChart({ data, ariaLabel, valueSuffix = '', className, animateIn = true }: RankedBarChartProps) {
+  const reduced = useReducedMotion()
+  const max = Math.max(...data.map((d) => d.value), 1)
+  return (
+    <ul role="img" aria-label={ariaLabel} className={cn('flex flex-col gap-3', className)}>
+      {data.map((d, i) => {
+        const pct = Math.round((d.value / max) * 100)
+        const top = i === 0
+        return (
+          <li key={d.label} className="grid grid-cols-[1.5rem_minmax(0,1fr)_3rem] items-center gap-3">
+            <span className={cn('text-center font-mono text-mono-xs tabular-nums', top ? 'text-accent-text' : 'text-fg-subtle')}>
+              {i + 1}
+            </span>
+            <div className="flex min-w-0 flex-col gap-1.5">
+              <span className="truncate font-body text-body-sm text-fg">{d.label}</span>
+              <div className="h-2 overflow-hidden rounded-xs bg-inset">
+                {reduced || !animateIn ? (
+                  <div className={cn('h-full rounded-xs', top ? 'bg-accent-press' : 'bg-accent')} style={{ width: `${pct}%` }} />
+                ) : (
+                  <motion.div
+                    className={cn('h-full rounded-xs', top ? 'bg-accent-press' : 'bg-accent')}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${pct}%` }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.6, ease: EASE_OUT, delay: i * 0.08 }}
+                  />
+                )}
+              </div>
+            </div>
+            <span className="text-right font-display text-title-sm tabular-nums text-fg">
+              <CountUp to={d.value} suffix={valueSuffix} />
+            </span>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+/* ── SplitTrack — a single bar split into proportional segments, each sweeping out on view,
+      with a swatch legend and computed percentages. The brand's AU / NZ keyword split.
+      One accent, segments stepped by opacity — never a second hue. ───────────────────────── */
+export interface SplitSegment {
+  label: string
+  value: number
+}
+export interface SplitTrackProps {
+  segments: SplitSegment[]
+  ariaLabel: string
+  className?: string
+  /** false renders statically (no segment sweep) */
+  animateIn?: boolean
+}
+
+export function SplitTrack({ segments, ariaLabel, className, animateIn = true }: SplitTrackProps) {
+  const reduced = useReducedMotion()
+  const total = segments.reduce((s, d) => s + d.value, 0) || 1
+  return (
+    <div className={cn('flex flex-col gap-3', className)}>
+      <div role="img" aria-label={ariaLabel} className="flex h-3 w-full overflow-hidden rounded-sm bg-inset">
+        {segments.map((seg, i) => {
+          const pct = (seg.value / total) * 100
+          return reduced || !animateIn ? (
+            <div key={seg.label} className="h-full bg-accent" style={{ width: `${pct}%`, opacity: stepAt(i) }} />
+          ) : (
+            <motion.div
+              key={seg.label}
+              className="h-full bg-accent"
+              style={{ opacity: stepAt(i) }}
+              initial={{ width: 0 }}
+              whileInView={{ width: `${pct}%` }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6, ease: EASE_OUT, delay: i * 0.12 }}
+            />
+          )
+        })}
+      </div>
+      <div className="flex flex-wrap justify-center gap-x-6 gap-y-1.5">
+        {segments.map((seg, i) => (
+          <span key={seg.label} className="inline-flex items-center gap-2 font-body text-caption text-fg-muted">
+            <span aria-hidden className="h-2.5 w-2.5 rounded-xs bg-accent" style={{ opacity: stepAt(i) }} />
+            {seg.label}
+            <span className="font-mono text-mono-2xs tabular-nums text-fg-subtle">{Math.round((seg.value / total) * 100)}%</span>
+          </span>
+        ))}
+      </div>
     </div>
   )
 }
