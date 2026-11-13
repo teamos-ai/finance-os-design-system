@@ -40,19 +40,21 @@
   - **finance.ts engine** now has `amortise()` (offset/extra/lump), `balanceAfter()`,
     `totalInterest()`, `durationLabel()`. **`CalcLayout.tsx`** = shared `CalcShell` + `ResultHeadline`
     / `MetricRow` / `CompareBars` — every new calculator uses it.
-  - ✅ **Paying it off (6/6) DONE** — Repayment (existing) + Extra, Lump, Offset, IO-vs-P&I, Frequency.
-    Validated to the dollar. In `CalculatorsSection` grouped by the site's categories.
-  - **NEXT batches (14 calculators left):**
-    - **Buying (5 new):** deposit-savings-goal, upfront-costs, lmi-estimate, first-home-schemes, LVR.
-      ⚠ These need published AU tables: extend `stampDuty` from NSW/VIC/QLD to **all 8 states** (site
-      covers 8; validate NSW $27,937 / VIC $40,070 / QLD $26,775 / WA $29,741 at $750k); LMI bands
-      (site points at $750k/$75k dep: 95%→$28,486, 90%→$14,216, 85%→$5,750); first-home price caps
-      (NSW cap $1.5m). Mark all indicative + dated. (Borrowing Power + Stamp Duty already exist.)
-    - **Comparing & switching (5 new):** refinance-savings, compare-two-loans, fixed-vs-variable,
-      split-loan, rent-vs-buy.
-    - **Property & equity (2 new):** usable-equity (80% rule: value×0.8−owing), investment-property-
-      cashflow (rent−costs, negative-gearing; site example $650k/$130k dep/$620pw → ~$207/wk after tax).
-    - Full per-calculator specs captured in the 2026-11-13 web-fetch reports (in transcript).
+  - ✅ **Paying it off (6/6) DONE** · ✅ **Comparing & switching (5/5) DONE** · ✅ **Property & equity
+    (2/2) DONE**. Calculators now **15 of 20**. All grouped in `CalculatorsSection` by the site's
+    categories; new finance.ts helpers: `amortise`, `balanceAfter`, `totalInterest`,
+    `interestOverPeriods`, `durationLabel`, `pct2`. Most validated to the dollar; Refinance & Compare
+    within ~$4 (site's default rates undisclosed — clean 6.0% used, formulas correct).
+  - **NEXT — the last calculator batch: Buying (5 new)** — deposit-savings-goal, upfront-costs,
+    lmi-estimate, first-home-schemes, LVR. (Borrowing Power + Stamp Duty already exist = 2/7; these 5
+    make 7/7.) ⚠ Needs published AU tables — **source carefully, mark indicative + dated:**
+    - Extend `stampDuty` from NSW/VIC/QLD to **all 8 states** (validate at $750k: NSW $27,937 / VIC
+      $40,070 / QLD $26,775 / WA $29,741; SA/TAS/ACT/NT brackets to source).
+    - LMI bands — site points at $750k value / $75k dep: 95%→$28,486, 90%→$14,216, 85%→$5,750.
+    - First-home price caps by state (NSW cap $1.5m metro / $800k regional; 1 Oct 2025 scheme).
+    - deposit-savings-goal & upfront-costs consume stamp-duty (+LMI). LVR is trivial (loan/value).
+  - Full per-calculator specs in the 2026-11-13 web-fetch reports (transcript).
+  - **Then:** the Stack Audit quiz (interactive + scoring) and Funnels (inventory the site catalogue).
   - **Stack Audit quiz** — build interactive (5 single-choice Qs captured) + the stage-scoring +
     result screen (result content wasn't visible on the site; re-fetch /quiz result or infer).
   - **Funnels** — inventory financeos.au/discover/assets/funnels and rebuild designs from DS parts.
