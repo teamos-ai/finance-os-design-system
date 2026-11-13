@@ -153,7 +153,8 @@ Vercel accepts the deploy.
   removed (the Banners *library exhibit* stays). The hero OS mark floats + gently wobbles
   (`FloatWobble` in `motion.tsx` — a deliberate, reduced-motion-safe exception to the no-wobble rule).
   Added **two downloadable icon packs** on the Icons section: the **full static Lucide set**
-  (`public/packs/lucide-icons-full.zip`, 2356 SVGs, lucide-static 1.72.0, ISC) and the **animated set**
+  (`public/packs/lucide-icons-full.zip`, **2713 SVGs** = 2356 core `lucide-static` 1.72.0 + 357 `@lucide/lab`,
+  ISC — the complete Lucide library; 21st.dev's "2814" over-counts) and the **animated set**
   (`public/packs/animated-lucide-icons.zip`, 999 components, AnimateIcons MIT + Lucide ISC, @ `23e58d0`).
   **Sidebar icons** re-picked for 10 items: Hero→Rocket, Tokens→Blocks, Radius & Elevation→Layers2,
   Logo→Gem, Icons→Shapes, Buttons & Controls→ToggleLeft, Heroes→Crown, Landscape Table→Table2,

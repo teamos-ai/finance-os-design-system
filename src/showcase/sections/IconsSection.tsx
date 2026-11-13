@@ -581,14 +581,15 @@ function PackRow({
 function IconPacks() {
   return (
     <div className="flex flex-col gap-6">
-      <PackRow title="Full Lucide set" count="2356" href="/packs/lucide-icons-full.zip" size="1.1 MB">
-        Every Lucide glyph as a clean SVG —{' '}
+      <PackRow title="Full Lucide set" count="2713" href="/packs/lucide-icons-full.zip" size="1.2 MB">
+        Every Lucide icon as a clean SVG —{' '}
         <a href="https://lucide.dev" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
           lucide.dev
         </a>{' '}
-        v1.72.0 (ISC), aliases included. In this project the icons are already React components via{' '}
-        <span className="font-mono text-mono-2xs">lucide-react</span> — this is the raw SVG library for design
-        tools, email and exports.
+        (ISC): 2,356 core (<span className="font-mono text-mono-2xs">lucide-static</span> 1.72.0) + 357
+        experimental (<span className="font-mono text-mono-2xs">@lucide/lab</span>), aliases included. In code
+        the icons are already React components via <span className="font-mono text-mono-2xs">lucide-react</span>;
+        this is the raw SVG library for design tools, email and exports.
       </PackRow>
       <div className="h-px bg-border" aria-hidden />
       <PackRow title="Animated Lucide set" count="999" href="/packs/animated-lucide-icons.zip" size="1.5 MB">
