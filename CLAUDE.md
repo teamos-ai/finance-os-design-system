@@ -65,10 +65,15 @@ like `text-fg`.
 
 ## Routes
 Two surfaces, split in `src/main.tsx` with `react-router-dom`:
-- **`/`** — the showcase. One long scroll, anchor-based sidebar nav (`src/lib/nav.ts` is the
-  single source: add an entry there and render the section in `App.tsx`; the section number is
-  derived from nav order, so it never gaps). Groups: Start · Foundations · Components · Patterns ·
-  Templates · Tools. 28 sections.
+- **`/`** — the showcase. One long scroll, anchor-based sidebar nav. **`src/lib/nav.ts` is the
+  single source of truth** (`NavItem { group, category?, subcategory? }`); `App.tsx` renders the
+  sections **data-driven from that nav, in order**, inserting group/category/Comparisons dividers —
+  so the sidebar and the page always match. Add a nav entry + register the section in `App.tsx`'s
+  `SECTIONS` map and it slots in (section number derived from nav order, never gaps). Four groups:
+  **Start · Foundations · Components · Library**, where Library nests into Images & Backgrounds ·
+  Website Sections (with a Comparisons cluster) · Dashboards & Data Displays · Marketing & Content ·
+  Demos & Templates · Calculators & Assessments. ~43 sections. (The former Positioning / Patterns /
+  Templates / Tools groups were dissolved into these on 2026-11-13.)
 - **`/audit`** — the client audit instrument, full-screen, outside the showcase chrome. It is
   **lazy-loaded** so its question bank stays out of the showcase bundle. Deep links need the SPA
   rewrite in `vercel.json`.
@@ -127,9 +132,15 @@ Vercel accepts the deploy.
   the real positioning data stays gated. Since then: Dashboard-Widgets premium-reveal pass, a
   **bundle split** (`manualChunks` → entry 500→291 kB, warning gone), and an **a11y screen-reader
   pass** (labelled the last inputs, named the collapsed GitHub link, fixed one heading skip). `git
-  push` is blocked for Claude (auto-mode classifier), so **Tumai runs every push** — 2 commits
-  (`600c20c` bundle, `8325c0f` a11y) are awaiting it. **Next:** nothing outstanding. See
-  `memory/next-actions.md`.
+  push` is blocked for Claude (auto-mode classifier), so **Tumai runs every push**. Those earlier
+  commits are pushed and live. **Then (2026-11-13): the IA restructure** — Positioning / Patterns /
+  Templates / Tools dissolved into a four-group nav (Start · Foundations · Components · Library) with
+  a browsable, nested Library; the 7 Positioning designs relocated; Notion, Domain Warm-up and the
+  Client-Audit nav entry removed (the `/audit` instrument stays); new Charts / Contour Map / Quizzes /
+  Funnels / Website Audit Forms homes added; page rendered data-driven from the nav so it matches the
+  sidebar. **1 commit awaiting push.** **Next:** the website-assets pass (17 calculators, the Stack
+  Audit quiz, funnels, embeddable audit forms — the "weekly leakage assessment" needs a source link).
+  See `memory/next-actions.md`.
 
 ---
 

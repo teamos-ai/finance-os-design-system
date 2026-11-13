@@ -2,52 +2,51 @@
 
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
-- **Focus:** Brand-alignment pass is done and **PUSHED** — Tumai ran `git push origin main`
-  2026-11-13 (`9d8ab7e..7113bce`); Vercel auto-deploys prod. The DS access gate is **ACTIVE**
-  (env `PORTAL_SESSION_SECRET` + `PORTAL_PASSWORD` set; ds.financeos.au → login; "Password works"),
-  and it inherits across deploys, so the real positioning data is safely gated.
+- **Focus:** Information-architecture restructure DONE (nav + page). The showcase is now four
+  top-level groups — **Start · Foundations · Components · Library** — with Library nested into
+  browsable categories. The page is rendered data-driven from `SHOWCASE_NAV` (see `App.tsx`), so the
+  sidebar and page order always match, with group/category/Comparisons dividers on the page.
 
-- **PUSH IS BLOCKED FOR CLAUDE** by the auto-mode classifier ("Unsanctioned Communication") — Tumai
-  runs every `git push` himself (or adds a Bash allow-rule / leaves auto mode to let Claude push).
+- **PUSH IS BLOCKED FOR CLAUDE** (auto-mode classifier) — Tumai runs every `git push origin main`.
+  Currently **1 commit ahead of origin** (the restructure). Earlier brand-alignment + bundle + a11y
+  commits are already pushed and live (gate active).
 
-- **NEXT — after a deploy, confirm the gate still holds:** ds.financeos.au should 302 → /login.html
-  (not 200). Gate inherits env vars across deploys, so it should stay active; just sanity-check.
+- **Done this pass (2026-11-13), committed, unpushed:**
+  - New `nav.ts` model `{ group, category?, subcategory? }`; `Shell.tsx` renders the 3-level nesting
+    (group → category → Comparisons), icon-only when collapsed; scroll-rhythm bg keyed by category.
+  - `App.tsx` is data-driven from the nav + auto dividers; `Section.tsx` gained `ComposedFrom`
+    (assembled-design → parts cross-links, used on Dashboard Layouts, Evidence Layouts, Heroes).
+  - **Relocations (former Positioning):** Positioning Hero → Website Sections › **Heroes** (Contour
+    Hero); contour background also standalone as Images & Backgrounds › **Contour Map** (new),
+    cross-linked both ways. Section Folders → Components. Market Evidence → Dashboards & Data Displays
+    › **Evidence Layouts**. Landscape Table / From and To / This vs That → Website Sections ›
+    **Comparisons**. Scroll Blue Band → Images & Backgrounds (referenced from Motion).
+  - **New Components entry:** **Charts** — showcases the chart primitives (BarChart, LineChart,
+    DonutChart, RingStat, RankedBarChart, SplitTrack, FillBar).
+  - **New Library homes (placeholders this pass):** Quizzes (Stack Audit 5-Q flow previewed), Funnels
+    (points at the site catalogue), Website Audit Forms (cross-refs /audit; flags leakage-not-found).
+  - **Removals:** Positioning / Patterns / Templates / Tools groups dissolved; **Notion** and
+    **Domain Warm-up** removed; **Client Audit** removed from the showcase nav (the `/audit`
+    instrument + `src/audit/**` stay). Relabels aligned (Colour, Buttons & Controls, Forms & Inputs,
+    Featured Sections, Dashboard Layouts, Evidence Layouts, Finance Calculators, Email Signatures).
+  - Verified: build + check green (contrast 21/21); sidebar tree matches the spec exactly; page
+    dividers + order match; relocated/new sections render; clean console (desktop).
 
-- **Done (2026-11-13) — the 5-part brand-alignment request, all committed:**
-  1. White reset + 2. scroll rhythm (fixed `.bg-stage`: white ↔ grey-blue `--c-warm` ↔ blue grid
-     paper, driven by `Shell.tsx` IO on nav group) + 5. Spline Sans body (Anonymous Pro → mono only).
-     → `d82ce5d`
-  3. Promo Video is now the **flip dashboard** (front = PlatformAppShell, back = demo video, plays
-     on flip); removed the duplicate PlatformDashboardSection. → `4aefda5`
-  4. **Market Evidence** section (Positioning group, after Section Folders) — ports brand §02 graph
-     vocabulary: new reusable primitives `RingStat`, `RankedBarChart`, `SplitTrack` in
-     `components/dashboards/charts.tsx`; stat tiles w/ `unverified` flags; AU keyword data table;
-     source/method disclosures. Real AXL/MFAA figures added to `positioning.ts` (`marketEvidence`),
-     every figure reported-not-verified — admissible because the DS is now gated like the brand page.
-     `CountUp` gained an opt-in `group` prop (thousands). → `d0656a2`
-  - Verified desktop + mobile; build + check green (contrast 21/21); docs regenerated (45 rows/12
-    families). 42 sections total now.
+- **DEFERRED — the website-assets pass (Tumai chose "structure + relocations now"):**
+  - **17 missing Finance Calculators.** DS has 3 (Repayment, Borrowing Power, Stamp Duty). The site
+    lists **20** (financeos.au/discover/assets/calculators): Paying it off (6), Buying (7), Comparing
+    & switching (5), Property & equity (2). Each needs its AU calc logic/assumptions rebuilt. Full
+    slug list captured in the 2026-11-13 web-fetch (in transcript).
+  - **Stack Audit quiz** — build interactive (5 single-choice Qs captured) + the stage-scoring +
+    result screen (result content wasn't visible on the site; re-fetch /quiz result or infer).
+  - **Funnels** — inventory financeos.au/discover/assets/funnels and rebuild designs from DS parts.
+  - **Website Audit Forms** — embeddable assessment form(s). ⚠ The named **"weekly leakage
+    assessment" was NOT found on the site** (checked /audit, /assessment, assets index, nav, footer) —
+    **ask Tumai for the source link** before building it.
 
-- **Also done (2026-11-13), committed, NOT yet pushed (2 commits ahead of origin):**
-  - **Widgets premium-reveal** — `WidgetsSection` now counts up / fills / sweeps on scroll via shared
-    `RingStat` + new `FillBar` + `CountUp` (+ `RingStat` `figureClass` prop). → `7113bce` (pushed)
-  - **Bundle split** — `vite.config.ts` `manualChunks` now peels `ds-core` (ui+lib) + `feat-*` chunks;
-    entry 500 → 291 kB, no >500 kB chunk, warning gone. React kept in ONE chunk; `ds-core` is a shared
-    leaf so no circular chunk deps. Verified against `vite preview`: home + /audit clean console. → `600c20c`
-  - **a11y screen-reader pass** — labelled the last unlabelled inputs (audit TableField cells,
-    Short/Long/Numeric fields via `question.prompt`, SidePanel notes), named the collapsed Shell GitHub
-    link, fixed a TokensSection h2→h4 skip (→h3). Rest of the codebase was already clean. → `8325c0f`
-
-- **NEXT — Tumai pushes** (2 commits: `600c20c` bundle, `8325c0f` a11y):
-  ```
-  git push origin main
-  ```
-
-- **Intentionally LEFT (minor, debatable a11y heading-ranks — don't "fix" without a reason):** the audit
-  Start screen h1→h3 (group labels are `MonoLabel` spans by design), PlatformDashboard mock heading
-  inversions, lead-magnet template heading inconsistency. Promoting `MonoLabel` to headings is shared-
-  component churn for a judgment-call gain.
+- **ONGOING depth (Phase 2):** each relocated item has Inspectable Explain/Token/Code/Download; a
+  fuller per-part token-reference table + variants + states + responsive rules could be completed
+  across all items. Example content is swappable where it already reads from `src/data/**`.
 
 - **Don't forget:** `npm run check` + `npm run build` before committing; `npm run docs:components`
-  after any component change; push `main` → Vercel deploys production. Sources in scratchpad
-  (`brand-src`, `zip-dashboard`) are reference only, not in the repo.
+  after any component change. Sources in scratchpad (`brand-src`, `zip-dashboard`) are reference only.
