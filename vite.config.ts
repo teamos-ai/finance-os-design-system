@@ -24,13 +24,39 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // Split the heavy vendors into their own chunks so the entry JS stays small and
-        // cacheable. react + react-dom + react-router MUST stay in ONE chunk (one React
-        // instance) — never separate them, or the dedupe above can't prevent "Invalid hook call".
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          icons: ['lucide-react'],
+        // Split heavy vendors AND the biggest app feature-families into their own chunks so the
+        // entry JS stays small and each area caches independently. Two hard rules:
+        //   1. the whole React ecosystem MUST stay in ONE chunk (one React instance) — never
+        //      separate react / react-dom / react-router, or the dedupe above can't prevent
+        //      "Invalid hook call". It is matched first and broadly below.
+        //   2. shared DS primitives (components/ui + lib) live in ONE leaf chunk (`ds-core`) that
+        //      the entry and every feature chunk import — so no feature chunk imports back into the
+        //      entry, which would be a circular chunk dependency and risk init-order crashes.
+        manualChunks(id) {
+          const n = id.replace(/\\/g, '/')
+          if (n.includes('/node_modules/')) {
+            if (/\/node_modules\/(react|react-dom|react-router|react-router-dom|@remix-run|scheduler|use-sync-external-store|react-is)\//.test(n))
+              return 'react-vendor'
+            if (/\/node_modules\/(framer-motion|motion-dom|motion-utils)\//.test(n)) return 'motion'
+            if (n.includes('/node_modules/lucide-react/')) return 'icons'
+            return 'vendor'
+          }
+          // Shared design-system core — imported by the entry and by every feature chunk (leaf).
+          if (n.includes('/src/components/ui/') || n.includes('/src/lib/')) return 'ds-core'
+          // Heavy, leaf feature implementations (each imports ds-core; only its section imports it).
+          if (n.includes('/src/components/calculators/')) return 'feat-calculators'
+          if (n.includes('/src/components/lead-magnets/')) return 'feat-leadmagnets'
+          if (
+            n.includes('/src/components/positioning-hero/') ||
+            n.includes('/src/components/section-folders/') ||
+            n.includes('/src/components/scroll-blue/') ||
+            n.includes('/src/components/this-vs-that/') ||
+            n.includes('/src/components/dashboards/') ||
+            n.includes('/src/components/platform-dashboard/')
+          )
+            return 'feat-positioning'
+          if (n.includes('/src/components/emails/') || n.includes('/src/components/signature/')) return 'feat-comms'
+          // everything else (App, showcase section glue, data, brand) → the entry chunk
         },
       },
     },
