@@ -1,23 +1,71 @@
 /**
- * QuizzesSection — the home for interactive quizzes (Library → Marketing & Content → Quizzes).
- * The first planned entry is the website's "Stack Audit" (financeos.au/quiz): five single-choice
- * questions that place a brokerage at a stage, no email, runs in the browser. The interactive build
- * and the stage-scoring logic are the next (assets) pass — this establishes the home and previews
- * the real question flow captured from the live site.
+ * QuizzesSection — interactive, no-email quizzes (Library → Marketing & Content → Quizzes). The
+ * exhibit is the website's "Stack Audit" (financeos.au/quiz): five single-choice questions that
+ * place a brokerage at a stage, running entirely in the browser. Questions are verbatim from the
+ * live quiz; the stages and scoring are the design system's interpretation (the site's result logic
+ * isn't published). Built on the reusable QuizRunner so the team can seed new quizzes the same way.
  */
 import { Section, Demo } from '@/showcase/Section'
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { QuizRunner, type QuizQuestion, type QuizStage } from '@/components/quizzes/QuizRunner'
+import type { InspectData } from '@/components/ui/inspectable'
 
-/** The Stack Audit question flow, as captured from financeos.au/quiz (5 single-choice questions). */
-const STACK_AUDIT = [
-  'How many people touch a loan file?',
-  'Roughly how many settlements a month?',
-  'Which part of the week would you most like back?',
-  'Where does most new business come from?',
-  'How much of the admin would you hand to software tomorrow?',
+/** The Stack Audit — questions verbatim from financeos.au/quiz. Option i scores stage i. */
+const QUESTIONS: QuizQuestion[] = [
+  {
+    prompt: 'How many people touch a loan file?',
+    options: ['Just me', 'Me and support', 'Two to five of us', 'More than five'],
+  },
+  {
+    prompt: 'Roughly how many settlements a month?',
+    options: ['Under five', 'Five to twenty', 'Twenty to fifty', 'More than fifty'],
+  },
+  {
+    prompt: 'Which part of the week would you most like back?',
+    options: [
+      'Answering new enquiries fast enough',
+      'Chasing documents',
+      'Retyping the same data into three systems',
+      'Nothing arriving in the first place',
+    ],
+  },
+  {
+    prompt: 'Where does most new business come from?',
+    options: ['Referrals and repeat clients', 'Accountants, agents and partners', 'Website, ads or social', 'A bit of everything'],
+  },
+  {
+    prompt: 'How much of the admin would you hand to software tomorrow?',
+    options: [
+      'Everything that is not the actual advice',
+      'Notes and follow-up, not client conversations',
+      'Very little, I want to see it first',
+      'None of it',
+    ],
+  },
 ]
+
+const STAGES: QuizStage[] = [
+  { name: 'Solo operator', blurb: 'Just you, or you and a hand. The win is capturing every enquiry and never dropping a follow-up.' },
+  { name: 'Small team', blurb: 'A few of you. The win is shared visibility — who owns each deal, and what happens next.' },
+  { name: 'Established brokerage', blurb: 'A real team and steady volume. The win is a consistent process and handovers that don’t leak.' },
+  { name: 'Scaling operation', blurb: 'High volume, many hands. The win is automation and reporting across the whole pipeline.' },
+]
+
+const INSPECT: InspectData = {
+  name: 'QuizRunner (Stack Audit)',
+  explain:
+    'A reusable, no-backend quiz: single-choice questions tally toward stages and reveal the result in the browser (no email, nothing submitted). Option i of each question scores stage i; the top stage wins and every stage’s score is shown. Seed it with any question/stage set.',
+  token: [
+    'option    border-border → selected border-accent · bg-accent-soft · text-accent-text',
+    'tick      bg-accent · text-accent-fg (selected)',
+    'result    border-border-strong · bg-accent-soft · FadeIn on complete',
+    'bars      bg-accent (your stage) · bg-border-strong · progress "N of M answered"',
+  ].join('\n'),
+  code: [
+    '<QuizRunner questions={QUESTIONS} stages={STAGES} />',
+    '// QUESTIONS: { prompt, options[] }[]  ·  STAGES: { name, blurb }[]  (option i → stage i)',
+  ].join('\n'),
+}
 
 export function QuizzesSection() {
   return (
@@ -25,41 +73,21 @@ export function QuizzesSection() {
       id="quizzes"
       eyebrow="Quizzes"
       title="Quizzes"
-      lead="Short, no-email quizzes that place a visitor and hand them a tailored next step. The first is the brokerage Stack Audit from the website; more can follow the same pattern."
+      lead="Short, no-email quizzes that place a visitor and hand them a tailored next step. The exhibit is the brokerage Stack Audit; the same QuizRunner seeds any quiz."
     >
-      <Demo label="Stack Audit — five questions → a brokerage stage">
-        <div className="mx-auto flex max-w-2xl flex-col gap-5">
-          <div className="flex flex-col gap-2 text-center">
-            <MonoLabel tone="subtle">financeos.au/quiz · captured flow</MonoLabel>
-            <h3 className="font-display text-title-lg text-fg">Which stage is your brokerage at?</h3>
-            <p className="font-body text-body-md leading-relaxed text-fg-muted">
-              Five single-choice questions, four options each. No email, submits nothing, runs in the browser; the
-              result is the set of roles a brokerage at your stage must fill.
+      <Demo label="Stack Audit — which stage is your brokerage at?" inspect={INSPECT}>
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <MonoLabel tone="subtle">financeos.au/quiz · questions verbatim</MonoLabel>
+            <p className="max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
+              Five questions about how the brokerage runs. No email, nothing submitted — the stage you’re at appears when
+              all five are answered.{' '}
+              <a href="https://www.financeos.au/quiz" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
+                See the live quiz ↗
+              </a>
             </p>
           </div>
-          <Card className="flex flex-col gap-3">
-            <ol className="flex flex-col gap-2.5">
-              {STACK_AUDIT.map((q, i) => (
-                <li key={q} className="flex gap-3">
-                  <span className="font-mono text-mono-xs tabular-nums text-accent-text">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="font-body text-body-sm text-fg">{q}</span>
-                </li>
-              ))}
-            </ol>
-          </Card>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Badge variant="amber" size="sm">
-              Interactive build &amp; scoring — next (assets) pass
-            </Badge>
-            <a
-              href="https://www.financeos.au/quiz"
-              target="_blank"
-              rel="noreferrer"
-              className="font-mono text-mono-xs text-accent-text underline-offset-4 hover:underline"
-            >
-              View the live quiz ↗
-            </a>
-          </div>
+          <QuizRunner questions={QUESTIONS} stages={STAGES} />
         </div>
       </Demo>
     </Section>

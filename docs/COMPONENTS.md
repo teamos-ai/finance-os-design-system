@@ -118,6 +118,12 @@ Broker email-signature block + preview.
 | `ContourField` | the React host for the vendored topographic survey map (./contour-map). |  | `positioning-hero/ContourField.tsx` |
 | `PositioningSearch` | the hero's fuzzy command search over the positioning. |  | `positioning-hero/PositioningSearch.tsx` |
 
+## quizzes `src/components/quizzes`
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `QuizRunner` | a reusable, no-backend quiz: single-choice questions that tally toward a set of stages and reveal a result in the browser (no email, nothing submitted). |  | `quizzes/QuizRunner.tsx` |
+
 ## scroll-blue `src/components/scroll-blue`
 
 | Component(s) | Purpose | Variants | Source |
