@@ -67,7 +67,13 @@ Broker calculators — repayments, borrowing power, stamp duty.
 |---|---|:---:|---|
 | `AnimatedCurrency` | the calculators' headline figure. |  | `calculators/AnimatedCurrency.tsx` |
 | `BorrowingPowerCalculator` | an indicative serviceability estimate. |  | `calculators/BorrowingPowerCalculator.tsx` |
+| `CalcShell` `ResultHeadline` `MetricRow` `CompareBars` | shared chrome for the broker calculators, so all of them read as one family: the icon + title + Reset header, the two-column inputs \| result grid, the accent-soft result  |  | `calculators/CalcLayout.tsx` |
+| `ExtraRepaymentsCalculator` | what paying a little more each month does to a loan. |  | `calculators/ExtraRepaymentsCalculator.tsx` |
+| `InterestOnlyPICalculator` | interest-only for a period, then the jump when it reverts to principal and interest. |  | `calculators/InterestOnlyPICalculator.tsx` |
+| `LumpSumCalculator` | the effect of a one-off payment partway through the loan. |  | `calculators/LumpSumCalculator.tsx` |
+| `OffsetCalculator` | what an average offset balance saves over the life of the loan. |  | `calculators/OffsetCalculator.tsx` |
 | `RepaymentCalculator` | home-loan repayments from property value, deposit, rate, term and frequency. |  | `calculators/RepaymentCalculator.tsx` |
+| `RepaymentFrequencyCalculator` | why paying half the monthly repayment every fortnight clears a loan years early (26 fortnights = 13 monthly repayments a year). |  | `calculators/RepaymentFrequencyCalculator.tsx` |
 | `StampDutyCalculator` | indicative AU transfer (stamp) duty for NSW / VIC / QLD. |  | `calculators/StampDutyCalculator.tsx` |
 
 ## Dashboards `src/components/dashboards`

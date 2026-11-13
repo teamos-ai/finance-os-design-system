@@ -43,6 +43,70 @@ export function periodicRepayment(
   return (principal * r * f) / (f - 1)
 }
 
+/** Balance remaining after `n` periods of a fixed `payment` — the closed-form amortised balance. */
+export function balanceAfter(
+  principal: number,
+  annualRatePct: number,
+  payment: number,
+  periodsPerYear: number,
+  n: number,
+): number {
+  if (principal <= 0 || n <= 0) return Math.max(0, principal)
+  const r = annualRatePct / 100 / periodsPerYear
+  if (r === 0) return Math.max(0, principal - payment * n)
+  const f = Math.pow(1 + r, n)
+  return Math.max(0, principal * f - payment * ((f - 1) / r))
+}
+
+/**
+ * Period-by-period amortisation — returns how many periods the loan takes to clear and the
+ * total interest paid getting there. Options model the levers the calculators need: a constant
+ * `offset` balance (interest charged only on balance − offset), a recurring `extra` payment, and
+ * a one-off `lumpAmount` applied at the end of period `lumpAfterPeriods`. Period-agnostic, so
+ * monthly (12) and fortnightly (26) are both solved directly.
+ */
+export function amortise(
+  principal: number,
+  annualRatePct: number,
+  payment: number,
+  periodsPerYear: number,
+  opts: { offset?: number; extra?: number; lumpAmount?: number; lumpAfterPeriods?: number; maxPeriods?: number } = {},
+): { periods: number; totalInterest: number } {
+  const { offset = 0, extra = 0, lumpAmount = 0, lumpAfterPeriods = 0, maxPeriods = 100 * periodsPerYear } = opts
+  if (principal <= 0 || payment <= 0) return { periods: 0, totalInterest: 0 }
+  const r = annualRatePct / 100 / periodsPerYear
+  const pay = payment + extra
+  let balance = principal
+  let totalInterest = 0
+  let periods = 0
+  while (balance > 0.005 && periods < maxPeriods) {
+    periods++
+    const interest = Math.max(0, balance - offset) * r
+    totalInterest += interest
+    balance = balance + interest - pay
+    if (lumpAmount > 0 && periods === lumpAfterPeriods) balance -= lumpAmount
+  }
+  return { periods, totalInterest }
+}
+
+/** Total interest over the full scheduled term at the amortising repayment. */
+export function totalInterest(principal: number, annualRatePct: number, years: number, freq: Frequency): number {
+  const payment = periodicRepayment(principal, annualRatePct, years, freq)
+  return Math.max(0, payment * PERIODS_PER_YEAR[freq] * years - principal)
+}
+
+/** "24 years 4 months" from a raw period count — rounds to the nearest whole month. */
+export function durationLabel(totalPeriods: number, periodsPerYear: number): string {
+  const months = Math.max(0, Math.round((totalPeriods / periodsPerYear) * 12))
+  const y = Math.floor(months / 12)
+  const m = months % 12
+  const yp = y === 1 ? '1 year' : `${y} years`
+  const mp = m === 1 ? '1 month' : `${m} months`
+  if (y === 0) return mp
+  if (m === 0) return yp
+  return `${yp} ${mp}`
+}
+
 /** The largest loan a given per-period repayment can service — the reverse solve. */
 export function loanFromRepayment(
   payment: number,
