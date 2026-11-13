@@ -48,6 +48,7 @@ export function SidePanel({ block, note, onNote, flags }: SidePanelProps) {
         <textarea
           ref={ref}
           data-audit-notes
+          aria-label={`Notes — ${block.title}`}
           rows={10}
           value={note}
           onChange={(e) => onNote(e.target.value)}

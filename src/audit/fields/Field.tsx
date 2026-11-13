@@ -282,6 +282,7 @@ function ShortField({ question, value, onChange, autoFocus }: FieldProps) {
   return (
     <input
       type="text"
+      aria-label={question.prompt}
       autoFocus={autoFocus}
       className={inputClass}
       placeholder={question.placeholder ?? 'Type their answer…'}
@@ -306,6 +307,7 @@ function LongField({ question, value, onChange, autoFocus }: FieldProps) {
   return (
     <textarea
       ref={ref}
+      aria-label={question.prompt}
       autoFocus={autoFocus}
       rows={4}
       className={cn(inputClass, 'resize-none leading-relaxed')}
@@ -335,6 +337,7 @@ function NumericField({ question, value, onChange, autoFocus }: FieldProps) {
         )}
         <input
           type="text"
+          aria-label={question.prompt}
           inputMode="decimal"
           autoFocus={autoFocus}
           className={cn(
@@ -416,6 +419,7 @@ function TableField({ question, value, onChange }: FieldProps) {
               <label className="mb-1 block font-mono text-caption text-fg-subtle sm:hidden">{c.label}</label>
               <input
                 type="text"
+                aria-label={`${c.label}, row ${i + 1}`}
                 inputMode={c.kind === 'short' ? 'text' : 'decimal'}
                 className={cn(inputClass, 'py-2.5', c.kind !== 'short' && 'font-mono tabular-nums')}
                 value={row[c.key] ?? ''}

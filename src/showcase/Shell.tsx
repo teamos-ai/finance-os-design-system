@@ -168,6 +168,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
             href={REPO_URL}
             target="_blank"
             rel="noreferrer"
+            title="Finance OS on GitHub"
+            aria-label={collapsed ? 'Finance OS on GitHub' : undefined}
             className={cn('flex items-center gap-2 text-caption text-fg-subtle transition-colors hover:text-fg', collapsed && 'justify-center')}
           >
             <Github className="h-4 w-4 shrink-0" strokeWidth={1.75} />

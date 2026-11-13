@@ -642,7 +642,7 @@ export function TokensSection() {
                   <Boxes className="h-4 w-4" strokeWidth={2} aria-hidden />
                 </span>
                 <div>
-                  <h4 className="font-display text-title-sm text-fg">Tokens are truth</h4>
+                  <h3 className="font-display text-title-sm text-fg">Tokens are truth</h3>
                   <p className="mt-1 max-w-[62ch] font-body text-body-sm leading-relaxed text-fg-muted">
                     Tailwind <span className="text-highlight">replaces</span> the colour and radius
                     scales — it does not extend them. An off-token class never reaches the browser; the
