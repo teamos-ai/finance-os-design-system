@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { Shell } from '@/showcase/Shell'
-import { Ticker } from '@/components/ui/banner'
-import { TICKER_ITEMS } from '@/data/system'
 import { SHOWCASE_NAV } from '@/lib/nav'
 
 import { HeroSection } from '@/showcase/sections/HeroSection'
@@ -127,11 +125,6 @@ function SubHeading({ children }: { children: React.ReactNode }) {
   )
 }
 
-function TopBanner() {
-  // Blue-gradient ticker (the single Light · Clarity theme).
-  return <Ticker items={TICKER_ITEMS} variant="gradient" />
-}
-
 export default function App() {
   const nodes: React.ReactNode[] = []
   let group: string | undefined
@@ -160,7 +153,6 @@ export default function App() {
 
   return (
     <Shell>
-      <TopBanner />
       {nodes}
     </Shell>
   )

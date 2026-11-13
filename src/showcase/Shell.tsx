@@ -1,7 +1,7 @@
 /**
  * Shell — the showcase chrome. A collapsible left icon-rail sidebar with a THREE-level nav
  * (top group → Library category → Comparisons cluster), IntersectionObserver active-section
- * tracking, a scroll-rhythm background, a pinned footer and a mobile sticky header. Token-only.
+ * tracking, a flat pure-white background, a pinned footer and a mobile sticky header. Token-only.
  *
  * The sidebar is rendered straight from SHOWCASE_NAV in order, so it always matches the page.
  */
@@ -89,54 +89,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
   }, [collapsed])
 
-  /* Scroll rhythm: set <html data-bg> to whichever section owns the viewport centre, so the
-     fixed .bg-stage cross-fades white ↔ grey-blue ↔ grid. Keyed by Library category where there
-     is one (so the data-heavy displays warm), else by top-level group. */
-  React.useEffect(() => {
-    const root = document.documentElement
-    const bgOf = new Map(
-      SHOWCASE_NAV.map((n) => {
-        const BY_CATEGORY: Record<string, string> = {
-          'Images & Backgrounds': 'grid',
-          'Dashboards & Data Displays': 'warm',
-        }
-        const BY_GROUP: Record<string, string> = {
-          Start: 'plain',
-          Foundations: 'plain',
-          Components: 'grid',
-          Library: 'plain',
-        }
-        return [n.id, (n.category && BY_CATEGORY[n.category]) || BY_GROUP[n.group] || 'plain']
-      }),
-    )
-    const shown = new Set<Element>()
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) shown.add(e.target)
-          else shown.delete(e.target)
-        }
-        const top = ids.map((id) => document.getElementById(id)).find((el) => el && shown.has(el))
-        root.dataset.bg = (top && bgOf.get(top.id)) || 'plain'
-      },
-      { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
-    )
-    ids.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) io.observe(el)
-    })
-    return () => {
-      io.disconnect()
-      delete root.dataset.bg
-    }
-  }, [ids])
-
   return (
     <div className="min-h-screen">
-      {/* fixed scroll-rhythm ground (white ↔ grey-blue ↔ grid), behind all content */}
-      <div className="bg-stage" aria-hidden />
-      <div className="bg-grid" aria-hidden />
-
       {/* mobile header */}
       <header className="sticky top-0 z-30 flex items-center border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
         <Logo size="sm" />

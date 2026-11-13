@@ -85,6 +85,8 @@ export default {
       /* type scale — [size, { lineHeight, letterSpacing, fontWeight }].
          Custom keys are registered in cn() so tailwind-merge keeps text colours. */
       fontSize: {
+        /* display-3xl mirrors the financeos.au hero headline (≈88px / 700 / -0.025em / 1.02). */
+        'display-3xl': ['clamp(2.75rem, 8vw, 5.5rem)', { lineHeight: '1.02', letterSpacing: '-0.025em', fontWeight: '700' }],
         'display-2xl': ['clamp(2.75rem, 5vw, 4.5rem)', { lineHeight: '1.04', letterSpacing: '-0.02em', fontWeight: '600' }],
         'display-xl': ['clamp(2.25rem, 4vw, 3.5rem)', { lineHeight: '1.07', letterSpacing: '-0.02em', fontWeight: '600' }],
         'display-lg': ['2.5rem', { lineHeight: '1.1', letterSpacing: '-0.015em', fontWeight: '600' }],

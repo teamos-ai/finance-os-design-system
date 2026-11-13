@@ -543,6 +543,42 @@ function IconButtonShowcase() {
   )
 }
 
+/* ── D · Animated pack — downloadable animated-Lucide set ───────────────────── */
+
+function AnimatedPackCard() {
+  return (
+    <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-2">
+        <MonoLabel tone="subtle" size="sm" trailing="999">
+          Animated Lucide pack
+        </MonoLabel>
+        <p className="max-w-xl font-body text-body-sm leading-relaxed text-fg-muted">
+          The same Lucide shapes, animated — 999 self-contained React components (hover to play). A
+          vendored snapshot of{' '}
+          <a
+            href="https://github.com/Avijit07x/animateicons"
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent-text underline-offset-4 hover:underline"
+          >
+            AnimateIcons
+          </a>{' '}
+          (MIT) over Lucide (ISC). Each needs the <span className="font-mono text-mono-2xs">motion</span>{' '}
+          runtime — the bundled README has the two-line setup. The static icons above stay the default.
+        </p>
+      </div>
+      <a
+        href="/packs/animated-lucide-icons.zip"
+        download
+        className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-4 py-2.5 font-body text-body-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas active:scale-[0.98]"
+      >
+        <Download className="h-4 w-4" strokeWidth={2} aria-hidden />
+        Download pack · 1.5 MB
+      </a>
+    </div>
+  )
+}
+
 /* ── Section ───────────────────────────────────────────────────────────────── */
 
 export function IconsSection() {
@@ -567,6 +603,10 @@ export function IconsSection() {
 
         <Demo label="In context — IconButton variants & sizes" inspect={ICONBUTTON_INSPECT}>
           <IconButtonShowcase />
+        </Demo>
+
+        <Demo label="Animated pack — download the animated Lucide set (999 icons)">
+          <AnimatedPackCard />
         </Demo>
       </div>
     </Section>

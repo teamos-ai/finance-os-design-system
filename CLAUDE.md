@@ -22,7 +22,8 @@ not a showcase exhibit — it is used live on client calls.
 
 ## Brand (as the code actually is)
 - Archetype: **Ruler 70% + Sage 30%**. Voice: Calm · Clear · Grounded · Authoritative. Never hyped.
-- **ONE theme: Light / Clarity.** Pure white canvas, `#F6F7F9` rhythm ground. There is no dark
+- **ONE theme: Light / Clarity.** Pure white canvas **everywhere** — no scroll-rhythm, no grey-blue
+  shift and no grid paper (the grid/rhythm was removed 2026-11-13; **do not reintroduce**). There is no dark
   mode, no paper mode, and no theme toggle. `src/lib/theme.tsx` and `theme-toggle.tsx` do not
   exist; `tokens.css` has no `[data-theme]` blocks.
 - **BLUE-PRIMARY.** The sole brand accent is **Atlas Blue `#33488F`** (ramp `--p-blue-50…500`),
@@ -123,7 +124,7 @@ Vercel accepts the deploy.
 - **Memory:** `memory/` — read `next-actions.md` first, then `task_plan.md`, `decisions.md`,
   `progress.md`, `findings.md`. Keeping them current is what `/save` does.
 - **Current State (2026-11-13):** Brand-alignment pass complete — the showcase now mirrors
-  brand.financeos.au: white reset + scroll-rhythm background (white ↔ grey-blue ↔ blue grid), Spline
+  brand.financeos.au: white reset + a scroll-rhythm background (**since removed — see the hero/brand-polish entry below**) (white ↔ grey-blue ↔ blue grid), Spline
   Sans body, the Promo Video flip-to-demo dashboard, and a new **Market Evidence** section porting
   the brand's graph/table vocabulary (`RingStat` · `RankedBarChart` · `SplitTrack`, stat tiles with
   `unverified` flags, keyword table, source disclosures) on real AXL/MFAA data, plus a premium
@@ -144,6 +145,19 @@ Vercel accepts the deploy.
   **Funnels catalogue** (10 types, cross-linked to the parts). **Next:** Website Audit Forms (the
   "weekly leakage assessment" needs a source link); ACT/NT stamp duty. Several commits await Tumai's
   push. See `memory/next-actions.md`.
+- **Current State (2026-11-13 · hero + brand polish):** Page background is now flat **pure white** —
+  the scroll-rhythm stage, grey-blue shift and blue grid are all gone from `Shell.tsx` / `index.css` /
+  `tokens.css` (**do not reintroduce the grid**). The hero mirrors financeos.au: headline **"Your
+  shortcut to our design system"** on a new `display-3xl` token (≈88px/700/-0.025em, in
+  `tailwind.config.ts` + registered in `cn.ts`), a new subtitle, and the top-of-page ticker banner
+  removed (the Banners *library exhibit* stays). The hero OS mark floats + gently wobbles
+  (`FloatWobble` in `motion.tsx` — a deliberate, reduced-motion-safe exception to the no-wobble rule).
+  Added a downloadable **animated-Lucide pack** at `public/packs/animated-lucide-icons.zip` (999 icons,
+  AnimateIcons MIT + Lucide ISC, @ commit `23e58d0`), surfaced via a download card on the Icons section.
+  **Sidebar icons** re-picked for 10 items: Hero→Rocket, Tokens→Blocks, Radius & Elevation→Layers2,
+  Logo→Gem, Icons→Shapes, Buttons & Controls→ToggleLeft, Heroes→Crown, Landscape Table→Table2,
+  This vs That→SquareSplitHorizontal, Social Media→Smartphone. All verified in the running app; commits
+  await Tumai's push.
 
 ---
 

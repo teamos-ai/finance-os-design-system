@@ -2,10 +2,16 @@
 
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
-- **Focus:** Two big pieces are DONE — the information-architecture restructure, and the
-  website-assets pass. The showcase is four groups — **Start · Foundations · Components · Library** —
-  rendered data-driven from `SHOWCASE_NAV` (`App.tsx`), so the sidebar and page order always match
-  (group / category / Comparisons dividers on the page). The DS is login-gated (ds.financeos.au).
+- **Focus:** Three big pieces are DONE — the information-architecture restructure, the website-assets
+  pass, and a **hero + brand polish** (2026-11-13): flat **pure-white background** (scroll-rhythm + grid
+  removed — do NOT reintroduce the grid), hero headline matched to financeos.au on a new `display-3xl`
+  token ("Your shortcut to our design system") with a new subtitle, the top-of-page ticker banner
+  removed, the hero OS mark floats + gently wobbles (`FloatWobble`), a downloadable **animated-Lucide
+  pack** at `public/packs/animated-lucide-icons.zip` surfaced on the Icons section, and **10 sidebar
+  icons re-picked** (Rocket · Blocks · Layers2 · Gem · Shapes · ToggleLeft · Crown · Table2 ·
+  SquareSplitHorizontal · Smartphone). The showcase is four groups — **Start · Foundations · Components ·
+  Library** — rendered data-driven from `SHOWCASE_NAV` (`App.tsx`), so the sidebar and page order always
+  match (group / category / Comparisons dividers on the page). The DS is login-gated (ds.financeos.au).
 
 - **PUSH IS BLOCKED FOR CLAUDE** (auto-mode classifier → "Unsanctioned Communication"). **Tumai runs
   every `git push origin main`.** Hand him the push and say how many commits are ahead.

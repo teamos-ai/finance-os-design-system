@@ -11,7 +11,7 @@ const twMerge = extendTailwindMerge({
       'font-size': [
         {
           text: [
-            'display-2xl', 'display-xl', 'display-lg', 'display-md', 'display-sm',
+            'display-3xl', 'display-2xl', 'display-xl', 'display-lg', 'display-md', 'display-sm',
             'title-lg', 'title-md', 'title-sm',
             'body-lg', 'body-md', 'body-sm',
             'label', 'caption', 'mono-xs', 'mono-2xs',

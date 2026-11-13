@@ -14,11 +14,11 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    background-color: var(--c-canvas); /* base plane; the fixed .bg-stage rides above it */
+    background-color: var(--c-canvas); /* the page plane — flat pure white, always */
   }
 
   body {
-    @apply text-fg font-body antialiased; /* transparent — the .bg-stage provides the ground */
+    @apply text-fg font-body antialiased; /* transparent — html provides the white ground */
     font-size: 0.9375rem;
     line-height: 1.65;
     text-rendering: optimizeLegibility;
@@ -48,34 +48,10 @@
   }
 }
 
-/* ── Scroll-rhythm background (mirrors brand.financeos.au) ────────────────────
-   A single fixed stage behind everything cross-fades white ↔ grey-blue, with a
-   faint blue grid fading in on component-heavy groups. Shell sets
-   <html data-bg="plain|warm|grid"> to whichever section owns the viewport centre;
-   with JS off the page stays plain white. The hero/sections keep their own art on top. */
-.bg-stage,
-.bg-grid {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-.bg-stage {
-  background-color: var(--c-canvas);
-  transition: background-color var(--dur-slow) var(--ease-out);
-}
-.bg-grid {
-  opacity: 0;
-  transition: opacity var(--dur-slow) var(--ease-out);
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 34px 34px;
-  -webkit-mask-image: radial-gradient(130% 100% at 50% 0%, #000 55%, transparent 100%);
-  mask-image: radial-gradient(130% 100% at 50% 0%, #000 55%, transparent 100%);
-}
-:root[data-bg='warm'] .bg-stage { background-color: var(--c-warm); }
-:root[data-bg='grid'] .bg-grid { opacity: 1; }
+/* ── Background — ONE flat plane: pure white, everywhere, always. ──────────────
+   No scroll-rhythm, no grey-blue shift, and NO grid paper (removed by request,
+   2026-11-13 — do not reintroduce). The canvas colour is html's background-color
+   (var(--c-canvas) = #FFFFFF); every section rides transparent on top of it. */
 
 /* Ticker / banner marquee — CSS-driven, two copies translate -50% for a seamless loop. */
 @keyframes fos-marquee {

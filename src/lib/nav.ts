@@ -1,12 +1,12 @@
 import type { LucideIcon } from 'lucide-react'
 import {
-  Sparkles, PlayCircle, Compass,
-  Boxes, Palette, Type, Ruler, Layers, Wand2, Shapes, Sticker,
-  MousePointerClick, CreditCard, TextCursorInput, Table, FolderOpen, Gauge, LineChart,
+  Rocket, PlayCircle, Compass,
+  Blocks, Palette, Type, Ruler, Layers2, Wand2, Gem, Shapes,
+  ToggleLeft, CreditCard, TextCursorInput, Table, FolderOpen, Gauge, LineChart,
   Image, Map, Images, MoveVertical,
-  Telescope, LayoutGrid, LayoutTemplate, Tags, Quote, Columns3, ArrowRightLeft, Columns2,
+  Crown, LayoutGrid, LayoutTemplate, Tags, Quote, Table2, ArrowRightLeft, SquareSplitHorizontal,
   LayoutDashboard, BarChart3,
-  Megaphone, FileText, Share2, Magnet, ListChecks, Filter, Mail, PenLine,
+  Megaphone, FileText, Smartphone, Magnet, ListChecks, Filter, Mail, PenLine,
   MonitorPlay,
   Calculator, ClipboardCheck,
 } from 'lucide-react'
@@ -36,22 +36,22 @@ export interface NavItem {
  */
 export const SHOWCASE_NAV: NavItem[] = [
   /* ── START ─────────────────────────────────────────────────────────────── */
-  { id: 'hero', label: 'Hero', Icon: Sparkles, accent: 'blue', group: 'Start' },
+  { id: 'hero', label: 'Hero', Icon: Rocket, accent: 'blue', group: 'Start' },
   { id: 'video', label: 'Promo Video', Icon: PlayCircle, accent: 'blue', group: 'Start' },
   { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Start' },
 
   /* ── FOUNDATIONS ───────────────────────────────────────────────────────── */
-  { id: 'tokens', label: 'Tokens', Icon: Boxes, accent: 'blue', group: 'Foundations' },
+  { id: 'tokens', label: 'Tokens', Icon: Blocks, accent: 'blue', group: 'Foundations' },
   { id: 'color', label: 'Colour', Icon: Palette, accent: 'blue', group: 'Foundations' },
   { id: 'typography', label: 'Typography', Icon: Type, accent: 'blue', group: 'Foundations' },
   { id: 'spacing', label: 'Spacing & Layout', Icon: Ruler, accent: 'blue', group: 'Foundations' },
-  { id: 'elevation', label: 'Radius & Elevation', Icon: Layers, accent: 'blue', group: 'Foundations' },
+  { id: 'elevation', label: 'Radius & Elevation', Icon: Layers2, accent: 'blue', group: 'Foundations' },
   { id: 'motion', label: 'Motion', Icon: Wand2, accent: 'blue', group: 'Foundations' },
-  { id: 'logo', label: 'Logo', Icon: Shapes, accent: 'blue', group: 'Foundations' },
-  { id: 'icons', label: 'Icons', Icon: Sticker, accent: 'blue', group: 'Foundations' },
+  { id: 'logo', label: 'Logo', Icon: Gem, accent: 'blue', group: 'Foundations' },
+  { id: 'icons', label: 'Icons', Icon: Shapes, accent: 'blue', group: 'Foundations' },
 
   /* ── COMPONENTS (individual parts) ─────────────────────────────────────── */
-  { id: 'components', label: 'Buttons & Controls', Icon: MousePointerClick, accent: 'blue', group: 'Components' },
+  { id: 'components', label: 'Buttons & Controls', Icon: ToggleLeft, accent: 'blue', group: 'Components' },
   { id: 'cards', label: 'Cards', Icon: CreditCard, accent: 'blue', group: 'Components' },
   { id: 'forms', label: 'Forms & Inputs', Icon: TextCursorInput, accent: 'blue', group: 'Components' },
   { id: 'tables', label: 'Tables', Icon: Table, accent: 'blue', group: 'Components' },
@@ -66,14 +66,14 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'scroll-blue-band', label: 'Scroll Blue Band', Icon: MoveVertical, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
 
   /* ── LIBRARY › Website Sections ────────────────────────────────────────── */
-  { id: 'heroes', label: 'Heroes', Icon: Telescope, accent: 'blue', group: 'Library', category: 'Website Sections' },
+  { id: 'heroes', label: 'Heroes', Icon: Crown, accent: 'blue', group: 'Library', category: 'Website Sections' },
   { id: 'bento', label: 'Bento Box', Icon: LayoutGrid, accent: 'blue', group: 'Library', category: 'Website Sections' },
   { id: 'featured', label: 'Featured Sections', Icon: LayoutTemplate, accent: 'blue', group: 'Library', category: 'Website Sections' },
   { id: 'pricing', label: 'Pricing', Icon: Tags, accent: 'blue', group: 'Library', category: 'Website Sections' },
   { id: 'testimonials', label: 'Testimonials', Icon: Quote, accent: 'blue', group: 'Library', category: 'Website Sections' },
-  { id: 'landscape-table', label: 'Landscape Table', Icon: Columns3, accent: 'blue', group: 'Library', category: 'Website Sections', subcategory: 'Comparisons' },
+  { id: 'landscape-table', label: 'Landscape Table', Icon: Table2, accent: 'blue', group: 'Library', category: 'Website Sections', subcategory: 'Comparisons' },
   { id: 'from-and-to', label: 'From and To', Icon: ArrowRightLeft, accent: 'blue', group: 'Library', category: 'Website Sections', subcategory: 'Comparisons' },
-  { id: 'this-vs-that', label: 'This vs That', Icon: Columns2, accent: 'blue', group: 'Library', category: 'Website Sections', subcategory: 'Comparisons' },
+  { id: 'this-vs-that', label: 'This vs That', Icon: SquareSplitHorizontal, accent: 'blue', group: 'Library', category: 'Website Sections', subcategory: 'Comparisons' },
 
   /* ── LIBRARY › Dashboards & Data Displays ──────────────────────────────── */
   { id: 'dashboards', label: 'Dashboard Layouts', Icon: LayoutDashboard, accent: 'blue', group: 'Library', category: 'Dashboards & Data Displays' },
@@ -82,7 +82,7 @@ export const SHOWCASE_NAV: NavItem[] = [
   /* ── LIBRARY › Marketing & Content ─────────────────────────────────────── */
   { id: 'banners', label: 'Banners', Icon: Megaphone, accent: 'blue', group: 'Library', category: 'Marketing & Content' },
   { id: 'blogs', label: 'Blogs', Icon: FileText, accent: 'blue', group: 'Library', category: 'Marketing & Content' },
-  { id: 'social', label: 'Social Media', Icon: Share2, accent: 'blue', group: 'Library', category: 'Marketing & Content' },
+  { id: 'social', label: 'Social Media', Icon: Smartphone, accent: 'blue', group: 'Library', category: 'Marketing & Content' },
   { id: 'leadmagnets', label: 'Lead Magnets', Icon: Magnet, accent: 'blue', group: 'Library', category: 'Marketing & Content' },
   { id: 'quizzes', label: 'Quizzes', Icon: ListChecks, accent: 'blue', group: 'Library', category: 'Marketing & Content' },
   { id: 'funnels', label: 'Funnels', Icon: Filter, accent: 'blue', group: 'Library', category: 'Marketing & Content' },

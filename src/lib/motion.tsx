@@ -3,10 +3,10 @@
  *
  * Every primitive honours `prefers-reduced-motion`. Vocabulary = fade + small
  * translate + gentle marquee + soft hover lift + count-up + signature Atlas Blue glow.
- * No bounce / wobble / elastic / autoplay. Durations stay subtle (<= 480ms).
+ * No bounce / elastic / autoplay (one opt-in hero float+wobble aside). Durations stay subtle (<= 480ms).
  * Use at most ONE reveal per viewport band so the page reads calm.
  *
- * Exports: FadeIn · Stagger · StaggerItem · CountUp · HoverLift · Glow · BorderGlow ·
+ * Exports: FadeIn · FloatWobble · Stagger · StaggerItem · CountUp · HoverLift · Glow · BorderGlow ·
  *          BreathingDot · Marquee · Reveal · GradientShimmer · EASE_OUT
  */
 import * as React from 'react'
@@ -44,6 +44,27 @@ export const FadeIn = ({ delay = 0, y = 10, className, children, as = 'div' }: F
     >
       {children}
     </MotionTag>
+  )
+}
+
+/* ── FloatWobble — a gentle, perpetual hover for the hero logo: a soft bob + tiny tilt.
+   A deliberate, opt-in exception to the "no wobble" rule, reserved for the hero mark.
+   Reduced-motion safe (renders static). */
+export const FloatWobble = ({ className, children }: { className?: string; children: React.ReactNode }) => {
+  const reduced = useReducedMotion()
+  if (reduced) return <div className={className}>{children}</div>
+  return (
+    <motion.div
+      className={className}
+      style={{ transformOrigin: '50% 50%' }}
+      animate={{ y: [0, -9, 0], rotate: [-2.5, 2.5, -2.5] }}
+      transition={{
+        y: { duration: 4, ease: 'easeInOut', repeat: Infinity },
+        rotate: { duration: 6, ease: 'easeInOut', repeat: Infinity },
+      }}
+    >
+      {children}
+    </motion.div>
   )
 }
 
