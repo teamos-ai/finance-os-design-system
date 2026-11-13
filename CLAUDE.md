@@ -152,8 +152,9 @@ Vercel accepts the deploy.
   `tailwind.config.ts` + registered in `cn.ts`), a new subtitle, and the top-of-page ticker banner
   removed (the Banners *library exhibit* stays). The hero OS mark floats + gently wobbles
   (`FloatWobble` in `motion.tsx` — a deliberate, reduced-motion-safe exception to the no-wobble rule).
-  Added a downloadable **animated-Lucide pack** at `public/packs/animated-lucide-icons.zip` (999 icons,
-  AnimateIcons MIT + Lucide ISC, @ commit `23e58d0`), surfaced via a download card on the Icons section.
+  Added **two downloadable icon packs** on the Icons section: the **full static Lucide set**
+  (`public/packs/lucide-icons-full.zip`, 2356 SVGs, lucide-static 1.72.0, ISC) and the **animated set**
+  (`public/packs/animated-lucide-icons.zip`, 999 components, AnimateIcons MIT + Lucide ISC, @ `23e58d0`).
   **Sidebar icons** re-picked for 10 items: Hero→Rocket, Tokens→Blocks, Radius & Elevation→Layers2,
   Logo→Gem, Icons→Shapes, Buttons & Controls→ToggleLeft, Heroes→Crown, Landscape Table→Table2,
   This vs That→SquareSplitHorizontal, Social Media→Smartphone. All verified in the running app; commits

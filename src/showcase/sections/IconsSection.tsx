@@ -543,38 +543,62 @@ function IconButtonShowcase() {
   )
 }
 
-/* ── D · Animated pack — downloadable animated-Lucide set ───────────────────── */
+/* ── D · Icon packs — downloadable sets (full static + animated) ─────────────── */
 
-function AnimatedPackCard() {
+function PackRow({
+  title,
+  count,
+  href,
+  size,
+  children,
+}: {
+  title: string
+  count: string
+  href: string
+  size: string
+  children: React.ReactNode
+}) {
   return (
     <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-col gap-2">
-        <MonoLabel tone="subtle" size="sm" trailing="999">
-          Animated Lucide pack
+        <MonoLabel tone="subtle" size="sm" trailing={count}>
+          {title}
         </MonoLabel>
-        <p className="max-w-xl font-body text-body-sm leading-relaxed text-fg-muted">
-          The same Lucide shapes, animated — 999 self-contained React components (hover to play). A
-          vendored snapshot of{' '}
-          <a
-            href="https://github.com/Avijit07x/animateicons"
-            target="_blank"
-            rel="noreferrer"
-            className="text-accent-text underline-offset-4 hover:underline"
-          >
-            AnimateIcons
-          </a>{' '}
-          (MIT) over Lucide (ISC). Each needs the <span className="font-mono text-mono-2xs">motion</span>{' '}
-          runtime — the bundled README has the two-line setup. The static icons above stay the default.
-        </p>
+        <p className="max-w-xl font-body text-body-sm leading-relaxed text-fg-muted">{children}</p>
       </div>
       <a
-        href="/packs/animated-lucide-icons.zip"
+        href={href}
         download
         className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-4 py-2.5 font-body text-body-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas active:scale-[0.98]"
       >
         <Download className="h-4 w-4" strokeWidth={2} aria-hidden />
-        Download pack · 1.5 MB
+        Download · {size}
       </a>
+    </div>
+  )
+}
+
+function IconPacks() {
+  return (
+    <div className="flex flex-col gap-6">
+      <PackRow title="Full Lucide set" count="2356" href="/packs/lucide-icons-full.zip" size="1.1 MB">
+        Every Lucide glyph as a clean SVG —{' '}
+        <a href="https://lucide.dev" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
+          lucide.dev
+        </a>{' '}
+        v1.72.0 (ISC), aliases included. In this project the icons are already React components via{' '}
+        <span className="font-mono text-mono-2xs">lucide-react</span> — this is the raw SVG library for design
+        tools, email and exports.
+      </PackRow>
+      <div className="h-px bg-border" aria-hidden />
+      <PackRow title="Animated Lucide set" count="999" href="/packs/animated-lucide-icons.zip" size="1.5 MB">
+        The same shapes, animated — self-contained React components (hover to play). A vendored snapshot of{' '}
+        <a href="https://github.com/Avijit07x/animateicons" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
+          AnimateIcons
+        </a>{' '}
+        (MIT) over Lucide (ISC). Each needs the <span className="font-mono text-mono-2xs">motion</span> runtime —
+        the bundled README has the two-line setup.
+      </PackRow>
     </div>
   )
 }
@@ -605,8 +629,8 @@ export function IconsSection() {
           <IconButtonShowcase />
         </Demo>
 
-        <Demo label="Animated pack — download the animated Lucide set (999 icons)">
-          <AnimatedPackCard />
+        <Demo label="Icon packs — download a full set to use">
+          <IconPacks />
         </Demo>
       </div>
     </Section>
