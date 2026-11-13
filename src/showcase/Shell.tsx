@@ -52,6 +52,42 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
   }, [collapsed])
 
+  /* Scroll rhythm: set <html data-bg> to the group that owns the viewport centre, so the
+     fixed .bg-stage cross-fades white ↔ grey-blue ↔ grid section to section. */
+  React.useEffect(() => {
+    const root = document.documentElement
+    const groupOf = new Map(SHOWCASE_NAV.map((n) => [n.id, n.group]))
+    const GROUP_BG: Record<string, string> = {
+      Start: 'plain',
+      Foundations: 'plain',
+      Components: 'grid',
+      Patterns: 'grid',
+      Templates: 'plain',
+      Positioning: 'warm',
+      Tools: 'plain',
+    }
+    const shown = new Set<Element>()
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) shown.add(e.target)
+          else shown.delete(e.target)
+        }
+        const top = ids.map((id) => document.getElementById(id)).find((el) => el && shown.has(el))
+        root.dataset.bg = (top && GROUP_BG[groupOf.get(top.id) ?? '']) || 'plain'
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
+    )
+    ids.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) io.observe(el)
+    })
+    return () => {
+      io.disconnect()
+      delete root.dataset.bg
+    }
+  }, [ids])
+
   const groups = React.useMemo(() => {
     const g: { name: string; items: typeof SHOWCASE_NAV }[] = []
     for (const item of SHOWCASE_NAV) {
@@ -63,7 +99,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <div className="min-h-screen bg-canvas">
+    <div className="min-h-screen">
+      {/* fixed scroll-rhythm ground (white ↔ grey-blue ↔ grid), behind all content */}
+      <div className="bg-stage" aria-hidden />
+      <div className="bg-grid" aria-hidden />
+
       {/* mobile header */}
       <header className="sticky top-0 z-30 flex items-center border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
         <Logo size="sm" />

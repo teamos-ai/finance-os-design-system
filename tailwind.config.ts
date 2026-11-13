@@ -74,9 +74,11 @@ export default {
 
     extend: {
       fontFamily: {
-        sans: ['"Anonymous Pro"', 'ui-monospace', 'monospace'],
-        display: ['"Spline Sans"', 'system-ui', 'sans-serif'],
-        body: ['"Anonymous Pro"', 'ui-monospace', 'monospace'],
+        /* Spline Sans is the voice — display AND body (matches brand.financeos.au).
+           Anonymous Pro (mono) is reserved for eyebrows, labels, counts and numerals. */
+        sans: ['"Spline Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Spline Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        body: ['"Spline Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"Anonymous Pro"', 'ui-monospace', 'monospace'],
       },
 

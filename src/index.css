@@ -14,10 +14,11 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    background-color: var(--c-canvas); /* base plane; the fixed .bg-stage rides above it */
   }
 
   body {
-    @apply bg-canvas text-fg font-body antialiased;
+    @apply text-fg font-body antialiased; /* transparent — the .bg-stage provides the ground */
     font-size: 0.9375rem;
     line-height: 1.65;
     text-rendering: optimizeLegibility;
@@ -47,48 +48,34 @@
   }
 }
 
-/* ── Alternating section texture ("crinkle / paper") ─────────────────────────
-   Every 3rd content section (2nd, 5th, 8th… <section> in <main>) gets the muted
-   ground + a fine fractal-noise crinkle, so scrolling reveals each section change.
-   The hero is nth-of-type(1) and stays clean. Rhythm: clean · crinkled · clean ·
-   clean · crinkled · clean … Blend `multiply` darkens the speckle into a crinkle on the
-   white ground. It sits behind content (z-0), so text contrast is untouched. Static —
-   nothing to freeze for reduced-motion. */
-main > section:nth-of-type(3n + 2) {
-  position: relative;
-  isolation: isolate;
-  background-color: var(--c-canvas-muted);
-}
-main > section:nth-of-type(3n + 2) > * {
-  position: relative;
-  z-index: 1;
-}
-main > section:nth-of-type(3n + 2)::before {
-  content: '';
-  position: absolute;
+/* ── Scroll-rhythm background (mirrors brand.financeos.au) ────────────────────
+   A single fixed stage behind everything cross-fades white ↔ grey-blue, with a
+   faint blue grid fading in on component-heavy groups. Shell sets
+   <html data-bg="plain|warm|grid"> to whichever section owns the viewport centre;
+   with JS off the page stays plain white. The hero/sections keep their own art on top. */
+.bg-stage,
+.bg-grid {
+  position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
 }
-/* ── Hero → Video gradual transition ─────────────────────────────────────────
-   The video section sits directly under the hero. A tall top gradient paints the
-   video section's top with the hero's own --c-canvas, then fades to transparent —
-   revealing the muted ground + crinkle gently below. The seam is the same colour
-   on both sides, so the black→charcoal (white→grey, ivory→sand) shift has NO hard
-   line. Theme-aware; sits above the crinkle (::before z0) but below content (z1). */
-#video::after {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 420px;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, var(--c-canvas) 0%, var(--c-canvas) 8%, transparent 100%);
+.bg-stage {
+  background-color: var(--c-canvas);
+  transition: background-color var(--dur-slow) var(--ease-out);
 }
+.bg-grid {
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 34px 34px;
+  -webkit-mask-image: radial-gradient(130% 100% at 50% 0%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(130% 100% at 50% 0%, #000 55%, transparent 100%);
+}
+:root[data-bg='warm'] .bg-stage { background-color: var(--c-warm); }
+:root[data-bg='grid'] .bg-grid { opacity: 1; }
 
 /* Ticker / banner marquee — CSS-driven, two copies translate -50% for a seamless loop. */
 @keyframes fos-marquee {
