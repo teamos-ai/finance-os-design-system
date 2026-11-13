@@ -95,6 +95,18 @@ export function totalInterest(principal: number, annualRatePct: number, years: n
   return Math.max(0, payment * PERIODS_PER_YEAR[freq] * years - principal)
 }
 
+/** Interest paid over the first `n` periods — payment·n minus the principal actually repaid. */
+export function interestOverPeriods(
+  principal: number,
+  annualRatePct: number,
+  payment: number,
+  periodsPerYear: number,
+  n: number,
+): number {
+  const principalRepaid = principal - balanceAfter(principal, annualRatePct, payment, periodsPerYear, n)
+  return Math.max(0, payment * n - principalRepaid)
+}
+
 /** "24 years 4 months" from a raw period count — rounds to the nearest whole month. */
 export function durationLabel(totalPeriods: number, periodsPerYear: number): string {
   const months = Math.max(0, Math.round((totalPeriods / periodsPerYear) * 12))
@@ -209,6 +221,11 @@ export function aud2(n: number): string {
 /** Percentage to one decimal — "88.0%". */
 export function pct1(n: number): string {
   return `${(Number.isFinite(n) ? n : 0).toFixed(1)}%`
+}
+
+/** Percentage to two decimals — "4.96%". For yields / blended rates that read finer. */
+export function pct2(n: number): string {
+  return `${(Number.isFinite(n) ? n : 0).toFixed(2)}%`
 }
 
 /** Parse a form field into a clamped, non-negative number ('' → 0). */

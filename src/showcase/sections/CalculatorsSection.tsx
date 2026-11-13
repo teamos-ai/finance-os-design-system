@@ -16,6 +16,13 @@ import { InterestOnlyPICalculator } from '@/components/calculators/InterestOnlyP
 import { RepaymentFrequencyCalculator } from '@/components/calculators/RepaymentFrequencyCalculator'
 import { BorrowingPowerCalculator } from '@/components/calculators/BorrowingPowerCalculator'
 import { StampDutyCalculator } from '@/components/calculators/StampDutyCalculator'
+import { RefinanceSavingsCalculator } from '@/components/calculators/RefinanceSavingsCalculator'
+import { CompareTwoLoansCalculator } from '@/components/calculators/CompareTwoLoansCalculator'
+import { FixedVsVariableCalculator } from '@/components/calculators/FixedVsVariableCalculator'
+import { SplitLoanCalculator } from '@/components/calculators/SplitLoanCalculator'
+import { RentVsBuyCalculator } from '@/components/calculators/RentVsBuyCalculator'
+import { UsableEquityCalculator } from '@/components/calculators/UsableEquityCalculator'
+import { InvestmentCashflowCalculator } from '@/components/calculators/InvestmentCashflowCalculator'
 import type { InspectData } from '@/components/ui/inspectable'
 import { FadeIn } from '@/lib/motion'
 
@@ -67,6 +74,41 @@ const STAMP_INSPECT = insp(
   'Indicative AU transfer duty for NSW, VIC and QLD using general bracket rates, comparing all three at the current price. Verification routes to the state revenue office.',
   '<StampDutyCalculator />\n// stampDuty(state, value) — bracket tables in finance.ts',
 )
+const REFI_INSPECT = insp(
+  'Refinance savings',
+  'A lower rate netted off against the cost of switching — the monthly saving, break-even on the switch cost, the saving over the remaining term, and what keeping the old repayment would do.',
+  '<RefinanceSavingsCalculator />\n// periodicRepayment at each rate + amortise() for "stays the same"',
+)
+const COMPARE_INSPECT = insp(
+  'Compare two loans',
+  'Two loans against the same balance and term, annual fees folded in — the cheaper loan over the term, each repayment and total cost. The cheaper rate is not always the cheaper loan.',
+  '<CompareTwoLoansCalculator />\n// total = payment × n + annualFee × years',
+)
+const FV_INSPECT = insp(
+  'Fixed vs variable',
+  'Interest over the fixed period each way, the repayments, and the average variable rate at which fixing breaks even. It cannot forecast rates — only the break-even.',
+  '<FixedVsVariableCalculator />\n// interestOverPeriods() for the fixed window',
+)
+const SPLIT_INSPECT = insp(
+  'Split loan',
+  'A part-fixed, part-variable blend: the total repayment, the blended rate, and what a one-point rate rise does to the variable portion only.',
+  '<SplitLoanCalculator />\n// periodicRepayment on each portion; blended by share',
+)
+const RENTBUY_INSPECT = insp(
+  'Rent vs buy',
+  'The two financial paths over a period: buying (equity net of repayments and holding costs) vs renting (rent paid, deposit invested instead). Swings hard on the growth and return assumptions.',
+  '<RentVsBuyCalculator />\n// equity − costs − depositInvested + rentPaid',
+)
+const USABLE_INSPECT = insp(
+  'Usable equity',
+  'Total equity vs the slice a lender will lend against — most go to 80% of value before mortgage insurance. Shows the usable amount, what is locked, and the deposit it could form.',
+  '<UsableEquityCalculator />\n// usable = value × lend% − owing',
+)
+const CASHFLOW_INSPECT = insp(
+  'Investment property cashflow',
+  'What an investment costs a week, before and after the tax deduction — rent after vacancy, repayments, costs, the cash position, the taxable loss and gross yield. Negative gearing, laid out.',
+  '<InvestmentCashflowCalculator />\n// interest (deductible) via interestOverPeriods(); principal is not',
+)
 
 /** A small group heading inside the section — mirrors the website's calculator categories. */
 function CalcGroup({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
@@ -87,7 +129,7 @@ export function CalculatorsSection() {
       id="calculators"
       eyebrow="Finance Calculators"
       title="Finance Calculators"
-      lead="The broker calculator family, mirrored from the Finance OS website and grouped as it is there. Real inputs drive live figures; every result is an indicative estimate, never a quote or an approval. 8 of the website's 20 are built so far — the rest land in this pass."
+      lead="The broker calculator family, mirrored from the Finance OS website and grouped as it is there. Real inputs drive live figures; every result is an indicative estimate, never a quote or an approval. 15 of the website's 20 are built so far — the rest land in this pass."
     >
       <div className="flex flex-col gap-12">
         <CalcGroup label="Paying it off" hint="6 of 6">
@@ -132,6 +174,47 @@ export function CalculatorsSection() {
           <FadeIn>
             <Demo label="Stamp duty — AU transfer duty by state" inspect={STAMP_INSPECT}>
               <StampDutyCalculator />
+            </Demo>
+          </FadeIn>
+        </CalcGroup>
+
+        <CalcGroup label="Comparing & switching" hint="5 of 5">
+          <FadeIn>
+            <Demo label="Refinance savings — a lower rate, net of switching costs" inspect={REFI_INSPECT}>
+              <RefinanceSavingsCalculator />
+            </Demo>
+          </FadeIn>
+          <FadeIn>
+            <Demo label="Compare two loans — rate + fees over the term" inspect={COMPARE_INSPECT}>
+              <CompareTwoLoansCalculator />
+            </Demo>
+          </FadeIn>
+          <FadeIn>
+            <Demo label="Fixed vs variable — the break-even rate" inspect={FV_INSPECT}>
+              <FixedVsVariableCalculator />
+            </Demo>
+          </FadeIn>
+          <FadeIn>
+            <Demo label="Split loan — the blend and the risk" inspect={SPLIT_INSPECT}>
+              <SplitLoanCalculator />
+            </Demo>
+          </FadeIn>
+          <FadeIn>
+            <Demo label="Rent vs buy — two paths over a period" inspect={RENTBUY_INSPECT}>
+              <RentVsBuyCalculator />
+            </Demo>
+          </FadeIn>
+        </CalcGroup>
+
+        <CalcGroup label="Property & equity" hint="2 of 2">
+          <FadeIn>
+            <Demo label="Usable equity — what a lender will lend against" inspect={USABLE_INSPECT}>
+              <UsableEquityCalculator />
+            </Demo>
+          </FadeIn>
+          <FadeIn>
+            <Demo label="Investment property cashflow — cost a week, after tax" inspect={CASHFLOW_INSPECT}>
+              <InvestmentCashflowCalculator />
             </Demo>
           </FadeIn>
         </CalcGroup>
