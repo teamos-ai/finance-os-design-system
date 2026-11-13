@@ -117,10 +117,14 @@ Vercel accepts the deploy.
   (migration history). `AGENTS.md` points Codex here.
 - **Memory:** `memory/` — read `next-actions.md` first, then `task_plan.md`, `decisions.md`,
   `progress.md`, `findings.md`. Keeping them current is what `/save` does.
-- **Current State (2026-11-12):** handoff-hardening pass — 9 of 13 audit items shipped + deployed
-  (gold purge, nav regroup, self-healing numbers, inspector pop-up, chunk split, lint/test, docs).
-  **Next:** 6 new sections (Tokens, Icons, Calculators, Dashboards, Emails, Signature) to be built
-  **under Ultra Code**; then the a11y sweep (deferred to the end). See `memory/next-actions.md`.
+- **Current State (2026-11-13):** Brand-alignment pass complete — the showcase now mirrors
+  brand.financeos.au: white reset + scroll-rhythm background (white ↔ grey-blue ↔ blue grid), Spline
+  Sans body, the Promo Video flip-to-demo dashboard, and a new **Market Evidence** section porting
+  the brand's graph/table vocabulary (`RingStat` · `RankedBarChart` · `SplitTrack`, stat tiles with
+  `unverified` flags, keyword table, source disclosures) on real AXL/MFAA data. The DS access gate is
+  **active**, so the real positioning data is shippable. **6 commits ahead of `origin/main`, unpushed
+  — Tumai runs `git push` (blocked for Claude).** **Next:** push; optional Widgets premium-reveal
+  consistency pass; then the a11y sweep (deferred to the end). See `memory/next-actions.md`.
 
 ---
 
