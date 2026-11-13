@@ -2,69 +2,42 @@
 
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
-- **Focus:** Information-architecture restructure DONE (nav + page). The showcase is now four
-  top-level groups — **Start · Foundations · Components · Library** — with Library nested into
-  browsable categories. The page is rendered data-driven from `SHOWCASE_NAV` (see `App.tsx`), so the
-  sidebar and page order always match, with group/category/Comparisons dividers on the page.
+- **Focus:** Two big pieces are DONE — the information-architecture restructure, and the
+  website-assets pass. The showcase is four groups — **Start · Foundations · Components · Library** —
+  rendered data-driven from `SHOWCASE_NAV` (`App.tsx`), so the sidebar and page order always match
+  (group / category / Comparisons dividers on the page). The DS is login-gated (ds.financeos.au).
 
-- **PUSH IS BLOCKED FOR CLAUDE** (auto-mode classifier) — Tumai runs every `git push origin main`.
-  Currently **1 commit ahead of origin** (the restructure). Earlier brand-alignment + bundle + a11y
-  commits are already pushed and live (gate active).
+- **PUSH IS BLOCKED FOR CLAUDE** (auto-mode classifier → "Unsanctioned Communication"). **Tumai runs
+  every `git push origin main`.** Hand him the push and say how many commits are ahead.
 
-- **Done this pass (2026-11-13), committed, unpushed:**
-  - New `nav.ts` model `{ group, category?, subcategory? }`; `Shell.tsx` renders the 3-level nesting
-    (group → category → Comparisons), icon-only when collapsed; scroll-rhythm bg keyed by category.
-  - `App.tsx` is data-driven from the nav + auto dividers; `Section.tsx` gained `ComposedFrom`
-    (assembled-design → parts cross-links, used on Dashboard Layouts, Evidence Layouts, Heroes).
-  - **Relocations (former Positioning):** Positioning Hero → Website Sections › **Heroes** (Contour
-    Hero); contour background also standalone as Images & Backgrounds › **Contour Map** (new),
-    cross-linked both ways. Section Folders → Components. Market Evidence → Dashboards & Data Displays
-    › **Evidence Layouts**. Landscape Table / From and To / This vs That → Website Sections ›
-    **Comparisons**. Scroll Blue Band → Images & Backgrounds (referenced from Motion).
-  - **New Components entry:** **Charts** — showcases the chart primitives (BarChart, LineChart,
-    DonutChart, RingStat, RankedBarChart, SplitTrack, FillBar).
-  - **New Library homes (placeholders this pass):** Quizzes (Stack Audit 5-Q flow previewed), Funnels
-    (points at the site catalogue), Website Audit Forms (cross-refs /audit; flags leakage-not-found).
-  - **Removals:** Positioning / Patterns / Templates / Tools groups dissolved; **Notion** and
-    **Domain Warm-up** removed; **Client Audit** removed from the showcase nav (the `/audit`
-    instrument + `src/audit/**` stay). Relabels aligned (Colour, Buttons & Controls, Forms & Inputs,
-    Featured Sections, Dashboard Layouts, Evidence Layouts, Finance Calculators, Email Signatures).
-  - Verified: build + check green (contrast 21/21); sidebar tree matches the spec exactly; page
-    dividers + order match; relocated/new sections render; clean console (desktop).
+- **DONE — IA restructure:** `nav.ts` model `{ group, category?, subcategory? }`; `Shell.tsx` renders
+  3-level nesting; `App.tsx` data-driven from nav + auto dividers; `Section.tsx` `ComposedFrom`
+  cross-links. Relocated the 7 former-Positioning designs (Hero→Website Sections›Heroes + standalone
+  Contour Map; Section Folders→Components; Market Evidence→Dashboards & Data Displays›Evidence Layouts;
+  Landscape/From-and-To/This-vs-That→Website Sections›Comparisons; Scroll Blue→Images & Backgrounds).
+  New Charts entry. Removed Notion, Domain Warm-up, Client-Audit nav entry (the `/audit` instrument
+  stays). Relabels aligned.
 
-- **WEBSITE-ASSETS PASS — IN PROGRESS (Tumai said "kick off"):**
-  - **Shared calculator defaults (verified self-consistent with the site): loan $600,000 · rate
-    6.25% · term 30yr · serviceability buffer 3%.** (e.g. $600k@6.25%/30 = $3,694.30/mo; offset
-    $40k×6.25% = $2,500; borrowing 6.25%+3% = 9.25%.) Build each to reproduce the site's figures and
-    validate (scratchpad `verify-calc.mjs` pattern).
-  - **finance.ts engine** now has `amortise()` (offset/extra/lump), `balanceAfter()`,
-    `totalInterest()`, `durationLabel()`. **`CalcLayout.tsx`** = shared `CalcShell` + `ResultHeadline`
-    / `MetricRow` / `CompareBars` — every new calculator uses it.
-  - ✅ **Paying it off (6/6) DONE** · ✅ **Comparing & switching (5/5) DONE** · ✅ **Property & equity
-    (2/2) DONE**. Calculators now **15 of 20**. All grouped in `CalculatorsSection` by the site's
-    categories; new finance.ts helpers: `amortise`, `balanceAfter`, `totalInterest`,
-    `interestOverPeriods`, `durationLabel`, `pct2`. Most validated to the dollar; Refinance & Compare
-    within ~$4 (site's default rates undisclosed — clean 6.0% used, formulas correct).
-  - **NEXT — the last calculator batch: Buying (5 new)** — deposit-savings-goal, upfront-costs,
-    lmi-estimate, first-home-schemes, LVR. (Borrowing Power + Stamp Duty already exist = 2/7; these 5
-    make 7/7.) ⚠ Needs published AU tables — **source carefully, mark indicative + dated:**
-    - Extend `stampDuty` from NSW/VIC/QLD to **all 8 states** (validate at $750k: NSW $27,937 / VIC
-      $40,070 / QLD $26,775 / WA $29,741; SA/TAS/ACT/NT brackets to source).
-    - LMI bands — site points at $750k value / $75k dep: 95%→$28,486, 90%→$14,216, 85%→$5,750.
-    - First-home price caps by state (NSW cap $1.5m metro / $800k regional; 1 Oct 2025 scheme).
-    - deposit-savings-goal & upfront-costs consume stamp-duty (+LMI). LVR is trivial (loan/value).
-  - Full per-calculator specs in the 2026-11-13 web-fetch reports (transcript).
-  - **Then:** the Stack Audit quiz (interactive + scoring) and Funnels (inventory the site catalogue).
-  - **Stack Audit quiz** — build interactive (5 single-choice Qs captured) + the stage-scoring +
-    result screen (result content wasn't visible on the site; re-fetch /quiz result or infer).
-  - **Funnels** — inventory financeos.au/discover/assets/funnels and rebuild designs from DS parts.
-  - **Website Audit Forms** — embeddable assessment form(s). ⚠ The named **"weekly leakage
-    assessment" was NOT found on the site** (checked /audit, /assessment, assets index, nav, footer) —
-    **ask Tumai for the source link** before building it.
+- **DONE — website-assets pass:**
+  - **Calculators 20/20**, grouped as the site groups them, validated against the live figures (mostly
+    to the dollar; Refinance/Compare within ~$4 as the site's default rates are undisclosed). Engine +
+    helpers in `finance.ts`: `amortise`, `balanceAfter`, `interestOverPeriods`, `totalInterest`,
+    `durationLabel`, `pct2`; stamp duty **6 states** (NSW/VIC/QLD refreshed + WA/SA/TAS added),
+    `firstHomeDuty`, `FHG_CAPS`, `lmiPremium` (indicative band). Shared `CalcLayout`
+    (`CalcShell`/`ResultHeadline`/`MetricRow`/`CompareBars`). Validation scripts in scratchpad
+    (`verify-calc.mjs`, `verify2.mjs`, `verify3.mjs`). **Shared calc defaults: $600k · 6.25% · 30yr ·
+    3% buffer.**
+  - **Quiz:** reusable `components/quizzes/QuizRunner.tsx` + the Stack Audit (5 Qs verbatim; DS's own
+    4 stages + scoring, since the site's result logic isn't published).
+  - **Funnels:** `FunnelsSection` = catalogue of the site's 10 funnel types (flow + "built from"
+    cross-links); faithful, since the site says they're brand-configured, not self-serve templates.
 
-- **ONGOING depth (Phase 2):** each relocated item has Inspectable Explain/Token/Code/Download; a
-  fuller per-part token-reference table + variants + states + responsive rules could be completed
-  across all items. Example content is swappable where it already reads from `src/data/**`.
+- **REMAINING (small / needs input):**
+  - **Website Audit Forms** is still a placeholder cross-referencing the live `/audit` instrument. The
+    named **"weekly leakage assessment" is NOT on the site** → **ask Tumai for a source** before building.
+  - **Stamp duty ACT & NT** not included (ACT page 403; NT uses an unusual quadratic formula). Source
+    their brackets to reach all 8 states, then add to `DUTY`/`STATES`/`FHB_DUTY`/`FHG_CAPS`.
+  - Optional depth: fuller per-item token-reference tables / variants / states across Library items.
 
 - **Don't forget:** `npm run check` + `npm run build` before committing; `npm run docs:components`
-  after any component change. Sources in scratchpad (`brand-src`, `zip-dashboard`) are reference only.
+  after any component change. Scratchpad `brand-src` / `zip-dashboard` are reference only, not in repo.

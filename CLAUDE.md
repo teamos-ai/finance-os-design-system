@@ -138,9 +138,12 @@ Vercel accepts the deploy.
   a browsable, nested Library; the 7 Positioning designs relocated; Notion, Domain Warm-up and the
   Client-Audit nav entry removed (the `/audit` instrument stays); new Charts / Contour Map / Quizzes /
   Funnels / Website Audit Forms homes added; page rendered data-driven from the nav so it matches the
-  sidebar. **1 commit awaiting push.** **Next:** the website-assets pass (17 calculators, the Stack
-  Audit quiz, funnels, embeddable audit forms — the "weekly leakage assessment" needs a source link).
-  See `memory/next-actions.md`.
+  sidebar. **Then (2026-11-13): the website-assets pass** — all **20 Finance Calculators** built from
+  the site and validated to the dollar (shared engine in `finance.ts`, shared `CalcLayout`; stamp duty
+  now 6 states, ACT/NT pending); the **interactive Stack Audit quiz** (reusable `QuizRunner`); and the
+  **Funnels catalogue** (10 types, cross-linked to the parts). **Next:** Website Audit Forms (the
+  "weekly leakage assessment" needs a source link); ACT/NT stamp duty. Several commits await Tumai's
+  push. See `memory/next-actions.md`.
 
 ---
 
