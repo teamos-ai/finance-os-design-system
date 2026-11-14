@@ -1,13 +1,12 @@
 /**
- * VideoSection — "the platform, in motion". The promo moment: a broker operating-system
- * window you can FLIP straight to the product demo video (it plays on the flip), mirroring
- * brand.financeos.au. Front = a live app-shell mock (sidebar, stat tiles with sparklines, an
- * enquiries chart, a workspace card, a task checklist, a new-enquiries list); back = the demo
- * video. Reduced-motion: the faces cross-fade instead of rotating; the video still plays.
+ * VideoSection — "the platform, in motion". The explainer-video moment: the Finance OS
+ * "My Account" workspace (BrandDashboard, mirroring brand.financeos.au) that you FLIP straight
+ * to the product explainer video — it plays on the flip. Dashboard and video are a 16:9 landscape
+ * card. Reduced-motion: the faces cross-fade instead of rotating; the video still plays.
  *
- * Replaces the old static "video placeholder". Composes from the same tokens + kit as the rest
- * of the system and from src/data/positioning.ts, so the DS and the brand page read as one.
- * Every figure/name on the dashboard is illustrative sample data (brand rule 09).
+ * The dashboard is drawn on a fixed 16:9 canvas and scaled to the board by ScaleToFit, so it
+ * stays faithful at any width. Every figure/name/avatar on it is illustrative sample data (brand
+ * rule 09). Composed from Finance OS tokens, so the DS and the brand page read as one.
  */
 import * as React from 'react'
 import { Play, RotateCw } from 'lucide-react'
@@ -17,14 +16,15 @@ import { Badge } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { BreathingDot } from '@/lib/motion'
 import { FlipCard } from '@/components/platform-dashboard/FlipCard'
-import { PlatformAppShell } from '@/components/platform-dashboard/PlatformDashboard'
+import { BrandDashboard } from '@/components/platform-dashboard/BrandDashboard'
+import { ScaleToFit } from '@/components/platform-dashboard/ScaleToFit'
 import type { InspectData } from '@/components/ui/inspectable'
 import { dashboard } from '@/data/positioning'
 
-/** The product demo video (Finance OS brand CDN) — plays on the flip. */
+/** The product explainer video (Finance OS brand CDN) — plays on the flip. */
 const DEMO_VIDEO = 'https://assets.cdn.filesafe.space/IFdDIBwoeb3jK7YtcUuh/media/6aab6cab42c38177da7c5ef6.mp4'
 
-/** The flip's back face: the demo video, played when the card is flipped and paused when not. */
+/** The flip's back face: the explainer video, played when flipped and paused when not. 16:9. */
 function DemoVideoBack({ playing }: { playing: boolean }) {
   const ref = React.useRef<HTMLVideoElement>(null)
   React.useEffect(() => {
@@ -52,8 +52,8 @@ function DemoVideoBack({ playing }: { playing: boolean }) {
       controls
       playsInline
       preload="none"
-      className="aspect-video h-full w-full rounded-lg border border-border bg-inverse object-cover"
-      aria-label="Finance OS product demo"
+      className="aspect-video w-full rounded-lg border border-border bg-inverse object-cover shadow-lg"
+      aria-label="Finance OS product explainer video"
     />
   )
 }
@@ -61,24 +61,24 @@ function DemoVideoBack({ playing }: { playing: boolean }) {
 const FLIP_INSPECT: InspectData = {
   name: 'Platform flip',
   explain:
-    'The promo moment — a broker app-shell that flips straight to the product demo video (it plays on the flip). The flip is a reduced-motion-safe 3D rotate (it cross-fades when motion is reduced). Front and back are one component each, composed from the signed-off positioning; the dashboard figures are illustrative sample data.',
+    'The explainer moment — the Finance OS "My Account" workspace (mirroring brand.financeos.au) that flips straight to the product explainer video (it plays on the flip). The flip is a reduced-motion-safe 3D rotate (it cross-fades when motion is reduced). The dashboard is a fixed 16:9 canvas scaled to fit; its figures, names and avatars are illustrative sample data.',
   token: [
-    'flip     rotateY 0↔180 · preserve-3d · backface-hidden   → reduced: cross-fade',
-    'front    PlatformAppShell — sidebar · stat tiles · chart · tasks',
-    'back     <video> demo (brand CDN) · aspect-video · object-cover · plays on flip',
-    'figures  font-display · tabular-nums · CountUp on view',
-    'at-risk  Badge variant="amber"  (one overdue task · status only)',
+    'frame    aspect-video (16:9) · both faces fill it',
+    'front    BrandDashboard — fixed 1280×720 canvas, ScaleToFit to board width',
+    'back     <video> explainer (brand CDN) · aspect-video · object-cover · plays on flip',
+    'surfaces --c-surface cards · hairline --c-border · 8px squircles · no glass',
+    'accent   Atlas Blue only · the MRR tile is the single gradient moment',
   ].join('\n'),
   code: [
     'const [flipped, setFlipped] = React.useState(false)',
     '',
     '<FlipCard',
     '  flipped={flipped}',
-    '  front={<PlatformAppShell />}',
+    '  front={<ScaleToFit width={1280} height={720}><BrandDashboard /></ScaleToFit>}',
     '  back={<DemoVideoBack playing={flipped} />}',
     '/>',
     '<Button onClick={() => setFlipped((f) => !f)}>',
-    '  {flipped ? "Show the dashboard" : "Watch the demo video"}',
+    '  {flipped ? "Show the dashboard" : "Watch the explainer"}',
     '</Button>',
   ].join('\n'),
 }
@@ -91,11 +91,11 @@ export function VideoSection() {
     <Section
       id="video"
       eyebrow="The platform, in motion"
-      title="Is Now a Bad Time To…"
-      lead="Get more finance leads, settle more loans, nurture more clients and get more referrals because you have automated more of your back-end operations than ever before?"
+      title="Watch the explainer"
+      lead="The Finance OS workspace brokers actually use — flip it to the explainer video for a quick look at how it captures every enquiry, follows up automatically, and nurtures clients through to settlement."
     >
-      <div className="mx-auto flex max-w-4xl flex-col gap-5">
-        <Demo label="The platform, in motion — flip to the demo" inspect={FLIP_INSPECT}>
+      <div className="mx-auto flex max-w-5xl flex-col gap-5">
+        <Demo label="The platform, in motion — flip to the explainer" inspect={FLIP_INSPECT}>
           <div className="flex flex-col gap-4">
             {/* control row — live cue + the flip/watch gesture */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -116,13 +116,17 @@ export function VideoSection() {
                   )
                 }
               >
-                {flipped ? 'Show the dashboard' : 'Watch the demo video'}
+                {flipped ? 'Show the dashboard' : 'Watch the explainer'}
               </Button>
             </div>
 
             <FlipCard
               flipped={flipped}
-              front={<PlatformAppShell />}
+              front={
+                <ScaleToFit width={1280} height={720} className="rounded-lg border border-border shadow-lg">
+                  <BrandDashboard />
+                </ScaleToFit>
+              }
               back={<DemoVideoBack playing={flipped} />}
             />
           </div>

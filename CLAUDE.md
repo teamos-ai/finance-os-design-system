@@ -160,6 +160,20 @@ Vercel accepts the deploy.
   Logo→Gem, Icons→Shapes, Buttons & Controls→ToggleLeft, Heroes→Crown, Landscape Table→Table2,
   This vs That→SquareSplitHorizontal, Social Media→Smartphone. All verified in the running app; commits
   await Tumai's push.
+- **Current State (2026-11-14 · promo / sidebar / colour):** Three changes, all verified. (1) **Promo
+  Video** reframed to the explainer — `VideoSection` is now "Watch the explainer" over the brand "My
+  Account" dashboard (`BrandDashboard`: a tokenised 16:9 rebuild of brand.financeos.au's platform-in-motion
+  board on a fixed 1280×720 canvas scaled by `ScaleToFit`, with the brand memoji avatars in `/public/dash`)
+  that flips to the explainer video (same CDN link). Kept DS rules over the brand page's look (8px squircles,
+  solid surfaces, no glass). The old broker `PlatformDashboard` was deleted (orphaned by the swap). (2)
+  **Sidebar** — the accent active side-rail is removed from the nav (`Shell`) and the audit `Rail`
+  (enforces the NO RIBBONS rule; active state is the filled highlight only); a full ribbon audit is clean.
+  The sidebar width is now **drag-resizable** (neutral handle, 208–420px, persisted, keyboard ←/→) on top
+  of collapse. Impeccable's binary wasn't run (untrusted download); its audit philosophy was applied by
+  hand. (3) **Colour** rebuilt into one coherent system — Anchor & neutrals (Blue/Black/White) + **the
+  functional ecosystem** (success · danger · amber · info, each with base/soft/AA-text/role/usage/tokens),
+  and **Tokens** reframed as the architecture and cross-linked. No token values changed (contrast 21/21).
+  Commits await Tumai's push.
 
 ---
 

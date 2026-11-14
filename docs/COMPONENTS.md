@@ -108,8 +108,9 @@ Broker email-signature block + preview.
 
 | Component(s) | Purpose | Variants | Source |
 |---|---|:---:|---|
+| `BrandDashboard` | the Finance OS "My Account" workspace, the FRONT face of the promo flip. |  | `platform-dashboard/BrandDashboard.tsx` |
 | `FlipCard` | a reduced-motion-safe 3D flip between a front and a back face. |  | `platform-dashboard/FlipCard.tsx` |
-| `PlatformAppShell` `PlatformOverview` | the "platform in motion" app-shell mock (FRONT) and a plain-language overview (BACK) for the flip card. |  | `platform-dashboard/PlatformDashboard.tsx` |
+| `ScaleToFit` | render a fixed design canvas and scale the whole thing to the container width. |  | `platform-dashboard/ScaleToFit.tsx` |
 
 ## positioning-hero `src/components/positioning-hero`
 

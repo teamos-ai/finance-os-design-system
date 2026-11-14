@@ -525,7 +525,7 @@ export function TokensSection() {
       id="tokens"
       eyebrow="Tokens"
       title="Tokens"
-      lead="Tokens are ground truth. Three layers resolve downward — raw primitive ramps, semantic intents, then component-scoped tokens — so a component never names a colour, only an intent. Tailwind replaces the colour and radius scales rather than extending them, so an off-token value fails the build."
+      lead="How the palette becomes tokens — the architecture, not the palette itself (for the colours and when to use each, see Colour). Tokens are ground truth, and three layers resolve downward: raw primitive ramps → semantic intents → component-scoped tokens, so a component never names a colour, only an intent. Tailwind replaces the colour and radius scales rather than extending them, so an off-token value fails the build."
     >
       <div className="flex flex-col gap-8">
         {/* A · Resolution */}

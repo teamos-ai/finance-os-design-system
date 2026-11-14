@@ -18,12 +18,13 @@ type Primary = {
   usage: string
 }
 
+/* ── The anchor + the neutrals — the structural trio. ─────────────────────────── */
 const PRIMARIES: Primary[] = [
   {
-    key: 'blue', name: 'Atlas Blue', role: 'Primary accent · CTAs, focus, links, the gradient',
+    key: 'blue', name: 'Atlas Blue', role: 'The anchor · brand accent, CTAs, focus, links, the gradient',
     hex: '#33488F', rgb: '51, 72, 143',
     shades: [{ label: '100', hex: '#ADB6D2' }, { label: '200', hex: '#8591BC' }, { label: '300', hex: '#5C6DA5' }, { label: '400', hex: '#33488F', main: true }, { label: '500', hex: '#1F2B56' }],
-    usage: 'Fill and text — #33488F (400) on white. The primary accent.',
+    usage: 'Fill and text — #33488F (400) on white. The sole brand accent, and it owns ALL typographic highlight.',
   },
   {
     key: 'black', name: 'Black', role: 'Ink & inverse surface',
@@ -36,6 +37,48 @@ const PRIMARIES: Primary[] = [
     hex: '#FFFFFF', rgb: '255, 255, 255',
     shades: [{ label: 'Canvas', hex: '#FFFFFF', main: true }, { label: 'Muted', hex: '#F6F7F9' }, { label: 'Selected', hex: '#EDEFF2' }, { label: 'Line', hex: '#E6E8EC' }, { label: 'Line-2', hex: '#CDD2DA' }],
     usage: 'Canvas #FFF · muted #F6F7F9 rhythm ground · #EDEFF2 selected lift.',
+  },
+]
+
+/* ── The functional ecosystem — signals that sit AROUND the anchor. ───────────────
+   Each is tuned to clear WCAG AA on white and kept deliberately deep/muted so it
+   reads as one family with Atlas Blue rather than shouting. Blue carries the brand;
+   these carry meaning only, used sparingly. (text = the AA-safe shade on white.) */
+type StateColor = {
+  key: string
+  name: string
+  role: string
+  base: string
+  onBase: string
+  soft: string
+  text: string
+  token: string
+  usage: string
+}
+const STATES: StateColor[] = [
+  {
+    key: 'success', name: 'Success', role: 'Positive — settled, approved, on track',
+    base: '#0E6B49', onBase: '#FFFFFF', soft: 'rgba(19, 138, 94, 0.12)', text: '#0E6B49',
+    token: '--c-success · --c-success-soft',
+    usage: 'Settlement done, approval, positive movement. A functional signal — never brand, never decoration.',
+  },
+  {
+    key: 'danger', name: 'Danger', role: 'Critical — failed, rejected, blocked',
+    base: '#A81E23', onBase: '#FFFFFF', soft: 'rgba(213, 41, 47, 0.10)', text: '#A81E23',
+    token: '--c-danger · --c-danger-soft',
+    usage: 'Errors and destructive actions only. Used rarely, and the one hue allowed to feel urgent.',
+  },
+  {
+    key: 'amber', name: 'Amber · attention', role: 'Pending — awaiting, overdue, at-risk',
+    base: '#D99A3E', onBase: '#14161B', soft: 'rgba(217, 154, 62, 0.16)', text: '#8A5A0F',
+    token: '--c-amber · --c-amber-text · --c-amber-soft',
+    usage: 'Attention / pending state and star ratings — ≈ one amber moment per view. Status only: never type, never a CTA.',
+  },
+  {
+    key: 'info', name: 'Info', role: 'Neutral — informational',
+    base: '#5C6DA5', onBase: '#FFFFFF', soft: 'rgba(92, 109, 165, 0.14)', text: '#33488F',
+    token: '--c-info · --c-info-soft',
+    usage: 'Quiet informational notes — a lighter blue so it never competes with the Atlas-Blue accent.',
   },
 ]
 
@@ -134,15 +177,62 @@ function ColorCard({ c }: { c: Primary }) {
   )
 }
 
+/* ── A functional-ecosystem card — base, soft fill, AA text, role + usage. ───────── */
+function StateCard({ s }: { s: StateColor }) {
+  const [copied, copy] = useCopy()
+  return (
+    <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => copy(s.base)}
+          aria-label={`Copy ${s.base}`}
+          className="group relative h-10 w-10 shrink-0 rounded-md border border-border-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+          style={{ background: s.base }}
+        >
+          <span className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100" style={{ color: s.onBase }}>
+            {copied ? <Check className="h-4 w-4" strokeWidth={2.5} /> : <span className="font-mono text-[0.5625rem] opacity-80">copy</span>}
+          </span>
+        </button>
+        <div className="min-w-0 flex-1">
+          <div className="font-display text-title-sm text-fg">{s.name}</div>
+          <div className="font-mono text-caption text-fg-subtle">{s.role}</div>
+        </div>
+      </div>
+
+      {/* base · soft · AA-text samples */}
+      <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-col items-center justify-center gap-1 rounded-md border border-border-subtle py-2" style={{ background: s.base }}>
+          <span className="font-mono text-[0.5625rem] uppercase tracking-wider" style={{ color: s.onBase, opacity: 0.85 }}>base</span>
+          <span className="font-mono text-[0.5625rem]" style={{ color: s.onBase }}>{s.base}</span>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-1 rounded-md border border-border py-2" style={{ background: s.soft }}>
+          <span className="font-mono text-[0.5625rem] uppercase tracking-wider" style={{ color: s.text }}>soft</span>
+          <span className="font-mono text-[0.5625rem]" style={{ color: s.text }}>fill</span>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-1 rounded-md border border-border bg-canvas py-2">
+          <span className="font-mono text-[0.5625rem] uppercase tracking-wider text-fg-subtle">text</span>
+          <span className="font-display text-title-sm font-bold" style={{ color: s.text }}>Aa</span>
+        </div>
+      </div>
+
+      <p className="font-body text-caption leading-relaxed text-fg-muted">{s.usage}</p>
+      <p className="font-mono text-mono-2xs text-fg-subtle">{s.token}</p>
+    </div>
+  )
+}
+
 export function ColorSection() {
   return (
     <Section
       id="color"
       eyebrow="Colour"
       title="Colour"
-      lead="Five locked primaries with their hex + RGB. Click any card to drop down its shade ramp and see exactly which shade to use. Components always name a semantic token, never a raw hex."
+      lead="One anchor, a disciplined ecosystem. Atlas Blue is the brand and owns every typographic highlight; a small set of functional signals — success, danger, attention, info — sit around it, each tuned to clear WCAG AA on white so the whole palette reads as one family. Click any swatch to copy. Components always name a semantic token, never a raw hex — see Tokens for how these become the three token layers."
     >
-      <div className="space-y-3">
+      {/* Anchor & neutrals */}
+      <MonoLabel tone="subtle" dot>Anchor &amp; neutrals</MonoLabel>
+      <div className="mt-3 space-y-3">
         {PRIMARIES.map((c) => (
           <Inspectable key={c.key} {...familyInspect(c)}>
             <ColorCard c={c} />
@@ -150,7 +240,23 @@ export function ColorSection() {
         ))}
       </div>
 
-      <div className="mt-8">
+      {/* The functional ecosystem */}
+      <div className="mt-10">
+        <MonoLabel tone="subtle" dot>The functional ecosystem</MonoLabel>
+        <p className="mt-2 max-w-3xl font-body text-body-sm leading-relaxed text-fg-muted">
+          These carry <span className="text-highlight">meaning, not brand</span>. Each is deliberately deep and muted so it
+          sits beside Atlas Blue rather than competing with it, and each clears AA on white. Blue stays the only accent and
+          the only colour on type; these appear sparingly, as signals.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {STATES.map((s) => (
+            <StateCard key={s.key} s={s} />
+          ))}
+        </div>
+      </div>
+
+      {/* Signature gradient */}
+      <div className="mt-10">
         <MonoLabel tone="brand" dot>Signature gradient</MonoLabel>
         <div className="mt-3">
           <Inspectable

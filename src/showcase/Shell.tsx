@@ -14,6 +14,12 @@ import { cn } from '@/lib/cn'
 
 const REPO_URL = 'https://github.com/teamos-ai/finance-os-design-system'
 
+/** Draggable sidebar width (px): min · max · default. The collapsed rail stays a fixed 76px. */
+const SIDEBAR_MIN = 208
+const SIDEBAR_MAX = 420
+const SIDEBAR_DEFAULT = 256
+const SIDEBAR_STEP = 16
+
 function useActiveSection(ids: string[]) {
   const [active, setActive] = React.useState(ids[0] ?? '')
   React.useEffect(() => {
@@ -89,8 +95,45 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
   }, [collapsed])
 
+  // Draggable width — persisted, clamped. The collapsed rail ignores it (fixed 76px).
+  const [width, setWidth] = React.useState(() => {
+    try {
+      const w = Number(localStorage.getItem('fos-sidebar-w'))
+      return w >= SIDEBAR_MIN && w <= SIDEBAR_MAX ? w : SIDEBAR_DEFAULT
+    } catch {
+      return SIDEBAR_DEFAULT
+    }
+  })
+  const [dragging, setDragging] = React.useState(false)
+
+  React.useEffect(() => {
+    try {
+      localStorage.setItem('fos-sidebar-w', String(width))
+    } catch {
+      /* ignore */
+    }
+  }, [width])
+
+  const startResize = React.useCallback((e: React.PointerEvent) => {
+    e.preventDefault()
+    setDragging(true)
+    const clamp = (x: number) => Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, x))
+    const onMove = (ev: PointerEvent) => setWidth(clamp(ev.clientX))
+    const onUp = () => {
+      setDragging(false)
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      document.body.style.userSelect = ''
+      document.body.style.cursor = ''
+    }
+    document.body.style.userSelect = 'none'
+    document.body.style.cursor = 'col-resize'
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+  }, [])
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ ['--sidebar-w' as string]: `${collapsed ? 76 : width}px` } as React.CSSProperties}>
       {/* mobile header */}
       <header className="sticky top-0 z-30 flex items-center border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
         <Logo size="sm" />
@@ -98,9 +141,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
       {/* sidebar */}
       <aside
+        style={{ width: 'var(--sidebar-w)', transition: dragging ? 'none' : undefined }}
         className={cn(
           'fixed inset-y-0 left-0 z-20 hidden flex-col border-r border-border bg-surface transition-[width,padding] duration-base ease-out lg:flex',
-          collapsed ? 'w-[76px] px-3' : 'w-64 px-4',
+          collapsed ? 'px-3' : 'px-4',
         )}
       >
         <div className={cn('flex py-5', collapsed ? 'flex-col items-center gap-3' : 'items-center justify-between')}>
@@ -157,9 +201,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
                       collapsed ? 'justify-center' : nested && 'ml-3',
                     )}
                   >
-                    {on && !collapsed && (
-                      <span aria-hidden className={cn('absolute inset-y-1.5 left-0 w-0.5 rounded-full', a.dot)} />
-                    )}
                     <item.Icon className="h-4 w-4 shrink-0" strokeWidth={1.75} />
                     {!collapsed && <span className="truncate">{item.label}</span>}
                   </a>
@@ -182,10 +223,40 @@ export function Shell({ children }: { children: React.ReactNode }) {
             {!collapsed && <span>teamos-ai/finance-os</span>}
           </a>
         </div>
+
+        {/* draggable width handle — neutral + keyboard-operable (drag or ←/→); not an accent rail */}
+        {!collapsed && (
+          <div
+            role="separator"
+            aria-orientation="vertical"
+            aria-label="Resize sidebar"
+            aria-valuenow={width}
+            aria-valuemin={SIDEBAR_MIN}
+            aria-valuemax={SIDEBAR_MAX}
+            tabIndex={0}
+            onPointerDown={startResize}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowLeft') {
+                e.preventDefault()
+                setWidth((w) => Math.max(SIDEBAR_MIN, w - SIDEBAR_STEP))
+              }
+              if (e.key === 'ArrowRight') {
+                e.preventDefault()
+                setWidth((w) => Math.min(SIDEBAR_MAX, w + SIDEBAR_STEP))
+              }
+            }}
+            className="group absolute inset-y-0 right-0 z-30 w-2 translate-x-1/2 cursor-col-resize touch-none rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span aria-hidden className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-transparent transition-colors group-hover:bg-border-strong" />
+          </div>
+        )}
       </aside>
 
       {/* content */}
-      <main className={cn('transition-[padding] duration-base ease-out', collapsed ? 'lg:pl-[76px]' : 'lg:pl-64')}>
+      <main
+        style={{ transition: dragging ? 'none' : undefined }}
+        className="transition-[padding] duration-base ease-out lg:pl-[var(--sidebar-w)]"
+      >
         {children}
       </main>
     </div>

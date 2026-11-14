@@ -57,9 +57,6 @@ export function Rail({ part, answers, activeModuleId, onSelect }: RailProps) {
               on ? 'bg-selected' : 'hover:bg-selected',
             )}
           >
-            {on && (
-              <span aria-hidden className="absolute inset-y-2 left-0 w-0.5 rounded-sm bg-accent" />
-            )}
             <Ring ratio={p.ratio} on={on || done} />
             <span className="min-w-0 flex-1">
               <span
