@@ -122,11 +122,11 @@ function ShadeChip({ shade }: { shade: Shade }) {
         style={{ background: shade.hex }}
       >
         <span className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100">
-          {copied ? <Check className="h-4 w-4 text-fg" strokeWidth={2.5} /> : <span className="font-mono text-[0.625rem] text-fg/70">copy</span>}
+          {copied ? <Check className="h-4 w-4 text-fg" strokeWidth={2.5} /> : <span className="font-mono text-[0.6875rem] text-fg/70">copy</span>}
         </span>
       </span>
-      <span className="font-mono text-[0.625rem] uppercase text-fg-subtle">{shade.label}</span>
-      <span className="font-mono text-[0.625rem] text-fg">{shade.hex}</span>
+      <span className="font-mono text-[0.6875rem] uppercase text-fg-subtle">{shade.label}</span>
+      <span className="font-mono text-[0.6875rem] text-fg">{shade.hex}</span>
     </button>
   )
 }
@@ -191,7 +191,7 @@ function StateCard({ s }: { s: StateColor }) {
           style={{ background: s.base }}
         >
           <span className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100" style={{ color: s.onBase }}>
-            {copied ? <Check className="h-4 w-4" strokeWidth={2.5} /> : <span className="font-mono text-[0.5625rem] opacity-80">copy</span>}
+            {copied ? <Check className="h-4 w-4" strokeWidth={2.5} /> : <span className="font-mono text-[0.6875rem] opacity-80">copy</span>}
           </span>
         </button>
         <div className="min-w-0 flex-1">
@@ -203,15 +203,15 @@ function StateCard({ s }: { s: StateColor }) {
       {/* base · soft · AA-text samples */}
       <div className="grid grid-cols-3 gap-2">
         <div className="flex flex-col items-center justify-center gap-1 rounded-md border border-border-subtle py-2" style={{ background: s.base }}>
-          <span className="font-mono text-[0.5625rem] uppercase tracking-wider" style={{ color: s.onBase, opacity: 0.85 }}>base</span>
-          <span className="font-mono text-[0.5625rem]" style={{ color: s.onBase }}>{s.base}</span>
+          <span className="font-mono text-[0.6875rem] uppercase tracking-wider" style={{ color: s.onBase, opacity: 0.85 }}>base</span>
+          <span className="font-mono text-[0.6875rem]" style={{ color: s.onBase }}>{s.base}</span>
         </div>
         <div className="flex flex-col items-center justify-center gap-1 rounded-md border border-border py-2" style={{ background: s.soft }}>
-          <span className="font-mono text-[0.5625rem] uppercase tracking-wider" style={{ color: s.text }}>soft</span>
-          <span className="font-mono text-[0.5625rem]" style={{ color: s.text }}>fill</span>
+          <span className="font-mono text-[0.6875rem] uppercase tracking-wider" style={{ color: s.text }}>soft</span>
+          <span className="font-mono text-[0.6875rem]" style={{ color: s.text }}>fill</span>
         </div>
         <div className="flex flex-col items-center justify-center gap-1 rounded-md border border-border bg-canvas py-2">
-          <span className="font-mono text-[0.5625rem] uppercase tracking-wider text-fg-subtle">text</span>
+          <span className="font-mono text-[0.6875rem] uppercase tracking-wider text-fg-subtle">text</span>
           <span className="font-display text-title-sm font-bold" style={{ color: s.text }}>Aa</span>
         </div>
       </div>

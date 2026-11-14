@@ -91,7 +91,7 @@ export const Swatch = ({ hex, label, copyValue, primary, className }: SwatchProp
         style={{ background: hex }}
       >
         {primary && (
-          <span className="absolute left-1.5 top-1.5 inline-flex items-center gap-1 rounded-sm bg-surface/90 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.1em] text-fg shadow-sm">
+          <span className="absolute left-1.5 top-1.5 inline-flex items-center gap-1 rounded-sm bg-surface/90 px-1.5 py-0.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-fg shadow-sm">
             <Star className="h-2.5 w-2.5 fill-current" strokeWidth={0} aria-hidden />
             Main
           </span>
@@ -112,7 +112,7 @@ export const Swatch = ({ hex, label, copyValue, primary, className }: SwatchProp
           {primary && ' · main'}
         </span>
         <span className="font-mono text-caption text-fg">{copied ? 'Copied ✓' : HEX}</span>
-        <span className="font-mono text-[10px] leading-tight text-fg-subtle">{rgb}</span>
+        <span className="font-mono text-[11px] leading-tight text-fg-subtle">{rgb}</span>
       </span>
     </button>
   )

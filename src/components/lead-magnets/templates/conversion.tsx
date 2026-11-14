@@ -182,7 +182,7 @@ export function PlannerTemplate() {
               {blocks
                 .filter((b) => b.d === i)
                 .map((b) => (
-                  <span key={b.t} className={`rounded-sm px-1.5 py-1 text-center font-mono text-[0.6rem] leading-tight ${b.tone}`}>
+                  <span key={b.t} className={`rounded-sm px-1.5 py-1 text-center font-mono text-[0.6875rem] leading-tight ${b.tone}`}>
                     {b.t}
                   </span>
                 ))}

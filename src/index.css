@@ -14,6 +14,7 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    overflow-x: clip; /* no page-level sideways scroll; internal overflow-x-auto scrollers still work */
     background-color: var(--c-canvas); /* the page plane — flat pure white, always */
   }
 

@@ -7,12 +7,15 @@
  * Self-contained: the wash CSS strings are documented signature-gradient + glow draughts
  * built only from the locked blue/navy family (rgba allowed inside a documented glow).
  */
+import * as React from 'react'
 import { Building2, LineChart, Handshake, ShieldCheck, Check, X } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { ImageWash } from '@/components/ui/image-wash'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { AuroraBackground, type AuroraTone } from '@/components/ui/aurora-background'
+import { IMAGE_LIBRARY, IMAGE_LIBRARY_TAGS, libraryImageSrc, type LibraryImage } from '@/data/image-library'
+import { cn } from '@/lib/cn'
 
 const OVERLAY_INSPECT: InspectData = {
   name: 'Gradient overlay',
@@ -146,18 +149,111 @@ const OVERLAY =
 /** The photo standing under the overlay in the live demo (a calm navy draught, not stock). */
 const PHOTO = 'linear-gradient(135deg, #233044, #11161f 70%)'
 
+/* ── Photography — the tagged shoot library ──────────────────────────────────── */
+
+/** The "+" inspector for a photo: description, tags, use hints, a copy-ready <img>, and a download. */
+function photoInspect(img: LibraryImage): InspectData {
+  const file = libraryImageSrc(img.id)
+  return {
+    name: img.title,
+    explain: `${img.alt} Good for: ${img.use.join(', ')}.`,
+    token: `tags  ${img.tags.join(' · ')}\nuse   ${img.use.join(' · ')}`,
+    code: `<img src="${file}" alt="${img.alt}" loading="lazy" className="h-full w-full object-cover" />`,
+    download: { filename: `${img.id}.jpg`, href: file },
+  }
+}
+
+function FilterChip({ label, count, active, onClick }: { label: string; count?: number; active: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={cn(
+        'rounded-sm border px-2.5 py-1 font-mono text-mono-2xs uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        active ? 'border-accent bg-accent-soft text-accent-text' : 'border-border text-fg-muted hover:border-border-strong hover:text-fg',
+      )}
+    >
+      {label}
+      {count !== undefined && <span className="ml-1 opacity-60 tabular-nums">{count}</span>}
+    </button>
+  )
+}
+
+function PhotoLibrary() {
+  const [tag, setTag] = React.useState<string | null>(null)
+  const shown = tag ? IMAGE_LIBRARY.filter((i) => i.tags.includes(tag) || i.use.includes(tag)) : IMAGE_LIBRARY
+  return (
+    <div>
+      {/* tag filter */}
+      <div className="mb-5 flex flex-wrap gap-1.5">
+        <FilterChip label="All" count={IMAGE_LIBRARY.length} active={tag === null} onClick={() => setTag(null)} />
+        {IMAGE_LIBRARY_TAGS.map((t) => (
+          <FilterChip key={t} label={t} active={tag === t} onClick={() => setTag((cur) => (cur === t ? null : t))} />
+        ))}
+      </div>
+
+      {/* grid */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {shown.map((img) => (
+          <Inspectable key={img.id} {...photoInspect(img)}>
+            <figure className="overflow-hidden rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-md">
+              <div className="relative aspect-[3/2]">
+                <img
+                  src={libraryImageSrc(img.id)}
+                  alt={img.alt}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </div>
+              <figcaption className="flex flex-col gap-2 p-3">
+                <span className="font-display text-body-md font-medium text-fg">{img.title}</span>
+                <span className="flex flex-wrap gap-1">
+                  {img.tags.slice(0, 4).map((t) => (
+                    <span key={t} className="rounded-sm bg-inset px-1.5 py-0.5 font-mono text-mono-2xs text-fg-subtle">
+                      {t}
+                    </span>
+                  ))}
+                </span>
+              </figcaption>
+            </figure>
+          </Inspectable>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function ImageLibrarySection() {
   return (
     <Section
       id="imagery"
       eyebrow="Image Library"
       title="Image Library"
-      lead="The visual language. Photography is calm, real and considered — advisors at work, not stock smiles. Backgrounds are production-grade pixel-art WEBP in the Atlas Blue palette. Until shoots land, washes from the same blue-navy family stand in. Every frame rounds to rounded-md and rests on a hairline border."
+      lead="The visual language. The photography library is live — calm, natural-light advisors at work, each shot tagged for filtering and captioned so you (or an AI agent) can drop the right image into a page, funnel or blog. Backgrounds are production-grade pixel-art WEBP in the Atlas Blue palette; every frame rounds to the 8px ceiling on a hairline border."
     >
-      {/* Backgrounds — pixel-art website backdrops (WEBP) */}
+      {/* Photography — the tagged shoot library */}
       <div className="mb-14">
         <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
           <MonoLabel number="17.1" dot>
+            Photography
+          </MonoLabel>
+          <span className="font-mono text-caption text-fg-subtle">{IMAGE_LIBRARY.length} images · tagged · filter below</span>
+        </div>
+        <p className="mb-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
+          The real shoot library — calm, considered, natural light. Filter by tag, then open any image’s{' '}
+          <span className="font-mono text-caption">+</span> for its description, tags, use hints, a copy-ready{' '}
+          <span className="font-mono text-caption">&lt;img&gt;</span>, or a download. Every entry is captioned in{' '}
+          <span className="font-mono text-caption">src/data/image-library.ts</span> so AI agents can pick the right
+          one for assets, funnels, pages and blogs.
+        </p>
+        <PhotoLibrary />
+      </div>
+
+      {/* Backgrounds — pixel-art website backdrops (WEBP) */}
+      <div className="mb-14">
+        <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
+          <MonoLabel number="17.2" dot>
             Backgrounds
           </MonoLabel>
           <span className="font-mono text-caption text-fg-subtle">WEBP + live aurora · website use</span>
@@ -242,7 +338,7 @@ export function ImageLibrarySection() {
       {/* Aspect-ratio frames */}
       <div className="mb-14">
         <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
-          <MonoLabel number="17.2" dot>
+          <MonoLabel number="17.3" dot>
             Aspect-ratio frames
           </MonoLabel>
         </div>
@@ -275,7 +371,7 @@ export function ImageLibrarySection() {
       {/* Gradient overlay over image */}
       <div className="mb-14">
         <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
-          <MonoLabel number="17.3" dot>
+          <MonoLabel number="17.4" dot>
             Gradient overlay
           </MonoLabel>
           <span className="font-mono text-caption text-fg-subtle">copy over photography</span>
@@ -319,7 +415,7 @@ export function ImageLibrarySection() {
 
       {/* Approved / forbidden */}
       <div className="mb-14">
-        <MonoLabel number="17.4" dot className="mb-5">
+        <MonoLabel number="17.5" dot className="mb-5">
           Direction — approved &amp; forbidden
         </MonoLabel>
         <div className="grid gap-5 md:grid-cols-2">
@@ -373,7 +469,7 @@ export function ImageLibrarySection() {
 
       {/* Image treatment */}
       <div>
-        <MonoLabel number="17.5" dot className="mb-5">
+        <MonoLabel number="17.6" dot className="mb-5">
           Image treatment
         </MonoLabel>
         <div className="grid gap-4 sm:grid-cols-3">

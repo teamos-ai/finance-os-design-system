@@ -48,7 +48,7 @@
      clear WCAG AA on white (#8A5A0F = 5.9:1). See the "amber = status only" rule. */
   --p-amber-300: #E8B866;
   --p-amber-400: #D99A3E; /* base — fills, dots, stars */
-  --p-amber-500: #8A5A0F; /* AA text on white */
+  --p-amber-500: #7A4E0A; /* AA text, incl. on amber-soft fills */
 }
 
 /* ----------------------------------------------------------------------------

@@ -101,7 +101,7 @@ export default {
         label: ['0.8125rem', { lineHeight: '1.2', letterSpacing: '0.02em', fontWeight: '700' }],
         caption: ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.01em' }],
         'mono-xs': ['0.6875rem', { lineHeight: '1.3', letterSpacing: '0.04em', fontWeight: '700' }],
-        'mono-2xs': ['0.625rem', { lineHeight: '1.3', letterSpacing: '0.04em', fontWeight: '700' }],
+        'mono-2xs': ['0.6875rem', { lineHeight: '1.3', letterSpacing: '0.04em', fontWeight: '700' }],
       },
 
       boxShadow: {

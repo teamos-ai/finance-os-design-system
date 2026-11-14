@@ -133,7 +133,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <div className="min-h-screen" style={{ ['--sidebar-w' as string]: `${collapsed ? 76 : width}px` } as React.CSSProperties}>
+    <div className="min-h-screen overflow-x-clip" style={{ ['--sidebar-w' as string]: `${collapsed ? 76 : width}px` } as React.CSSProperties}>
       {/* mobile header */}
       <header className="sticky top-0 z-30 flex items-center border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
         <Logo size="sm" />
@@ -165,7 +165,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 if (collapsed) return <li key={row.key} className="mt-4 first:mt-0 border-t border-border" aria-hidden />
                 return (
                   <li key={row.key} className="mt-5 first:mt-0 px-2 pb-1 pt-2">
-                    <p className="font-mono text-[0.625rem] uppercase tracking-[0.14em] text-fg-subtle">{row.name}</p>
+                    <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-fg-subtle">{row.name}</p>
                   </li>
                 )
               }
@@ -173,7 +173,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 if (collapsed) return null
                 return (
                   <li key={row.key} className="mt-3 px-2 pb-0.5 pt-1">
-                    <p className="font-mono text-[0.625rem] uppercase tracking-[0.1em] text-fg-muted">{row.name}</p>
+                    <p className="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-fg-muted">{row.name}</p>
                   </li>
                 )
               }
@@ -181,7 +181,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 if (collapsed) return null
                 return (
                   <li key={row.key} className="mt-1 pl-4 pr-2 pb-0.5">
-                    <p className="font-mono text-[0.5625rem] uppercase tracking-[0.1em] text-fg-subtle/80">{row.name}</p>
+                    <p className="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-fg-subtle/80">{row.name}</p>
                   </li>
                 )
               }

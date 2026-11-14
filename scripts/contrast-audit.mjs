@@ -31,8 +31,8 @@ const themes = {
     canvas: '#FFFFFF', surface: '#FFFFFF', elevated: '#FFFFFF',
     fg: '#14161B', fgMuted: '#474E5C', fgSubtle: '#646C7D',
     accent: '#33488F', accentText: '#33488F', accentFg: '#FFFFFF',
-    amberText: '#8A5A0F', brand: '#33488F',
-    success: '#0E6B49', warning: '#8A5A0F', danger: '#A81E23', info: '#33488F',
+    amberText: '#7A4E0A', brand: '#33488F',
+    success: '#0E6B49', warning: '#7A4E0A', danger: '#A81E23', info: '#33488F',
     soft: { success: [19,138,94,0.12], warning: [217,154,62,0.16], danger: [213,41,47,0.10], info: [51,72,143,0.10], accent: [51,72,143,0.12] },
   },
 }
