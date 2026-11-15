@@ -8,12 +8,13 @@
  * built only from the locked blue/navy family (rgba allowed inside a documented glow).
  */
 import * as React from 'react'
-import { Building2, LineChart, Handshake, ShieldCheck, Check, X } from 'lucide-react'
+import { Building2, LineChart, Handshake, ShieldCheck, Check, X, Search } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { ImageWash } from '@/components/ui/image-wash'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { AuroraBackground, type AuroraTone } from '@/components/ui/aurora-background'
+import { ContourField } from '@/components/positioning-hero/ContourField'
 import { IMAGE_LIBRARY, IMAGE_LIBRARY_TAGS, libraryImageSrc, type LibraryImage } from '@/data/image-library'
 import { cn } from '@/lib/cn'
 
@@ -102,6 +103,25 @@ function auroraInspect(a: (typeof AURORA_TONES)[number]): InspectData {
   }
 }
 
+/** Contour — the tokenised topographic field, as a reusable website background (drawn, not a raster,
+ *  like Aurora). It also backs the Contour Hero under Website Sections. Tagged for metadata. */
+const CONTOUR_INSPECT: InspectData = {
+  name: 'Contour',
+  explain:
+    'A tokenised topographic contour field — drawn from the tokens (paper = canvas, ink = fg, lines = accent), not a raster, so it recolours with the system. A calm, full-bleed backdrop for a hero or band, with a pointer-following magnifier loupe. Reduced-motion renders it static. Tags: contour · topographic · map · survey · background · blue · tokenised.',
+  token:
+    'ContourField · seed=7 · --c-canvas / --c-fg / --c-accent\n' +
+    'tags  contour · topographic · map · survey · background · blue · tokenised',
+  code:
+    "import { ContourField } from '@/components/positioning-hero/ContourField'\n\n" +
+    '<ContourField seed={7} className="h-screen">\n  {/* hero content rides on top */}\n</ContourField>',
+  download: {
+    filename: 'contour-background.tsx',
+    content: '<ContourField seed={7} className="h-screen">\n  {/* hero content rides on top */}\n</ContourField>\n',
+    mime: 'text/plain',
+  },
+}
+
 /** Aspect-ratio frames the system ships against — each a draft wash standing in for a shoot. */
 const FRAMES: ReadonlyArray<{
   ratio: string
@@ -163,63 +183,179 @@ function photoInspect(img: LibraryImage): InspectData {
   }
 }
 
-function FilterChip({ label, count, active, onClick }: { label: string; count?: number; active: boolean; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={cn(
-        'rounded-sm border px-2.5 py-1 font-mono text-mono-2xs uppercase tracking-wider transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-        active ? 'border-accent bg-accent-soft text-accent-text' : 'border-border text-fg-muted hover:border-border-strong hover:text-fg',
-      )}
-    >
-      {label}
-      {count !== undefined && <span className="ml-1 opacity-60 tabular-nums">{count}</span>}
-    </button>
-  )
-}
+/** Curated "suggested searches" shown when the box is focused but empty. */
+const SUGGESTED_SEARCHES = ['portrait', 'meeting', 'boardroom', 'sunlit', 'remote-work', 'collaboration', 'candid', 'city-view']
 
+/** The full text an image is matched against — title, description, tags and use hints. */
+const haystack = (img: LibraryImage) => [img.title, img.alt, ...img.tags, ...img.use].join(' ').toLowerCase()
+
+/**
+ * PhotoLibrary — a single search box in place of the old tag wall. Focus it (or type) and a dropdown
+ * of tag suggestions / suggested searches appears; pick one, or free-type across every field. The
+ * grid filters live on title · description · tags · use.
+ */
 function PhotoLibrary() {
-  const [tag, setTag] = React.useState<string | null>(null)
-  const shown = tag ? IMAGE_LIBRARY.filter((i) => i.tags.includes(tag) || i.use.includes(tag)) : IMAGE_LIBRARY
+  const [query, setQuery] = React.useState('')
+  const [open, setOpen] = React.useState(false)
+  const [activeIdx, setActiveIdx] = React.useState(-1)
+  const rootRef = React.useRef<HTMLDivElement>(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  const q = query.trim().toLowerCase()
+
+  const suggestions = React.useMemo(() => {
+    if (!q) return IMAGE_LIBRARY_TAGS.filter((t) => SUGGESTED_SEARCHES.includes(t))
+    return IMAGE_LIBRARY_TAGS.filter((t) => t.includes(q)).slice(0, 10)
+  }, [q])
+
+  const shown = React.useMemo(
+    () => (q ? IMAGE_LIBRARY.filter((i) => haystack(i).includes(q)) : IMAGE_LIBRARY),
+    [q],
+  )
+
+  // close the dropdown on an outside click
+  React.useEffect(() => {
+    if (!open) return
+    const onDown = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    window.addEventListener('mousedown', onDown)
+    return () => window.removeEventListener('mousedown', onDown)
+  }, [open])
+
+  const choose = (t: string) => {
+    setQuery(t)
+    setOpen(false)
+    setActiveIdx(-1)
+    inputRef.current?.blur()
+  }
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      setOpen(false)
+      setActiveIdx(-1)
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setOpen(true)
+      setActiveIdx((i) => Math.min(suggestions.length - 1, i + 1))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActiveIdx((i) => Math.max(0, i - 1))
+    } else if (e.key === 'Enter' && activeIdx >= 0 && suggestions[activeIdx]) {
+      e.preventDefault()
+      choose(suggestions[activeIdx])
+    }
+  }
+
   return (
     <div>
-      {/* tag filter */}
-      <div className="mb-5 flex flex-wrap gap-1.5">
-        <FilterChip label="All" count={IMAGE_LIBRARY.length} active={tag === null} onClick={() => setTag(null)} />
-        {IMAGE_LIBRARY_TAGS.map((t) => (
-          <FilterChip key={t} label={t} active={tag === t} onClick={() => setTag((cur) => (cur === t ? null : t))} />
-        ))}
+      {/* search box + suggestions dropdown (replaces the old tag wall) */}
+      <div ref={rootRef} className="relative mb-4 max-w-md">
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-fg-subtle" strokeWidth={1.75} aria-hidden />
+        <input
+          ref={inputRef}
+          type="text"
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            setOpen(true)
+            setActiveIdx(-1)
+          }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={onKeyDown}
+          role="combobox"
+          aria-expanded={open}
+          aria-controls="image-search-suggestions"
+          aria-autocomplete="list"
+          aria-label="Search images"
+          placeholder="Search images — try “sunlit”, “boardroom”, “remote-work”…"
+          className="w-full rounded-md border border-border bg-surface py-2.5 pl-9 pr-9 font-body text-body-sm text-fg placeholder:text-fg-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        />
+        {query && (
+          <button
+            type="button"
+            onClick={() => {
+              setQuery('')
+              inputRef.current?.focus()
+            }}
+            aria-label="Clear search"
+            className="absolute right-2.5 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-sm text-fg-subtle transition-colors hover:bg-selected hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <X className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+          </button>
+        )}
+
+        {open && suggestions.length > 0 && (
+          <div
+            id="image-search-suggestions"
+            role="listbox"
+            className="absolute left-0 right-0 top-full z-20 mt-1.5 overflow-hidden rounded-md border border-border bg-elevated shadow-lg"
+          >
+            <p className="border-b border-border bg-surface px-3 py-1.5 font-mono text-mono-2xs uppercase tracking-wider text-fg-subtle">
+              {q ? 'Matching tags' : 'Suggested searches'}
+            </p>
+            <ul className="max-h-64 overflow-auto py-1">
+              {suggestions.map((t, i) => (
+                <li key={t}>
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={i === activeIdx}
+                    onMouseEnter={() => setActiveIdx(i)}
+                    onClick={() => choose(t)}
+                    className={cn(
+                      'flex w-full items-center gap-2 px-3 py-1.5 text-left font-body text-body-sm transition-colors',
+                      i === activeIdx ? 'bg-selected text-fg' : 'text-fg-muted hover:bg-selected hover:text-fg',
+                    )}
+                  >
+                    <Search className="h-3.5 w-3.5 shrink-0 text-fg-subtle" strokeWidth={1.75} aria-hidden />
+                    <span className="truncate">{t}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
+      {/* result count */}
+      <p className="mb-5 font-mono text-caption text-fg-subtle" aria-live="polite">
+        {shown.length} {shown.length === 1 ? 'image' : 'images'}
+        {q && <> · “{query.trim()}”</>}
+      </p>
+
       {/* grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {shown.map((img) => (
-          <Inspectable key={img.id} {...photoInspect(img)}>
-            <figure className="overflow-hidden rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-md">
-              <div className="relative aspect-[3/2]">
-                <img
-                  src={libraryImageSrc(img.id)}
-                  alt={img.alt}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </div>
-              <figcaption className="flex flex-col gap-2 p-3">
-                <span className="font-display text-body-md font-medium text-fg">{img.title}</span>
-                <span className="flex flex-wrap gap-1">
-                  {img.tags.slice(0, 4).map((t) => (
-                    <span key={t} className="rounded-sm bg-inset px-1.5 py-0.5 font-mono text-mono-2xs text-fg-subtle">
-                      {t}
-                    </span>
-                  ))}
-                </span>
-              </figcaption>
-            </figure>
-          </Inspectable>
-        ))}
-      </div>
+      {shown.length > 0 ? (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {shown.map((img) => (
+            <Inspectable key={img.id} {...photoInspect(img)}>
+              <figure className="overflow-hidden rounded-lg border border-border bg-surface shadow-sm transition-shadow hover:shadow-md">
+                <div className="relative aspect-[3/2]">
+                  <img
+                    src={libraryImageSrc(img.id)}
+                    alt={img.alt}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+                <figcaption className="flex flex-col gap-2 p-3">
+                  <span className="font-display text-body-md font-medium text-fg">{img.title}</span>
+                  <span className="flex flex-wrap gap-1">
+                    {img.tags.slice(0, 4).map((t) => (
+                      <span key={t} className="rounded-sm bg-inset px-1.5 py-0.5 font-mono text-mono-2xs text-fg-subtle">
+                        {t}
+                      </span>
+                    ))}
+                  </span>
+                </figcaption>
+              </figure>
+            </Inspectable>
+          ))}
+        </div>
+      ) : (
+        <p className="rounded-md border border-border bg-inset px-4 py-10 text-center font-body text-body-sm text-fg-muted">
+          No images match “{query.trim()}”. Try a broader term — or clear the search.
+        </p>
+      )}
     </div>
   )
 }
@@ -230,7 +366,7 @@ export function ImageLibrarySection() {
       id="imagery"
       eyebrow="Image Library"
       title="Image Library"
-      lead="The visual language. The photography library is live — calm, natural-light advisors at work, each shot tagged for filtering and captioned so you (or an AI agent) can drop the right image into a page, funnel or blog. Backgrounds are production-grade pixel-art WEBP in the Atlas Blue palette; every frame rounds to the 8px ceiling on a hairline border."
+      lead="The visual language. The photography library is live — calm, natural-light advisors at work, each shot searchable and captioned so you (or an AI agent) can drop the right image into a page, funnel or blog. Backgrounds are production-grade pixel-art WEBP in the Atlas Blue palette, plus live Aurora and Contour fields; every frame rounds to the 8px ceiling on a hairline border."
     >
       {/* Photography — the tagged shoot library */}
       <div className="mb-14">
@@ -238,12 +374,13 @@ export function ImageLibrarySection() {
           <MonoLabel number="17.1" dot>
             Photography
           </MonoLabel>
-          <span className="font-mono text-caption text-fg-subtle">{IMAGE_LIBRARY.length} images · tagged · filter below</span>
+          <span className="font-mono text-caption text-fg-subtle">{IMAGE_LIBRARY.length} images · search below</span>
         </div>
         <p className="mb-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          The real shoot library — calm, considered, natural light. Filter by tag, then open any image’s{' '}
-          <span className="font-mono text-caption">+</span> for its description, tags, use hints, a copy-ready{' '}
-          <span className="font-mono text-caption">&lt;img&gt;</span>, or a download. Every entry is captioned in{' '}
+          The real shoot library — calm, considered, natural light. Search by keyword or tag (the box suggests
+          matches as you type), then open any image’s <span className="font-mono text-caption">+</span> for its
+          description, tags, use hints, a copy-ready <span className="font-mono text-caption">&lt;img&gt;</span>, or a
+          download. Every entry is captioned in{' '}
           <span className="font-mono text-caption">src/data/image-library.ts</span> so AI agents can pick the right
           one for assets, funnels, pages and blogs.
         </p>
@@ -259,12 +396,12 @@ export function ImageLibrarySection() {
           <span className="font-mono text-caption text-fg-subtle">WEBP + live aurora · website use</span>
         </div>
         <p className="mb-8 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
-          Backdrops for sections and heroes — drawn from the Atlas Blue palette. Four weights: full{' '}
+          Backdrops for sections and heroes — drawn from the Atlas Blue palette. Full{' '}
           <span className="text-fg">Scenes</span>, faded <span className="text-fg">Horizons</span>, plain{' '}
-          <span className="text-fg">Washes</span> (all high-resolution WEBP), and a live, animated{' '}
-          <span className="text-fg">Aurora</span> component. Pair with the bottom-up scrim (17.3) whenever copy
-          sits on top. Open any tile’s <span className="font-mono text-caption">+</span> to download the asset or
-          its usage snippet.
+          <span className="text-fg">Washes</span> (all high-resolution WEBP), a live, animated{' '}
+          <span className="text-fg">Aurora</span>, and the tokenised <span className="text-fg">Contour</span> field.
+          Pair with the bottom-up scrim (17.3) whenever copy sits on top. Open any tile’s{' '}
+          <span className="font-mono text-caption">+</span> to download the asset or its usage snippet.
         </p>
         {BG_GROUPS.map((g) => (
           <div key={g.group} className="mb-9 last:mb-0">
@@ -326,12 +463,36 @@ export function ImageLibrarySection() {
             ))}
           </div>
         </div>
+        {/* Contour — the tokenised topographic field (a component, like Aurora), relocated here from
+            its former standalone section so it lives with the other website backgrounds. */}
+        <div className="mb-9">
+          <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span className="font-mono text-caption font-bold uppercase tracking-[0.1em] text-fg">
+              Contour
+            </span>
+            <span className="font-body text-body-sm text-fg-muted">
+              A tokenised topographic field (a component, not an image) with a pointer-following loupe — drop it behind a hero or band.
+            </span>
+          </div>
+          <Inspectable {...CONTOUR_INSPECT}>
+            <div className="overflow-hidden rounded-md border border-border shadow-md">
+              <div className="relative aspect-[16/9]">
+                <ContourField seed={7} className="absolute inset-0 h-full min-h-0" />
+              </div>
+            </div>
+          </Inspectable>
+          <div className="mt-2 flex items-baseline justify-between gap-2">
+            <span className="font-display text-body-md font-medium text-fg">Contour</span>
+            <span className="font-mono text-caption text-fg-subtle">topographic · map · background</span>
+          </div>
+        </div>
         <p className="mt-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
           Add a still background by dropping a 16/9 WEBP into{' '}
           <span className="font-mono text-caption">public/images/backgrounds</span> and appending to a group in{' '}
           <span className="font-mono text-caption">BG_GROUPS</span>; the live{' '}
           <span className="font-mono text-caption">&lt;AuroraBackground&gt;</span> takes{' '}
-          <span className="font-mono text-caption">blue · sky · slate · mist</span>.
+          <span className="font-mono text-caption">blue · sky · slate · mist</span>, and{' '}
+          <span className="font-mono text-caption">&lt;ContourField&gt;</span> draws a tokenised contour map.
         </p>
       </div>
 

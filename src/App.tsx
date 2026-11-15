@@ -21,7 +21,6 @@ import { SectionFoldersSection } from '@/showcase/sections/SectionFoldersSection
 import { WidgetsSection } from '@/showcase/sections/WidgetsSection'
 import { ChartsSection } from '@/showcase/sections/ChartsSection'
 import { ImageLibrarySection } from '@/showcase/sections/ImageLibrarySection'
-import { ContourMapSection } from '@/showcase/sections/ContourMapSection'
 import { ScrollersSection } from '@/showcase/sections/ScrollersSection'
 import { ScrollBlueSection } from '@/showcase/sections/ScrollBlueSection'
 import { HeroesSection } from '@/showcase/sections/HeroesSection'
@@ -68,7 +67,6 @@ const SECTIONS: Record<string, React.ComponentType> = {
   widgets: WidgetsSection,
   charts: ChartsSection,
   imagery: ImageLibrarySection,
-  'contour-map': ContourMapSection,
   scrollers: ScrollersSection,
   'scroll-blue-band': ScrollBlueSection,
   heroes: HeroesSection,

@@ -67,9 +67,9 @@ export function HeroesSection() {
       id="heroes"
       eyebrow="Heroes"
       title="Heroes"
-      lead="Full-bleed hero compositions built from the shared tokens. The Contour Hero below pairs a topographic survey map with a pointer-following magnifier, a command-bar search and a single blue-highlighted line — swap in any headline, overline and search index. Its background is also available on its own under Images & Backgrounds → Contour Map."
+      lead="Full-bleed hero compositions built from the shared tokens. The Contour Hero below pairs a topographic survey map with a pointer-following magnifier, a command-bar search and a single blue-highlighted line — swap in any headline, overline and search index. Its contour background is also available on its own in the Image Library → Backgrounds."
     >
-      <ComposedFrom items={[{ label: 'Contour Map', href: '#contour-map' }]} />
+      <ComposedFrom items={[{ label: 'Contour background', href: '#imagery' }]} />
       <Demo
         label="Contour Hero — contour map · magnifier loupe · fuzzy search"
         padded={false}

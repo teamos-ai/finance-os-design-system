@@ -7,7 +7,8 @@
  * The sidebar is rendered straight from SHOWCASE_NAV in order, so it always matches the page.
  */
 import * as React from 'react'
-import { Github, LogOut, PanelLeftClose, PanelLeft } from 'lucide-react'
+import { useReducedMotion } from 'framer-motion'
+import { ChevronUp, Github, LogOut, PanelLeftClose, PanelLeft } from 'lucide-react'
 import { SHOWCASE_NAV, type NavItem } from '@/lib/nav'
 import { ACCENTS } from '@/lib/accents'
 import { Logo } from '@/components/brand/Logo'
@@ -56,6 +57,7 @@ function buildRows(): Row[] {
   let c: string | undefined
   let s: string | undefined
   for (const item of SHOWCASE_NAV) {
+    if (item.hideInNav) continue // on the page, not in the sidebar (Hero / Video) — so START drops out too
     if (item.group !== g) {
       out.push({ kind: 'group', key: `g:${item.group}`, name: item.group })
       g = item.group
@@ -162,6 +164,20 @@ export function Shell({ children }: { children: React.ReactNode }) {
     window.location.href = '/login.html'
   }, [])
 
+  /* Back to top — the logos (rect, collapsed mark, mobile) and a bottom-right chevron all call this.
+     Smooth by default; honours reduced-motion. The chevron fades in only after scrolling down. */
+  const reduced = useReducedMotion()
+  const scrollToTop = React.useCallback(() => {
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' })
+  }, [reduced])
+  const [showTop, setShowTop] = React.useState(false)
+  React.useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   const startResize = React.useCallback((e: React.PointerEvent) => {
     e.preventDefault()
     setDragging(true)
@@ -187,7 +203,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
       {/* mobile header */}
       <header className="sticky top-0 z-30 flex items-center border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
-        <Logo size="sm" />
+        <button type="button" onClick={scrollToTop} aria-label="Back to top" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <Logo size="sm" />
+        </button>
       </header>
 
       {/* sidebar */}
@@ -199,7 +217,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
         )}
       >
         <div className={cn('flex py-5', collapsed ? 'flex-col items-center gap-3' : 'items-center justify-between')}>
-          {collapsed ? <Logo variant="mark" size="sm" /> : <Logo size="sm" />}
+          <button type="button" onClick={scrollToTop} aria-label="Back to top" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            {collapsed ? <Logo variant="mark" size="sm" /> : <Logo size="sm" />}
+          </button>
           <button
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             onClick={() => setCollapsed((c) => !c)}
@@ -261,17 +281,17 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </ul>
         </nav>
 
-        <div className={cn('border-t border-border py-4', collapsed ? 'flex flex-col items-center gap-3' : 'space-y-3')}>
+        {/* Footer — GitHub mark sits right next to the Log out button (one row when expanded). */}
+        <div className={cn('border-t border-border py-4', collapsed ? 'flex flex-col items-center gap-3' : 'flex items-center gap-2')}>
           <a
             href={REPO_URL}
             target="_blank"
             rel="noreferrer"
             title="Finance OS on GitHub"
-            aria-label={collapsed ? 'Finance OS on GitHub' : undefined}
-            className={cn('flex items-center gap-2 text-caption text-fg-subtle transition-colors hover:text-fg', collapsed && 'justify-center')}
+            aria-label="Finance OS on GitHub"
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-md text-fg-subtle transition-colors hover:bg-selected hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <Github className="h-4 w-4 shrink-0" strokeWidth={1.75} />
-            {!collapsed && <span>teamos-ai/finance-os</span>}
+            <Github className="h-4 w-4" strokeWidth={1.75} />
           </a>
 
           <button
@@ -282,7 +302,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             aria-label={collapsed ? 'Log out' : undefined}
             className={cn(
               'flex items-center gap-2 rounded-md text-caption text-fg-subtle transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60',
-              collapsed && 'justify-center',
+              collapsed ? 'h-8 w-8 justify-center' : 'h-8 px-1.5',
             )}
           >
             <LogOut className="h-4 w-4 shrink-0" strokeWidth={1.75} />
@@ -325,6 +345,21 @@ export function Shell({ children }: { children: React.ReactNode }) {
       >
         {children}
       </main>
+
+      {/* Back to top — fades in after scrolling down; neutral elevated chip (no ribbon, 8px squircle). */}
+      <button
+        type="button"
+        onClick={scrollToTop}
+        aria-label="Back to top"
+        aria-hidden={!showTop}
+        tabIndex={showTop ? 0 : -1}
+        className={cn(
+          'fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-lg border border-border bg-elevated text-fg-muted shadow-md transition-[opacity,transform,color,border-color] duration-base ease-out hover:border-border-strong hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+          showTop ? 'opacity-100' : 'pointer-events-none translate-y-2 opacity-0',
+        )}
+      >
+        <ChevronUp className="h-5 w-5" strokeWidth={2} aria-hidden />
+      </button>
     </div>
   )
 }

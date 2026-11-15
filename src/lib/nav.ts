@@ -3,7 +3,7 @@ import {
   Rocket, PlayCircle, Compass,
   Blocks, Palette, Type, Ruler, Layers2, Wand2, Gem, Shapes,
   ToggleLeft, CreditCard, TextCursorInput, Table, FolderOpen, Gauge, LineChart,
-  Image, Map, Images, MoveVertical,
+  Image, Images, MoveVertical,
   Crown, LayoutGrid, LayoutTemplate, Tags, Quote, Table2, ArrowRightLeft, SquareSplitHorizontal,
   LayoutDashboard, BarChart3,
   Megaphone, FileText, Smartphone, Magnet, ListChecks, Filter, Mail, PenLine,
@@ -23,6 +23,8 @@ export interface NavItem {
   category?: string
   /** A deeper cluster inside a category, e.g. 'Comparisons'. */
   subcategory?: string
+  /** Rendered on the PAGE but hidden from the SIDEBAR (e.g. the Hero / Video front door). */
+  hideInNav?: boolean
 }
 
 /**
@@ -35,9 +37,10 @@ export interface NavItem {
  * cluster). The former Positioning / Patterns / Templates / Tools groups are dissolved into these.
  */
 export const SHOWCASE_NAV: NavItem[] = [
-  /* ── START (the front door — see it, then the live demo) ───────────────── */
-  { id: 'hero', label: 'Hero', Icon: Rocket, accent: 'blue', group: 'Start' },
-  { id: 'video', label: 'Video Explainer', Icon: PlayCircle, accent: 'blue', group: 'Start' },
+  /* ── START (the front door — on the PAGE as the top-of-page / back-to-top target,
+        but hidden from the sidebar so the nav opens straight at Foundations) ───────── */
+  { id: 'hero', label: 'Hero', Icon: Rocket, accent: 'blue', group: 'Start', hideInNav: true },
+  { id: 'video', label: 'Video Explainer', Icon: PlayCircle, accent: 'blue', group: 'Start', hideInNav: true },
 
   /* ── FOUNDATIONS (Overview opens it — the system at a glance, then the parts) */
   { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Foundations' },
@@ -61,7 +64,6 @@ export const SHOWCASE_NAV: NavItem[] = [
 
   /* ── LIBRARY › Images & Backgrounds ────────────────────────────────────── */
   { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
-  { id: 'contour-map', label: 'Contour Map', Icon: Map, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
   { id: 'scrollers', label: 'Scroller Images', Icon: Images, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
   { id: 'scroll-blue-band', label: 'Scroll Blue Band', Icon: MoveVertical, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
 
