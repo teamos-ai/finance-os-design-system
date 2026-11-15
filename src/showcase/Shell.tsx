@@ -7,7 +7,7 @@
  * The sidebar is rendered straight from SHOWCASE_NAV in order, so it always matches the page.
  */
 import * as React from 'react'
-import { Github, PanelLeftClose, PanelLeft } from 'lucide-react'
+import { Github, LogOut, PanelLeftClose, PanelLeft } from 'lucide-react'
 import { SHOWCASE_NAV, type NavItem } from '@/lib/nav'
 import { ACCENTS } from '@/lib/accents'
 import { Logo } from '@/components/brand/Logo'
@@ -147,6 +147,21 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
   }, [width])
 
+  /* Log out — the session cookie is HttpOnly, so only the server can clear it: POST /api/logout
+     (Set-Cookie Max-Age=0), then go to the login page. The gate then re-checks the now-cleared
+     cookie and keeps everything behind /login.html until the password is re-entered. Navigate
+     regardless of the fetch outcome so a dormant gate / offline endpoint still lands on login. */
+  const [loggingOut, setLoggingOut] = React.useState(false)
+  const handleLogout = React.useCallback(async () => {
+    setLoggingOut(true)
+    try {
+      await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' })
+    } catch {
+      /* ignore — navigate anyway */
+    }
+    window.location.href = '/login.html'
+  }, [])
+
   const startResize = React.useCallback((e: React.PointerEvent) => {
     e.preventDefault()
     setDragging(true)
@@ -258,6 +273,21 @@ export function Shell({ children }: { children: React.ReactNode }) {
             <Github className="h-4 w-4 shrink-0" strokeWidth={1.75} />
             {!collapsed && <span>teamos-ai/finance-os</span>}
           </a>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            disabled={loggingOut}
+            title="Log out"
+            aria-label={collapsed ? 'Log out' : undefined}
+            className={cn(
+              'flex items-center gap-2 rounded-md text-caption text-fg-subtle transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60',
+              collapsed && 'justify-center',
+            )}
+          >
+            <LogOut className="h-4 w-4 shrink-0" strokeWidth={1.75} />
+            {!collapsed && <span>{loggingOut ? 'Logging out…' : 'Log out'}</span>}
+          </button>
         </div>
 
         {/* draggable width handle — neutral + keyboard-operable (drag or ←/→); not an accent rail */}
