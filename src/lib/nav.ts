@@ -4,7 +4,7 @@ import {
   Blocks, Palette, Type, Ruler, Layers2, Wand2, Gem, Shapes,
   ToggleLeft, CreditCard, TextCursorInput, Table, FolderOpen, Gauge, LineChart,
   Image, Images, MoveVertical,
-  Crown, LayoutGrid, LayoutTemplate, Tags, Quote, Table2, ArrowRightLeft, SquareSplitHorizontal,
+  Crown, Orbit, LayoutGrid, LayoutTemplate, Tags, Quote, Table2, ArrowRightLeft, SquareSplitHorizontal,
   LayoutDashboard, BarChart3,
   Megaphone, FileText, Smartphone, Magnet, ListChecks, Filter, Mail, PenLine,
   MonitorPlay,
@@ -69,6 +69,7 @@ export const SHOWCASE_NAV: NavItem[] = [
 
   /* ── LIBRARY › Website Sections ────────────────────────────────────────── */
   { id: 'heroes', label: 'Heroes', Icon: Crown, accent: 'blue', group: 'Library', category: 'Website Sections' },
+  { id: 'card-sphere', label: 'Card Sphere', Icon: Orbit, accent: 'blue', group: 'Library', category: 'Website Sections' },
   { id: 'bento', label: 'Bento Box', Icon: LayoutGrid, accent: 'blue', group: 'Library', category: 'Website Sections' },
   { id: 'featured', label: 'Featured Sections', Icon: LayoutTemplate, accent: 'blue', group: 'Library', category: 'Website Sections' },
   { id: 'pricing', label: 'Pricing', Icon: Tags, accent: 'blue', group: 'Library', category: 'Website Sections' },

@@ -199,7 +199,7 @@ const CSS = `
 .csph-c{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform,opacity;overflow:hidden;backface-visibility:hidden;box-sizing:border-box;border-radius:8px}
 .csph-surface{background:var(--c-surface);color:var(--c-accent);border:1px solid var(--c-border);box-shadow:var(--shadow-md)}
 .csph-soft{background:var(--c-accent-soft);color:var(--c-accent-text);border:1px solid var(--c-border)}
-.csph-blue{background:var(--c-accent);color:#fff;box-shadow:var(--shadow-glow)}
+.csph-blue{background:var(--c-gradient-accent);color:#fff;box-shadow:var(--shadow-glow),var(--shadow-md)}
 .csph-ink{background:var(--c-inverse-bg);color:#fff;box-shadow:var(--shadow-lg)}
 .csph:focus-visible{box-shadow:0 0 0 2px var(--c-ring)}
 @media (prefers-reduced-motion:reduce){.csph-c{will-change:auto}}

@@ -16,6 +16,7 @@ import { MonoLabel } from '@/components/ui/mono-label'
 import { TokenTag } from '@/components/ui/token-tag'
 import { FadeIn, Stagger, StaggerItem, Glow } from '@/lib/motion'
 import { FEATURES, STATS, BRAND } from '@/data/system'
+import { SystemBento } from './overview/SystemBento'
 
 /** Two feature cells lifted from the content data — follow-up + insights read well at this scale. */
 const TILE_FEATURES = [FEATURES[1], FEATURES[8]] as const
@@ -146,6 +147,25 @@ export function BentoSection() {
           </StaggerItem>
         </Stagger>
       </FadeIn>
+
+      {/* Premium variant — the cursor-tilt "system" bento, catalogued from the Overview */}
+      <div className="mt-12 border-t border-border pt-10">
+        <div className="mb-6 flex flex-col items-center gap-2.5 text-center">
+          <MonoLabel tone="subtle">Premium variant</MonoLabel>
+          <h3 className="font-display text-display-sm text-fg text-balance">The tilt bento</h3>
+          <p className="max-w-2xl font-body text-body-md leading-relaxed text-fg-muted text-pretty">
+            The same asymmetric grid taken premium — every cell tilts toward the cursor, rests on a
+            layered shadow and lifts on hover, with figures that count up and draw in. This is the
+            &ldquo;system at a glance&rdquo; board from the Overview; lift the pattern for any feature section.
+          </p>
+          <div className="mt-1 flex flex-wrap items-center justify-center gap-2">
+            <TokenTag title="cursor-parallax primitive">{'<TiltCard>'}</TokenTag>
+            <TokenTag title="hero fill">bg-gradient-accent</TokenTag>
+            <TokenTag title="hover elevation">shadow-lg</TokenTag>
+          </div>
+        </div>
+        <SystemBento />
+      </div>
     </Section>
   )
 }
