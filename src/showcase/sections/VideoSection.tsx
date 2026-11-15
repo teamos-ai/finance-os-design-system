@@ -13,8 +13,6 @@ import { Play, RotateCw } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { MonoLabel } from '@/components/ui/mono-label'
-import { BreathingDot } from '@/lib/motion'
 import { FlipCard } from '@/components/platform-dashboard/FlipCard'
 import { BrandDashboard } from '@/components/platform-dashboard/BrandDashboard'
 import { ScaleToFit } from '@/components/platform-dashboard/ScaleToFit'
@@ -31,6 +29,12 @@ function DemoVideoBack({ playing }: { playing: boolean }) {
     const v = ref.current
     if (!v) return
     if (playing) {
+      // move keyboard focus to the player as it flips in (reference parity)
+      try {
+        v.focus({ preventScroll: true })
+      } catch {
+        /* ignore */
+      }
       const p = v.play()
       if (p && p.catch)
         p.catch(() => {
@@ -65,9 +69,10 @@ const FLIP_INSPECT: InspectData = {
   token: [
     'frame    aspect-video (16:9) · both faces fill it',
     'front    BrandDashboard — fixed 1280×720 canvas, ScaleToFit to board width',
-    'back     <video> explainer (brand CDN) · aspect-video · object-cover · plays on flip',
+    'back     <video> demo (brand CDN) · object-cover · plays + focuses on flip',
+    'rest     subtle 3D tilt rotateX 3° / rotateY -6° · flat ≤600px',
+    'order    card → caption → toggle, all below (reference parity)',
     'surfaces --c-surface cards · hairline --c-border · 8px squircles · no glass',
-    'accent   Atlas Blue only · the MRR tile is the single gradient moment',
   ].join('\n'),
   code: [
     'const [flipped, setFlipped] = React.useState(false)',
@@ -77,8 +82,9 @@ const FLIP_INSPECT: InspectData = {
     '  front={<ScaleToFit width={1280} height={720}><BrandDashboard /></ScaleToFit>}',
     '  back={<DemoVideoBack playing={flipped} />}',
     '/>',
+    '<Badge variant="outline">Illustrative product interface · sample data</Badge>',
     '<Button onClick={() => setFlipped((f) => !f)}>',
-    '  {flipped ? "Show the dashboard" : "Watch the explainer"}',
+    '  {flipped ? "Back to the dashboard" : "Watch the demo video"}',
     '</Button>',
   ].join('\n'),
 }
@@ -91,36 +97,15 @@ export function VideoSection() {
     <Section
       id="video"
       eyebrow="The platform, in motion"
-      title="Watch the explainer"
+      title="Video Explainer"
       lead="The Finance OS workspace brokers actually use — flip it to the explainer video for a quick look at how it captures every enquiry, follows up automatically, and nurtures clients through to settlement."
     >
       <div className="mx-auto flex max-w-5xl flex-col gap-5">
-        <Demo label="The platform, in motion — flip to the explainer" inspect={FLIP_INSPECT}>
-          <div className="flex flex-col gap-4">
-            {/* control row — live cue + the flip/watch gesture */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <span className="inline-flex items-center gap-2">
-                <BreathingDot />
-                <MonoLabel tone="subtle">Live workspace preview</MonoLabel>
-              </span>
-              <Button
-                variant={flipped ? 'secondary' : 'primary'}
-                size="sm"
-                onClick={flip}
-                aria-pressed={flipped}
-                leadingIcon={
-                  flipped ? (
-                    <RotateCw className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
-                  ) : (
-                    <Play className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
-                  )
-                }
-              >
-                {flipped ? 'Show the dashboard' : 'Watch the explainer'}
-              </Button>
-            </div>
-
+        <Demo label="The platform, in motion — flip to the demo video" inspect={FLIP_INSPECT}>
+          {/* card → caption → control, stacked top-to-bottom (brand.financeos.au parity) */}
+          <div className="flex flex-col items-center gap-4">
             <FlipCard
+              className="w-full"
               flipped={flipped}
               front={
                 <ScaleToFit width={1280} height={720} className="rounded-lg border border-border shadow-lg">
@@ -129,16 +114,33 @@ export function VideoSection() {
               }
               back={<DemoVideoBack playing={flipped} />}
             />
+
+            <Badge variant="outline" size="sm">
+              Illustrative product interface · sample data
+            </Badge>
+
+            <Button
+              variant={flipped ? 'secondary' : 'primary'}
+              size="sm"
+              onClick={flip}
+              aria-pressed={flipped}
+              leadingIcon={
+                flipped ? (
+                  <RotateCw className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+                ) : (
+                  <Play className="h-3.5 w-3.5" strokeWidth={2} aria-hidden />
+                )
+              }
+            >
+              {flipped ? 'Back to the dashboard' : 'Watch the demo video'}
+            </Button>
           </div>
         </Demo>
 
-        {/* illustrative-data disclosure (brand rule 09) */}
-        <div className="flex flex-col items-center gap-2 text-center">
-          <Badge variant="outline" size="sm">
-            Illustrative product interface · sample data
-          </Badge>
-          <p className="max-w-3xl font-body text-caption leading-relaxed text-fg-subtle">{dashboard.note}</p>
-        </div>
+        {/* fuller illustrative-data disclosure (brand rule 09) */}
+        <p className="mx-auto max-w-3xl text-center font-body text-caption leading-relaxed text-fg-subtle">
+          {dashboard.note}
+        </p>
       </div>
     </Section>
   )

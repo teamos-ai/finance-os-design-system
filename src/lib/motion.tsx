@@ -31,7 +31,7 @@ export interface FadeInProps {
   children: React.ReactNode
   as?: 'div' | 'section' | 'span' | 'li' | 'header' | 'p'
 }
-export const FadeIn = ({ delay = 0, y = 10, className, children, as = 'div' }: FadeInProps) => {
+export const FadeIn = ({ delay = 0, y = 12, className, children, as = 'div' }: FadeInProps) => {
   const reduced = useReducedMotion()
   const MotionTag = motion[as] as React.ElementType
   return (
@@ -71,7 +71,7 @@ export const FloatWobble = ({ className, children }: { className?: string; child
 /* ── Stagger container + item ──────────────────────────────────────────────── */
 const containerVariants: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } }
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 12 },
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE_OUT } },
 }
 export const Stagger = ({

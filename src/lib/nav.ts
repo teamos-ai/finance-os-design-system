@@ -37,7 +37,7 @@ export interface NavItem {
 export const SHOWCASE_NAV: NavItem[] = [
   /* ── START ─────────────────────────────────────────────────────────────── */
   { id: 'hero', label: 'Hero', Icon: Rocket, accent: 'blue', group: 'Start' },
-  { id: 'video', label: 'Promo Video', Icon: PlayCircle, accent: 'blue', group: 'Start' },
+  { id: 'video', label: 'Video Explainer', Icon: PlayCircle, accent: 'blue', group: 'Start' },
   { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Start' },
 
   /* ── FOUNDATIONS ───────────────────────────────────────────────────────── */

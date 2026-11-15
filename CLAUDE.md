@@ -22,10 +22,14 @@ not a showcase exhibit — it is used live on client calls.
 
 ## Brand (as the code actually is)
 - Archetype: **Ruler 70% + Sage 30%**. Voice: Calm · Clear · Grounded · Authoritative. Never hyped.
-- **ONE theme: Light / Clarity.** Pure white canvas **everywhere** — no scroll-rhythm, no grey-blue
-  shift and no grid paper (the grid/rhythm was removed 2026-11-13; **do not reintroduce**). There is no dark
-  mode, no paper mode, and no theme toggle. `src/lib/theme.tsx` and `theme-toggle.tsx` do not
-  exist; `tokens.css` has no `[data-theme]` blocks.
+- **ONE theme: Light / Clarity.** The canvas is white with a **subtle scroll-rhythm colour wash** —
+  a fixed `.bg-stage` layer cross-fades white ↔ soft blue-grey (`--c-warm #E8EDF7`) over **750ms** as
+  every ~3rd section reaches the viewport centre (`Shell.tsx` sets `<html data-bg="plain|warm">`;
+  `rootMargin -45%/-45%`), mirroring brand.financeos.au. Restored **2026-11-14** (confirmed by Tumai) —
+  this **supersedes the earlier always-white rule**. It is **COLOUR ONLY**: the blue **grid paper stays
+  retired** (removed 2026-11-13 — **do not reintroduce the grid**). JS off → plain white; reduced-motion
+  keeps content visible. There is no dark mode, no paper mode, and no theme toggle. `src/lib/theme.tsx`
+  and `theme-toggle.tsx` do not exist; `tokens.css` has no `[data-theme]` blocks.
 - **BLUE-PRIMARY.** The sole brand accent is **Atlas Blue `#33488F`** (ramp `--p-blue-50…500`),
   and **it owns ALL typographic highlight** — headings and any emphasised word inside a header or
   body copy use `text-highlight` / `--c-accent-text` (blue), never a second hue. **There is no gold
@@ -174,6 +178,18 @@ Vercel accepts the deploy.
   functional ecosystem** (success · danger · amber · info, each with base/soft/AA-text/role/usage/tokens),
   and **Tokens** reframed as the architecture and cross-linked. No token values changed (contrast 21/21).
   Commits await Tumai's push.
+- **Current State (2026-11-14 · webp + both Codex amendments):** **Focus now —** shipped three
+  verified pieces (desktop + mobile; `npm run check` 21/21, `build` OK): (1) the 33 library photos are
+  now **WebP** (Pillow, 5.18 → 1.51 MB; `libraryImageSrc` → `.webp`); (2) **Video Explainer parity** —
+  the flip control sits below the card, relabelled "Watch the demo video / Back to the dashboard", the
+  card rests at the reference 3D tilt (rotateX 3° / rotateY -6°, flat ≤600px) and the player focuses on
+  flip (`FlipCard.tsx`, `VideoSection.tsx`); (3) **scroll motion** — the white ↔ `--c-warm #E8EDF7`
+  background rhythm is **back** (fixed `.bg-stage`, 750ms, warm every ~3rd section via `Shell` `data-bg`),
+  and the reveal rise is aligned to the reference 12px (`motion.tsx`). The scroll-rhythm **COLOUR is
+  restored; the grid stays retired** — the brand rule + this constitution were reconciled above.
+  **Next step —** Tumai commits + runs `git push origin main` (push is blocked for Claude), then confirm
+  the gated prod deploy. **Don't-touch —** do NOT reintroduce the blue grid paper. **Open question —**
+  none. **Last updated —** 2026-11-14, Claude (Opus 4.8).
 
 ---
 

@@ -2,6 +2,36 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-14 — WebP conversion + both Codex handoff amendments (verified; awaiting Tumai's push)
+
+Three pieces, all verified in the running app (desktop + mobile), gate green (`npm run check` 21/21,
+`npm run build` OK, `docs:components` no-op).
+
+- **Library images → WebP.** The 33 shoot photos were JPEG (the old `sips` can't encode webp). Used
+  **Pillow 11.3.0** (q82, method 6): 5.18 MB → **1.51 MB (71% smaller)**. Removed the JPEGs, rewired
+  `libraryImageSrc` + the download filename + doc comments to `.webp`. All 33 serve 200, no console
+  errors, crisp. (cwebp/ImageMagick/sharp/vips still absent; ffmpeg present but Pillow was cleaner.)
+- **Amendment 1 — Video Explainer parity** (`promo-video-handoff-2026-11-14.md`). Reference checkout
+  at `scratchpad/bp` @ f590c34. Gaps closed vs the reference flipwrap: the watch control now sits
+  **below** the card (was above); relabelled **"Watch the demo video" / "Back to the dashboard"**;
+  the card rests at the reference **3D tilt (rotateX 3° / rotateY -6°, flat ≤600px)**, perspective
+  1600; the player **focuses on flip**. Already-correct and kept: 700ms+EASE_OUT flip, plays-on-flip
+  + muted-retry, pause-on-return, BrandDashboard composition, sample-data caption + disclosure,
+  reduced-motion cross-fade. FlipCard is VideoSection-only, so the tilt is scoped safely.
+- **Amendment 2 — Brand Positioning scroll motion** (`scroll-motion-handoff-2026-11-14.md`, ref
+  @ f590c34). Restored the **background colour rhythm** removed in `ba27c3b`: a fixed `.bg-stage`
+  cross-fades white ↔ `--c-warm #E8EDF7` over **750ms**; `Shell` sets `<html data-bg>` to the section
+  owning the viewport centre (`rootMargin -45%/-45%`), warming **every ~3rd section** (matches the
+  brand's `bgOf 02/05/08`). **Grid stays retired** (colour only). Aligned the reveal vocabulary to the
+  reference: `FadeIn`/`Stagger` rise **10px → 12px** (duration 0.4s = 400ms and `EASE_OUT`
+  [.22,1,.36,1] already matched; 70ms stagger already matched). Verified the rhythm with
+  `scrollIntoView` centre-tests: **0 mismatches** over 11 sections. Reconciled CLAUDE.md (the
+  "pure-white / no scroll-rhythm / do not reintroduce" rule now documents the restored colour wash;
+  grid ban kept).
+- **Gotcha:** a synthetic `window.scrollTo` sweep read the rhythm as "all warm / 0 transitions" — a
+  **test artifact** of `scroll-behavior: smooth` + instant jumps racing the IntersectionObserver, not
+  a bug. `scrollIntoView({block:'center'})` with a settle gave the true (correct) reading.
+
 ## 2026-11-12 — Energize Phase 1: 6 new sections via Ultra Code (`e046712`)
 
 Ran an Ultra Code workflow (14 agents: 6 build + 6 make-interfaces review + 2 refine) to build

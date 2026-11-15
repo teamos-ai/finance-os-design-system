@@ -107,8 +107,12 @@
   --c-gradient-accent: linear-gradient(135deg, var(--p-blue-300) 0%, var(--p-blue-400) 100%);
   --c-img-outline:     rgba(16, 19, 27, 0.10); /* neutral media/image hairline — inset, never tinted */
 
-  /* grey-blue washes — used ONLY inside components (section-folder tabs, feature tiles).
-     The page background itself is flat pure white: no scroll-rhythm, no grid. */
+  /* Scroll-rhythm plane (mirrors brand.financeos.au): the fixed .bg-stage cross-fades
+     white ↔ this soft blue-grey as marker sections reach the viewport centre. COLOUR ONLY —
+     the blue grid paper stays retired (do not reintroduce). */
+  --c-warm: #E8EDF7;
+
+  /* grey-blue washes — used inside components (section-folder tabs, feature tiles). */
   --wash-mist: linear-gradient(180deg, #FBFCFE 0%, #F2F5FB 100%);
   --wash-haze: linear-gradient(180deg, #F6F8FC 0%, #ECF1F9 100%);
   --wash-tint: radial-gradient(120% 130% at 100% 0%, rgba(51, 72, 143, 0.08), transparent 55%),

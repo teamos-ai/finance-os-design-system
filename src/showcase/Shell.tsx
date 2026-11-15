@@ -1,7 +1,8 @@
 /**
  * Shell — the showcase chrome. A collapsible left icon-rail sidebar with a THREE-level nav
  * (top group → Library category → Comparisons cluster), IntersectionObserver active-section
- * tracking, a flat pure-white background, a pinned footer and a mobile sticky header. Token-only.
+ * tracking, a scroll-rhythm colour background (white ↔ soft blue-grey), a pinned footer and a
+ * mobile sticky header. Token-only.
  *
  * The sidebar is rendered straight from SHOWCASE_NAV in order, so it always matches the page.
  */
@@ -95,6 +96,38 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
   }, [collapsed])
 
+  /* Scroll rhythm (mirrors brand.financeos.au): set <html data-bg> to whichever section owns the
+     viewport centre, so the fixed .bg-stage cross-fades white ↔ soft blue-grey over 750ms. A warm
+     pulse lands on every 3rd section (the brand warms 02/05/08…), so the page breathes gently as
+     you scroll instead of holding one tint for a whole group. Colour only; the grid stays retired.
+     The centre band is rootMargin -45%/-45% (the middle 10% of the viewport). JS off → plain white. */
+  React.useEffect(() => {
+    const root = document.documentElement
+    const bgOf = new Map<string, 'plain' | 'warm'>()
+    // hero (index 0) stays white; a warm pulse every third section thereafter (i % 3 === 2).
+    SHOWCASE_NAV.forEach((n, i) => bgOf.set(n.id, i % 3 === 2 ? 'warm' : 'plain'))
+    const shown = new Set<Element>()
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) shown.add(e.target)
+          else shown.delete(e.target)
+        }
+        const top = ids.map((id) => document.getElementById(id)).find((el) => el && shown.has(el))
+        root.dataset.bg = (top && bgOf.get(top.id)) || 'plain'
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
+    )
+    ids.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) io.observe(el)
+    })
+    return () => {
+      io.disconnect()
+      delete root.dataset.bg
+    }
+  }, [ids])
+
   // Draggable width — persisted, clamped. The collapsed rail ignores it (fixed 76px).
   const [width, setWidth] = React.useState(() => {
     try {
@@ -134,6 +167,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen overflow-x-clip" style={{ ['--sidebar-w' as string]: `${collapsed ? 76 : width}px` } as React.CSSProperties}>
+      {/* fixed scroll-rhythm ground (white ↔ soft blue-grey), behind all content */}
+      <div className="bg-stage" aria-hidden />
+
       {/* mobile header */}
       <header className="sticky top-0 z-30 flex items-center border-b border-border bg-canvas/90 px-4 py-3 backdrop-blur lg:hidden">
         <Logo size="sm" />

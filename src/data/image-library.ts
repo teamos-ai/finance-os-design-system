@@ -6,12 +6,12 @@
  * (also the <img> alt), descriptive `tags` for filtering, and `use` hints for where it fits —
  * so a person OR an AI agent can pick the right image for an asset, funnel, website page or blog.
  *
- * Files live at /images/library/<id>.jpg (optimised JPEG, ~1400px, 3:2 landscape). Add an image
- * by dropping a JPEG there and appending an entry below; the Image Library section renders and
+ * Files live at /images/library/<id>.webp (optimised WebP, ~1400px, 3:2 landscape). Add an image
+ * by dropping a WebP there and appending an entry below; the Image Library section renders and
  * filters this list directly, and IMAGE_LIBRARY_TAGS (derived) drives the filter chips.
  */
 export interface LibraryImage {
-  /** file id — matches /images/library/<id>.jpg */
+  /** file id — matches /images/library/<id>.webp */
   id: string
   title: string
   /** one-line description; used as the image alt text and as the AI-readable caption */
@@ -64,4 +64,4 @@ export const IMAGE_LIBRARY_TAGS: string[] = [
 ].sort()
 
 /** Public path for a library image. */
-export const libraryImageSrc = (id: string) => `/images/library/${id}.jpg`
+export const libraryImageSrc = (id: string) => `/images/library/${id}.webp`

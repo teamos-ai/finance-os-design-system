@@ -159,7 +159,7 @@ function photoInspect(img: LibraryImage): InspectData {
     explain: `${img.alt} Good for: ${img.use.join(', ')}.`,
     token: `tags  ${img.tags.join(' · ')}\nuse   ${img.use.join(' · ')}`,
     code: `<img src="${file}" alt="${img.alt}" loading="lazy" className="h-full w-full object-cover" />`,
-    download: { filename: `${img.id}.jpg`, href: file },
+    download: { filename: `${img.id}.webp`, href: file },
   }
 }
 
