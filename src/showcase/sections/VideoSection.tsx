@@ -65,12 +65,13 @@ function DemoVideoBack({ playing }: { playing: boolean }) {
 const FLIP_INSPECT: InspectData = {
   name: 'Platform flip',
   explain:
-    'The explainer moment — the Finance OS "My Account" workspace (mirroring brand.financeos.au) that flips straight to the product explainer video (it plays on the flip). The flip is a reduced-motion-safe 3D rotate (it cross-fades when motion is reduced). The dashboard is a fixed 16:9 canvas scaled to fit; its figures, names and avatars are illustrative sample data.',
+    'The explainer moment — the Finance OS "My Account" workspace (mirroring brand.financeos.au) that flips straight to the product explainer video (it plays on the flip). The dashboard face follows the mouse with a gentle parallax tilt, then flips with a reduced-motion-safe 3D rotate (it cross-fades when motion is reduced). The dashboard is a fixed 16:9 canvas scaled to fit; its figures, names and avatars are illustrative sample data.',
   token: [
     'frame    aspect-video (16:9) · both faces fill it',
     'front    BrandDashboard — fixed 1280×720 canvas, ScaleToFit to board width',
     'back     <video> demo (brand CDN) · object-cover · plays + focuses on flip',
     'rest     subtle 3D tilt rotateX 3° / rotateY -6° · flat ≤600px',
+    'hover    cursor-follow parallax ±5° (FT 10) · mouse only · settles on leave',
     'order    card → caption → toggle, all below (reference parity)',
     'surfaces --c-surface cards · hairline --c-border · 8px squircles · no glass',
   ].join('\n'),

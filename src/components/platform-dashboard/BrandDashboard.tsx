@@ -174,8 +174,8 @@ export function BrandDashboard() {
 
           {/* Profile */}
           <div style={{ ...card, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-            <div style={{ height: 150, width: 150, overflow: 'hidden', border: '1px solid var(--c-border)', borderRadius: 8, background: 'var(--c-canvas-muted)' }}>
-              <img src="/dash/Champ.png" alt="" width={150} height={150} style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+            <div style={{ display: 'grid', placeItems: 'center', height: 150, width: 150, flex: 'none', overflow: 'hidden', border: '1px solid var(--c-border)', borderRadius: 8, padding: 14, background: 'radial-gradient(circle at 50% 24%, var(--c-accent-soft), transparent 62%), var(--c-canvas-muted)' }}>
+              <img src="/dash/Champ.png" alt="" width={122} height={122} style={{ height: '100%', width: '100%', objectFit: 'contain' }} />
             </div>
             <h3 style={{ marginTop: 12, color: 'var(--c-fg)', fontSize: 24, fontWeight: 600, letterSpacing: '-0.03em' }}>Champ Carter</h3>
             <p style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 2, color: 'var(--c-fg-subtle)', fontSize: 10 }}>

@@ -93,9 +93,13 @@ export const Demo = ({
 }) => {
   const frame = (
     <div className={cn('overflow-hidden rounded-lg border border-border bg-canvas', className)}>
+      {/* Grey header band — a labelled "specimen drawer" chrome strip. `bg-selected` is the
+          system's cool neutral grey (clearly set off from the white frame body); the mono label
+          is `text-fg-muted` so it stays easy to read on the grey. This is the one place the rule
+          lives, so every Demo frame across the showcase picks it up. */}
       {(label || action) && (
-        <div className="flex items-center justify-between gap-3 border-b border-border bg-surface px-4 py-2.5">
-          {label ? <span className="font-mono text-caption text-fg-subtle">{label}</span> : <span />}
+        <div className="flex items-center justify-between gap-3 border-b border-border bg-selected px-4 py-2.5">
+          {label ? <span className="font-mono text-caption font-medium text-fg-muted">{label}</span> : <span />}
           {action}
         </div>
       )}

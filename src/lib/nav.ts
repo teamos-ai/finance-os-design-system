@@ -35,12 +35,12 @@ export interface NavItem {
  * cluster). The former Positioning / Patterns / Templates / Tools groups are dissolved into these.
  */
 export const SHOWCASE_NAV: NavItem[] = [
-  /* ── START ─────────────────────────────────────────────────────────────── */
+  /* ── START (the front door — see it, then the live demo) ───────────────── */
   { id: 'hero', label: 'Hero', Icon: Rocket, accent: 'blue', group: 'Start' },
   { id: 'video', label: 'Video Explainer', Icon: PlayCircle, accent: 'blue', group: 'Start' },
-  { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Start' },
 
-  /* ── FOUNDATIONS ───────────────────────────────────────────────────────── */
+  /* ── FOUNDATIONS (Overview opens it — the system at a glance, then the parts) */
+  { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Foundations' },
   { id: 'tokens', label: 'Tokens', Icon: Blocks, accent: 'blue', group: 'Foundations' },
   { id: 'color', label: 'Colour', Icon: Palette, accent: 'blue', group: 'Foundations' },
   { id: 'typography', label: 'Typography', Icon: Type, accent: 'blue', group: 'Foundations' },

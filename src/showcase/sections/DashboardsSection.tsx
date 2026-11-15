@@ -16,6 +16,8 @@ import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { BarChart, LineChart, DonutChart, type ChartDatum } from '@/components/dashboards/charts'
+import { BrandDashboard } from '@/components/platform-dashboard/BrandDashboard'
+import { ScaleToFit } from '@/components/platform-dashboard/ScaleToFit'
 import { EASE_OUT } from '@/lib/motion'
 import type { InspectData } from '@/components/ui/inspectable'
 import { cn } from '@/lib/cn'
@@ -213,6 +215,27 @@ const VIEW_OPTIONS: { value: View; label: string }[] = [
 ]
 
 /* ── inspect payloads ───────────────────────────────────────────────────────── */
+const WORKSPACE_INSPECT: InspectData = {
+  name: 'My Account workspace',
+  explain:
+    'The full Finance OS "My Account" workspace — the same tokenised dashboard asset the Video Explainer flips to the demo video (mirroring brand.financeos.au). Sidebar, four stat tiles, a Total Profits bar chart, the profile, a today’s-earnings sparkline, tasks and new customers, drawn on a fixed 1280×720 canvas and scaled to fit, composed entirely from Finance OS tokens. Every figure, name and avatar is illustrative sample data.',
+  token: [
+    'canvas    fixed 1280×720 (16:9) · ScaleToFit to the board width',
+    'surfaces  --c-surface cards · hairline --c-border · 8px squircles · no glass',
+    'accent    Atlas Blue only · the MRR tile is the one --c-gradient-accent moment',
+    'data      tabular-nums · blue-mono · never a second hue',
+    'reuse     <BrandDashboard /> — one token-only asset, drop it into any surface',
+  ].join('\n'),
+  code: [
+    "import { BrandDashboard } from '@/components/platform-dashboard/BrandDashboard'",
+    "import { ScaleToFit } from '@/components/platform-dashboard/ScaleToFit'",
+    '',
+    '<ScaleToFit width={1280} height={720} className="rounded-lg border border-border shadow-lg">',
+    '  <BrandDashboard />',
+    '</ScaleToFit>',
+  ].join('\n'),
+}
+
 const DASH_INSPECT: InspectData = {
   name: 'Assembled dashboard',
   explain:
@@ -368,7 +391,7 @@ export function DashboardsSection() {
       id="dashboards"
       eyebrow="Dashboard Layouts"
       title="Dashboard Layouts"
-      lead="Assembled broker dashboards — a KPI stat row, one tokenised chart and a compact status table, switched across Pipeline, Settlements and Commission. Blue-mono data, green only for movement, one amber at-risk moment per view, every chart drawn as inline SVG."
+      lead="Assembled broker dashboards — from the full “My Account” workspace to a live KPI board: a stat row, one tokenised chart and a compact status table, switched across Pipeline, Settlements and Commission. Blue-mono data, green only for movement, one amber at-risk moment per view, every chart drawn as inline SVG."
     >
       <ComposedFrom
         items={[
@@ -378,6 +401,13 @@ export function DashboardsSection() {
         ]}
       />
       <div className="flex flex-col gap-8">
+        {/* The full brand workspace — the same tokenised asset the Video Explainer flips to the demo */}
+        <Demo label="My Account workspace — the full brand layout, tokenised" inspect={WORKSPACE_INSPECT}>
+          <ScaleToFit width={1280} height={720} className="rounded-lg border border-border shadow-lg">
+            <BrandDashboard />
+          </ScaleToFit>
+        </Demo>
+
         {/* The live, assembled dashboard */}
         <Demo label="Broker dashboard — switch the view" inspect={DASH_INSPECT}>
           <DashboardSurface />
