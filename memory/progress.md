@@ -2,6 +2,35 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-15 — Overview premium rebuild + self-documenting token system (3 commits, shipped + pushed, all live)
+
+Three commits, each gate-green (`npm run check` incl. the new token-coverage, `npm run build`),
+verified in-browser (desktop + mobile), pushed to `main`, each confirmed live on ds.financeos.au
+(root → 302 /login.html).
+
+- **`0ec8752` — Overview "system at a glance" rebuilt** as a showreel: a draggable **CardSphere**
+  (`sections/overview/CardSphere.tsx`) of tokenised SVG/CSS card faces (drag / flick / arrow-keys +
+  a gentle idle drift, reduced-motion safe) over two bentos. **Re-tokenised from dark 21st-dev
+  references into the Light / Atlas-Blue brand** (no lime, no glass, no dark).
+- **`4bceb4d` — self-documenting specimens.** New **`<TokenTag>`** (`components/ui/token-tag.tsx`):
+  a copy-able mono chip that shows a class / token / prop inline AND writes **`data-token`** to the DOM,
+  so an agent reads every specimen via `document.querySelectorAll('[data-token]')`. Paired with the
+  existing `<ComposedFrom>` for assembled designs. Swept **~31 sections** so every exhibit names its
+  token BY EYE (previously only inside the "+" inspector). New guard **`scripts/token-coverage.mjs`**
+  wired into `npm run check` — fails if a section renders specimens with neither; **9 documented
+  EXEMPT** (Tokens/Colour print live swatches, Banners/Funnels self-document, Hero/Video/Overview are
+  narrative, Motion blank, AuditForms placeholder). Coverage **34 ok · 9 exempt · 0 missing**.
+  Convention added to CONTRIBUTING.md + CLAUDE.md. Charts' plain `<p>` labels unified to TokenTag.
+  Ran the audit + the annotation as **parallel subagents**; one JSX-imbalance race on
+  `MarketEvidenceSection` when I edited a file a subagent still owned → healed (lesson in decisions).
+- **`2b0d38e` — premium Overview (Light brand, Tumai's explicit call).** CardSphere **floats** (no
+  container, soft Atlas-Blue halo, gradient-accent blue cards); the two bentos **merged into one**
+  `sections/overview/SystemBento.tsx` (both headers removed); every cell rides a cursor-parallax
+  **`<TiltCard>`** (`overview/TiltCard.tsx` — spring, mouse-only, reduced-motion safe) with
+  layered-shadow lift + count-up / draw-in. **Catalogued for reuse:** new **Card Sphere** library
+  section (`CardSphereSection.tsx`, after Heroes, Orbit icon) + the premium bento as "The tilt bento"
+  in Bento Box. Old `GlanceBento` / `FeatureBento` deleted.
+
 ## 2026-11-15 — Sidebar log-out button (shipped + pushed, 9878e90; live on prod)
 
 Added a **Log out** control to the showcase sidebar footer (`Shell.tsx`), under the GitHub link —

@@ -2,6 +2,19 @@
 
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
+- **DONE + PUSHED (2026-11-15) — Overview premium + self-documenting tokens [0ec8752 · 4bceb4d · 2b0d38e], all live:**
+  - **Self-documenting specimens:** `<TokenTag>` (inline class/token/prop + `data-token` for agents) +
+    `<ComposedFrom>` across ~31 sections; guard `scripts/token-coverage.mjs` in `npm run check`
+    (**34 ok · 9 exempt · 0 missing**); convention in CONTRIBUTING.md + CLAUDE.md. Every NEW specimen
+    must carry one — the guard fails the build otherwise.
+  - **Premium Overview (Light brand):** CardSphere **floats** on an Atlas-Blue halo (gradient cards);
+    the two bentos **merged into one** `SystemBento`; every cell on a cursor-parallax `<TiltCard>`
+    (`sections/overview/`). Catalogued: new **Card Sphere** section (Orbit icon, after Heroes) + "The
+    tilt bento" in Bento Box. `GlanceBento`/`FeatureBento` deleted.
+
+- **CURRENT FOCUS / NEXT STEP:** nothing outstanding — await Tumai's next direction. Everything built
+  this session is live behind the gate on ds.financeos.au.
+
 - **DONE + PUSHED (2026-11-15) — three DS changes [f7bbbf6]:**
   - **Video Explainer dashboard:** cursor-follow parallax **hover tilt** on the flip card (FT 10 → ±5°,
     180ms follow, rest on leave, mouse-only, off while flipped / flat ≤600px — ported from

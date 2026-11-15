@@ -218,6 +218,23 @@ Vercel accepts the deploy.
   the scroll-rhythm colour wash stays. **Open question —** grey-header strength (`bg-selected` #EDEFF2)
   can be dialled to `bg-inset` #F6F7F9 if Tumai wants subtler; "move dashboard" was read as "add to
   Dashboard Layouts" (flip kept). **Last updated —** 2026-11-15, Claude (Opus 4.8).
+- **Current State (2026-11-15 · token system + premium Overview):** **Focus now —** shipped + pushed
+  three commits, all live behind the gate (ds.financeos.au root → 302 /login.html). (1) **`0ec8752`** —
+  Overview "system at a glance" rebuilt as a draggable **CardSphere** + two bentos (re-tokenised from
+  dark 21st-dev refs into Light / Atlas-Blue). (2) **`4bceb4d`** — **self-documenting specimens**: new
+  `<TokenTag>` (`components/ui/token-tag.tsx` — shows a class/token/prop inline AND writes `data-token`
+  for agents) + `<ComposedFrom>` across ~31 sections, so every exhibit names its token BY EYE, not only
+  in the "+" inspector; guard `scripts/token-coverage.mjs` in `npm run check` (34 ok · 9 exempt · 0
+  missing) fails a new section that skips it; the rule is written above (token-architecture + Checks)
+  and in CONTRIBUTING.md. (3) **`2b0d38e`** — **premium Overview** (Light brand, Tumai's call):
+  CardSphere **floats** (no box, Atlas-Blue halo, gradient-accent cards); the two bentos **merged** into
+  one `sections/overview/SystemBento.tsx`; every cell on a cursor-parallax `<TiltCard>` (`overview/`)
+  with layered-shadow lift + count-up/draw-in; catalogued for reuse — new **Card Sphere** library
+  section (`CardSphereSection.tsx`, Orbit icon, after Heroes) + "The tilt bento" in Bento Box;
+  `GlanceBento`/`FeatureBento` deleted. **Next step —** none pending; await direction. **Don't-touch —**
+  keep it Light (no dark tokens); keep the blue grid retired; put a `<TokenTag>`/`<ComposedFrom>` on
+  every new specimen (the guard enforces it). **Open question —** none. **Last updated —** 2026-11-15,
+  Claude (Opus 4.8).
 
 ---
 

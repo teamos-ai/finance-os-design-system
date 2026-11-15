@@ -3,6 +3,29 @@
 <!-- Architecture / strategy calls + the reason behind each, so we don't re-litigate them.
      Date each entry (YYYY-MM-DD). -->
 
+- **2026-11-15 — Every specimen names its token inline (`<TokenTag>` / `<ComposedFrom>`), enforced.**
+  Tumai's goal: the showcase must be referenceable by eye AND by an AI agent via tokens. The "+"
+  inspector hid tokens behind a click, so `<TokenTag>` surfaces them inline + emits `data-token` for
+  machine reads. `scripts/token-coverage.mjs` gates it in `npm run check`. Chose a **static check with
+  a documented 9-section EXEMPT allowlist** (sections that self-document another way) over a perfect
+  per-specimen crawl — honest and cheap; a Playwright DOM sweep is the deeper option, deferred.
+- **2026-11-15 — Charts' inline `<p>` labels → `<TokenTag>`.** Charts already named its primitives
+  inline but as plain text (no copy, no `data-token`). Unified to TokenTag so the whole system uses one
+  mechanism and the coverage guard counts them, rather than exempting Charts.
+- **2026-11-15 — "Totally premium" stays in the Light brand (confirmed with Tumai).** His references
+  were dark / high-contrast; the constitution is single Light/Clarity. Asked, he chose Light → kept
+  white + Atlas Blue and translated the refs' ENERGY (depth, parallax, density) via gradient-accent +
+  `<Glow>` + layered shadow + a cursor-tilt `<TiltCard>` — never their palette. No dark tokens added.
+- **2026-11-15 — Overview = floating sphere + ONE merged bento.** Removed the sphere's container box
+  and both bento headers; fused `GlanceBento` + `FeatureBento` into `SystemBento` so it reads as one
+  board (Tumai's ask). Reusable assets catalogued in their own homes: CardSphere → a **new "Card
+  Sphere" library section** (he chose a dedicated section over an exhibit-in-Heroes); the bento → "The
+  tilt bento" in Bento Box. Trade-off accepted: sphere/bento now render in two places each (minor extra
+  animation on a showcase; lazy-pause later if perf ever matters).
+- **2026-11-15 — Don't edit a file a running subagent owns.** Fanning the annotation sweep out to
+  parallel subagents was fast, but editing `MarketEvidenceSection` mid-flight raced its edits into a
+  broken `<div>` balance. Rule: wait for the agent to finish, then reconcile from the final state.
+
 - **2026-11-15 — Exhibit-box headers are a grey band (`bg-selected` #EDEFF2).** The shared `Demo`
   frame header (`Section.tsx`) was `bg-surface` = pure white, so it read white-on-white. Chose the
   system's cool neutral grey over the fainter `--c-inset` (#F6F7F9) so Tumai's "make it grey" rule is
