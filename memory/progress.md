@@ -2,6 +2,37 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-15 — Dashboard hover + memoji, grey exhibit headers, Overview → Foundations (shipped + pushed, f7bbbf6)
+
+Three changes, all verified in the running app (desktop + mobile, real-cursor), gate green
+(`npm run check` 21/21, `npm run build` OK, `docs:components` no-op), committed + pushed to `main`.
+
+- **Video Explainer dashboard.** Ported the brand's hover interaction from the reference checkout
+  (`financeos-brand-positioning` `assets/app.js` + `src/app.css`): a **cursor-follow parallax tilt**
+  on the flip card — `FT 10` (±5°), 180ms follow (`is-following`), settles to the rest tilt
+  (rotateX 3° / rotateY -6°) on `pointerleave`, mouse-only, off while flipped and **flat ≤600px**.
+  Rebuilt `FlipCard` with framer-motion **motion values + imperative `animate()`** so the 700ms
+  ease-out flip is preserved exactly and the follow retargets without React re-renders. Fixed the
+  **memoji "Champ Carter"** clipping — the 500×500 art sat edge-to-edge in the 150px / 8px box, so the
+  squircle cut the hair/beard; now `padding 14 + object-contain + a tokenised halo`
+  (`radial --c-accent-soft over --c-canvas-muted`) so it floats with breathing room (DS 8px squircle
+  kept, not the brand's 34px).
+- **Reuse.** `BrandDashboard` was already token-only; added it as the **lead "My Account workspace"
+  exhibit in Dashboard Layouts** (own inspector), keeping the flip in Video Explainer. Same asset,
+  two homes.
+- **Grey exhibit headers (global).** The shared `Demo` frame header (`Section.tsx`) was `bg-surface`
+  = pure white `#FFF` (white-on-white). Now **`bg-selected` `#EDEFF2` + `text-fg-muted` medium** label
+  — one change, every exhibit box across all 36 sections reads as a grey specimen-drawer strip.
+- **IA.** **Overview moved from Start into Foundations** as its opening section. The page skips the
+  divider before the first group, so Start (Hero + Video + Overview) had Overview bleeding into the
+  FOUNDATIONS divider. Now Start = Hero + Video; FOUNDATIONS opens with Overview → Tokens. Section
+  numbers are nav-index-driven, unchanged (Video 01 · Overview 02 · Tokens 03).
+- **Verify.** Real-cursor tilt tracked left −4.5° / right +4.5° / top +4.5° / bottom −4.5°, returned
+  to rest (3°, −6°) on leave, disabled while flipped, flat on mobile; memoji breathing room confirmed
+  in both homes; grey headers on Components / Cards / Dashboards / Video; the FOUNDATIONS divider now
+  sits between Video and Overview. No console errors. (A synthetic `pointerleave` didn't reach React's
+  delegated listener — a test artifact; the real cursor returns to rest fine.)
+
 ## 2026-11-14 — WebP conversion + both Codex handoff amendments (verified; awaiting Tumai's push)
 
 Three pieces, all verified in the running app (desktop + mobile), gate green (`npm run check` 21/21,

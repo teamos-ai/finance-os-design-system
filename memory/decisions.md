@@ -3,6 +3,25 @@
 <!-- Architecture / strategy calls + the reason behind each, so we don't re-litigate them.
      Date each entry (YYYY-MM-DD). -->
 
+- **2026-11-15 — Exhibit-box headers are a grey band (`bg-selected` #EDEFF2).** The shared `Demo`
+  frame header (`Section.tsx`) was `bg-surface` = pure white, so it read white-on-white. Chose the
+  system's cool neutral grey over the fainter `--c-inset` (#F6F7F9) so Tumai's "make it grey" rule is
+  unmistakable; label bumped to `text-fg-muted` + medium for legibility. One change governs all 36
+  sections. Dial to `bg-inset` if a subtler band is wanted.
+- **2026-11-15 — Hover tilt lives in `FlipCard`, ported 1:1 from the brand reference.** Cursor-follow
+  parallax (FT 10 → ±5°, 180ms follow, rest on leave, mouse-only) matches brand.financeos.au exactly.
+  framer-motion motion values + imperative `animate()` so the 700ms ease-out flip is preserved and the
+  follow retargets without re-renders; reduced-motion / flat (≤600px) safe.
+- **2026-11-15 — Memoji fix = breathing room, not a zoom.** `object-contain` + padding + a tokenised
+  halo, keeping the DS 8px squircle (not the brand's 34px radius), so the full memoji shows with margin.
+- **2026-11-15 — Overview joins Foundations (don't merge the two groups).** Overview is foundational
+  content, and the page skips the divider before the first group, so it bled into FOUNDATIONS. Moving
+  it to open Foundations fixes the bleed while keeping Start a tight 2-item front door (Hero + Video).
+  A full Start+Foundations merge was the alternative; rejected — Hero/Video aren't "Foundations".
+- **2026-11-15 — "Move dashboard to Dashboard Layouts" = add, not relocate.** Removing `BrandDashboard`
+  from Video Explainer would break the dashboard→video flip, so it is featured in both: the flip in
+  Video Explainer, a static lead exhibit in Dashboard Layouts.
+
 - **2026-11-14 — Scroll-rhythm COLOUR is back; the grid is NOT.** The confirmed Amendment 2 handoff
   supersedes the 2026-11-13 "pure white everywhere" rule: the fixed `.bg-stage` cross-fades white ↔
   `--c-warm #E8EDF7` (750ms) on every ~3rd section, mirroring brand.financeos.au. The blue **grid

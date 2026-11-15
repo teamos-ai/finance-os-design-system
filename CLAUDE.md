@@ -190,6 +190,26 @@ Vercel accepts the deploy.
   **Next step —** Tumai commits + runs `git push origin main` (push is blocked for Claude), then confirm
   the gated prod deploy. **Don't-touch —** do NOT reintroduce the blue grid paper. **Open question —**
   none. **Last updated —** 2026-11-14, Claude (Opus 4.8).
+- **Current State (2026-11-15 · dashboard hover + grey headers + Overview→Foundations):** **Focus
+  now —** shipped + pushed three verified changes [f7bbbf6]. (1) The **Video Explainer** dashboard
+  gained the brand's **cursor-follow parallax hover tilt** (FT 10 → ±5°, 180ms follow, settles to the
+  rest tilt rotateX 3° / rotateY -6° on leave, mouse-only, off while flipped, flat ≤600px — ported
+  from brand.financeos.au `app.js`/`app.css` into `FlipCard` via framer-motion motion values +
+  imperative `animate()`, the 700ms ease-out flip preserved). The **memoji "Champ Carter"** no longer
+  clips — `padding + object-contain + a tokenised halo` (`radial --c-accent-soft over --c-canvas-muted`),
+  keeping the DS 8px squircle. The tokenised **`BrandDashboard` is reused** as the lead "My Account
+  workspace" exhibit in **Dashboard Layouts** (the flip stays in Video Explainer). (2) **Grey exhibit
+  headers are now a global rule** — the shared `Demo` frame header (`Section.tsx`) went from
+  `bg-surface` (pure white) to **`bg-selected` #EDEFF2 + `text-fg-muted` medium**, so every box across
+  all 36 sections reads as a grey specimen-drawer strip. (3) **Overview moved from Start into
+  Foundations** as its opening section — Start = Hero + Video no longer bleeds into the FOUNDATIONS
+  divider; section numbers are nav-index-driven and unchanged. Gate green (check 21/21, build OK,
+  docs:components no-op); verified in-browser (real-cursor tilt, mobile flat, divider order, grey
+  headers, memoji). **Next step —** confirm the gated prod deploy after Vercel rebuilds. **Don't-touch —**
+  keep the blue grid retired; emphasis stays elevation / border / scale / centered-badge (NO RIBBONS);
+  the scroll-rhythm colour wash stays. **Open question —** grey-header strength (`bg-selected` #EDEFF2)
+  can be dialled to `bg-inset` #F6F7F9 if Tumai wants subtler; "move dashboard" was read as "add to
+  Dashboard Layouts" (flip kept). **Last updated —** 2026-11-15, Claude (Opus 4.8).
 
 ---
 

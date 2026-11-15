@@ -2,17 +2,26 @@
 
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
-- **DONE (2026-11-14) — both Codex amendments + WebP, verified, AWAITING TUMAI'S PUSH:**
-  - **Library images → WebP** (Pillow, 5.18 → 1.51 MB; JPEGs removed; `libraryImageSrc` rewired).
-  - **Amendment 1 — [Video Explainer parity](promo-video-handoff-2026-11-14.md):** control moved
-    below the card, relabelled "Watch the demo video / Back to the dashboard", reference 3D rest-tilt
-    (flat ≤600px), player focuses on flip. Flip/play/retry/pause-on-return/dashboard already matched.
-  - **Amendment 2 — [Brand Positioning scroll motion](scroll-motion-handoff-2026-11-14.md):**
-    background colour rhythm restored (fixed `.bg-stage`, white ↔ `--c-warm #E8EDF7`, 750ms, warm every
-    ~3rd section via `Shell` `data-bg`); reveal rise aligned 10→12px. **Grid stays retired.** CLAUDE.md
-    reconciled. Gate green (check 21/21, build OK). Both handoff files are now marked implemented.
-  - **NEXT STEP:** Tumai runs `git push origin main` after committing (push is blocked for Claude).
-    Then confirm the prod deploy behind the gate (ds.financeos.au root → 302 → /login.html).
+- **DONE + PUSHED (2026-11-15) — three DS changes [f7bbbf6]:**
+  - **Video Explainer dashboard:** cursor-follow parallax **hover tilt** on the flip card (FT 10 → ±5°,
+    180ms follow, rest on leave, mouse-only, off while flipped / flat ≤600px — ported from
+    brand.financeos.au into `FlipCard` via framer-motion motion values; 700ms ease-out flip preserved).
+    **Memoji "Champ Carter"** no longer clips (padding + `object-contain` + tokenised halo, 8px squircle
+    kept). Tokenised **`BrandDashboard` reused** as the lead "My Account workspace" exhibit in Dashboard
+    Layouts (flip kept in Video Explainer).
+  - **Grey exhibit headers (global):** shared `Demo` frame header → `bg-selected` #EDEFF2 +
+    `text-fg-muted` — one change in `Section.tsx`, all 36 sections.
+  - **IA:** **Overview moved from Start into Foundations** (opens it), so Start = Hero + Video no longer
+    bleeds into the FOUNDATIONS divider. Section numbers nav-index-driven, unchanged.
+  - Verified in-browser (real-cursor tilt, mobile flat, divider order); gate green (check 21/21, build).
+
+- **DONE + PUSHED (2026-11-14) [b6f2de2] — WebP + both Codex amendments:** 33 photos → WebP; Video
+  Explainer parity (control below, relabel, rest-tilt, focus-on-flip); scroll-rhythm colour restored
+  (**grid stays retired**). See `progress.md` (2026-11-14) and the two handoff files (both implemented).
+
+- **NEXT STEP:** confirm the gated prod deploy once Vercel rebuilds (ds.financeos.au root → 302 →
+  /login.html; the showcase should show the webp photos, the flip + hover tilt, the grey headers, and
+  Overview opening Foundations).
 
 - **Focus:** Three big pieces are DONE — the information-architecture restructure, the website-assets
   pass, and a **hero + brand polish** (2026-11-13): flat **pure-white background** (scroll-rhythm + grid
