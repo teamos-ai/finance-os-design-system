@@ -2,6 +2,22 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-15 — Sidebar log-out button (shipped + pushed, 9878e90; live on prod)
+
+Added a **Log out** control to the showcase sidebar footer (`Shell.tsx`), under the GitHub link —
+expanded shows `⟲ Log out`, collapsed is icon-only. Neutral, token-only, no ribbon.
+
+- **Mechanism (reused the existing gate):** the `fos_gate` cookie is HttpOnly, so JS can't clear it;
+  the button POSTs `/api/logout` (Set-Cookie Max-Age=0), then `window.location = '/login.html'`.
+  `middleware.js` then re-checks the now-cleared cookie and holds every showcase/`/audit` request at
+  the password gate until the access password is re-entered. Navigates regardless of the fetch result,
+  so a dormant gate / offline endpoint (e.g. Vite dev) still lands on login.
+- **Verify.** In-browser: button renders expanded + collapsed; real click → landed on `/login.html`
+  ("Enter the access password to continue"). Gate green (`npm run check` 21/21, `npm run build` OK).
+  Deploy `dpl_DX67Lmua…` for `9878e90` READY, aliased to ds.financeos.au; live curl: root → 302
+  /login.html, /login.html → 200.
+- Prior prod deploys this session confirmed READY: `f7bbbf6` (three DS changes) and `9029364` (memory).
+
 ## 2026-11-15 — Dashboard hover + memoji, grey exhibit headers, Overview → Foundations (shipped + pushed, f7bbbf6)
 
 Three changes, all verified in the running app (desktop + mobile, real-cursor), gate green
