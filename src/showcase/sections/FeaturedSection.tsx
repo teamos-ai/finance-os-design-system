@@ -6,11 +6,12 @@
  * from elevation and a full border — no ribbons, no glass, 8px squircles.
  */
 import { Check, ChevronUp } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 
 /** One benefit bullet — a bold display lead-in with a quiet body line. */
 interface Bullet {
@@ -159,6 +160,15 @@ export function FeaturedSection() {
       <div className="flex flex-col gap-8">
         {/* Split feature — copy + live dashboard */}
         <Demo label="Split feature — benefit bullets beside a live pipeline dashboard">
+          <ComposedFrom
+            items={[
+              { label: 'Card', href: '#cards' },
+              { label: 'Button', href: '#components' },
+              { label: 'Badge', href: '#components' },
+              { label: 'MonoLabel', href: '#typography' },
+            ]}
+            className="mt-3 mb-6"
+          />
           <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12">
             <div className="flex flex-col gap-4">
               <MonoLabel dot>Pipeline</MonoLabel>
@@ -181,6 +191,13 @@ export function FeaturedSection() {
 
         {/* Featured banner — one blue highlight, primary + ghost CTA */}
         <Demo label="Featured banner — one blue highlight, primary + ghost CTA">
+          <ComposedFrom
+            items={[
+              { label: 'Card', href: '#cards' },
+              { label: 'Button', href: '#components' },
+            ]}
+            className="mt-3 mb-6"
+          />
           <Card
             interactive
             padding="lg"
@@ -196,6 +213,9 @@ export function FeaturedSection() {
                 From first enquiry to funds disbursed, Finance OS keeps brokers, processors and your
                 aggregator reporting in step — without another spreadsheet to reconcile.
               </p>
+              <div className="mt-3">
+                <TokenTag title="utility class · the one blue type highlight">text-highlight</TokenTag>
+              </div>
             </div>
             <div className="flex shrink-0 flex-wrap gap-2.5 md:flex-col">
               <Button variant="primary">Book a walkthrough</Button>
@@ -206,6 +226,10 @@ export function FeaturedSection() {
 
         {/* Split feature, reversed — blue wash visual beside the copy */}
         <Demo label="Split feature, reversed — blue wash visual beside the copy">
+          <div className="mt-3 mb-6 flex flex-col items-center gap-2.5">
+            <ComposedFrom items={[{ label: 'Button', href: '#components' }]} className="my-0" />
+            <TokenTag title="utility class · tinted wash visual panel">bg-wash-tint</TokenTag>
+          </div>
           <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12">
             <div className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-lg border border-border bg-wash-tint">
               <svg

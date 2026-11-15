@@ -10,13 +10,14 @@
     "typecheck": "tsc --noEmit",
     "check:audit": "tsx scripts/audit-check.mts",
     "check:contrast": "node scripts/contrast-audit.mjs",
+    "check:tokens": "node scripts/token-coverage.mjs",
     "docs:components": "node scripts/gen-component-docs.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "npm run check:audit && npm run check:contrast",
-    "check": "npm run typecheck && npm run lint && npm run test"
+    "check": "npm run typecheck && npm run lint && npm run test && npm run check:tokens"
   },
   "dependencies": {
     "@fontsource/anonymous-pro": "^5.2.8",

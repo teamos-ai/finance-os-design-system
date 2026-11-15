@@ -14,11 +14,12 @@
 import { useState, type ReactNode } from 'react'
 import { Check, Clock, UserRound, Sparkles } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { cn } from '@/lib/cn'
 
 type Billing = 'monthly' | 'annual'
@@ -157,6 +158,20 @@ export function PricingSection() {
       <div className="flex flex-col gap-8">
         {/* Variation 1 — plan cards with monthly/annual toggle, Scale recommended */}
         <Demo label="Plan cards — three tiers, monthly/annual toggle, Scale recommended">
+          <div className="mt-3 mb-7 flex flex-col items-center gap-2.5">
+            <ComposedFrom
+              items={[
+                { label: 'Card', href: '#cards' },
+                { label: 'Button', href: '#components' },
+                { label: 'Badge', href: '#components' },
+                { label: 'MonoLabel', href: '#typography' },
+              ]}
+              className="my-0"
+            />
+            <TokenTag title="recommended tier marker — centred badge + accent border, never a ribbon">
+              border-2 border-accent
+            </TokenTag>
+          </div>
           {/* Billing toggle — segmented control + blue "2 months free" on annual */}
           <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
             <div
@@ -262,6 +277,10 @@ export function PricingSection() {
 
         {/* Variation 2 — compare plans, tiers as columns */}
         <Demo label="Compare plans — tiers as columns, feature rows">
+          <div className="mt-3 mb-6 flex flex-wrap items-center justify-center gap-2">
+            <TokenTag title="utility class · table head fill">bg-canvas-muted</TokenTag>
+            <TokenTag title='Badge · the "Metered" chip'>{'variant="outline"'}</TokenTag>
+          </div>
           <div className="overflow-x-auto rounded-lg border border-border">
             <table className="w-full min-w-[520px] border-collapse">
               <thead>

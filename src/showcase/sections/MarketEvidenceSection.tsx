@@ -91,6 +91,13 @@ export function MarketEvidenceSection() {
       <ComposedFrom items={[{ label: 'Charts', href: '#charts' }]} />
       <div className="flex flex-col gap-8">
         {/* Band 1 — readiness: the RingStat + a bare count-up figure */}
+        <ComposedFrom
+          className="mt-0 mb-0"
+          items={[
+            { label: 'RingStat', href: '#charts' },
+            { label: 'CountUp', href: '#motion' },
+          ]}
+        />
         <Demo label="Positioning readiness — ring + count-up" inspect={READINESS_INSPECT}>
           <Stagger className="grid gap-4 sm:grid-cols-2">
             <StaggerItem>
@@ -121,6 +128,15 @@ export function MarketEvidenceSection() {
         </Demo>
 
         {/* Band 2 — customer snapshot: stat tiles (with unverified flags) + source disclosure */}
+        <ComposedFrom
+          className="mt-0 mb-0"
+          items={[
+            { label: 'Card', href: '#cards' },
+            { label: 'CountUp', href: '#motion' },
+            { label: 'Flag', href: '#components' },
+            { label: 'Disclosure', href: '#components' },
+          ]}
+        />
         <Demo label="Customer snapshot — reported, not verified" inspect={STATS_INSPECT}>
           <div className="flex flex-col gap-4">
             <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -159,6 +175,13 @@ export function MarketEvidenceSection() {
         </Demo>
 
         {/* Band 3 — search demand: ranked bars + AU/NZ split + full table + method */}
+        <ComposedFrom
+          className="mt-0 mb-0"
+          items={[
+            { label: 'RankedBarChart', href: '#charts' },
+            { label: 'SplitTrack', href: '#charts' },
+          ]}
+        />
         <Demo label="Search demand · AXL Media research" inspect={SEARCH_INSPECT}>
           <div className="flex flex-col gap-6">
             <FadeIn>

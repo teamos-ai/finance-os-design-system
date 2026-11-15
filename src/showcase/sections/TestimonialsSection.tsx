@@ -7,8 +7,9 @@
  * lift via `interactive` — no ribbons, no side-rails, 8px squircles.
  */
 import { Quote, Star, TrendingUp, User } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
+import { TokenTag } from '@/components/ui/token-tag'
 import { cn } from '@/lib/cn'
 
 interface Author {
@@ -106,11 +107,13 @@ export function TestimonialsSection() {
       <div className="flex flex-col gap-8">
         {/* (a) Quote card — stars, quote and a result metric */}
         <Demo label="Quote card — circular initials, role, quote and a result metric">
+          <ComposedFrom items={[{ label: 'Card', href: '#cards' }]} className="mt-3 mb-6" />
           <Card interactive className="mx-auto flex max-w-xl flex-col gap-5">
             <div>
               <Quote className="h-7 w-7 text-accent opacity-50" strokeWidth={1.5} aria-hidden />
-              <div className="mt-2.5">
+              <div className="mt-2.5 flex items-center gap-2">
                 <Stars />
+                <TokenTag title="utility class · rating stars (amber status hue)">text-amber</TokenTag>
               </div>
               <p className="mt-3 font-display text-title-md tracking-[-0.01em] text-fg">{FEATURED.quote}</p>
             </div>
@@ -131,6 +134,10 @@ export function TestimonialsSection() {
 
         {/* (b) Portrait — 40/60 split, gradient portrait placeholder */}
         <Demo label="Portrait — 40 / 60 split, blue-gradient portrait placeholder">
+          <div className="mt-3 mb-6 flex flex-col items-center gap-2.5">
+            <ComposedFrom items={[{ label: 'Card', href: '#cards' }]} className="my-0" />
+            <TokenTag title="utility class · blue-gradient portrait + avatar disc">bg-gradient-accent</TokenTag>
+          </div>
           <Card padding="none" interactive className="grid overflow-hidden md:grid-cols-[2fr_3fr]">
             <div
               role="img"
@@ -151,6 +158,7 @@ export function TestimonialsSection() {
 
         {/* (c) Wall — 3-up grid of short quotes */}
         <Demo label="Wall — 3-up grid of short quotes">
+          <ComposedFrom items={[{ label: 'Card', href: '#cards' }]} className="mt-3 mb-6" />
           <div className="grid gap-5 md:grid-cols-3">
             {WALL.map((t) => (
               <Card key={t.author.name} interactive className="flex flex-col gap-4">

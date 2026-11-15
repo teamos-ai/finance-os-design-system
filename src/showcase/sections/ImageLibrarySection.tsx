@@ -12,6 +12,7 @@ import { Building2, LineChart, Handshake, ShieldCheck, Check, X, Search } from '
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { ImageWash } from '@/components/ui/image-wash'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { AuroraBackground, type AuroraTone } from '@/components/ui/aurora-background'
 import { ContourField } from '@/components/positioning-hero/ContourField'
@@ -318,10 +319,16 @@ function PhotoLibrary() {
       </div>
 
       {/* result count */}
-      <p className="mb-5 font-mono text-caption text-fg-subtle" aria-live="polite">
+      <p className="mb-2.5 font-mono text-caption text-fg-subtle" aria-live="polite">
         {shown.length} {shown.length === 1 ? 'image' : 'images'}
         {q && <> · “{query.trim()}”</>}
       </p>
+
+      {/* every tile resolves its src through the shared helper */}
+      <div className="mb-5 flex flex-wrap items-center gap-2 font-body text-caption text-fg-subtle">
+        <span>Each tile’s src via</span>
+        <TokenTag title="helper · resolves an image id to its WEBP src">libraryImageSrc</TokenTag>
+      </div>
 
       {/* grid */}
       {shown.length > 0 ? (
@@ -502,6 +509,7 @@ export function ImageLibrarySection() {
           <MonoLabel number="17.3" dot>
             Aspect-ratio frames
           </MonoLabel>
+          <TokenTag title="component · the aspect-ratio wash tiles">{'<ImageWash>'}</TokenTag>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {FRAMES.map((frame) => (

@@ -23,9 +23,10 @@ import {
   Scale,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { TokenTag } from '@/components/ui/token-tag'
 import { cn } from '@/lib/cn'
 
 /* ── Scoped keyframes + reduced-motion guard. One <style> per section, namespaced under
@@ -358,6 +359,11 @@ export function ScrollersSection() {
           label="Scroll-synced split — sticky media swaps across four steps"
           className="overflow-visible"
         >
+          <ComposedFrom items={[{ label: 'Badge', href: '#components' }]} className="mt-3 mb-2" />
+          <p className="mb-6 text-center font-body text-caption text-fg-subtle">
+            Scroll-synced with an IntersectionObserver (<span className="font-mono">rootMargin -45%</span>) — the
+            step crossing the viewport centre drives the pinned media.
+          </p>
           <div className="grid gap-7 lg:grid-cols-[2fr_3fr]">
             {/* media cell stretches to the steps' height; the inner wrapper sticks within it */}
             <div className="relative">
@@ -429,6 +435,16 @@ export function ScrollersSection() {
 
         {/* Variation 2 — product marquee */}
         <Demo label="Product marquee — six screens, pause on hover or focus, frozen under reduced motion">
+          <div className="mt-3 mb-6 flex flex-col items-center gap-2">
+            <ComposedFrom
+              items={[
+                { label: 'Card', href: '#cards' },
+                { label: 'Badge', href: '#components' },
+              ]}
+              className="my-0"
+            />
+            <TokenTag title="scoped keyframe animation class">fos-scr-marquee</TokenTag>
+          </div>
           <div
             className={cn('fos-scr-marquee relative overflow-hidden rounded-sm', FOCUS_RING)}
             tabIndex={0}
@@ -466,6 +482,9 @@ export function ScrollersSection() {
 
         {/* Variation 3 — signal strip */}
         <Demo label="Signal strip — partner marks and headline figures on a slow loop">
+          <div className="mt-3 mb-6 flex justify-center">
+            <TokenTag title="scoped keyframe animation class">fos-scr-strip</TokenTag>
+          </div>
           <div
             className={cn('fos-scr-strip relative overflow-hidden border-y border-border py-5', FOCUS_RING)}
             tabIndex={0}

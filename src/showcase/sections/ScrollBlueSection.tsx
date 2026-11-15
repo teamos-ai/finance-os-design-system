@@ -13,7 +13,8 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { MoveVertical } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { BlueAreaChart, BlueStatTile } from '@/components/scroll-blue/blue-viz'
 import { hero, dashboard } from '@/data/positioning'
 
@@ -50,6 +51,16 @@ export function ScrollBlueSection() {
       title="Scroll & blue transition"
       lead="As the page scrolls, the surface settles into deep Atlas Blue — one calm band that holds the positioning statement while the supporting figures read alongside it."
     >
+      <div className="-mt-4 mb-10 flex flex-col items-center gap-2.5">
+        <ComposedFrom
+          items={[
+            { label: 'BlueAreaChart', href: '#charts' },
+            { label: 'BlueStatTile', href: '#widgets' },
+          ]}
+          className="my-0"
+        />
+        <TokenTag title="band gradient — Atlas Blue, accent → accent-press">bg-accent → bg-accent-press</TokenTag>
+      </div>
       <Demo
         label="Scroll band — the surface deepens to Atlas Blue as it enters view"
         padded={false}

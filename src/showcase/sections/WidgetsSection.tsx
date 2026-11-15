@@ -16,6 +16,7 @@ import { Section, Demo } from '@/showcase/Section'
 import { Card } from '@/components/ui/card'
 import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { RingStat, FillBar } from '@/components/dashboards/charts'
 import { CountUp, EASE_OUT } from '@/lib/motion'
 import { cn } from '@/lib/cn'
@@ -53,11 +54,14 @@ export function WidgetsSection() {
     >
       <div className="flex flex-col gap-8">
         {/* Band 1 — performance: completion ring, capacity meter, trend sparkline */}
-        <Demo label="Performance — ring, capacity and trend at a glance">
+        <Demo label="Performance — ring, capacity and trend at a glance" action={<TokenTag>{'<Card interactive>'}</TokenTag>}>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {/* Completion ring — arc sweeps to 68% on view, figure counts up (RingStat) */}
             <Card interactive className="flex flex-col gap-4">
-              <MonoLabel tone="subtle">Annual settlements</MonoLabel>
+              <div className="flex items-center justify-between gap-2">
+                <MonoLabel tone="subtle">Annual settlements</MonoLabel>
+                <TokenTag>{'<RingStat>'}</TokenTag>
+              </div>
               <RingStat
                 pct={68}
                 value={68}
@@ -72,7 +76,13 @@ export function WidgetsSection() {
 
             {/* Capacity meter — big figure, horizontal bar, split foot */}
             <Card interactive className="flex flex-col gap-4">
-              <MonoLabel tone="subtle">Loan files in progress</MonoLabel>
+              <div className="flex items-center justify-between gap-2">
+                <MonoLabel tone="subtle">Loan files in progress</MonoLabel>
+                <div className="flex items-center gap-1.5">
+                  <TokenTag>{'<CountUp>'}</TokenTag>
+                  <TokenTag>{'<FillBar>'}</TokenTag>
+                </div>
+              </div>
               <div className="flex items-baseline gap-1.5">
                 <span className="font-display text-display-md leading-none tabular-nums text-fg">
                   <CountUp to={128} />
@@ -94,6 +104,11 @@ export function WidgetsSection() {
                   <TrendingUp className="h-3 w-3" strokeWidth={2.25} aria-hidden />
                   <span className="tabular-nums">12.4%</span>
                 </Badge>
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<CountUp>'}</TokenTag>
+                <TokenTag>{'<Badge variant="success">'}</TokenTag>
+                <TokenTag title="inline SVG spark">text-accent</TokenTag>
               </div>
               <span className="font-display text-display-md leading-none tabular-nums text-fg">
                 <CountUp to={342} />
@@ -147,11 +162,14 @@ export function WidgetsSection() {
         </Demo>
 
         {/* Band 2 — activity: leaderboard, day agenda, sentiment gauge */}
-        <Demo label="Activity — people, schedule and sentiment">
+        <Demo label="Activity — people, schedule and sentiment" action={<TokenTag>{'<Card interactive>'}</TokenTag>}>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {/* Settlements leaderboard — avatar · name + bar · value */}
             <Card interactive className="flex flex-col gap-4">
-              <MonoLabel tone="subtle">Settlements this quarter</MonoLabel>
+              <div className="flex items-center justify-between gap-2">
+                <MonoLabel tone="subtle">Settlements this quarter</MonoLabel>
+                <TokenTag>{'<FillBar>'}</TokenTag>
+              </div>
               <div className="flex flex-col gap-3">
                 {SETTLEMENTS.map((p, i) => (
                   <div key={p.initials} className="flex items-center gap-3">
@@ -173,7 +191,10 @@ export function WidgetsSection() {
 
             {/* Day agenda — time · what + context · status chip, hairline between rows */}
             <Card interactive className="flex flex-col gap-4">
-              <MonoLabel tone="subtle">Today’s agenda</MonoLabel>
+              <div className="flex items-center justify-between gap-2">
+                <MonoLabel tone="subtle">Today’s agenda</MonoLabel>
+                <TokenTag>{'<Badge>'}</TokenTag>
+              </div>
               <div className="flex flex-col">
                 {AGENDA.map((a, i) => (
                   <div
@@ -201,7 +222,10 @@ export function WidgetsSection() {
 
             {/* Sentiment gauge — semicircle arc, score centred, 1–5 ends */}
             <Card interactive className="flex flex-col gap-4">
-              <MonoLabel tone="subtle">Client satisfaction</MonoLabel>
+              <div className="flex items-center justify-between gap-2">
+                <MonoLabel tone="subtle">Client satisfaction</MonoLabel>
+                <TokenTag>{'<CountUp>'}</TokenTag>
+              </div>
               <div className="relative mx-auto mt-0.5 w-full max-w-[216px]">
                 <svg
                   viewBox="0 0 200 118"

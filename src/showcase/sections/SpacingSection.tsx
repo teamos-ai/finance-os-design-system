@@ -5,6 +5,7 @@
  */
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import type { InspectData } from '@/components/ui/inspectable'
 
 /** The 8px-derived spacing scale. Each step renders a live Atlas Blue ruler. */
@@ -108,6 +109,7 @@ export function SpacingSection() {
                         aria-hidden
                       />
                     </div>
+                    <TokenTag title="8px scale step · gap / p / m">{`gap-${step.token.replace('space-', '')}`}</TokenTag>
                   </div>
 
                   {/* usage note — hidden on the tightest viewports */}
@@ -137,6 +139,7 @@ export function SpacingSection() {
                       (i !== 0 ? ' border-t border-border-subtle' : '')
                     }
                   >
+                    <TokenTag title="max-width utility" className="self-start">{c.token}</TokenTag>
                     <span className="font-mono text-mono-xs tabular-nums text-fg">{c.px}</span>
                     <span className="font-body text-body-sm text-fg-muted">{c.use}</span>
                   </div>
@@ -155,7 +158,7 @@ export function SpacingSection() {
                 <thead>
                   <tr className="border-b border-border">
                     <th className="px-5 py-3 font-mono text-mono-xs uppercase text-fg-subtle">
-                      Min width
+                      Prefix · min width
                     </th>
                     <th className="hidden px-5 py-3 font-mono text-mono-xs uppercase text-fg-subtle sm:table-cell">
                       Behaviour
@@ -165,8 +168,11 @@ export function SpacingSection() {
                 <tbody>
                   {BREAKPOINTS.map((b) => (
                     <tr key={b.token} className="border-b border-border-subtle last:border-b-0">
-                      <td className="px-5 py-3.5 font-mono text-body-sm tabular-nums text-fg">
-                        {b.px}
+                      <td className="px-5 py-3.5">
+                        <span className="flex items-center gap-2">
+                          <TokenTag title="responsive prefix">{`${b.token}:`}</TokenTag>
+                          <span className="font-mono text-body-sm tabular-nums text-fg">{b.px}</span>
+                        </span>
                       </td>
                       <td className="hidden px-5 py-3.5 font-body text-body-sm text-fg-muted sm:table-cell">
                         {b.note}
@@ -190,6 +196,7 @@ export function SpacingSection() {
 
           <Demo label="grid · 12 columns, 16px gutter" inspect={GRID_INSPECT}>
             <div className="flex flex-col gap-5">
+              <TokenTag title="grid utilities" className="self-start">grid grid-cols-12 gap-4</TokenTag>
               {/* the column track */}
               <div className="grid grid-cols-12 gap-4">
                 {Array.from({ length: 12 }).map((_, i) => (
@@ -206,11 +213,13 @@ export function SpacingSection() {
 
               {/* a representative span layout */}
               <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12 flex h-14 items-center rounded-sm bg-surface px-4 md:col-span-8">
+                <div className="col-span-12 flex h-14 items-center gap-3 rounded-sm bg-surface px-4 md:col-span-8">
                   <span className="font-body text-body-sm text-fg-muted">8 columns</span>
+                  <TokenTag title="column span">col-span-12 md:col-span-8</TokenTag>
                 </div>
-                <div className="col-span-12 flex h-14 items-center rounded-sm border border-border bg-canvas px-4 md:col-span-4">
+                <div className="col-span-12 flex h-14 items-center gap-3 rounded-sm border border-border bg-canvas px-4 md:col-span-4">
                   <span className="font-body text-body-sm text-fg-muted">4 columns</span>
+                  <TokenTag title="column span">col-span-12 md:col-span-4</TokenTag>
                 </div>
               </div>
             </div>

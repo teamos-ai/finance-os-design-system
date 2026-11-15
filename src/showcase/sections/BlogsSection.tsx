@@ -6,7 +6,8 @@
  * inline ImageWash, closed by related Cards. Token-only, theme-aware, responsive.
  */
 import { Clock, BookOpen, ArrowUpRight, LineChart, FileText } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Card, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
@@ -61,6 +62,18 @@ export function BlogsSection() {
       title="Blogs"
       lead="The editorial template — article header, a measured prose rhythm with display subheads, an accent pull-quote and inline figure, then a row of related posts."
     >
+      <ComposedFrom
+        className="mt-3 mb-4"
+        items={[
+          { label: 'MonoLabel', href: '#typography' },
+          { label: 'ImageWash', href: '#imagery' },
+          { label: 'LogoMark', href: '#logo' },
+        ]}
+      />
+      <div className="mb-6 flex flex-wrap items-center justify-center gap-1.5">
+        <TokenTag title="lead paragraph">text-body-lg</TokenTag>
+        <TokenTag title="centred pull-quote · hairline frame, no side-rail">border-y</TokenTag>
+      </div>
       <Demo
         label="Article template"
         action={
@@ -163,6 +176,16 @@ export function BlogsSection() {
         <MonoLabel tone="subtle" number="15.1">
           Related posts
         </MonoLabel>
+        <ComposedFrom
+          className="mt-3 mb-2 justify-start"
+          items={[{ label: 'Card', href: '#cards' }]}
+        />
+        <div className="flex flex-wrap items-center gap-1.5">
+          <TokenTag title="prop · renders the card as a link">as="a"</TokenTag>
+          <TokenTag title="prop">accent</TokenTag>
+          <TokenTag title="prop">meta</TokenTag>
+          <TokenTag title="prop">ratio="16/9"</TokenTag>
+        </div>
         <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {RELATED.map((post) => (
             <Card

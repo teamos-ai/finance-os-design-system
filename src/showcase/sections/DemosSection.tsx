@@ -23,7 +23,8 @@ import {
   CalendarCheck,
   Quote,
 } from 'lucide-react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Stat } from '@/components/ui/stat'
@@ -335,12 +336,37 @@ export function DemosSection() {
     >
       <div className="flex flex-col gap-10">
         <FadeIn>
+          <ComposedFrom
+            className="mt-0 mb-2"
+            items={[
+              { label: 'LogoMark', href: '#logo' },
+              { label: 'MonoLabel', href: '#typography' },
+              { label: 'Button', href: '#components' },
+              { label: 'FeatureCard', href: '#cards' },
+              { label: 'Glow', href: '#motion' },
+              { label: 'Testimonial', href: '#testimonials' },
+            ]}
+          />
+          <div className="mb-5 flex flex-wrap items-center justify-center gap-1.5">
+            <TokenTag title="CTA banner fill">bg-gradient-accent</TokenTag>
+          </div>
           <Demo label="Marketing landing" padded={false}>
             <Landing />
           </Demo>
         </FadeIn>
 
         <FadeIn>
+          <ComposedFrom
+            className="mt-0 mb-5"
+            items={[
+              { label: 'LogoMark', href: '#logo' },
+              { label: 'Badge', href: '#components' },
+              { label: 'Button', href: '#components' },
+              { label: 'Stat', href: '#components' },
+              { label: 'MonoLabel', href: '#typography' },
+              { label: 'Table', href: '#tables' },
+            ]}
+          />
           <Demo label="CRM dashboard" padded={false}>
             <Dashboard />
           </Demo>

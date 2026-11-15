@@ -8,6 +8,7 @@
 import { Section, Demo } from '@/showcase/Section'
 import { Stagger, StaggerItem } from '@/lib/motion'
 import { Badge } from '@/components/ui/badge'
+import { TokenTag } from '@/components/ui/token-tag'
 import type { InspectData } from '@/components/ui/inspectable'
 import { sections } from '@/data/positioning'
 import { SectionFolder } from '@/components/section-folders/SectionFolder'
@@ -43,7 +44,11 @@ export function SectionFoldersSection() {
       lead="The ten sections of the signed-off brand positioning, filed as folders. Hover, focus or open one to lift it; amber marks the sections still carrying open or deferred items, the rest are decided."
     >
       <div className="flex flex-col gap-6">
-        <Demo label="Positioning sections · folder overview" inspect={INSPECT}>
+        <Demo
+          label="Positioning sections · folder overview"
+          inspect={INSPECT}
+          action={<TokenTag>{'<SectionFolder n title status index>'}</TokenTag>}
+        >
           <Stagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {sections.map((section, i) => (
               <StaggerItem key={section.n}>
@@ -59,12 +64,14 @@ export function SectionFoldersSection() {
             <Badge variant="neutral" size="sm" dot>
               Decided
             </Badge>
+            <TokenTag>{'variant="neutral"'}</TokenTag>
             <span className="font-body text-body-sm text-fg-subtle">Signed off, no open blocks</span>
           </span>
           <span className="inline-flex items-center gap-2">
             <Badge variant="amber" size="sm" dot>
               Open
             </Badge>
+            <TokenTag>{'variant="amber"'}</TokenTag>
             <span className="font-body text-body-sm text-fg-subtle">Still carries deferred or illustrative blocks</span>
           </span>
         </div>

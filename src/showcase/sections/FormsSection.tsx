@@ -17,6 +17,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Mail, ShieldCheck, Check, AlertCircle, ChevronDown, Clock } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { Button } from '@/components/ui/button'
+import { TokenTag } from '@/components/ui/token-tag'
 import { EASE_OUT } from '@/lib/motion'
 import { cn } from '@/lib/cn'
 
@@ -137,7 +138,15 @@ export function FormsSection() {
         {/* Newsletter + enquiry — side by side, as in the kit grid */}
         <div className="grid gap-8 lg:grid-cols-2">
           {/* (a) Inline newsletter capture */}
-          <Demo label="Newsletter — inline capture with a privacy note">
+          <Demo
+            label="Newsletter — inline capture with a privacy note"
+            action={
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag title="shared field">border-border-strong</TokenTag>
+                <TokenTag>{'<Button variant="primary">'}</TokenTag>
+              </div>
+            }
+          >
             <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
               <div className="flex items-center gap-3">
                 <span className="grid h-10 w-10 flex-none place-items-center rounded-md bg-accent-soft text-accent">
@@ -204,7 +213,15 @@ export function FormsSection() {
           </Demo>
 
           {/* (b) Lead / enquiry form — live error + success field states */}
-          <Demo label="Enquiry — lead form with live error & success states">
+          <Demo
+            label="Enquiry — lead form with live error & success states"
+            action={
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag title="valid field">border-success</TokenTag>
+                <TokenTag title="error field">border-danger</TokenTag>
+              </div>
+            }
+          >
             <form
               noValidate
               onSubmit={(e) => e.preventDefault()}
@@ -304,7 +321,16 @@ export function FormsSection() {
         </div>
 
         {/* (c) Multi-step booking — full width, driven by useState */}
-        <Demo label="Booking — three-step stepper with an active-step panel">
+        <Demo
+          label="Booking — three-step stepper with an active-step panel"
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag title="active slot / step">border-accent bg-accent-soft</TokenTag>
+              <TokenTag>{'variant="primary"'}</TokenTag>
+              <TokenTag>{'variant="ghost"'}</TokenTag>
+            </div>
+          }
+        >
           <div className="rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8">
             {/* stepper header */}
             <div className="flex items-start">

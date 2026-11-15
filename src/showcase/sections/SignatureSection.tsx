@@ -13,6 +13,7 @@ import * as React from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Copy, Check, Table2, Type, ImageUp, ShieldCheck, Reply, Feather } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Input } from '@/components/ui/input'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { Button } from '@/components/ui/button'
@@ -154,7 +155,11 @@ export function SignatureSection() {
     >
       <div className="flex flex-col gap-8">
         {/* The builder — type your details, switch layout, copy the HTML. */}
-        <Demo label="Signature builder — type your details, copy the HTML" inspect={inspect}>
+        <Demo
+          label="Signature builder — type your details, copy the HTML"
+          inspect={inspect}
+          action={<TokenTag title="component">{'<SignaturePreview/>'}</TokenTag>}
+        >
           <div className="grid gap-8 md:grid-cols-2 md:gap-10">
             {/* details + layout */}
             <div className="flex flex-col gap-6">

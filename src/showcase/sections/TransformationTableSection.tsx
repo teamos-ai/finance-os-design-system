@@ -15,6 +15,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Stagger, StaggerItem } from '@/lib/motion'
 import { transformations } from '@/data/positioning'
 import { cn } from '@/lib/cn'
@@ -60,6 +61,24 @@ export function TransformationTableSection() {
         label="From → To — the brand transformations, generic framing to broking-specific"
         inspect={INSPECT}
       >
+        <div className="mb-5 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 font-body text-caption text-fg-subtle">
+          <span className="inline-flex flex-wrap items-center gap-1.5">
+            <span className="font-mono text-mono-2xs uppercase tracking-wider">From</span>
+            <TokenTag>bg-surface</TokenTag>
+            <TokenTag>text-fg-muted</TokenTag>
+          </span>
+          <span aria-hidden className="text-accent">→</span>
+          <span className="inline-flex flex-wrap items-center gap-1.5">
+            <span className="font-mono text-mono-2xs uppercase tracking-wider">arrow</span>
+            <TokenTag>bg-accent-soft</TokenTag>
+          </span>
+          <span aria-hidden className="text-accent">→</span>
+          <span className="inline-flex flex-wrap items-center gap-1.5">
+            <span className="font-mono text-mono-2xs uppercase tracking-wider">To</span>
+            <TokenTag>bg-accent-soft</TokenTag>
+            <TokenTag>text-fg</TokenTag>
+          </span>
+        </div>
         <div className="overflow-hidden rounded-lg border border-border bg-surface">
           {/* column header — desktop only; stacked rows carry their own From / To micro-labels */}
           <div className={cn('hidden border-b border-border bg-canvas-muted', COLS)}>

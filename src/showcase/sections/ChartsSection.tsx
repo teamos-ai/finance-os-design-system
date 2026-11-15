@@ -9,6 +9,7 @@
  */
 import { Section, Demo } from '@/showcase/Section'
 import { Badge } from '@/components/ui/badge'
+import { TokenTag } from '@/components/ui/token-tag'
 import {
   BarChart,
   LineChart,
@@ -107,11 +108,11 @@ export function ChartsSection() {
         <Demo label="Bar & line — comparison and trend" inspect={BAR_INSPECT}>
           <div className="grid gap-8 sm:grid-cols-2">
             <div className="flex flex-col gap-3">
-              <p className="font-mono text-mono-xs uppercase tracking-wider text-fg-subtle">BarChart</p>
+              <TokenTag className="self-start">{'<BarChart>'}</TokenTag>
               <BarChart data={BAR_DATA} highlightIndex={3} ariaLabel="Enquiries by week, week four highest" />
             </div>
             <div className="flex flex-col gap-3">
-              <p className="font-mono text-mono-xs uppercase tracking-wider text-fg-subtle">LineChart</p>
+              <TokenTag className="self-start">{'<LineChart>'}</TokenTag>
               <LineChart data={LINE_DATA} ariaLabel="Settlements trend over six months, rising" />
             </div>
           </div>
@@ -119,15 +120,18 @@ export function ChartsSection() {
 
         <Demo label="Donut & ring — composition and a single value" inspect={RADIAL_INSPECT}>
           <div className="grid items-center gap-8 sm:grid-cols-2">
-            <DonutChart
-              data={DONUT_DATA}
-              centerValue="100%"
-              centerLabel="loan book"
-              formatValue={(v) => `${v}%`}
-              ariaLabel="Loan book mix by purpose"
-            />
+            <div className="flex flex-col gap-3">
+              <TokenTag className="self-start">{'<DonutChart>'}</TokenTag>
+              <DonutChart
+                data={DONUT_DATA}
+                centerValue="100%"
+                centerLabel="loan book"
+                formatValue={(v) => `${v}%`}
+                ariaLabel="Loan book mix by purpose"
+              />
+            </div>
             <div className="mx-auto flex flex-col items-center gap-3">
-              <p className="font-mono text-mono-xs uppercase tracking-wider text-fg-subtle">RingStat</p>
+              <TokenTag>{'<RingStat>'}</TokenTag>
               <RingStat pct={68} value={68} suffix="%" centerSub="of FY target" ariaLabel="68 percent of the financial-year target" />
             </div>
           </div>
@@ -136,12 +140,12 @@ export function ChartsSection() {
         <Demo label="Ranked bars, split track & fill" inspect={BARS_INSPECT}>
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-3">
-              <p className="font-mono text-mono-xs uppercase tracking-wider text-fg-subtle">RankedBarChart</p>
+              <TokenTag className="self-start">{'<RankedBarChart>'}</TokenTag>
               <RankedBarChart data={RANKED_DATA} valueSuffix="%" ariaLabel="New business by source" className="max-w-2xl" />
             </div>
             <div className="grid gap-8 sm:grid-cols-2">
               <div className="flex flex-col gap-3">
-                <p className="font-mono text-mono-xs uppercase tracking-wider text-fg-subtle">SplitTrack</p>
+                <TokenTag className="self-start">{'<SplitTrack>'}</TokenTag>
                 <SplitTrack
                   segments={[
                     { label: 'Owner-occupier', value: 62 },
@@ -151,7 +155,7 @@ export function ChartsSection() {
                 />
               </div>
               <div className="flex flex-col gap-3">
-                <p className="font-mono text-mono-xs uppercase tracking-wider text-fg-subtle">FillBar</p>
+                <TokenTag className="self-start">{'<FillBar>'}</TokenTag>
                 <div className="flex flex-col gap-2.5">
                   <FillBar pct={82} className="h-2.5" ariaLabel="Capacity 82 percent" />
                   <FillBar pct={54} className="h-2.5" delay={0.08} ariaLabel="Capacity 54 percent" />

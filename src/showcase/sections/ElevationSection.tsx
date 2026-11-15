@@ -1,5 +1,6 @@
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 
 const RADII = [
@@ -53,6 +54,7 @@ export function ElevationSection() {
               {RADII.map((r) => (
                 <div key={r.token} className="flex flex-col items-center gap-3">
                   <div className={`h-20 w-full border border-border-strong bg-elevated ${r.token}`} />
+                  <TokenTag title="radius utility">{r.token}</TokenTag>
                   <p className="text-center font-mono text-caption text-fg-subtle">
                     {r.px} · {r.use}
                   </p>
@@ -68,7 +70,8 @@ export function ElevationSection() {
             <div className="grid gap-4 rounded-lg sm:grid-cols-3">
               {SHADOWS.map((s) => (
                 <div key={s.token} className={`rounded-lg border border-border bg-surface p-6 ${s.token}`}>
-                  <p className="font-mono text-caption text-fg-subtle">{s.use}</p>
+                  <TokenTag title="elevation utility">{s.token}</TokenTag>
+                  <p className="mt-2 font-mono text-caption text-fg-subtle">{s.use}</p>
                 </div>
               ))}
             </div>
@@ -81,6 +84,10 @@ export function ElevationSection() {
             <div className="grid gap-4 rounded-lg sm:grid-cols-2">
               <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-border bg-surface p-8">
                 <div className="h-16 w-16 rounded-lg bg-gradient-accent shadow-glow" />
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <TokenTag title="elevation utility">shadow-glow</TokenTag>
+                  <TokenTag title="brand fill">bg-gradient-accent</TokenTag>
+                </div>
                 <p className="font-mono text-caption text-fg-subtle">Atlas Blue glow on an accent tile</p>
               </div>
               <div className="flex items-center rounded-lg border border-border bg-surface p-8">

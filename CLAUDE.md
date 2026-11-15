@@ -68,6 +68,13 @@ compile, which is what enforces token-only and the 8px ceiling.
 in `src/lib/cn.ts`, or `cn()` reads them as text-COLOUR classes and silently drops real colours
 like `text-fg`.
 
+**Self-documenting specimens (hard rule).** What you see must say what makes it — by eye AND for an
+AI agent. Every showcase specimen names the token / class / prop / parts behind it **inline**, not
+only inside the "+" inspector: a `<TokenTag>` (`src/components/ui/token-tag.tsx` — shows + copies the
+string and writes `data-token` to the DOM) for an atomic class/token/prop, or a `<ComposedFrom>`
+(`src/showcase/Section.tsx`) parts row for an assembled design. `npm run check:tokens` gates this; a
+few sections are EXEMPT in `scripts/token-coverage.mjs`, each with a reason. See CONTRIBUTING.md.
+
 ## Routes
 Two surfaces, split in `src/main.tsx` with `react-router-dom`:
 - **`/`** — the showcase. One long scroll, anchor-based sidebar nav. **`src/lib/nav.ts` is the
@@ -117,7 +124,8 @@ Vercel accepts the deploy.
 ## Checks
 - `npm run build` → `tsc --noEmit` + `check:audit` + `vite build`
 - `node scripts/contrast-audit.mjs` → WCAG AA over the semantic pairs (currently 21/21)
-- `npm run check` → typecheck + lint + test (audit + contrast) — the local gate before a commit
+- `npm run check` → typecheck + lint + test (audit + contrast) + **token coverage** — the local gate before a commit
+- `node scripts/token-coverage.mjs` → every showcase section names its specimens inline (`<TokenTag>`/`<ComposedFrom>`); a small documented EXEMPT set aside
 - `npm run docs:components` → regenerates `docs/COMPONENTS.md` after any component change
 
 ## Memory Map & Current State

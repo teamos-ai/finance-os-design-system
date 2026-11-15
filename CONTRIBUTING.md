@@ -6,7 +6,7 @@ ships without its showcase entry and its regenerated index is only half done.
 ## Before every commit
 
 ```bash
-npm run check    # typecheck + lint + test (content audit + WCAG AA contrast)
+npm run check    # typecheck + lint + test (content audit + WCAG AA contrast) + token coverage
 npm run build    # must stay green — this is what Vercel runs
 ```
 
@@ -23,6 +23,27 @@ See **[CLAUDE.md](CLAUDE.md)** for the full brand contract. The short version:
 - No ribbons. 8px-max radius. No glassmorphism. Neutral focus rings.
 - Logos are the **provided assets only** — never draw, recolour or fabricate one (incl. the favicon).
 
+## Every specimen names its token (self-documenting)
+
+The showcase is read by eye **and** by AI agents, so what you see must say what makes it. **Every
+specimen declares the token / class / prop / parts behind it _inline_** — never only inside the "+"
+inspector (that's hidden behind a click). Two tools do this, and `npm run check:tokens` enforces it:
+
+- **`<TokenTag>`** (`src/components/ui/token-tag.tsx`) — for an atomic specimen or a single
+  class / token / prop. It shows the string, copies it on click, and writes `data-token` to the DOM
+  so an agent can read it (`document.querySelectorAll('[data-token]')`). The child is a plain string:
+  `<TokenTag>text-body-md</TokenTag>`, `<TokenTag>{'variant="primary"'}</TokenTag>`. Put it in the
+  specimen's caption/label row, under the sample, or in a `<Demo action={…}>` (the grey header band).
+  Place it **beside** interactive specimens, never nested inside a `<button>`/`<a>`.
+- **`<ComposedFrom>`** (`src/showcase/Section.tsx`) — for an assembled design: the DS parts it's
+  built from, as anchor links. `<ComposedFrom items={[{ label: 'Card', href: '#cards' }]} />`.
+
+`npm run check:tokens` (`scripts/token-coverage.mjs`) fails if a section renders specimens with
+neither. A handful of sections are **EXEMPT** in that script, each with a reason (they self-document
+another accepted way — Tokens/Colour print live swatches, Banners name the variant in the Demo
+label — or render no reproducible specimen). A genuinely new exempt case goes there with a one-line
+reason; otherwise, annotate.
+
 ## Add or change a **component**
 
 1. Put reusable primitives in `src/components/ui/`. Follow the house pattern: a leading `/** … */`
@@ -34,8 +55,9 @@ See **[CLAUDE.md](CLAUDE.md)** for the full brand contract. The short version:
    - **Regenerate the index:** `npm run docs:components` (writes `docs/COMPONENTS.md` — never
      hand-edit it; it is generated from source so it can't drift).
    - **Show it in the showcase:** add or update the component's demo in its `src/showcase/sections/*`
-     file, and give the demo an `inspect={…}` payload (Explain / Tokens / Code / Download) so the
-     live API stays complete.
+     file, give the demo an `inspect={…}` payload (Explain / Tokens / Code / Download) so the live API
+     stays complete, **and name the specimen inline** with a `<TokenTag>` (its prop/class) or
+     `<ComposedFrom>` (its parts) — see *Every specimen names its token* above.
 4. Run `npm run check`. Commit the component, its showcase change, and the regenerated
    `docs/COMPONENTS.md` **together**.
 
@@ -50,6 +72,9 @@ See **[CLAUDE.md](CLAUDE.md)** for the full brand contract. The short version:
 2. Create `src/showcase/sections/<Name>Section.tsx` using the `<Section id=… eyebrow=… title=…>`
    frame (pass the eyebrow as a plain label, no leading number).
 3. Render it in `src/App.tsx` in the same position as the nav entry.
+4. **Annotate every specimen inline** with `<TokenTag>` / `<ComposedFrom>` (see *Every specimen names
+   its token*), then run `npm run check:tokens` — a section that renders a specimen with no inline
+   token fails the gate.
 
 ## Add a **token**
 

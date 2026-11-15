@@ -13,6 +13,7 @@
  */
 import { ArrowLeftRight, Check } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { landscape, landscapeFootnote } from '@/data/positioning'
 import { FadeIn } from '@/lib/motion'
 import { cn } from '@/lib/cn'
@@ -84,6 +85,16 @@ export function LandscapeTableSection() {
 <p>{landscapeFootnote}</p>`,
           }}
         >
+          <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-body text-caption text-fg-subtle">
+            <span className="font-mono text-mono-2xs uppercase tracking-wider text-fg-subtle">Compare key</span>
+            <span className="inline-flex flex-wrap items-center gap-1.5">
+              Good at <TokenTag>bg-success-soft</TokenTag> <TokenTag>text-success</TokenTag>
+            </span>
+            <span className="inline-flex flex-wrap items-center gap-1.5">
+              Weak at <TokenTag>bg-danger-soft</TokenTag> <TokenTag>text-danger</TokenTag>
+            </span>
+            <span>· a raw <span className="font-mono">&lt;table&gt;</span> mirroring the Tables family</span>
+          </div>
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
             <table className="w-full min-w-[820px] border-collapse">
               <thead>

@@ -9,7 +9,8 @@
  * hairline borders, 8px squircles, calm reveals: one system with the rest of the showcase.
  */
 import type { ReactNode } from 'react'
-import { Section, Demo } from '@/showcase/Section'
+import { Section, Demo, ComposedFrom } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { ComparePair } from '@/components/this-vs-that/ThisVsThat'
 import { voice, rules } from '@/data/positioning'
 
@@ -57,6 +58,13 @@ export function ThisVsThatSection() {
       <div className="flex flex-col gap-8">
         {/* Voice — the key demo, carries the inspector */}
         <Demo label="Voice — how we sound, and how we never sound" inspect={VOICE_INSPECT}>
+          <div className="mt-3 mb-6 flex flex-col items-center gap-2.5">
+            <ComposedFrom items={[{ label: 'ComparePair', href: '#this-vs-that' }]} className="my-0" />
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <TokenTag title="semantic token · KEEP signal (green)">--c-success</TokenTag>
+              <TokenTag title="semantic token · AVOID signal (red)">--c-danger</TokenTag>
+            </div>
+          </div>
           <ComparePair
             keep={{ tone: 'keep', title: 'Sounds like us', countWord: 'to keep', items: voice.soundsLike }}
             avoid={{ tone: 'avoid', title: 'Does not sound like us', countWord: 'to avoid', items: voice.doesNot }}
@@ -68,6 +76,13 @@ export function ThisVsThatSection() {
 
         {/* Brand rules — what we always do, and the lines we do not cross */}
         <Demo label="Brand rules — what we always do, and the lines we do not cross">
+          <div className="mt-3 mb-6 flex flex-col items-center gap-2.5">
+            <ComposedFrom items={[{ label: 'ComparePair', href: '#this-vs-that' }]} className="my-0" />
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <TokenTag title="semantic token · KEEP signal (green)">--c-success</TokenTag>
+              <TokenTag title="semantic token · AVOID signal (red)">--c-danger</TokenTag>
+            </div>
+          </div>
           <ComparePair
             keep={{ tone: 'keep', title: 'What we will always do', countWord: 'to keep', items: rules.alwaysDo }}
             avoid={{ tone: 'avoid', title: 'The lines we do not cross', countWord: 'to avoid', items: rules.doNotCross }}

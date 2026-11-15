@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { cn } from '@/lib/cn'
@@ -66,16 +67,19 @@ export function TypographySection() {
         {/* heading colour toggle — theme-aware options */}
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-surface px-5 py-4">
           <MonoLabel tone="subtle">Heading colour</MonoLabel>
-          <SegmentedControl
-            aria-label="Heading colour"
-            value={color}
-            onValueChange={(v) => setColor(v as ColorKey)}
-            size="sm"
-            options={[
-              { value: 'accent', label: opts.accent },
-              { value: 'ink', label: opts.ink },
-            ]}
-          />
+          <div className="flex items-center gap-3">
+            <TokenTag title="active heading-colour class">{colorClass}</TokenTag>
+            <SegmentedControl
+              aria-label="Heading colour"
+              value={color}
+              onValueChange={(v) => setColor(v as ColorKey)}
+              size="sm"
+              options={[
+                { value: 'accent', label: opts.accent },
+                { value: 'ink', label: opts.ink },
+              ]}
+            />
+          </div>
         </div>
 
         {/* display specimens — coloured by the toggle */}
@@ -87,7 +91,8 @@ export function TypographySection() {
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {DISPLAY.map((r) => (
               <div key={r.token} className="grid grid-cols-1 gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col items-start gap-1.5">
+                  <TokenTag>{r.cls}</TokenTag>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
                 </div>
                 <p className={cn('font-display transition-colors duration-base', r.cls, colorClass)}>{r.sample}</p>
@@ -106,7 +111,8 @@ export function TypographySection() {
           <div className="divide-y divide-border-subtle rounded-lg border border-border bg-surface">
             {BODY.map((r) => (
               <div key={r.token} className="grid grid-cols-1 gap-3 px-5 py-5 md:grid-cols-[160px_1fr] md:items-baseline">
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col items-start gap-1.5">
+                  <TokenTag>{r.cls}</TokenTag>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
                 </div>
                 <p className={cn('font-body text-fg', r.cls)}>{r.sample}</p>
@@ -118,7 +124,10 @@ export function TypographySection() {
 
         {/* full body copy specimen */}
         <div className="rounded-lg border border-border bg-surface p-6 md:p-8">
-          <MonoLabel tone="subtle">Body copy · a full paragraph</MonoLabel>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <MonoLabel tone="subtle">Body copy · a full paragraph</MonoLabel>
+            <TokenTag title="utility class">text-body-md</TokenTag>
+          </div>
           <div className="mt-4 max-w-2xl space-y-4">
             {BODY_COPY.split('\n\n').map((para, i) => (
               <p key={i} className="font-body text-body-md leading-relaxed text-fg-muted">{para}</p>

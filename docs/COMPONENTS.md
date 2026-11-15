@@ -35,6 +35,7 @@ The reusable primitives. Compose only from `--c-*` tokens.
 | `SegmentedControl` | Daily \| Weekly \| Monthly. |  | `ui/segmented.tsx` |
 | `Stat` | a big outcome figure with a calm label. |  | `ui/stat.tsx` |
 | `Swatch` `GradientSwatch` | a click-to-copy colour chip. |  | `ui/swatch.tsx` |
+| `TokenTag` | the system's inline "what produces this" chip. |  | `ui/token-tag.tsx` |
 | `ToolCard` | a single "thing Finance OS replaces" card for the horizontal carousel (app-card craft). |  | `ui/tool-card.tsx` |
 | `VideoPlayer` | a flat hairline video frame, ported from the Health OS v2 design system and reskinned to Finance OS tokens. |  | `ui/video-player.tsx` |
 

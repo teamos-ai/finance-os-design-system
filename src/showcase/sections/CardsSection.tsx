@@ -33,6 +33,7 @@ import { Stat } from '@/components/ui/stat'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import type { InspectData } from '@/components/ui/inspectable'
 import type { Accent } from '@/lib/accents'
 import { FEATURES, TOOLS_REPLACED } from '@/data/system'
@@ -90,7 +91,16 @@ export function CardsSection() {
     >
       <div className="flex flex-col gap-8">
         {/* Base card — full anatomy */}
-        <Demo label="Base card — Header · Title · Description · Content · Footer" inspect={CARD_INSPECT}>
+        <Demo
+          label="Base card — Header · Title · Description · Content · Footer"
+          inspect={CARD_INSPECT}
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag>{'<Card interactive>'}</TokenTag>
+              <TokenTag>{'tone="soft"'}</TokenTag>
+            </div>
+          }
+        >
           <div className="grid gap-5 lg:grid-cols-2">
             <Card interactive>
               <CardHeader>
@@ -128,7 +138,16 @@ export function CardsSection() {
         </Demo>
 
         {/* Feature cards — from FEATURES */}
-        <Demo label="Feature cards — icon well · title · body" inspect={FEATURE_INSPECT}>
+        <Demo
+          label="Feature cards — icon well · title · body"
+          inspect={FEATURE_INSPECT}
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag>{'<FeatureCard>'}</TokenTag>
+              <TokenTag>{'accent="blue"'}</TokenTag>
+            </div>
+          }
+        >
           <div className="grid gap-5 md:grid-cols-3">
             {FEATURES.slice(0, 3).map((f, i) => (
               <FeatureCard
@@ -145,7 +164,16 @@ export function CardsSection() {
         </Demo>
 
         {/* Tool cards — from TOOLS_REPLACED */}
-        <Demo label="Tool cards — what Finance OS replaces" inspect={TOOL_INSPECT}>
+        <Demo
+          label="Tool cards — what Finance OS replaces"
+          inspect={TOOL_INSPECT}
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag>{'<ToolCard>'}</TokenTag>
+              <TokenTag>{'name meta icon accent'}</TokenTag>
+            </div>
+          }
+        >
           <div className="-mx-2 flex gap-5 overflow-x-auto px-2 pb-2">
             {TOOLS_REPLACED.map((name) => {
               const m = TOOL_META[name]
@@ -165,7 +193,16 @@ export function CardsSection() {
         {/* Stat card + media card */}
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Stat inside a Card */}
-          <Demo label="Stat card — an outcome figure on a surface" inspect={STAT_INSPECT}>
+          <Demo
+            label="Stat card — an outcome figure on a surface"
+            inspect={STAT_INSPECT}
+            action={
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<Stat>'}</TokenTag>
+                <TokenTag>{'<Card interactive>'}</TokenTag>
+              </div>
+            }
+          >
             <Card interactive>
               <CardHeader>
                 <MonoLabel tone="success" dot>
@@ -186,7 +223,16 @@ export function CardsSection() {
           </Demo>
 
           {/* Media card — wash treatment */}
-          <Demo label="Media card — wash placeholder · badge · meta · actions" inspect={MEDIA_INSPECT}>
+          <Demo
+            label="Media card — wash placeholder · badge · meta · actions"
+            inspect={MEDIA_INSPECT}
+            action={
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<Card>'}</TokenTag>
+                <TokenTag>{'placeholderIcon badge meta actions'}</TokenTag>
+              </div>
+            }
+          >
             <Card
               accent="blue"
               placeholderIcon={LineChart}

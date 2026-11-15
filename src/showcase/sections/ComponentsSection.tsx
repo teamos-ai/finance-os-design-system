@@ -27,6 +27,7 @@ import { SaveButton } from '@/components/ui/save-button'
 import { CelebrationButton } from '@/components/ui/celebration-button'
 import { Stat } from '@/components/ui/stat'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 
 type Period = 'daily' | 'weekly' | 'monthly'
 
@@ -61,7 +62,7 @@ export function ComponentsSection() {
           token={`primary    → bg-accent · text-accent-fg\nsecondary  → border-accent-text · text-accent-text\n--c-accent = Atlas Blue (#33488F)`}
           code={`<Button variant="primary">Book a call</Button>\n<Button variant="secondary">Compare plans</Button>`}
         >
-          <Demo label="Button intents — primary (solid) &amp; secondary (outline)">
+          <Demo label="Button intents — primary (solid) &amp; secondary (outline)" action={<TokenTag>{`variant="${intent}"`}</TokenTag>}>
             <div className="flex flex-col gap-5">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <MonoLabel tone="subtle">Accent · Atlas Blue (#33488F)</MonoLabel>
@@ -115,21 +116,48 @@ export function ComponentsSection() {
           code={`<Button variant="gradient">Start free</Button>\n<Button variant="ghost">Learn more</Button>`}
         >
           <Demo label="Button — nine variants">
-            <div className="flex flex-wrap items-center gap-3">
-              <Button variant="primary">Book a call</Button>
-              <Button variant="gradient">Start free</Button>
-              <Button variant="secondary">Compare plans</Button>
-              <Button variant="dark" leadingIcon={<Play className="h-3 w-3 fill-current" strokeWidth={0} />}>
-                Watch the tour
-              </Button>
-              <Button variant="soft">Submit</Button>
-              <Button variant="outline">Export</Button>
-              <Button variant="ghost">Learn more</Button>
-              <Button variant="danger">Cancel plan</Button>
-              <Button variant="link">
-                See pricing
-                <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-              </Button>
+            <div className="flex flex-wrap items-start gap-x-3 gap-y-4">
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="primary">Book a call</Button>
+                <TokenTag>variant="primary"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="gradient">Start free</Button>
+                <TokenTag>variant="gradient"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="secondary">Compare plans</Button>
+                <TokenTag>variant="secondary"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="dark" leadingIcon={<Play className="h-3 w-3 fill-current" strokeWidth={0} />}>
+                  Watch the tour
+                </Button>
+                <TokenTag>variant="dark"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="soft">Submit</Button>
+                <TokenTag>variant="soft"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="outline">Export</Button>
+                <TokenTag>variant="outline"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="ghost">Learn more</Button>
+                <TokenTag>variant="ghost"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="danger">Cancel plan</Button>
+                <TokenTag>variant="danger"</TokenTag>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <Button variant="link">
+                  See pricing
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+                </Button>
+                <TokenTag>variant="link"</TokenTag>
+              </div>
             </div>
           </Demo>
         </Inspectable>
@@ -143,18 +171,33 @@ export function ComponentsSection() {
         >
           <Demo label="Button — sizes &amp; disabled state">
             <div className="flex flex-col gap-5">
-              <div className="flex flex-wrap items-center gap-3">
-                <Button size="sm">Small</Button>
-                <Button size="md">Medium</Button>
-                <Button size="lg">Large</Button>
+              <div className="flex flex-wrap items-start gap-x-3 gap-y-4">
+                <div className="flex flex-col items-center gap-2">
+                  <Button size="sm">Small</Button>
+                  <TokenTag>size="sm"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <Button size="md">Medium</Button>
+                  <TokenTag>size="md"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <Button size="lg">Large</Button>
+                  <TokenTag>size="lg"</TokenTag>
+                </div>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <Button variant="primary" disabled>
-                  Disabled
-                </Button>
-                <Button variant="secondary" disabled>
-                  Disabled
-                </Button>
+              <div className="flex flex-wrap items-start gap-x-3 gap-y-4">
+                <div className="flex flex-col items-center gap-2">
+                  <Button variant="primary" disabled>
+                    Disabled
+                  </Button>
+                  <TokenTag>disabled</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <Button variant="secondary" disabled>
+                    Disabled
+                  </Button>
+                  <TokenTag>disabled</TokenTag>
+                </div>
               </div>
             </div>
           </Demo>
@@ -169,33 +212,57 @@ export function ComponentsSection() {
         >
           <Demo label="IconButton — icon-only, aria-label required">
             <div className="flex flex-col gap-5">
-              <div className="flex flex-wrap items-center gap-3">
-                <IconButton variant="dark" aria-label="Play the tour">
-                  <Play className="h-4 w-4 fill-current" strokeWidth={0} />
-                </IconButton>
-                <IconButton variant="accent" aria-label="Confirm">
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
-                </IconButton>
-                <IconButton variant="soft" aria-label="Email us">
-                  <Mail className="h-4 w-4" strokeWidth={1.5} />
-                </IconButton>
-                <IconButton variant="outline" aria-label="Next">
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                </IconButton>
-                <IconButton variant="ghost" aria-label="Open mail">
-                  <Mail className="h-4 w-4" strokeWidth={1.5} />
-                </IconButton>
+              <div className="flex flex-wrap items-start gap-x-3 gap-y-4">
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton variant="dark" aria-label="Play the tour">
+                    <Play className="h-4 w-4 fill-current" strokeWidth={0} />
+                  </IconButton>
+                  <TokenTag>variant="dark"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton variant="accent" aria-label="Confirm">
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
+                  </IconButton>
+                  <TokenTag>variant="accent"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton variant="soft" aria-label="Email us">
+                    <Mail className="h-4 w-4" strokeWidth={1.5} />
+                  </IconButton>
+                  <TokenTag>variant="soft"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton variant="outline" aria-label="Next">
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </IconButton>
+                  <TokenTag>variant="outline"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton variant="ghost" aria-label="Open mail">
+                    <Mail className="h-4 w-4" strokeWidth={1.5} />
+                  </IconButton>
+                  <TokenTag>variant="ghost"</TokenTag>
+                </div>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <IconButton size="sm" variant="dark" aria-label="Play small">
-                  <Play className="h-3.5 w-3.5 fill-current" strokeWidth={0} />
-                </IconButton>
-                <IconButton size="md" variant="dark" aria-label="Play medium">
-                  <Play className="h-4 w-4 fill-current" strokeWidth={0} />
-                </IconButton>
-                <IconButton size="lg" variant="dark" aria-label="Play large">
-                  <Play className="h-5 w-5 fill-current" strokeWidth={0} />
-                </IconButton>
+              <div className="flex flex-wrap items-start gap-x-3 gap-y-4">
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton size="sm" variant="dark" aria-label="Play small">
+                    <Play className="h-3.5 w-3.5 fill-current" strokeWidth={0} />
+                  </IconButton>
+                  <TokenTag>size="sm"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton size="md" variant="dark" aria-label="Play medium">
+                    <Play className="h-4 w-4 fill-current" strokeWidth={0} />
+                  </IconButton>
+                  <TokenTag>size="md"</TokenTag>
+                </div>
+                <div className="flex flex-col items-center gap-2">
+                  <IconButton size="lg" variant="dark" aria-label="Play large">
+                    <Play className="h-5 w-5 fill-current" strokeWidth={0} />
+                  </IconButton>
+                  <TokenTag>size="lg"</TokenTag>
+                </div>
               </div>
             </div>
           </Demo>
@@ -209,11 +276,14 @@ export function ComponentsSection() {
           code={`<Badge variant="success" dot>Funded</Badge>`}
         >
           <Demo label="Badge — every variant">
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-start gap-x-3 gap-y-4">
               {BADGE_VARIANTS.map((b) => (
-                <Badge key={b.variant} variant={b.variant} dot>
-                  {b.label}
-                </Badge>
+                <div key={b.variant} className="flex flex-col items-center gap-2">
+                  <Badge variant={b.variant} dot>
+                    {b.label}
+                  </Badge>
+                  <TokenTag>{`variant="${b.variant}"`}</TokenTag>
+                </div>
               ))}
             </div>
           </Demo>
@@ -226,16 +296,28 @@ export function ComponentsSection() {
           token={`bg-surface · border-border-strong\nradius → --radius-md (6px)\nerror → text-danger`}
           code={`<Input label="Work email" icon={Mail} />\n<Input label="ABN" error="Enter a valid ABN." />`}
         >
-          <Demo label="Input — default, with hint, with error">
+          <Demo label="Input — default, with hint, with error" action={<TokenTag>{'<Input>'}</TokenTag>}>
             <div className="grid max-w-2xl gap-5 md:grid-cols-2">
-              <Input label="Full name" placeholder="Jordan broker" />
-              <Input label="Work email" type="email" icon={Mail} placeholder="jordan@firm.com.au" />
-              <Input
-                label="Brokerage"
-                placeholder="Meridian Capital"
-                hint="Shown to your clients on every statement."
-              />
-              <Input label="ABN" placeholder="51 824 753 556" error="Enter a valid 11-digit ABN." />
+              <div className="flex flex-col items-start gap-2">
+                <Input label="Full name" placeholder="Jordan broker" />
+                <TokenTag>default</TokenTag>
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <Input label="Work email" type="email" icon={Mail} placeholder="jordan@firm.com.au" />
+                <TokenTag>{'icon={Mail}'}</TokenTag>
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <Input
+                  label="Brokerage"
+                  placeholder="Meridian Capital"
+                  hint="Shown to your clients on every statement."
+                />
+                <TokenTag>hint</TokenTag>
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <Input label="ABN" placeholder="51 824 753 556" error="Enter a valid 11-digit ABN." />
+                <TokenTag>error</TokenTag>
+              </div>
             </div>
           </Demo>
         </Inspectable>
@@ -247,7 +329,15 @@ export function ComponentsSection() {
           token={`active pill → bg-inverse · text-inverse-fg\ntrack → bg-surface · border-border`}
           code={`<SegmentedControl value={period} onValueChange={setPeriod} options={…} />\n<Pagination page={page} total={8} onChange={setPage} />`}
         >
-          <Demo label="SegmentedControl + Pagination — live state">
+          <Demo
+            label="SegmentedControl + Pagination — live state"
+            action={
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<SegmentedControl>'}</TokenTag>
+                <TokenTag>{'<Pagination>'}</TokenTag>
+              </div>
+            }
+          >
             <div className="flex flex-col gap-6">
               <div className="flex flex-wrap items-center gap-8">
                 <SegmentedControl
@@ -278,7 +368,7 @@ export function ComponentsSection() {
           token={`animation → grid-rows-[0fr] ⇆ grid-rows-[1fr]\nborder-border · text-fg-muted`}
           code={`<Disclosure title="How is data secured?" defaultOpen>\n  …\n</Disclosure>`}
         >
-          <Demo label="Disclosure — calm accordion">
+          <Demo label="Disclosure — calm accordion" action={<TokenTag>{'<Disclosure>'}</TokenTag>}>
             <div className="flex flex-col gap-3">
               <Disclosure title="How is client data secured?" defaultOpen>
                 Every record is encrypted at rest and in transit. Access is role-scoped, and a full
@@ -299,7 +389,15 @@ export function ComponentsSection() {
           token={`bg-surface · border-border\nchip → bg-canvas-muted · text-fg-muted`}
           code={`<CommandBar />\n<CommandChip command="import my loan book" />`}
         >
-          <Demo label="CommandBar + /command chips">
+          <Demo
+            label="CommandBar + /command chips"
+            action={
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<CommandBar>'}</TokenTag>
+                <TokenTag>{'<CommandChip>'}</TokenTag>
+              </div>
+            }
+          >
             <div className="flex flex-col gap-4">
               <CommandBar />
               <div className="flex flex-wrap gap-2.5">
@@ -318,7 +416,15 @@ export function ComponentsSection() {
           token={`success chips → --c-success\nstreamers → --p-blue-* primitives`}
           code={`<SaveButton>Save changes</SaveButton>\n<CelebrationButton>Mark settled</CelebrationButton>`}
         >
-          <Demo label="SaveButton + CelebrationButton — confirmation motion">
+          <Demo
+            label="SaveButton + CelebrationButton — confirmation motion"
+            action={
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<SaveButton>'}</TokenTag>
+                <TokenTag>{'<CelebrationButton>'}</TokenTag>
+              </div>
+            }
+          >
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap items-center gap-3">
                 <SaveButton>Save changes</SaveButton>
@@ -339,7 +445,7 @@ export function ComponentsSection() {
           token={`value → font-display · text-fg\nlabel → text-fg-subtle`}
           code={`<Stat value={1284} prefix="$" suffix="M" label="Settled this quarter" />`}
         >
-          <Demo label="Stat — outcome figures">
+          <Demo label="Stat — outcome figures" action={<TokenTag>{'<Stat>'}</TokenTag>}>
             <div className="flex flex-wrap items-end gap-12">
               <Stat value={1284} prefix="$" suffix="M" label="Settled this quarter" />
               <Stat value={98} suffix="%" label="On-time settlements" />

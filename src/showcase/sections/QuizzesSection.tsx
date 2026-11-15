@@ -6,6 +6,7 @@
  * isn't published). Built on the reusable QuizRunner so the team can seed new quizzes the same way.
  */
 import { Section, Demo } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { QuizRunner, type QuizQuestion, type QuizStage } from '@/components/quizzes/QuizRunner'
 import type { InspectData } from '@/components/ui/inspectable'
@@ -86,6 +87,11 @@ export function QuizzesSection() {
                 See the live quiz ↗
               </a>
             </p>
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag title="selected option">border-accent</TokenTag>
+              <TokenTag title="selected option">bg-accent-soft</TokenTag>
+              <TokenTag title="selected option">text-accent-text</TokenTag>
+            </div>
           </div>
           <QuizRunner questions={QUESTIONS} stages={STAGES} />
         </div>

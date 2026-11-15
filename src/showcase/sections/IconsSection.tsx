@@ -57,6 +57,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Input } from '@/components/ui/input'
 import { IconButton } from '@/components/ui/icon-button'
 import { Stagger, StaggerItem } from '@/lib/motion'
@@ -316,12 +317,12 @@ function Conventions() {
           <div className="flex items-center gap-3">
             <FileText className="h-6 w-6 text-fg" strokeWidth={1.5} aria-hidden />
             <span className="font-body text-body-md text-fg">Body copy</span>
-            <span className="ml-auto font-mono text-mono-2xs tabular-nums text-fg-subtle">1.5</span>
+            <TokenTag title="stroke prop" className="ml-auto">{'strokeWidth={1.5}'}</TokenTag>
           </div>
           <div className="flex items-center gap-3">
             <FileText className="h-6 w-6 text-fg" strokeWidth={2} aria-hidden />
             <span className="font-display text-title-sm text-fg">Bold label</span>
-            <span className="ml-auto font-mono text-mono-2xs tabular-nums text-fg-subtle">2</span>
+            <TokenTag title="stroke prop" className="ml-auto">{'strokeWidth={2}'}</TokenTag>
           </div>
         </div>
       </ConventionTile>
@@ -330,11 +331,11 @@ function Conventions() {
         title="currentColor"
         caption="One glyph, six text tokens — the colour comes from the text, never a baked-in fill."
       >
-        <div className="grid w-full grid-cols-3 gap-3 sm:grid-cols-6">
+        <div className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3">
           {COLOR_STATES.map((c) => (
-            <div key={c.label} className="flex flex-col items-center gap-1.5">
+            <div key={c.label} className="flex flex-col items-center gap-2">
               <ShieldCheck className={cn('h-5 w-5', c.cls)} strokeWidth={1.75} aria-hidden />
-              <span className="font-mono text-mono-2xs text-fg-subtle">{c.label}</span>
+              <TokenTag title="text colour token">{c.cls}</TokenTag>
             </div>
           ))}
         </div>
@@ -354,9 +355,12 @@ function Conventions() {
               ),
             )}
           </div>
-          <div className="flex gap-4 font-mono text-mono-2xs text-fg-subtle">
-            <span>fill = selected</span>
-            <span>outline = empty</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-fg-subtle">
+            <span className="inline-flex items-center gap-1.5">
+              <TokenTag title="selected glyph">fill-current</TokenTag>
+              <span className="font-mono text-mono-2xs">= selected</span>
+            </span>
+            <span className="font-mono text-mono-2xs">outline = empty</span>
           </div>
         </div>
       </ConventionTile>

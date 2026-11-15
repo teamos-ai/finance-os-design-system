@@ -1,5 +1,6 @@
 import { Section } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Inspectable } from '@/components/ui/inspectable'
 
 const BG_TILES = [
@@ -33,8 +34,12 @@ export function LogoSection() {
                   <img src={tile.rect} alt={`Finance OS lockup — ${tile.name}`} className="h-9 w-auto object-contain" />
                   <img src={tile.mark} alt="Finance OS mark" className="h-10 w-10 object-contain" />
                 </div>
-                <div className="border-t border-border bg-surface px-4 py-2.5">
+                <div className="flex flex-col gap-2 border-t border-border bg-surface px-4 py-3">
                   <span className="font-mono text-caption text-fg-subtle">{tile.name}</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    <TokenTag title="lockup asset">{tile.rect}</TokenTag>
+                    <TokenTag title="mark asset">{tile.mark}</TokenTag>
+                  </div>
                 </div>
               </div>
             </Inspectable>

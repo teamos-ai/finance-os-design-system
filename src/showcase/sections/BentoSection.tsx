@@ -6,13 +6,14 @@
  * Stagger band over FadeIn so the panel assembles quietly and reduced-motion safe.
  */
 import { ArrowRight, Sparkles, ShieldCheck } from 'lucide-react'
-import { Section } from '@/showcase/Section'
+import { Section, ComposedFrom } from '@/showcase/Section'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Stat } from '@/components/ui/stat'
 import { FeatureCard } from '@/components/ui/feature-card'
 import { ImageWash } from '@/components/ui/image-wash'
 import { MonoLabel } from '@/components/ui/mono-label'
+import { TokenTag } from '@/components/ui/token-tag'
 import { FadeIn, Stagger, StaggerItem, Glow } from '@/lib/motion'
 import { FEATURES, STATS, BRAND } from '@/data/system'
 
@@ -29,6 +30,16 @@ export function BentoSection() {
       title="Bento box"
       lead="The responsive bento grid — a hero, feature cells, an outcome figure, a media wash and a closing CTA composed into one expressive panel. Lift the whole arrangement, or any single cell."
     >
+      <ComposedFrom
+        items={[
+          { label: 'FeatureCard', href: '#cards' },
+          { label: 'Stat', href: '#components' },
+          { label: 'ImageWash', href: '#imagery' },
+          { label: 'Button', href: '#components' },
+          { label: 'Badge', href: '#components' },
+          { label: 'MonoLabel', href: '#typography' },
+        ]}
+      />
       <FadeIn>
         <Stagger className="grid grid-cols-1 gap-4 md:grid-cols-3 md:auto-rows-[minmax(0,1fr)]">
           {/* Hero tile — gradient + Glow, spans two columns and two rows on desktop. */}
@@ -45,6 +56,10 @@ export function BentoSection() {
                 <p className="max-w-md font-body text-body-md leading-relaxed text-accent-fg/85">
                   {BRAND.promise}
                 </p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <TokenTag title="utility class · hero tile gradient fill">bg-gradient-accent</TokenTag>
+                  <TokenTag title="motion component · ambient glow">{'<Glow>'}</TokenTag>
+                </div>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button variant="dark" size="md">

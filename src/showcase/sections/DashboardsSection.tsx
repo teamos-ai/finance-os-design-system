@@ -402,16 +402,38 @@ export function DashboardsSection() {
       />
       <div className="flex flex-col gap-8">
         {/* The full brand workspace — the same tokenised asset the Video Explainer flips to the demo */}
-        <Demo label="My Account workspace — the full brand layout, tokenised" inspect={WORKSPACE_INSPECT}>
-          <ScaleToFit width={1280} height={720} className="rounded-lg border border-border shadow-lg">
-            <BrandDashboard />
-          </ScaleToFit>
-        </Demo>
+        <div>
+          <ComposedFrom
+            className="mt-3 mb-6"
+            items={[
+              { label: 'BrandDashboard', href: '#video' },
+              { label: 'ScaleToFit', href: '#video' },
+            ]}
+          />
+          <Demo label="My Account workspace — the full brand layout, tokenised" inspect={WORKSPACE_INSPECT}>
+            <ScaleToFit width={1280} height={720} className="rounded-lg border border-border shadow-lg">
+              <BrandDashboard />
+            </ScaleToFit>
+          </Demo>
+        </div>
 
         {/* The live, assembled dashboard */}
-        <Demo label="Broker dashboard — switch the view" inspect={DASH_INSPECT}>
-          <DashboardSurface />
-        </Demo>
+        <div>
+          <ComposedFrom
+            className="mt-3 mb-6"
+            items={[
+              { label: 'KpiTile', href: '#widgets' },
+              { label: 'SegmentedControl', href: '#components' },
+              { label: 'BarChart', href: '#charts' },
+              { label: 'LineChart', href: '#charts' },
+              { label: 'DonutChart', href: '#charts' },
+              { label: 'MiniTable', href: '#tables' },
+            ]}
+          />
+          <Demo label="Broker dashboard — switch the view" inspect={DASH_INSPECT}>
+            <DashboardSurface />
+          </Demo>
+        </div>
 
         {/* The three tokenised chart primitives, documented on their own */}
         <Demo label="Chart kit — tokenised inline SVG (bar · line · donut)" inspect={CHARTS_INSPECT}>

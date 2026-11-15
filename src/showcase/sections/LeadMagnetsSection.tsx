@@ -14,6 +14,7 @@
 import * as React from 'react'
 import { Calculator, Check, Download, FileText, Mail, RotateCcw, TrendingDown, BookOpen, Layers, ListChecks } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -346,6 +347,18 @@ const MOTION_VOCAB = [
   { Icon: ListChecks, t: 'Checkbox tick', d: 'Checklists · quizzes' },
 ]
 
+/** Caption a template specimen with the component a builder drops in to reproduce it. */
+function Specimen({ tag, children }: { tag: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2">
+      {children}
+      <TokenTag title="template component" className="self-start">
+        {tag}
+      </TokenTag>
+    </div>
+  )
+}
+
 export function LeadMagnetsSection() {
   return (
     <Section
@@ -379,8 +392,12 @@ export function LeadMagnetsSection() {
         <div>
           <MonoLabel tone="subtle">Turn the pages — flip</MonoLabel>
           <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <EbookTemplate />
-            <MagazineTemplate />
+            <Specimen tag="<EbookTemplate/>">
+              <EbookTemplate />
+            </Specimen>
+            <Specimen tag="<MagazineTemplate/>">
+              <MagazineTemplate />
+            </Specimen>
           </div>
         </div>
 
@@ -388,13 +405,23 @@ export function LeadMagnetsSection() {
         <div>
           <MonoLabel tone="subtle">Interactive — swipe · tick · count-up</MonoLabel>
           <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <SwipeFileTemplate />
-            <ChecklistTemplate />
-            <QuizTemplate />
-            <ScorecardTemplate />
+            <Specimen tag="<SwipeFileTemplate/>">
+              <SwipeFileTemplate />
+            </Specimen>
+            <Specimen tag="<ChecklistTemplate/>">
+              <ChecklistTemplate />
+            </Specimen>
+            <Specimen tag="<QuizTemplate/>">
+              <QuizTemplate />
+            </Specimen>
+            <Specimen tag="<ScorecardTemplate/>">
+              <ScorecardTemplate />
+            </Specimen>
           </div>
           <div className="mt-6">
-            <CalculatorTemplate />
+            <Specimen tag="<CalculatorTemplate/>">
+              <CalculatorTemplate />
+            </Specimen>
           </div>
         </div>
 
@@ -402,13 +429,23 @@ export function LeadMagnetsSection() {
         <div>
           <MonoLabel tone="subtle">Documents</MonoLabel>
           <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <CheatSheetTemplate />
-            <GuideTemplate />
-            <WorkbookTemplate />
-            <CaseStudyTemplate />
+            <Specimen tag="<CheatSheetTemplate/>">
+              <CheatSheetTemplate />
+            </Specimen>
+            <Specimen tag="<GuideTemplate/>">
+              <GuideTemplate />
+            </Specimen>
+            <Specimen tag="<WorkbookTemplate/>">
+              <WorkbookTemplate />
+            </Specimen>
+            <Specimen tag="<CaseStudyTemplate/>">
+              <CaseStudyTemplate />
+            </Specimen>
           </div>
           <div className="mt-6">
-            <ReportTemplate />
+            <Specimen tag="<ReportTemplate/>">
+              <ReportTemplate />
+            </Specimen>
           </div>
         </div>
 
@@ -416,15 +453,29 @@ export function LeadMagnetsSection() {
         <div>
           <MonoLabel tone="subtle">Opt-in &amp; utility</MonoLabel>
           <div className="mt-4 grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-            <NewsletterTemplate />
-            <EmailCourseTemplate />
-            <WebinarTemplate />
-            <ToolkitTemplate />
-            <ResourceListTemplate />
-            <PlannerTemplate />
+            <Specimen tag="<NewsletterTemplate/>">
+              <NewsletterTemplate />
+            </Specimen>
+            <Specimen tag="<EmailCourseTemplate/>">
+              <EmailCourseTemplate />
+            </Specimen>
+            <Specimen tag="<WebinarTemplate/>">
+              <WebinarTemplate />
+            </Specimen>
+            <Specimen tag="<ToolkitTemplate/>">
+              <ToolkitTemplate />
+            </Specimen>
+            <Specimen tag="<ResourceListTemplate/>">
+              <ResourceListTemplate />
+            </Specimen>
+            <Specimen tag="<PlannerTemplate/>">
+              <PlannerTemplate />
+            </Specimen>
           </div>
           <div className="mx-auto mt-6 max-w-sm">
-            <CouponTemplate />
+            <Specimen tag="<CouponTemplate/>">
+              <CouponTemplate />
+            </Specimen>
           </div>
         </div>
 
@@ -432,24 +483,39 @@ export function LeadMagnetsSection() {
         <div>
           <MonoLabel tone="subtle">Capture surfaces — live state</MonoLabel>
           <div className="mt-4 flex flex-col gap-6">
-            <Demo
-              label="Tech-stack savings calculator"
-              action={
-                <Badge variant="outline" size="sm">
-                  <Calculator className="h-3 w-3" strokeWidth={1.5} aria-hidden />
-                  Live
-                </Badge>
-              }
-            >
-              <SavingsCalculator />
-            </Demo>
-
-            <Demo label="Gated download & opt-in">
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <GatedDownload />
-                <OptInForm />
+            <div>
+              <Demo
+                label="Tech-stack savings calculator"
+                action={
+                  <Badge variant="outline" size="sm">
+                    <Calculator className="h-3 w-3" strokeWidth={1.5} aria-hidden />
+                    Live
+                  </Badge>
+                }
+              >
+                <SavingsCalculator />
+              </Demo>
+              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<Input>'}</TokenTag>
+                <TokenTag>{'<Button variant="gradient">'}</TokenTag>
+                <TokenTag>{'<CountUp>'}</TokenTag>
+                <TokenTag title="result card fill">bg-accent-soft</TokenTag>
               </div>
-            </Demo>
+            </div>
+
+            <div>
+              <Demo label="Gated download & opt-in">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                  <GatedDownload />
+                  <OptInForm />
+                </div>
+              </Demo>
+              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                <TokenTag>{'<Input>'}</TokenTag>
+                <TokenTag>{'<Button>'}</TokenTag>
+                <TokenTag title="success / thank-you state">bg-success-soft</TokenTag>
+              </div>
+            </div>
           </div>
         </div>
       </div>

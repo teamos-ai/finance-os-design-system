@@ -8,6 +8,7 @@
  */
 import * as React from 'react'
 import { Section, Demo } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { RepaymentCalculator } from '@/components/calculators/RepaymentCalculator'
 import { ExtraRepaymentsCalculator } from '@/components/calculators/ExtraRepaymentsCalculator'
 import { LumpSumCalculator } from '@/components/calculators/LumpSumCalculator'
@@ -164,32 +165,86 @@ export function CalculatorsSection() {
       <div className="flex flex-col gap-12">
         <CalcGroup label="Paying it off" hint="6 of 6">
           <FadeIn>
-            <Demo label="Repayments — value, deposit, rate, term, frequency" inspect={REPAYMENT_INSPECT}>
+            <Demo
+              label="Repayments — value, deposit, rate, term, frequency"
+              inspect={REPAYMENT_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<RepaymentCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">periodicRepayment()</TokenTag>
+                </div>
+              }
+            >
               <RepaymentCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Extra repayments — interest saved, time off" inspect={EXTRA_INSPECT}>
+            <Demo
+              label="Extra repayments — interest saved, time off"
+              inspect={EXTRA_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<ExtraRepaymentsCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">amortise()</TokenTag>
+                </div>
+              }
+            >
               <ExtraRepaymentsCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Lump sum — a one-off payment partway through" inspect={LUMP_INSPECT}>
+            <Demo
+              label="Lump sum — a one-off payment partway through"
+              inspect={LUMP_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<LumpSumCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">amortise()</TokenTag>
+                </div>
+              }
+            >
               <LumpSumCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Offset account — lifetime saving + equivalent return" inspect={OFFSET_INSPECT}>
+            <Demo
+              label="Offset account — lifetime saving + equivalent return"
+              inspect={OFFSET_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<OffsetCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">amortise()</TokenTag>
+                </div>
+              }
+            >
               <OffsetCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Interest only vs P&I — the step up when it reverts" inspect={IO_INSPECT}>
+            <Demo
+              label="Interest only vs P&I — the step up when it reverts"
+              inspect={IO_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<InterestOnlyPICalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">periodicRepayment()</TokenTag>
+                </div>
+              }
+            >
               <InterestOnlyPICalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Repayment frequency — fortnightly vs monthly" inspect={FREQ_INSPECT}>
+            <Demo
+              label="Repayment frequency — fortnightly vs monthly"
+              inspect={FREQ_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<RepaymentFrequencyCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">amortise()</TokenTag>
+                </div>
+              }
+            >
               <RepaymentFrequencyCalculator />
             </Demo>
           </FadeIn>
@@ -197,37 +252,95 @@ export function CalculatorsSection() {
 
         <CalcGroup label="Buying" hint="7 of 7">
           <FadeIn>
-            <Demo label="Borrowing power — serviceability from monthly surplus" inspect={BORROWING_INSPECT}>
+            <Demo
+              label="Borrowing power — serviceability from monthly surplus"
+              inspect={BORROWING_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<BorrowingPowerCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">loanFromRepayment()</TokenTag>
+                </div>
+              }
+            >
               <BorrowingPowerCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Deposit savings goal — time to save the deposit + costs" inspect={DEPOSIT_INSPECT}>
+            <Demo
+              label="Deposit savings goal — time to save the deposit + costs"
+              inspect={DEPOSIT_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<DepositSavingsGoalCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">stampDuty()</TokenTag>
+                </div>
+              }
+            >
               <DepositSavingsGoalCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Upfront purchase costs — cash at settlement" inspect={UPFRONT_INSPECT}>
+            <Demo
+              label="Upfront purchase costs — cash at settlement"
+              inspect={UPFRONT_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<UpfrontCostsCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">stampDuty()</TokenTag>
+                </div>
+              }
+            >
               <UpfrontCostsCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Stamp duty — AU transfer duty by state" inspect={STAMP_INSPECT}>
+            <Demo
+              label="Stamp duty — AU transfer duty by state"
+              inspect={STAMP_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<StampDutyCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">stampDuty()</TokenTag>
+                </div>
+              }
+            >
               <StampDutyCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Lender's mortgage insurance — an indicative band" inspect={LMI_INSPECT}>
+            <Demo
+              label="Lender's mortgage insurance — an indicative band"
+              inspect={LMI_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<LmiEstimateCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">lmiPremium()</TokenTag>
+                </div>
+              }
+            >
               <LmiEstimateCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="First home scheme check — cap + first-home duty" inspect={FHS_INSPECT}>
+            <Demo
+              label="First home scheme check — cap + first-home duty"
+              inspect={FHS_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<FirstHomeSchemesCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">firstHomeDuty()</TokenTag>
+                </div>
+              }
+            >
               <FirstHomeSchemesCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Loan to value ratio — the number lenders look at first" inspect={LVR_INSPECT}>
+            <Demo
+              label="Loan to value ratio — the number lenders look at first"
+              inspect={LVR_INSPECT}
+              action={<TokenTag title="component">{'<LvrCalculator/>'}</TokenTag>}
+            >
               <LvrCalculator />
             </Demo>
           </FadeIn>
@@ -235,27 +348,72 @@ export function CalculatorsSection() {
 
         <CalcGroup label="Comparing & switching" hint="5 of 5">
           <FadeIn>
-            <Demo label="Refinance savings — a lower rate, net of switching costs" inspect={REFI_INSPECT}>
+            <Demo
+              label="Refinance savings — a lower rate, net of switching costs"
+              inspect={REFI_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<RefinanceSavingsCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">periodicRepayment()</TokenTag>
+                </div>
+              }
+            >
               <RefinanceSavingsCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Compare two loans — rate + fees over the term" inspect={COMPARE_INSPECT}>
+            <Demo
+              label="Compare two loans — rate + fees over the term"
+              inspect={COMPARE_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<CompareTwoLoansCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">periodicRepayment()</TokenTag>
+                </div>
+              }
+            >
               <CompareTwoLoansCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Fixed vs variable — the break-even rate" inspect={FV_INSPECT}>
+            <Demo
+              label="Fixed vs variable — the break-even rate"
+              inspect={FV_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<FixedVsVariableCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">interestOverPeriods()</TokenTag>
+                </div>
+              }
+            >
               <FixedVsVariableCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Split loan — the blend and the risk" inspect={SPLIT_INSPECT}>
+            <Demo
+              label="Split loan — the blend and the risk"
+              inspect={SPLIT_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<SplitLoanCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">periodicRepayment()</TokenTag>
+                </div>
+              }
+            >
               <SplitLoanCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Rent vs buy — two paths over a period" inspect={RENTBUY_INSPECT}>
+            <Demo
+              label="Rent vs buy — two paths over a period"
+              inspect={RENTBUY_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<RentVsBuyCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">balanceAfter()</TokenTag>
+                </div>
+              }
+            >
               <RentVsBuyCalculator />
             </Demo>
           </FadeIn>
@@ -263,12 +421,25 @@ export function CalculatorsSection() {
 
         <CalcGroup label="Property & equity" hint="2 of 2">
           <FadeIn>
-            <Demo label="Usable equity — what a lender will lend against" inspect={USABLE_INSPECT}>
+            <Demo
+              label="Usable equity — what a lender will lend against"
+              inspect={USABLE_INSPECT}
+              action={<TokenTag title="component">{'<UsableEquityCalculator/>'}</TokenTag>}
+            >
               <UsableEquityCalculator />
             </Demo>
           </FadeIn>
           <FadeIn>
-            <Demo label="Investment property cashflow — cost a week, after tax" inspect={CASHFLOW_INSPECT}>
+            <Demo
+              label="Investment property cashflow — cost a week, after tax"
+              inspect={CASHFLOW_INSPECT}
+              action={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <TokenTag title="component">{'<InvestmentCashflowCalculator/>'}</TokenTag>
+                  <TokenTag title="maths · finance.ts">interestOverPeriods()</TokenTag>
+                </div>
+              }
+            >
               <InvestmentCashflowCalculator />
             </Demo>
           </FadeIn>

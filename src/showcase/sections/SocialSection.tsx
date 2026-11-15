@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { SegmentedControl } from '@/components/ui/segmented'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
+import { TokenTag } from '@/components/ui/token-tag'
 import { LogoMark } from '@/components/brand/Logo'
 import { Quote, TrendingUp, Megaphone } from 'lucide-react'
 import { BRAND } from '@/data/system'
@@ -195,57 +196,75 @@ export function SocialSection() {
 
           <div className="grid gap-5 md:grid-cols-3">
             {/* Quote card */}
-            <Inspectable {...QUOTE_INSPECT}>
-              <div className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-gradient-accent p-6 shadow-glow">
-                <Quote className="h-6 w-6 text-accent-fg/70" strokeWidth={1.5} aria-hidden />
-                <p className="font-display text-title-md font-semibold leading-snug text-accent-fg">
-                  Best business decision ever — hands down.
-                </p>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-body text-caption text-accent-fg/80">{BRAND.name}</span>
-                  <LogoMark size="sm" className="shadow-none" />
-                </div>
-              </div>
-            </Inspectable>
-
-            {/* Stat card */}
-            <Inspectable {...STAT_CARD_INSPECT}>
-              <div className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-inverse p-6">
-                <MonoLabel tone="subtle" size="sm" className="text-inverse-fg/60">By the numbers</MonoLabel>
-                <div className="flex flex-col gap-1">
-                  <span className="font-display text-display-lg font-semibold leading-none text-accent-text">200+</span>
-                  <span className="font-body text-body-sm text-inverse-fg/70">hours saved every month</span>
-                </div>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-body text-caption text-inverse-fg/70">{BRAND.name}</span>
-                  <LogoMark size="sm" />
-                </div>
-              </div>
-            </Inspectable>
-
-            {/* OG / share card */}
-            <Inspectable {...OG_INSPECT}>
-              <div
-                className="relative overflow-hidden rounded-lg border border-border bg-surface"
-                style={{ aspectRatio: '1.91 / 1' }}
-              >
-                {/* Safe-zone guide — inset where avatars/UI chrome may crop on link unfurls. */}
-                <div
-                  className="pointer-events-none absolute inset-[8%] rounded-md border border-dashed border-accent/40"
-                  aria-hidden
-                />
-                <div className="relative flex h-full flex-col justify-between p-6">
-                  <MonoLabel tone="subtle" size="sm">Link preview</MonoLabel>
-                  <p className="max-w-[22ch] font-display text-title-md font-semibold leading-tight text-fg">
-                    {BRAND.oneLiner}
+            <div className="flex flex-col gap-2">
+              <Inspectable {...QUOTE_INSPECT}>
+                <div className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-gradient-accent p-6 shadow-glow">
+                  <Quote className="h-6 w-6 text-accent-fg/70" strokeWidth={1.5} aria-hidden />
+                  <p className="font-display text-title-md font-semibold leading-snug text-accent-fg">
+                    Best business decision ever — hands down.
                   </p>
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-body text-caption text-fg-muted">financeos.app</span>
+                    <span className="font-body text-caption text-accent-fg/80">{BRAND.name}</span>
+                    <LogoMark size="sm" className="shadow-none" />
+                  </div>
+                </div>
+              </Inspectable>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag>bg-gradient-accent</TokenTag>
+                <TokenTag>shadow-glow</TokenTag>
+                <TokenTag title="ratio · square feed post">aspect-square</TokenTag>
+              </div>
+            </div>
+
+            {/* Stat card */}
+            <div className="flex flex-col gap-2">
+              <Inspectable {...STAT_CARD_INSPECT}>
+                <div className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-inverse p-6">
+                  <MonoLabel tone="subtle" size="sm" className="text-inverse-fg/60">By the numbers</MonoLabel>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-display text-display-lg font-semibold leading-none text-accent-text">200+</span>
+                    <span className="font-body text-body-sm text-inverse-fg/70">hours saved every month</span>
+                  </div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-body text-caption text-inverse-fg/70">{BRAND.name}</span>
                     <LogoMark size="sm" />
                   </div>
                 </div>
+              </Inspectable>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag title="carbon surface">bg-inverse</TokenTag>
+                <TokenTag title="figure in the accent">text-accent-text</TokenTag>
               </div>
-            </Inspectable>
+            </div>
+
+            {/* OG / share card */}
+            <div className="flex flex-col gap-2">
+              <Inspectable {...OG_INSPECT}>
+                <div
+                  className="relative overflow-hidden rounded-lg border border-border bg-surface"
+                  style={{ aspectRatio: '1.91 / 1' }}
+                >
+                  {/* Safe-zone guide — inset where avatars/UI chrome may crop on link unfurls. */}
+                  <div
+                    className="pointer-events-none absolute inset-[8%] rounded-md border border-dashed border-accent/40"
+                    aria-hidden
+                  />
+                  <div className="relative flex h-full flex-col justify-between p-6">
+                    <MonoLabel tone="subtle" size="sm">Link preview</MonoLabel>
+                    <p className="max-w-[22ch] font-display text-title-md font-semibold leading-tight text-fg">
+                      {BRAND.oneLiner}
+                    </p>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-body text-caption text-fg-muted">financeos.app</span>
+                      <LogoMark size="sm" />
+                    </div>
+                  </div>
+                </div>
+              </Inspectable>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <TokenTag title="ratio · 1200 × 628 link unfurl">aspect-[1.91/1]</TokenTag>
+              </div>
+            </div>
           </div>
 
           <p className="max-w-3xl font-body text-body-sm leading-relaxed text-fg-muted">

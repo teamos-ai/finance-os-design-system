@@ -11,6 +11,7 @@ import { Fragment, type ReactNode } from 'react'
 import { BarChart3, Check, Minus, X } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { Badge } from '@/components/ui/badge'
+import { TokenTag } from '@/components/ui/token-tag'
 import { cn } from '@/lib/cn'
 
 /** Inline blue highlight chip — blue owns every typographic highlight. */
@@ -159,7 +160,16 @@ export function TablesSection() {
     >
       <div className="flex flex-col gap-8">
         {/* (a) COMPARISON — generic review sites vs the Finance OS accent column */}
-        <Demo label="Comparison — why a Finance OS ranking reads differently from a review site">
+        <Demo
+          label="Comparison — why a Finance OS ranking reads differently from a review site"
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag>{'<table>'}</TokenTag>
+              <TokenTag title="accent head">bg-accent</TokenTag>
+              <TokenTag title="accent column">bg-accent-soft</TokenTag>
+            </div>
+          }
+        >
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
             <table className="w-full min-w-[640px] border-collapse">
               <thead>
@@ -207,7 +217,16 @@ export function TablesSection() {
         </Demo>
 
         {/* (b) FEATURE MATRIX — sticky first column, accent Professional column, grouped rows */}
-        <Demo label="Feature matrix — capabilities by plan, with a sticky first column">
+        <Demo
+          label="Feature matrix — capabilities by plan, with a sticky first column"
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag title="frozen column">sticky left-0</TokenTag>
+              <TokenTag title="highlighted plan">bg-accent-soft</TokenTag>
+              <TokenTag>{'<Badge variant="outline">'}</TokenTag>
+            </div>
+          }
+        >
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
             <table className="w-full min-w-[720px] border-collapse">
               <thead>
@@ -283,7 +302,16 @@ export function TablesSection() {
         </Demo>
 
         {/* (c) DATA TABLE — tabular figures, hover rows, sparklines, amber "Reported" flag */}
-        <Demo label="Data table — review scores by source, tabular figures, zebra-on-hover">
+        <Demo
+          label="Data table — review scores by source, tabular figures, zebra-on-hover"
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag title="aligned figures">tabular-nums</TokenTag>
+              <TokenTag title="zebra on hover">hover:bg-canvas-muted</TokenTag>
+              <TokenTag>{'<Badge variant="amber">'}</TokenTag>
+            </div>
+          }
+        >
           <div className="overflow-x-auto rounded-lg border border-border bg-surface">
             <table className="w-full min-w-[640px] border-collapse">
               <thead>

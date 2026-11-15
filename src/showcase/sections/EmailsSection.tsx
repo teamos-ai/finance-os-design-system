@@ -16,6 +16,7 @@ import * as React from 'react'
 import { ChevronDown, Copy, ArrowRight, BadgeCheck, KeyRound, CalendarClock, Star, type LucideIcon } from 'lucide-react'
 import { useReducedMotion } from 'framer-motion'
 import { Section, Demo } from '@/showcase/Section'
+import { TokenTag } from '@/components/ui/token-tag'
 import { Button } from '@/components/ui/button'
 import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
@@ -276,7 +277,17 @@ const text = toPlainText(email)   // plain-text alternate`,
       lead="The transactional and relationship emails a broker sends a borrower through Finance OS — pre-approval, settlement, the annual review and a review request. Content is data; the plain-text and HTML bodies render from one source, so they cannot drift. Every client figure is a merge field, never a written-in value."
     >
       <div className="flex flex-col gap-8">
-        <Demo label="The four moments — one template each" inspect={overviewInspect}>
+        <Demo
+          label="The four moments — one template each"
+          inspect={overviewInspect}
+          action={
+            <div className="flex flex-wrap items-center gap-1.5">
+              <TokenTag title="tile surface">bg-surface border shadow-sm</TokenTag>
+              <TokenTag title="icon well">bg-accent-soft</TokenTag>
+              <TokenTag title="status variants · amber · success · blue · neutral">{'<Badge>'}</TokenTag>
+            </div>
+          }
+        >
           <Stagger className="grid gap-4 sm:grid-cols-2">
             {TEMPLATES.map((e) => (
               <StaggerItem key={e.slug} className="h-full">
