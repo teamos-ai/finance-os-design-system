@@ -6,7 +6,6 @@ import { HeroSection } from '@/showcase/sections/HeroSection'
 import { VideoSection } from '@/showcase/sections/VideoSection'
 import { OverviewSection } from '@/showcase/sections/OverviewSection'
 import { ColorSection } from '@/showcase/sections/ColorSection'
-import { TokensSection } from '@/showcase/sections/TokensSection'
 import { TypographySection } from '@/showcase/sections/TypographySection'
 import { SpacingSection } from '@/showcase/sections/SpacingSection'
 import { ElevationSection } from '@/showcase/sections/ElevationSection'
@@ -52,7 +51,6 @@ const SECTIONS: Record<string, React.ComponentType> = {
   hero: HeroSection,
   video: VideoSection,
   overview: OverviewSection,
-  tokens: TokensSection,
   color: ColorSection,
   typography: TypographySection,
   spacing: SpacingSection,

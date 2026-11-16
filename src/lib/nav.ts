@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
 import {
   Rocket, PlayCircle, Compass,
-  Blocks, Palette, Type, Ruler, Layers2, Wand2, Gem, Shapes,
+  Palette, Type, Ruler, Layers2, Wand2, Gem, Shapes,
   ToggleLeft, CreditCard, TextCursorInput, Table, FolderOpen, Gauge, LineChart,
   Image, Images, MoveVertical,
   Crown, Orbit, LayoutGrid, LayoutTemplate, Tags, Quote, Table2, ArrowRightLeft, SquareSplitHorizontal,
@@ -44,7 +44,6 @@ export const SHOWCASE_NAV: NavItem[] = [
 
   /* ── FOUNDATIONS (Overview opens it — the system at a glance, then the parts) */
   { id: 'overview', label: 'Overview', Icon: Compass, accent: 'blue', group: 'Foundations' },
-  { id: 'tokens', label: 'Tokens', Icon: Blocks, accent: 'blue', group: 'Foundations' },
   { id: 'color', label: 'Colour', Icon: Palette, accent: 'blue', group: 'Foundations' },
   { id: 'typography', label: 'Typography', Icon: Type, accent: 'blue', group: 'Foundations' },
   { id: 'spacing', label: 'Spacing & Layout', Icon: Ruler, accent: 'blue', group: 'Foundations' },

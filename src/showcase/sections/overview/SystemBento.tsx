@@ -1,17 +1,21 @@
 /**
- * SystemBento — "the system at a glance" as ONE cohesive premium bento.
+ * SystemBento — "the system at a glance" as ONE large, varied premium bento.
  *
- * Merges the former GlanceBento (what it's made of) and FeatureBento (the system as a product) into a
- * single asymmetric grid: a gradient token-architecture hero, verified-AA proof, the type ramp, the
- * three token layers, the Ruler/Sage archetype, the 8px radius ladder, the motion vocabulary, the
- * single Light theme, and a closing "copy anything" row. Every cell rides a cursor-parallax TiltCard,
- * rests on a layered shadow and lifts on hover, and every figure counts up / draws in — all on the
- * house EASE_OUT and reduced-motion safe. Atlas Blue + neutrals, 8px squircles, depth from glow +
- * shadow (never glass), no ribbons.
+ * A true bento: fixed-height rows on a 6-column grid with mixed col/row spans (a tall gradient
+ * token-architecture hero, 2×2 feature tiles, a wide image-library strip, and a spread of compact
+ * nav tiles) packed with grid-auto-flow:dense. Heights are LOCKED — the Typography cell gives its
+ * animated Aa a fixed, roomy box so the ramp cycles without ever resizing the grid. Each cell rides
+ * a cursor-parallax TiltCard, rests on a layered shadow and lifts on hover; figures count up / draw
+ * in. The compact tiles point at the rest of the system (Image Library, Buttons, Logo, This vs That,
+ * Layouts, Blogs, Lead Magnets). Atlas Blue + neutrals, 8px squircles, depth from glow + shadow
+ * (never glass), no ribbons, reduced-motion safe.
  */
 import * as React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Palette } from 'lucide-react'
+import {
+  ArrowRight, ArrowUpRight, Palette, ToggleLeft, Gem, Image as ImageIcon,
+  SquareSplitHorizontal, Ruler, FileText, Magnet,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { MonoLabel } from '@/components/ui/mono-label'
@@ -20,19 +24,13 @@ import { PILLARS } from '@/data/system'
 import { cn } from '@/lib/cn'
 import { TiltCard } from './TiltCard'
 
-/* ── standard cell shell — hairline border, resting shadow, lift + strengthen on hover ───────── */
+/* ── shells ──────────────────────────────────────────────────────────────────────────────────── */
+
+/** Standard cell — a visual inset above a title + description. Used in the taller (2-row) tiles. */
 function Cell({
-  title,
-  desc,
-  children,
-  tone = 'surface',
-  className,
+  title, desc, children, tone = 'surface', className,
 }: {
-  title: string
-  desc: React.ReactNode
-  children: React.ReactNode
-  tone?: 'surface' | 'muted'
-  className?: string
+  title: string; desc: React.ReactNode; children: React.ReactNode; tone?: 'surface' | 'muted'; className?: string
 }) {
   return (
     <div
@@ -52,7 +50,41 @@ function Cell({
   )
 }
 
-/* ── 1 · Token architecture — the gradient hero spine, a dot travelling the three layers ─────── */
+/** Compact nav tile — an icon well, a title that links to its section, a one-line note, and an
+ *  optional mini visual. Sized to a single fixed row. */
+function NavCell({
+  icon: Icon, title, href, desc, tone = 'surface', children,
+}: {
+  icon: typeof Palette; title: string; href: string; desc: string; tone?: 'surface' | 'muted'; children?: React.ReactNode
+}) {
+  return (
+    <div
+      className={cn(
+        'group/nav flex h-full flex-col justify-between gap-3 overflow-hidden rounded-lg border border-border p-5 shadow-sm',
+        'transition-[border-color,box-shadow] duration-base ease-out hover:border-border-strong hover:shadow-lg',
+        tone === 'muted' ? 'bg-canvas-muted' : 'bg-surface',
+      )}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-accent-soft text-accent-text">
+          <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+        </span>
+        {children}
+      </div>
+      <div>
+        <h4 className="font-display text-title-sm text-fg">
+          <a href={href} className="inline-flex items-center gap-1 rounded-sm hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas">
+            {title}
+            <ArrowUpRight className="h-3.5 w-3.5 text-fg-subtle transition-colors group-hover/nav:text-accent-text" strokeWidth={2} aria-hidden />
+          </a>
+        </h4>
+        <p className="mt-0.5 font-body text-body-sm leading-relaxed text-fg-muted text-pretty">{desc}</p>
+      </div>
+    </div>
+  )
+}
+
+/* ── 1 · Token architecture — the gradient hero spine ────────────────────────────────────────── */
 const ARCH = [
   { tag: 'primitive', note: 'raw brand ramps · --p-*' },
   { tag: 'semantic', note: 'intent · --c-*' },
@@ -64,14 +96,11 @@ function ArchitectureCell() {
     <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-lg border border-border bg-gradient-accent p-7 shadow-md md:p-8">
       <Glow />
       <div className="flex flex-col gap-3">
-        <MonoLabel tone="accent" dot className="text-accent-fg">
-          Token architecture
-        </MonoLabel>
+        <MonoLabel tone="accent" dot className="text-accent-fg">Token architecture</MonoLabel>
         <h3 className="max-w-xs font-display text-display-sm leading-tight text-accent-fg text-balance">
           Every surface composes from one layer.
         </h3>
       </div>
-
       <div className="relative mt-8 flex flex-col gap-3">
         <span aria-hidden className="absolute bottom-4 left-[15px] top-4 w-px bg-accent-fg/30" />
         {!reduced && (
@@ -84,10 +113,7 @@ function ArchitectureCell() {
           />
         )}
         {ARCH.map((l) => (
-          <div
-            key={l.tag}
-            className="relative flex items-center gap-3 rounded-md border border-accent-fg/20 bg-accent-fg/10 px-3 py-2"
-          >
+          <div key={l.tag} className="relative flex items-center gap-3 rounded-md border border-accent-fg/20 bg-accent-fg/10 px-3 py-2">
             <span className="h-2 w-2 shrink-0 rounded-sm bg-accent-fg" aria-hidden />
             <span className="flex flex-col">
               <span className="font-mono text-mono-2xs uppercase tracking-[0.12em] text-accent-fg">{l.tag}</span>
@@ -100,7 +126,7 @@ function ArchitectureCell() {
   )
 }
 
-/* ── 2 · Verified AA — a count-up over calm concentric rings ─────────────────────────────────── */
+/* ── 2 · Verified AA ─────────────────────────────────────────────────────────────────────────── */
 function ContrastInset() {
   const reduced = useReducedMotion()
   return (
@@ -127,7 +153,7 @@ function ContrastInset() {
   )
 }
 
-/* ── 3 · Type ramp — an Aa that eases through the real scale ─────────────────────────────────── */
+/* ── 3 · Type ramp (locked inside a fixed, roomy cell) ───────────────────────────────────────── */
 const SCALE = [
   { label: 'display-lg', px: 'clamp(2.6rem,7vw,4rem)' },
   { label: 'display-sm', px: 'clamp(2rem,5vw,2.75rem)' },
@@ -144,7 +170,9 @@ function TypeRampInset() {
   }, [reduced])
   const step = SCALE[i]
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3">
+    // min-height holds the tallest glyph so the cell never resizes as the ramp cycles — on mobile
+    // (single-column, auto-height rows) as well as on the fixed-row desktop grid.
+    <div className="flex h-full min-h-[7rem] flex-col items-center justify-center gap-3">
       <motion.span
         key={step.label}
         initial={reduced ? false : { opacity: 0, y: 8, filter: 'blur(4px)' }}
@@ -162,7 +190,7 @@ function TypeRampInset() {
   )
 }
 
-/* ── 4 · Three token layers — a highlight travels down the stack ─────────────────────────────── */
+/* ── 4 · Three token layers ──────────────────────────────────────────────────────────────────── */
 const LAYERS = [
   { tag: 'primitive', val: '#33488F' },
   { tag: 'semantic', val: '--c-accent' },
@@ -200,16 +228,14 @@ function TokenLayersInset() {
   )
 }
 
-/* ── 5 · Ruler / Sage archetype — one cell, a 70 / 30 split ──────────────────────────────────── */
+/* ── 5 · Ruler / Sage archetype ──────────────────────────────────────────────────────────────── */
 function ArchetypeCell() {
   const reduced = useReducedMotion()
   const [ruler, sage] = PILLARS
   return (
-    <div className="flex h-full flex-col justify-between gap-5 rounded-lg border border-border bg-surface p-6 shadow-sm transition-[border-color,box-shadow] duration-base ease-out hover:border-border-strong hover:shadow-lg">
+    <div className="flex h-full flex-col justify-between gap-4 rounded-lg border border-border bg-surface p-6 shadow-sm transition-[border-color,box-shadow] duration-base ease-out hover:border-border-strong hover:shadow-lg">
       <div className="flex items-center justify-between">
-        <MonoLabel tone="brand" dot>
-          Ruler-first
-        </MonoLabel>
+        <MonoLabel tone="brand" dot>Ruler-first</MonoLabel>
         <span className="font-mono text-mono-2xs uppercase tracking-[0.14em] text-fg-subtle">archetype</span>
       </div>
       <div className="flex flex-col gap-2.5">
@@ -224,27 +250,20 @@ function ArchetypeCell() {
           <span className="block h-full flex-1 bg-accent/35" />
         </div>
         <div className="flex items-center justify-between font-mono text-mono-2xs uppercase tracking-[0.12em]">
-          <span className="text-accent-text">
-            {ruler.name} <span className="tabular-nums">70</span>
-          </span>
-          <span className="text-fg-subtle">
-            {sage.name} <span className="tabular-nums">30</span>
-          </span>
+          <span className="text-accent-text">{ruler.name} <span className="tabular-nums">70</span></span>
+          <span className="text-fg-subtle">{sage.name} <span className="tabular-nums">30</span></span>
         </div>
       </div>
       <p className="font-body text-body-sm leading-relaxed text-fg-muted text-pretty">
-        Structure, order and authority — softened by the Sage's clarity.
+        Structure and authority — softened by the Sage's clarity.
       </p>
     </div>
   )
 }
 
-/* ── 6 · Radius ladder — 2 / 4 / 6 / 8, highlighted in turn ──────────────────────────────────── */
+/* ── 6 · Radius ladder ───────────────────────────────────────────────────────────────────────── */
 const RADII = [
-  { r: 'rounded-xs', n: '2' },
-  { r: 'rounded-sm', n: '4' },
-  { r: 'rounded-md', n: '6' },
-  { r: 'rounded-lg', n: '8' },
+  { r: 'rounded-xs', n: '2' }, { r: 'rounded-sm', n: '4' }, { r: 'rounded-md', n: '6' }, { r: 'rounded-lg', n: '8' },
 ]
 function RadiusInset() {
   const reduced = useReducedMotion()
@@ -255,21 +274,18 @@ function RadiusInset() {
     return () => clearInterval(t)
   }, [reduced])
   return (
-    <div className="flex h-full items-center justify-center gap-4 sm:gap-6">
+    <div className="flex h-full items-center justify-center gap-3 sm:gap-4">
       {RADII.map((it, idx) => {
         const on = reduced || idx === i
         return (
-          <div key={it.n} className="flex flex-col items-center gap-2">
+          <div key={it.n} className="flex flex-col items-center gap-1.5">
             <div
               className={cn(
-                'h-12 w-12 border-2 transition-colors duration-base ease-out',
-                it.r,
+                'h-10 w-10 border-2 transition-colors duration-base ease-out', it.r,
                 on ? 'border-accent bg-accent-soft' : 'border-border-strong bg-surface',
               )}
             />
-            <span className={cn('font-mono text-mono-2xs tabular-nums', on ? 'text-accent-text' : 'text-fg-subtle')}>
-              {it.n}px
-            </span>
+            <span className={cn('font-mono text-mono-2xs tabular-nums', on ? 'text-accent-text' : 'text-fg-subtle')}>{it.n}px</span>
           </div>
         )
       })}
@@ -277,12 +293,12 @@ function RadiusInset() {
   )
 }
 
-/* ── 7 · Motion vocabulary — a dot fades + translates on a loop ──────────────────────────────── */
+/* ── 7 · Motion vocabulary ───────────────────────────────────────────────────────────────────── */
 function MotionInset() {
   const reduced = useReducedMotion()
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4">
-      <div className="flex h-10 items-center gap-2">
+      <div className="flex h-8 items-center gap-2">
         {[0, 1, 2].map((d) => (
           <motion.span
             key={d}
@@ -293,7 +309,7 @@ function MotionInset() {
           />
         ))}
       </div>
-      <div className="h-1.5 w-32 max-w-full overflow-hidden rounded-sm bg-inset">
+      <div className="h-1.5 w-28 max-w-full overflow-hidden rounded-sm bg-inset">
         <motion.div
           className="h-full rounded-sm bg-accent"
           initial={{ width: '12%' }}
@@ -305,17 +321,34 @@ function MotionInset() {
   )
 }
 
-/* ── 8 · Colour · Light theme — the Atlas Blue swatch trio ───────────────────────────────────── */
-function ColourInset() {
+/* ── 8 · Image Library — a wide strip of backgrounds ─────────────────────────────────────────── */
+const WASHES = ['var(--wash-mist)', 'var(--wash-haze)', 'var(--wash-tint)', 'var(--wash-deep)', 'var(--c-gradient-accent)']
+function ImageLibraryCell() {
   return (
-    <div className="flex h-full items-center gap-3">
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-accent-soft text-accent-text">
-        <Palette className="h-5 w-5" strokeWidth={1.5} aria-hidden />
-      </span>
-      <div className="flex gap-1.5">
-        <span className="h-9 w-9 rounded-sm bg-accent shadow-sm" title="Atlas Blue" />
-        <span className="h-9 w-9 rounded-sm border border-border bg-canvas" title="Canvas white" />
-        <span className="h-9 w-9 rounded-sm bg-fg" title="Ink" />
+    <div className="group/img flex h-full flex-col justify-between gap-4 overflow-hidden rounded-lg border border-border bg-surface p-6 shadow-sm transition-[border-color,box-shadow] duration-base ease-out hover:border-border-strong hover:shadow-lg sm:flex-row sm:items-center">
+      <div className="flex max-w-xs flex-col gap-1.5">
+        <span className="grid h-10 w-10 place-items-center rounded-md bg-accent-soft text-accent-text">
+          <ImageIcon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
+        </span>
+        <h4 className="mt-1 font-display text-title-sm text-fg">
+          <a href="#imagery" className="inline-flex items-center gap-1 rounded-sm hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas">
+            Image Library
+            <ArrowUpRight className="h-3.5 w-3.5 text-fg-subtle transition-colors group-hover/img:text-accent-text" strokeWidth={2} aria-hidden />
+          </a>
+        </h4>
+        <p className="font-body text-body-sm leading-relaxed text-fg-muted text-pretty">
+          Searchable photos, plus live Aurora and Contour backgrounds.
+        </p>
+      </div>
+      <div className="grid flex-1 grid-cols-5 gap-2">
+        {WASHES.map((w, i) => (
+          <span
+            key={i}
+            aria-hidden
+            className="h-16 rounded-md border border-border-subtle sm:h-full sm:min-h-[72px]"
+            style={{ background: w }}
+          />
+        ))}
       </div>
     </div>
   )
@@ -324,40 +357,35 @@ function ColourInset() {
 /* ── Section ─────────────────────────────────────────────────────────────────────────────────── */
 export function SystemBento() {
   return (
-    <Stagger className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[minmax(190px,auto)]" amount={0.08}>
-      {/* Token architecture — tall hero, top-left */}
-      <StaggerItem className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-2">
-        <TiltCard className="h-full">
-          <ArchitectureCell />
-        </TiltCard>
+    <Stagger
+      className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[188px] md:[grid-auto-flow:row_dense]"
+      amount={0.06}
+    >
+      {/* Token architecture — tall gradient hero */}
+      <StaggerItem className="md:col-span-2 md:row-span-3">
+        <TiltCard className="h-full"><ArchitectureCell /></TiltCard>
       </StaggerItem>
 
-      {/* Typography */}
-      <StaggerItem className="md:col-start-3 md:col-span-2 md:row-start-1">
+      {/* Typography — 2×2 so the animated Aa has a fixed, roomy box (height stays locked) */}
+      <StaggerItem className="md:col-span-2 md:row-span-2">
         <TiltCard className="h-full">
-          <Cell
-            title="Typography"
-            desc="Spline Sans for voice, Anonymous Pro for labels — one ramp, blue owns the highlight."
-          >
+          <Cell title="Typography" desc="Spline Sans for voice, Anonymous Pro for labels — one ramp, blue owns the highlight.">
             <TypeRampInset />
           </Cell>
         </TiltCard>
       </StaggerItem>
 
-      {/* Verified AA — tall, top-right */}
-      <StaggerItem className="md:col-start-5 md:col-span-2 md:row-start-1 md:row-span-2">
+      {/* Verified AA — 2×2 */}
+      <StaggerItem className="md:col-span-2 md:row-span-2">
         <TiltCard className="h-full">
-          <Cell
-            title="Verified contrast"
-            desc="Every semantic pair is checked against WCAG AA on each build — 21 of 21 pass."
-          >
+          <Cell title="Verified contrast" desc="Every semantic pair is checked against WCAG AA on each build — 21 of 21 pass.">
             <ContrastInset />
           </Cell>
         </TiltCard>
       </StaggerItem>
 
-      {/* Three-layer tokens */}
-      <StaggerItem className="md:col-start-3 md:col-span-2 md:row-start-2">
+      {/* Three-layer tokens — 2×2 */}
+      <StaggerItem className="md:col-span-2 md:row-span-2">
         <TiltCard className="h-full">
           <Cell
             title="Three-layer tokens"
@@ -369,67 +397,127 @@ export function SystemBento() {
         </TiltCard>
       </StaggerItem>
 
-      {/* Ruler / Sage archetype */}
-      <StaggerItem className="md:col-start-1 md:col-span-2 md:row-start-3">
+      {/* Ruler / Sage */}
+      <StaggerItem className="md:col-span-2 md:row-span-1">
+        <TiltCard className="h-full"><ArchetypeCell /></TiltCard>
+      </StaggerItem>
+
+      {/* Buttons */}
+      <StaggerItem className="md:col-span-2 md:row-span-1">
         <TiltCard className="h-full">
-          <ArchetypeCell />
+          <NavCell icon={ToggleLeft} title="Buttons" href="#components" desc="Solid blue primary, blue-outline secondary.">
+            <span className="flex items-center gap-1.5" aria-hidden>
+              <span className="h-5 w-10 rounded-sm bg-accent" />
+              <span className="h-5 w-8 rounded-sm border border-accent-text" />
+            </span>
+          </NavCell>
         </TiltCard>
       </StaggerItem>
 
       {/* Radius ladder */}
-      <StaggerItem className="md:col-start-3 md:col-span-2 md:row-start-3">
+      <StaggerItem className="md:col-span-2 md:row-span-1">
         <TiltCard className="h-full">
-          <Cell
-            title="8px-max squircles"
-            desc="A tight 2 / 4 / 6 / 8 corner ladder — crisp and software-grade, never a pill."
-            tone="muted"
-          >
+          <Cell title="8px-max squircles" desc="A tight 2 / 4 / 6 / 8 corner ladder — never a pill." tone="muted">
             <RadiusInset />
           </Cell>
         </TiltCard>
       </StaggerItem>
 
       {/* Gentle motion */}
-      <StaggerItem className="md:col-start-5 md:col-span-2 md:row-start-3">
+      <StaggerItem className="md:col-span-2 md:row-span-1">
         <TiltCard className="h-full">
-          <Cell
-            title="Gentle motion"
-            desc="Fade, a small translate, a soft glow. Everything honours reduced-motion."
-          >
+          <Cell title="Gentle motion" desc="Fade, a small translate, a soft glow — all reduced-motion safe.">
             <MotionInset />
           </Cell>
         </TiltCard>
       </StaggerItem>
 
       {/* Light · Clarity */}
-      <StaggerItem className="md:col-start-1 md:col-span-2 md:row-start-4">
+      <StaggerItem className="md:col-span-2 md:row-span-1">
         <TiltCard className="h-full">
-          <Cell
-            title="Light · Clarity"
-            desc="One theme. Pure white with the Atlas Blue accent — matched to the production site."
-          >
-            <ColourInset />
-          </Cell>
+          <NavCell icon={Palette} title="Colour" href="#color" desc="One Light theme — pure white + the Atlas Blue accent." tone="muted">
+            <span className="flex gap-1.5" aria-hidden>
+              <span className="h-7 w-7 rounded-sm bg-accent" />
+              <span className="h-7 w-7 rounded-sm border border-border bg-canvas" />
+              <span className="h-7 w-7 rounded-sm bg-fg" />
+            </span>
+          </NavCell>
         </TiltCard>
       </StaggerItem>
 
+      {/* Logo */}
+      <StaggerItem className="md:col-span-2 md:row-span-1">
+        <TiltCard className="h-full">
+          <NavCell icon={Gem} title="Logo" href="#logo" desc="The provided mark — never redrawn or recoloured.">
+            <img src="/logo-square-blue.png" alt="" className="h-9 w-9 object-contain" />
+          </NavCell>
+        </TiltCard>
+      </StaggerItem>
+
+      {/* This vs That */}
+      <StaggerItem className="md:col-span-2 md:row-span-1">
+        <TiltCard className="h-full">
+          <NavCell icon={SquareSplitHorizontal} title="This vs That" href="#this-vs-that" desc="Side-by-side comparisons, success vs danger." tone="muted">
+            <span className="flex h-7 w-16 overflow-hidden rounded-sm border border-border" aria-hidden>
+              <span className="h-full flex-1 bg-success-soft" />
+              <span className="h-full flex-1 bg-danger-soft" />
+            </span>
+          </NavCell>
+        </TiltCard>
+      </StaggerItem>
+
+      {/* Layouts */}
+      <StaggerItem className="md:col-span-2 md:row-span-1">
+        <TiltCard className="h-full">
+          <NavCell icon={Ruler} title="Spacing & Layout" href="#spacing" desc="An 8px grid and a 12-column system.">
+            <span className="grid grid-cols-3 gap-0.5" aria-hidden>
+              {Array.from({ length: 9 }).map((_, i) => <span key={i} className="h-2 w-2 rounded-[1px] bg-accent-soft" />)}
+            </span>
+          </NavCell>
+        </TiltCard>
+      </StaggerItem>
+
+      {/* Blogs */}
+      <StaggerItem className="md:col-span-2 md:row-span-1">
+        <TiltCard className="h-full">
+          <NavCell icon={FileText} title="Blogs" href="#blogs" desc="Article templates + a related-posts grid." tone="muted">
+            <span className="flex w-16 flex-col gap-1" aria-hidden>
+              <span className="h-1 w-full rounded-full bg-border-strong" />
+              <span className="h-1 w-4/5 rounded-full bg-border" />
+              <span className="h-1 w-full rounded-full bg-border" />
+            </span>
+          </NavCell>
+        </TiltCard>
+      </StaggerItem>
+
+      {/* Lead Magnets */}
+      <StaggerItem className="md:col-span-2 md:row-span-1">
+        <TiltCard className="h-full">
+          <NavCell icon={Magnet} title="Lead Magnets" href="#leadmagnets" desc="Ebooks, checklists, quizzes — opt-in templates.">
+            <span className="flex items-end gap-1" aria-hidden>
+              <span className="h-6 w-4 rounded-sm bg-accent-soft" />
+              <span className="h-8 w-4 rounded-sm bg-accent" />
+              <span className="h-5 w-4 rounded-sm bg-accent-soft" />
+            </span>
+          </NavCell>
+        </TiltCard>
+      </StaggerItem>
+
+      {/* Image Library — wide strip */}
+      <StaggerItem className="md:col-span-4 md:row-span-1">
+        <TiltCard className="h-full" max={3}><ImageLibraryCell /></TiltCard>
+      </StaggerItem>
+
       {/* Copy-anything CTA — wide closer */}
-      <StaggerItem className="md:col-start-3 md:col-span-4 md:row-start-4">
-        <TiltCard className="h-full" max={3}>
+      <StaggerItem className="md:col-span-6 md:row-span-1">
+        <TiltCard className="h-full" max={2}>
           <div className="flex h-full flex-col items-start justify-between gap-5 rounded-lg border border-border bg-elevated p-6 shadow-sm transition-[border-color,box-shadow] duration-base ease-out hover:border-border-strong hover:shadow-lg md:flex-row md:items-center md:p-7">
             <div className="flex flex-col gap-2.5">
-              <Badge variant="blue" size="sm" dot>
-                The showcase is the documentation
-              </Badge>
+              <Badge variant="blue" size="sm" dot>The showcase is the documentation</Badge>
               <h4 className="font-display text-title-md text-fg text-balance">Copy any token. Lift any component.</h4>
               <div className="flex flex-wrap items-center gap-2">
                 {['--c-accent', '<Button>', '#33488F', '--radius-lg'].map((t) => (
-                  <code
-                    key={t}
-                    className="rounded-sm border border-border bg-surface px-2 py-1 font-mono text-caption text-accent-text"
-                  >
-                    {t}
-                  </code>
+                  <code key={t} className="rounded-sm border border-border bg-surface px-2 py-1 font-mono text-caption text-accent-text">{t}</code>
                 ))}
               </div>
             </div>

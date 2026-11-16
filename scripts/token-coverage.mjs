@@ -27,7 +27,6 @@ const EXEMPT = {
   'HeroSection.tsx': 'front door — the hero, not a parts exhibit',
   'VideoSection.tsx': 'front door — the explainer/promo, not a parts exhibit',
   'OverviewSection.tsx': 'narrative "system at a glance" showreel, not a parts catalogue',
-  'TokensSection.tsx': 'prints every token inline via <Swatch> (hex + --c-*) — the gold standard',
   'ColorSection.tsx': 'prints hex + --c-* inline via swatches — the gold standard',
   'MotionSection.tsx': 'intentionally blank — awaiting motion direction, no specimens',
   'BannersSection.tsx': 'self-documents via Demo variant labels ("Banner · black", …)',

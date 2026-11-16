@@ -177,7 +177,8 @@ function buildCards(): Card[] {
   let seed = 7
   const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647)
   const heroes: Card[] = HEROES.map((o, i) => ({
-    ...o, w: HERO_SIZE[i][0], h: HERO_SIZE[i][1], rz: HERO_SIZE[i][2], p: fib(8, i, 1.1), hero: true, hv: 1,
+    // heroes are scaled down a touch so even the biggest never swings past the frame edge.
+    ...o, w: HERO_SIZE[i][0] * 0.85, h: HERO_SIZE[i][1] * 0.85, rz: HERO_SIZE[i][2], p: fib(8, i, 1.1), hero: true, hv: 1,
   }))
   const small: Card[] = []
   for (let i = 0; i < NS; i++) {
@@ -195,7 +196,7 @@ function buildCards(): Card[] {
 }
 
 const CSS = `
-.csph{position:relative;width:100%;height:100%;min-height:320px;overflow:hidden;contain:strict;user-select:none;-webkit-user-select:none;outline:none;touch-action:pan-y;cursor:grab}
+.csph{position:relative;width:100%;height:100%;min-height:320px;overflow:visible;contain:layout;user-select:none;-webkit-user-select:none;outline:none;touch-action:pan-y;cursor:grab}
 .csph.grabbing{cursor:grabbing}
 .csph-c{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform,opacity;overflow:hidden;backface-visibility:hidden;box-sizing:border-box;border-radius:8px}
 .csph-surface{background:var(--c-surface);color:var(--c-accent);border:1px solid var(--c-border);box-shadow:var(--shadow-md)}
@@ -233,8 +234,8 @@ export default function CardSphere({ onSettle, className, style }: CardSpherePro
     const size = () => {
       const r = root.getBoundingClientRect(); W = r.width; H = r.height
       u = Math.min(W, H * 0.82) / 720; F = 502 * u
-      // 0.82 (was 0.97) leaves a clear margin around the sphere so no card clips at any rotation.
-      Ax = Math.max(1, (W / 2) / (F * 0.577) * 0.82); Ay = Math.max(1, (H / 2) / (F * 0.577) * 0.82)
+      // 0.74 fill leaves a wide margin so no card clips at any rotation (the silhouette is fixed).
+      Ax = Math.max(1, (W / 2) / (F * 0.577) * 0.74); Ay = Math.max(1, (H / 2) / (F * 0.577) * 0.74)
     }
     size()
     const ro = new ResizeObserver(size); ro.observe(root)

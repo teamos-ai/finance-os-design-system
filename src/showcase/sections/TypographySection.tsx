@@ -6,15 +6,17 @@ import { SegmentedControl } from '@/components/ui/segmented'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { cn } from '@/lib/cn'
 
-type Row = { token: string; cls: string; spec: string; sample: string }
+/** `hl` = the single word that carries the Atlas-Blue highlight in the default "Mixed" heading
+ *  pattern (the rest of the line stays ink) — the hero-H1 treatment used across the site. */
+type Row = { token: string; cls: string; spec: string; sample: string; hl?: string }
 
 const DISPLAY: Row[] = [
-  { token: 'display-2xl', cls: 'text-display-2xl', spec: '44–72px · 600 · -0.02em', sample: 'Predictable pipeline' },
-  { token: 'display-xl', cls: 'text-display-xl', spec: '36–56px · 600 · -0.02em', sample: 'More settlements' },
-  { token: 'display-lg', cls: 'text-display-lg', spec: '40px · 600 · -0.015em', sample: 'Less admin' },
-  { token: 'display-md', cls: 'text-display-md', spec: '32px · 600', sample: 'The calm operator' },
-  { token: 'title-lg', cls: 'text-title-lg', spec: '20px · 600', sample: 'Unified CRM' },
-  { token: 'title-md', cls: 'text-title-md', spec: '18px · 600', sample: 'Automated follow-up' },
+  { token: 'display-2xl', cls: 'text-display-2xl', spec: '44–72px · 600 · -0.02em', sample: 'Predictable pipeline', hl: 'Predictable' },
+  { token: 'display-xl', cls: 'text-display-xl', spec: '36–56px · 600 · -0.02em', sample: 'More settlements', hl: 'settlements' },
+  { token: 'display-lg', cls: 'text-display-lg', spec: '40px · 600 · -0.015em', sample: 'Less admin', hl: 'Less' },
+  { token: 'display-md', cls: 'text-display-md', spec: '32px · 600', sample: 'The calm operator', hl: 'calm' },
+  { token: 'title-lg', cls: 'text-title-lg', spec: '20px · 600', sample: 'Unified CRM', hl: 'Unified' },
+  { token: 'title-md', cls: 'text-title-md', spec: '18px · 600', sample: 'Automated follow-up', hl: 'Automated' },
 ]
 
 const BODY: Row[] = [
@@ -45,36 +47,61 @@ const BODY_INSPECT: InspectData = {
   download: { filename: 'anonymous-pro-400.woff2', href: '/fonts/anonymous-pro-400.woff2' },
 }
 
-type ColorKey = 'accent' | 'ink'
+type ColorKey = 'mixed' | 'accent' | 'ink'
 
-/* Heading-colour options. 'accent' = Atlas Blue highlight, 'ink' = neutral black.
-   Classes appear here as string literals so Tailwind keeps them. */
-const HEADING_COLORS = { accent: 'Blue', ink: 'Black' }
+/* Heading-colour options. 'mixed' (default) = ink with one Atlas-Blue keyword — the hero-H1
+   pattern; 'accent' = all Atlas Blue; 'ink' = all neutral black. Classes appear as string
+   literals so Tailwind keeps them. */
+const HEADING_COLORS: Record<ColorKey, string> = { mixed: 'Mixed', accent: 'Blue', ink: 'Black' }
+
+/** Render a heading sample in the active mode: Mixed = ink line with one `text-highlight` word
+ *  (the default), Blue = all `text-highlight`, Black = all `text-fg`. */
+function HeadingText({ r, mode }: { r: Row; mode: ColorKey }) {
+  const base = 'font-display transition-colors duration-base'
+  if (mode === 'mixed' && r.hl && r.sample.includes(r.hl)) {
+    const i = r.sample.indexOf(r.hl)
+    return (
+      <p className={cn(base, r.cls, 'text-fg')}>
+        {r.sample.slice(0, i)}
+        <span className="text-highlight">{r.hl}</span>
+        {r.sample.slice(i + r.hl.length)}
+      </p>
+    )
+  }
+  return <p className={cn(base, r.cls, mode === 'accent' ? 'text-highlight' : 'text-fg')}>{r.sample}</p>
+}
 
 export function TypographySection() {
-  const [color, setColor] = React.useState<ColorKey>('accent')
+  const [color, setColor] = React.useState<ColorKey>('mixed')
   const opts = HEADING_COLORS
-  const colorClass = color === 'accent' ? 'text-highlight' : 'text-fg'
 
   return (
     <Section
       id="typography"
       eyebrow="Typography"
       title="Typography"
-      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. Toggle the heading colour — the Atlas Blue accent or a neutral ink."
+      lead="Spline Sans carries every heading and figure; Anonymous Pro carries body, captions and the mono overline. The default Mixed heading keeps the line ink with one Atlas-Blue keyword — the hero-H1 pattern — or switch it to all Blue or all Black."
     >
       <div className="space-y-8">
         {/* heading colour toggle — theme-aware options */}
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-surface px-5 py-4">
           <MonoLabel tone="subtle">Heading colour</MonoLabel>
-          <div className="flex items-center gap-3">
-            <TokenTag title="active heading-colour class">{colorClass}</TokenTag>
+          <div className="flex flex-wrap items-center gap-3">
+            {color === 'mixed' ? (
+              <span className="flex items-center gap-1.5">
+                <TokenTag title="heading base">text-fg</TokenTag>
+                <TokenTag title="highlighted keyword">text-highlight</TokenTag>
+              </span>
+            ) : (
+              <TokenTag title="active heading-colour token">{color === 'accent' ? 'text-highlight' : 'text-fg'}</TokenTag>
+            )}
             <SegmentedControl
               aria-label="Heading colour"
               value={color}
               onValueChange={(v) => setColor(v as ColorKey)}
               size="sm"
               options={[
+                { value: 'mixed', label: opts.mixed },
                 { value: 'accent', label: opts.accent },
                 { value: 'ink', label: opts.ink },
               ]}
@@ -95,7 +122,7 @@ export function TypographySection() {
                   <TokenTag>{r.cls}</TokenTag>
                   <span className="font-mono text-caption text-fg-subtle">{r.spec}</span>
                 </div>
-                <p className={cn('font-display transition-colors duration-base', r.cls, colorClass)}>{r.sample}</p>
+                <HeadingText r={r} mode={color} />
               </div>
             ))}
           </div>

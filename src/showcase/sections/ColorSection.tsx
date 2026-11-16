@@ -132,7 +132,7 @@ function ShadeChip({ shade }: { shade: Shade }) {
 }
 
 function ColorCard({ c }: { c: Primary }) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(true)
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-surface">
       <button
@@ -228,7 +228,7 @@ export function ColorSection() {
       id="color"
       eyebrow="Colour"
       title="Colour"
-      lead="One anchor, a disciplined ecosystem. Atlas Blue is the brand and owns every typographic highlight; a small set of functional signals — success, danger, attention, info — sit around it, each tuned to clear WCAG AA on white so the whole palette reads as one family. Click any swatch to copy. Components always name a semantic token, never a raw hex — see Tokens for how these become the three token layers."
+      lead="One anchor, a disciplined ecosystem. Atlas Blue is the brand and owns every typographic highlight; a small set of functional signals — success, danger, attention, info — sit around it, each tuned to clear WCAG AA on white so the whole palette reads as one family. Click any swatch to copy. Components always name a semantic token, never a raw hex. Every family is expanded below — click any swatch to copy its value."
     >
       {/* Anchor & neutrals */}
       <MonoLabel tone="subtle" dot>Anchor &amp; neutrals</MonoLabel>
