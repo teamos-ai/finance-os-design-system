@@ -60,6 +60,7 @@ import { MonoLabel } from '@/components/ui/mono-label'
 import { TokenTag } from '@/components/ui/token-tag'
 import { Input } from '@/components/ui/input'
 import { IconButton } from '@/components/ui/icon-button'
+import { StatusIcon, type StatusVariant } from '@/components/ui/status-icon'
 import { DownloadFolder } from '@/components/brand/DownloadFolder'
 import { Stagger, StaggerItem } from '@/lib/motion'
 import { copyText } from '@/lib/utils'
@@ -181,10 +182,10 @@ const IB_SIZES = ['sm', 'md', 'lg'] as const
 const CONVENTIONS_INSPECT = {
   name: 'Icon conventions',
   explain:
-    'One family — lucide-react, never mixed with another set. A glyph inherits its colour from the text around it through currentColor, carries a stroke that matches that text weight (1.5 for body, 2 for emphasis), and sits on the 14 / 16 / 20 / 24 size scale. Outline is the resting state; a filled glyph marks the active one.',
+    'One family — lucide-react, never mixed with another set. A glyph inherits its colour from the text around it through currentColor, carries one standard stroke (1.75), and sits on the 14 / 16 / 20 / 24 size scale. Outline is the resting state; a filled glyph marks the active one.',
   token: [
     'size    h-3.5·14  h-4·16  h-5·20  h-6·24',
-    'stroke  strokeWidth={1.5}  body  ·  {2} emphasis',
+    'stroke  strokeWidth={1.75}  (one standard weight — no bold option)',
     'colour  currentColor ← text-fg / text-accent-text / …',
     'fill    fill-current for the active (selected) glyph',
   ].join('\n'),
@@ -206,7 +207,7 @@ const CONVENTIONS_INSPECT = {
       '// Finance OS icon conventions',
       '// family  lucide-react (one set, never mixed)',
       '// size    h-3.5 (14) · h-4 (16) · h-5 (20) · h-6 (24)',
-      '// stroke  1.5 beside body copy · 2 beside a bold label/heading',
+      '// stroke  strokeWidth={1.75} — one standard weight across the set (no bold)',
       '// colour  currentColor — a semantic text token paints the glyph',
       '',
       '<Star className="h-5 w-5 text-fg-subtle" strokeWidth={1.75} aria-hidden />   // outline',
@@ -251,7 +252,7 @@ const ICONBUTTON_INSPECT = {
     "import { Search } from 'lucide-react'",
     '',
     '<IconButton aria-label="Search" variant="soft">',
-    '  <Search className="h-5 w-5" strokeWidth={2} aria-hidden />',
+    '  <Search className="h-5 w-5" strokeWidth={1.75} aria-hidden />',
     '</IconButton>',
   ].join('\n'),
   download: {
@@ -264,7 +265,7 @@ const ICONBUTTON_INSPECT = {
       '// variant: dark | outline | soft | ghost | accent',
       '// size:    sm (h-9) | md (h-11) | lg (h-12)',
       '<IconButton aria-label="Search" variant="soft">',
-      '  <Search className="h-5 w-5" strokeWidth={2} aria-hidden />',
+      '  <Search className="h-5 w-5" strokeWidth={1.75} aria-hidden />',
       '</IconButton>',
     ].join('\n'),
   },
@@ -312,19 +313,12 @@ function Conventions() {
 
       <ConventionTile
         title="Stroke weight"
-        caption="The stroke matches the weight of the text beside it — 1.5 for body, 2 for emphasis."
+        caption="One standard stroke across the whole set, so icons read as one family. There is no bold option — weight never carries meaning; colour, fill and size do."
       >
-        <div className="flex w-full flex-col gap-3.5">
-          <div className="flex items-center gap-3">
-            <FileText className="h-6 w-6 text-fg" strokeWidth={1.5} aria-hidden />
-            <span className="font-body text-body-md text-fg">Body copy</span>
-            <TokenTag title="stroke prop" className="ml-auto">{'strokeWidth={1.5}'}</TokenTag>
-          </div>
-          <div className="flex items-center gap-3">
-            <FileText className="h-6 w-6 text-fg" strokeWidth={2} aria-hidden />
-            <span className="font-display text-title-sm text-fg">Bold label</span>
-            <TokenTag title="stroke prop" className="ml-auto">{'strokeWidth={2}'}</TokenTag>
-          </div>
+        <div className="flex w-full items-center gap-3">
+          <FileText className="h-6 w-6 text-fg" strokeWidth={1.75} aria-hidden />
+          <span className="font-body text-body-md text-fg">Standard stroke</span>
+          <TokenTag title="stroke prop" className="ml-auto">{'strokeWidth={1.75}'}</TokenTag>
         </div>
       </ConventionTile>
 
@@ -521,7 +515,7 @@ function IconButtonShowcase() {
           {IB_VARIANTS.map((v) => (
             <div key={v.variant} className="flex flex-col items-center gap-2">
               <IconButton variant={v.variant} aria-label={v.label}>
-                <v.Icon className="h-5 w-5" strokeWidth={2} aria-hidden />
+                <v.Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden />
               </IconButton>
               <span className="font-mono text-mono-2xs text-fg-subtle">{v.variant}</span>
             </div>
@@ -537,7 +531,7 @@ function IconButtonShowcase() {
           {IB_SIZES.map((s) => (
             <div key={s} className="flex flex-col items-center gap-2">
               <IconButton variant="outline" size={s} aria-label={`Open (${s})`}>
-                <ArrowUpRight className={cn(s === 'sm' ? 'h-4 w-4' : 'h-5 w-5')} strokeWidth={2} aria-hidden />
+                <ArrowUpRight className={cn(s === 'sm' ? 'h-4 w-4' : 'h-5 w-5')} strokeWidth={1.75} aria-hidden />
               </IconButton>
               <span className="font-mono text-mono-2xs text-fg-subtle">{s}</span>
             </div>
@@ -611,6 +605,67 @@ function IconPacks() {
   )
 }
 
+/* ── A2 · Status variants (shared with Tables) ───────────────────────────────── */
+
+const STATUS_VARIANTS: { variant: StatusVariant; label: string; use: string }[] = [
+  { variant: 'yes', label: 'Yes', use: 'Included · supported · pass' },
+  { variant: 'no', label: 'No', use: 'Excluded · unsupported · fail' },
+  { variant: 'warn', label: 'Partial', use: 'Caveat · add-on · at-risk' },
+]
+
+const STATUS_INSPECT = {
+  name: 'Status variants',
+  explain:
+    'The three semantic status glyphs, shared by the Icons set and the comparison Tables so a check means the same thing everywhere. Each pairs a tokenised status colour with a recognisable shape (never colour alone), the one standard stroke, and an accessible label — green check for yes, red cross for no, amber triangle for a caveat.',
+  token: [
+    'yes   <Check/>          text-success',
+    'no    <X/>              text-danger',
+    'warn  <AlertTriangle/>  text-amber-text   (amber = status)',
+    'a11y  role="img" + aria-label (Yes / No / Partial)',
+    'stroke strokeWidth={1.75} — the one standard weight',
+  ].join('\n'),
+  code: [
+    "import { StatusIcon } from '@/components/ui/status-icon'",
+    '',
+    '<StatusIcon variant="yes" />              // green check',
+    '<StatusIcon variant="no" />               // red cross',
+    '<StatusIcon variant="warn" label="Add-on" /> // amber warning',
+  ].join('\n'),
+  download: {
+    filename: 'status-icon-usage.tsx',
+    mime: 'text/plain',
+    content: [
+      "import { StatusIcon } from '@/components/ui/status-icon'",
+      '',
+      '// variant: yes (success check) | no (danger cross) | warn (amber triangle)',
+      '// colour comes from the status token; shape + aria-label carry the meaning',
+      '<StatusIcon variant="yes" />',
+      '<StatusIcon variant="no" />',
+      '<StatusIcon variant="warn" label="Add-on" />',
+    ].join('\n'),
+  },
+}
+
+function StatusVariants() {
+  return (
+    <div className="flex flex-wrap items-stretch gap-4">
+      {STATUS_VARIANTS.map((s) => (
+        <div
+          key={s.variant}
+          className="flex flex-1 items-center gap-4 rounded-lg border border-border bg-surface p-4 min-w-[14rem]"
+        >
+          <StatusIcon variant={s.variant} />
+          <div className="flex min-w-0 flex-col gap-1">
+            <span className="font-display text-title-sm text-fg">{s.label}</span>
+            <span className="font-body text-caption text-fg-subtle">{s.use}</span>
+          </div>
+          <TokenTag title="status variant" className="ml-auto self-start">{`variant="${s.variant}"`}</TokenTag>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 /* ── Section ───────────────────────────────────────────────────────────────── */
 
 export function IconsSection() {
@@ -619,14 +674,22 @@ export function IconsSection() {
       id="icons"
       eyebrow="Icons"
       title="Icons"
-      lead="One icon family — lucide-react. Every glyph inherits its colour through currentColor, carries a stroke that matches the text weight beside it, and sits on a tight 14–24px scale. Search the curated set the system actually ships, and click any icon to copy its name."
+      lead="One icon family — lucide-react. Every glyph inherits its colour through currentColor, carries one standard stroke, and sits on a tight 14–24px scale. Search the curated set the system actually ships, and click any icon to copy its name."
     >
       <div className="flex flex-col gap-8">
         <Demo
-          label="Conventions — one family, currentColor, stroke matches text weight"
+          label="Conventions — one family, currentColor, one standard stroke"
           inspect={CONVENTIONS_INSPECT}
         >
           <Conventions />
+        </Demo>
+
+        <Demo
+          label="Status variants — a check, a cross and a warning, shared with Tables"
+          inspect={STATUS_INSPECT}
+          action={<TokenTag>{'<StatusIcon variant>'}</TokenTag>}
+        >
+          <StatusVariants />
         </Demo>
 
         <Demo label="The set — search, then click an icon to copy its name" inspect={SET_INSPECT}>

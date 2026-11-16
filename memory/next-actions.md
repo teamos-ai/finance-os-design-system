@@ -1,5 +1,7 @@
 # Next Actions
 
+- [17 November design review handoff](design-review-handoff-2026-11-17.md) — Tables, Typography, Bold Icon Removal and Icon Variants.
+
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
 - **CURRENT FOCUS / NEXT STEP (2026-11-16, Folders) — built + verified, awaiting Tumai's push:**
