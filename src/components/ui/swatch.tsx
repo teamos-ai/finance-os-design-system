@@ -78,7 +78,7 @@ export const Swatch = ({ hex, label, copyValue, primary, className }: SwatchProp
       aria-label={`${label}${primary ? ' (main brand colour)' : ''} — ${HEX}, ${rgb}. Click to copy ${value}.`}
       className={cn(
         'group flex flex-col overflow-hidden rounded-md border bg-surface text-left',
-        'transition-all duration-fast ease-out hover:shadow-sm',
+        'transition-calm duration-fast ease-out hover:shadow-sm',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
         primary
           ? 'border-border-strong shadow-sm ring-2 ring-ring ring-offset-2 ring-offset-canvas'

@@ -96,7 +96,15 @@ export function Inspectable({
   }
 
   return (
-    <div className={cn('group/inspect relative', className)}>
+    <div
+      className={cn(
+        'group/inspect relative',
+        // reserve the top-right corner for the "+" trigger: a Demo header strip directly under this
+        // wrapper keeps its action (token chips) clear of the button
+        '[&>div:first-child>.demo-head]:pr-11 [&>div:first-child>div>.demo-head]:pr-11',
+        className,
+      )}
+    >
       {children}
 
       <div className="absolute right-2.5 top-2.5 z-30">

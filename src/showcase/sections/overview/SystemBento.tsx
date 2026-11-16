@@ -359,7 +359,6 @@ export function SystemBento() {
   return (
     <Stagger
       className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[188px] md:[grid-auto-flow:row_dense]"
-      amount={0.06}
     >
       {/* Token architecture — tall gradient hero */}
       <StaggerItem className="md:col-span-2 md:row-span-3">

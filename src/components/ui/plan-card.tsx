@@ -65,7 +65,7 @@ export function PlanCard({ title, subtitle, Icon, actionText, onAction, classNam
         <button
           type="button"
           onClick={onAction}
-          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2.5 font-display font-medium text-accent-fg transition-all duration-fast ease-out hover:bg-accent-hover active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2.5 font-display font-medium text-accent-fg transition-calm duration-fast ease-out hover:bg-accent-hover active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
         >
           {actionText}
         </button>

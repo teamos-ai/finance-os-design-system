@@ -80,7 +80,7 @@ export const FeatureCard = ({
     <div
       className={cn(
         'group flex h-full flex-col rounded-lg border border-border bg-surface',
-        'transition-all duration-base ease-out hover:border-border-strong hover:shadow-md',
+        'transition-calm duration-base ease-out hover:border-border-strong hover:shadow-md',
         hasImage ? 'overflow-hidden' : 'gap-4 p-6',
         className,
       )}

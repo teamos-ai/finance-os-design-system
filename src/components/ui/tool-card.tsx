@@ -23,7 +23,7 @@ export const ToolCard = ({ name, meta, icon: Icon, accent = 'blue', badge = 'Rep
     <article
       className={cn(
         'flex w-72 shrink-0 flex-col gap-4 rounded-lg border border-border bg-surface p-5',
-        'transition-all duration-base ease-out hover:border-border-strong hover:shadow-md',
+        'transition-calm duration-base ease-out hover:border-border-strong hover:shadow-md',
         className
       )}
     >

@@ -405,7 +405,7 @@ export function ScrollersSection() {
                     data-step-index={i}
                     aria-current={on ? 'true' : undefined}
                     className={cn(
-                      'rounded-lg border bg-surface p-5 transition-all duration-base ease-out motion-reduce:transition-none',
+                      'rounded-lg border bg-surface p-5 transition-calm duration-base ease-out motion-reduce:transition-none',
                       on ? '-translate-y-0.5 border-accent shadow-sm' : 'translate-y-0 border-border shadow-none',
                     )}
                   >

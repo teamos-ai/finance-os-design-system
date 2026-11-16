@@ -448,7 +448,7 @@ function IconGrid() {
                       aria-label={`Copy icon name ${i.name}`}
                       className={cn(
                         'group/icon flex flex-col items-center gap-2 rounded-md border px-2 py-3 text-center',
-                        'transition-all duration-fast ease-out active:scale-[0.96]',
+                        'transition-calm duration-fast ease-out active:scale-[0.96]',
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
                         isCopied
                           ? 'border-accent bg-accent-soft'

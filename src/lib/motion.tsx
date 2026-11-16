@@ -1,13 +1,14 @@
 /**
  * Motion primitives — Finance OS's quiet Framer Motion vocabulary.
  *
- * Every primitive honours `prefers-reduced-motion`. Vocabulary = fade + small
- * translate + gentle marquee + soft hover lift + count-up + signature Atlas Blue glow.
- * No bounce / elastic / autoplay (one opt-in hero float+wobble aside). Durations stay subtle (<= 480ms).
+ * Calm precision: things arrive, land and hold. Every number comes from `motion-tokens.ts`
+ * (= the `--dur-*` / `--ease-*` / `--rise-*` CSS tokens = the `motion-finance` skill's GSAP presets).
+ * Every primitive honours `prefers-reduced-motion`. No bounce / elastic; no idle loops on content
+ * (sanctioned loops: Marquee, BreathingDot, the halftone cloud drift, and the opt-in hero FloatWobble).
  * Use at most ONE reveal per viewport band so the page reads calm.
  *
  * Exports: FadeIn · FloatWobble · Stagger · StaggerItem · CountUp · HoverLift · Glow · BorderGlow ·
- *          BreathingDot · Marquee · Reveal · GradientShimmer · EASE_OUT
+ *          BreathingDot · Marquee · Reveal · MaskReveal · DrawLine · GradientShimmer · EASE_OUT
  */
 import * as React from 'react'
 import {
@@ -20,8 +21,9 @@ import {
   type Variants,
 } from 'framer-motion'
 import { cn } from '@/lib/cn'
+import { MOTION } from '@/lib/motion-tokens'
 
-export const EASE_OUT = [0.22, 1, 0.36, 1] as const
+export const EASE_OUT = MOTION.ease.out
 
 /* ── FadeIn — viewport fade + small translate-up ───────────────────────────── */
 export interface FadeInProps {
@@ -31,7 +33,7 @@ export interface FadeInProps {
   children: React.ReactNode
   as?: 'div' | 'section' | 'span' | 'li' | 'header' | 'p'
 }
-export const FadeIn = ({ delay = 0, y = 12, className, children, as = 'div' }: FadeInProps) => {
+export const FadeIn = ({ delay = 0, y = MOTION.rise.md, className, children, as = 'div' }: FadeInProps) => {
   const reduced = useReducedMotion()
   const MotionTag = motion[as] as React.ElementType
   return (
@@ -39,8 +41,8 @@ export const FadeIn = ({ delay = 0, y = 12, className, children, as = 'div' }: F
       className={className}
       initial={reduced ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.4, ease: EASE_OUT, delay }}
+      viewport={MOTION.viewport}
+      transition={{ duration: MOTION.dur.slow, ease: EASE_OUT, delay }}
     >
       {children}
     </MotionTag>
@@ -69,18 +71,19 @@ export const FloatWobble = ({ className, children }: { className?: string; child
 }
 
 /* ── Stagger container + item ──────────────────────────────────────────────── */
-const containerVariants: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } }
+const containerVariants: Variants = { hidden: {}, show: { transition: { staggerChildren: MOTION.stagger.base } } }
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE_OUT } },
+  hidden: { opacity: 0, y: MOTION.rise.md },
+  show: { opacity: 1, y: 0, transition: { duration: MOTION.dur.slow, ease: EASE_OUT } },
 }
 export const Stagger = ({
   className,
   children,
-  amount = 0.15,
+  amount,
 }: {
   className?: string
   children: React.ReactNode
+  /** visible fraction that triggers the reveal. Omit (recommended) to use the in-view margin. */
   amount?: number
 }) => {
   const reduced = useReducedMotion()
@@ -90,7 +93,7 @@ export const Stagger = ({
       variants={containerVariants}
       initial={reduced ? false : 'hidden'}
       whileInView="show"
-      viewport={{ once: true, amount }}
+      viewport={amount == null ? MOTION.viewport : { once: true, amount }}
     >
       {children}
     </motion.div>
@@ -113,7 +116,7 @@ export interface CountUpProps {
   group?: boolean
   className?: string
 }
-export const CountUp = ({ to, duration = 1.4, decimals = 0, prefix = '', suffix = '', group = false, className }: CountUpProps) => {
+export const CountUp = ({ to, duration = MOTION.dur.draw, decimals = 0, prefix = '', suffix = '', group = false, className }: CountUpProps) => {
   const ref = React.useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.4 })
   const reduced = useReducedMotion()
@@ -164,7 +167,7 @@ export const HoverLift = ({
 }) => {
   const reduced = useReducedMotion()
   return (
-    <motion.div className={className} whileHover={reduced ? undefined : { y }} transition={{ duration: 0.24, ease: EASE_OUT }}>
+    <motion.div className={className} whileHover={reduced ? undefined : { y }} transition={{ duration: MOTION.dur.base, ease: EASE_OUT }}>
       {children}
     </motion.div>
   )
@@ -235,13 +238,91 @@ export const Reveal = ({
   return (
     <motion.div
       className={className}
-      initial={reduced ? false : { opacity: 0, y: 14, filter: 'blur(6px)' }}
+      initial={reduced ? false : { opacity: 0, y: MOTION.rise.md, filter: 'blur(6px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, ease: EASE_OUT, delay }}
+      viewport={MOTION.viewport}
+      transition={{ duration: MOTION.dur.slower, ease: EASE_OUT, delay }}
     >
       {children}
     </motion.div>
+  )
+}
+
+/* ── MaskReveal — the headline entrance: each line slides up from behind its own mask.
+   Pass one node per line. One Atlas-Blue keyword per headline (wrap it in `text-highlight`). */
+export const MaskReveal = ({
+  lines,
+  className,
+  lineClassName,
+  delay = 0,
+  as = 'h3',
+}: {
+  lines: React.ReactNode[]
+  className?: string
+  lineClassName?: string
+  delay?: number
+  as?: 'h1' | 'h2' | 'h3' | 'p' | 'div'
+}) => {
+  const reduced = useReducedMotion()
+  const Tag = motion[as] as React.ElementType
+  return (
+    <Tag
+      className={className}
+      initial={reduced ? false : 'hidden'}
+      whileInView="show"
+      viewport={MOTION.viewport}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: MOTION.stagger.words + 0.02, delayChildren: delay } } }}
+    >
+      {lines.map((line, i) => (
+        <span key={i} className={cn('block overflow-hidden pb-[0.08em]', lineClassName)}>
+          <motion.span
+            className="block"
+            variants={{
+              hidden: { y: '108%' },
+              show: { y: '0%', transition: { duration: MOTION.dur.slower, ease: EASE_OUT } },
+            }}
+          >
+            {line}
+          </motion.span>
+        </span>
+      ))}
+    </Tag>
+  )
+}
+
+/* ── DrawLine — an SVG path that draws on (charts, underlines, connectors).
+   Render inside an <svg>; stroke colour / width come from the caller via className or props. */
+export const DrawLine = ({
+  d,
+  className,
+  delay = 0,
+  duration = MOTION.dur.draw,
+  strokeWidth = 2,
+}: {
+  d: string
+  className?: string
+  delay?: number
+  duration?: number
+  strokeWidth?: number
+}) => {
+  const reduced = useReducedMotion()
+  return (
+    <motion.path
+      d={d}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      initial={reduced ? false : { pathLength: 0, opacity: 0 }}
+      whileInView={{ pathLength: 1, opacity: 1 }}
+      viewport={MOTION.viewport}
+      transition={{
+        pathLength: { duration, ease: MOTION.ease.inOut, delay },
+        opacity: { duration: 0.01, delay },
+      }}
+    />
   )
 }
 

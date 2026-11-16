@@ -45,6 +45,7 @@ Logo marks — the provided assets only (see CLAUDE.md).
 
 | Component(s) | Purpose | Variants | Source |
 |---|---|:---:|---|
+| `HalftoneClouds` | the Finance OS signature texture as a live canvas: a slow-drifting cloud field drawn as an Atlas Blue halftone screen. |  | `brand/HalftoneClouds.tsx` |
 | `LogoMark` `Logo` | the real Finance OS brand marks (PNG assets in /public). |  | `brand/Logo.tsx` |
 
 ## Lead magnets `src/components/lead-magnets`

@@ -6,11 +6,23 @@ import type { Config } from 'tailwindcss'
    compile, enforcing "zero rogue hex / 8px-max squircles". Utilities reference
    the semantic CSS variables in src/styles/tokens.css, so themes switch by
    toggling [data-theme] with no class changes. */
+/* Make every token colour ALPHA-AWARE. A bare `var(--c-accent)` gives Tailwind nothing to apply an
+   opacity modifier to, so `bg-accent/70` or `border-accent/25` silently rendered as nothing. Wrapping
+   the variable in color-mix with Tailwind's `<alpha-value>` placeholder makes `/NN` work on every
+   token while plain `bg-accent` (alpha 1) resolves to exactly the same colour as before. */
+type ColorTree = string | { [key: string]: ColorTree }
+const alphaAware = (value: ColorTree): ColorTree =>
+  typeof value === 'string'
+    ? value.startsWith('var(')
+      ? `color-mix(in srgb, ${value} calc(<alpha-value> * 100%), transparent)`
+      : value
+    : Object.fromEntries(Object.entries(value).map(([k, v]) => [k, alphaAware(v)]))
+
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   darkMode: 'class', // single Light theme — no dark: utilities in use
   theme: {
-    colors: {
+    colors: alphaAware({
       transparent: 'transparent',
       current: 'currentColor',
       white: '#FFFFFF',
@@ -61,7 +73,7 @@ export default {
       info: { DEFAULT: 'var(--c-info)', soft: 'var(--c-info-soft)' },
       inverse: { DEFAULT: 'var(--c-inverse-bg)', fg: 'var(--c-inverse-fg)' },
       ring: 'var(--c-ring)',
-    },
+    }) as Record<string, string | Record<string, string>>,
 
     borderRadius: {
       none: '0',
@@ -134,15 +146,24 @@ export default {
         },
       },
 
+      /* `transition-calm` — the named property list for interactive state. Never `transition-all`:
+         it animates layout properties too and can't be reasoned about. */
+      transitionProperty: {
+        calm: 'color, background-color, border-color, box-shadow, transform, opacity, filter',
+      },
       transitionTimingFunction: {
         out: 'var(--ease-out)',
         'in-out': 'var(--ease-in-out)',
         spring: 'var(--ease-spring)',
+        in: 'var(--ease-in)',
+        confirm: 'var(--ease-confirm)',
       },
       transitionDuration: {
         fast: 'var(--dur-fast)',
         base: 'var(--dur-base)',
         slow: 'var(--dur-slow)',
+        slower: 'var(--dur-slower)',
+        draw: 'var(--dur-draw)',
       },
 
       ringColor: { DEFAULT: 'var(--c-ring)' },

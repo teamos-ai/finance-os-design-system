@@ -6,7 +6,7 @@ import { Inspectable } from '@/components/ui/inspectable'
 const BG_TILES = [
   { name: 'White', bg: '#FFFFFF', rect: '/logo-rect-blue.png', mark: '/logo-square-blue.png' },
   { name: 'Muted', bg: '#F6F7F9', rect: '/logo-rect-blue.png', mark: '/logo-square-blue.png' },
-  { name: 'Black', bg: '#000000', rect: '/logo-rect-white.png', mark: '/logo-square-blue.png' },
+  { name: 'Black', bg: '#000000', rect: '/logo-rect-blue.png', mark: '/logo-square-blue.png' },
 ]
 
 export function LogoSection() {
@@ -15,7 +15,7 @@ export function LogoSection() {
       id="logo"
       eyebrow="Logo"
       title="Logo"
-      lead="The Finance OS mark and lockup across surfaces — Atlas Blue on white, white on black."
+      lead="The Finance OS mark and lockup across surfaces — the one Atlas Blue lockup on white, muted and black. There is no gold, orange or recoloured variant."
     >
       <div>
         <MonoLabel tone="brand" dot>Logo lockups · the mark across surfaces</MonoLabel>

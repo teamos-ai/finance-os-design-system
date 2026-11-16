@@ -99,8 +99,8 @@ compose from `--c-*` only, wired through `tailwind.config.ts`.
   Emphasis comes from elevation, a full border, scale, or a centred top badge only.
 - **8px-max squircles** (radius scale 2/4/6/8 — no pills, no full rounds). No glassmorphism.
 - **Neutral focus rings** (`--c-ring`), never the accent.
-- **Logos: the provided assets only** — `/logo-square-blue.png` + `/logo-rect-blue.png` /
-  `/logo-rect-white.png`. Never draw, recolour or fabricate a logo or favicon.
+- **Logos: the provided assets only** — `/logo-square-blue.png` + `/logo-rect-blue.png` (the one
+  blue lockup, on every surface). Never draw, recolour or fabricate a logo or favicon.
 - **Fonts:** Spline Sans (display) + Anonymous Pro (body/mono), self-hosted via `@fontsource`.
 
 ## Deploy

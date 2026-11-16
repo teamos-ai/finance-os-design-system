@@ -23,7 +23,6 @@ const PUBLIC = new Set([
   '/favicon.ico',
   '/logo-square-blue.png',
   '/logo-rect-blue.png',
-  '/logo-rect-white.png',
   '/robots.txt',
 ])
 

@@ -28,7 +28,6 @@ const EXEMPT = {
   'VideoSection.tsx': 'front door — the explainer/promo, not a parts exhibit',
   'OverviewSection.tsx': 'narrative "system at a glance" showreel, not a parts catalogue',
   'ColorSection.tsx': 'prints hex + --c-* inline via swatches — the gold standard',
-  'MotionSection.tsx': 'intentionally blank — awaiting motion direction, no specimens',
   'BannersSection.tsx': 'self-documents via Demo variant labels ("Banner · black", …)',
   'FunnelsSection.tsx': "self-documents via its own per-card 'Built from' anchor rows",
   'WebsiteAuditFormsSection.tsx': 'status/placeholder — no rendered design specimen',

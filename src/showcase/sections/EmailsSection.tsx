@@ -90,7 +90,7 @@ const OverviewTile = ({ email, onOpen }: { email: ClientEmail; onOpen: () => voi
       onClick={onOpen}
       className={cn(
         'group flex h-full w-full flex-col gap-3 rounded-lg border border-border bg-surface p-5 text-left shadow-sm',
-        'transition-all duration-base ease-out hover:-translate-y-0.5 hover:border-border-strong hover:shadow-md',
+        'transition-calm duration-base ease-out hover:-translate-y-0.5 hover:border-border-strong hover:shadow-md',
         'active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
         'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
       )}

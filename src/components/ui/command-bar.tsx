@@ -14,7 +14,7 @@ import { cn } from '@/lib/cn'
 
 const bar = cva(
   'group flex items-center gap-3 rounded-lg border border-border bg-surface ' +
-    'transition-all duration-base ease-out shadow-sm ' +
+    'transition-calm duration-base ease-out shadow-sm ' +
     'focus-within:border-accent focus-within:shadow-md focus-within:ring-2 focus-within:ring-accent-soft',
   {
     variants: {

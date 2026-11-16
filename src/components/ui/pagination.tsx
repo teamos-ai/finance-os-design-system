@@ -45,7 +45,7 @@ export const Pagination = ({
 
   const cell =
     'inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 ' +
-    'font-display text-body-sm font-medium transition-all duration-fast ease-out ' +
+    'font-display text-body-sm font-medium transition-calm duration-fast ease-out ' +
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ' +
     'focus-visible:ring-offset-2 focus-visible:ring-offset-canvas active:scale-[0.96]'
 

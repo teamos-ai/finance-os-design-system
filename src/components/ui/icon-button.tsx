@@ -14,7 +14,7 @@ import { cn } from '@/lib/cn'
 
 const iconButton = cva(
   'inline-flex shrink-0 items-center justify-center rounded-md ' +
-    'transition-all duration-fast ease-out active:scale-[0.96] ' +
+    'transition-calm duration-fast ease-out active:scale-[0.96] ' +
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ' +
     'focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ' +
     'disabled:opacity-50 disabled:pointer-events-none',

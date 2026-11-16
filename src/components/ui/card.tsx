@@ -18,7 +18,7 @@ import { Badge, type BadgeProps } from '@/components/ui/badge'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
 
-const card = cva('relative border shadow-sm transition-all duration-base ease-out', {
+const card = cva('relative border shadow-sm transition-calm duration-base ease-out', {
   variants: {
     tone: {
       surface: 'bg-surface border-border',

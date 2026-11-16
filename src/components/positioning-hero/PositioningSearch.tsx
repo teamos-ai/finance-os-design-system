@@ -195,7 +195,7 @@ export function PositioningSearch({ entries, tags, placeholder }: PositioningSea
               }}
               className={cn(
                 'rounded-md border border-border bg-surface px-3 py-1.5 font-mono text-mono-xs text-fg-muted shadow-sm',
-                'transition-all duration-base ease-out hover:border-border-strong hover:text-fg active:scale-[0.96]',
+                'transition-calm duration-base ease-out hover:border-border-strong hover:text-fg active:scale-[0.96]',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas',
               )}
             >

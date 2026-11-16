@@ -7,6 +7,7 @@ import { MonoLabel } from '@/components/ui/mono-label'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { SHOWCASE_NAV } from '@/lib/nav'
 import { FadeIn } from '@/lib/motion'
+import { MOTION } from '@/lib/motion-tokens'
 import { cn } from '@/lib/cn'
 
 export interface SectionProps {
@@ -41,7 +42,8 @@ export const Section = ({ id, eyebrow, title, lead, children, className }: Secti
             {lead && <p className="mt-4 max-w-2xl font-body text-body-lg leading-relaxed text-fg-muted">{lead}</p>}
           </header>
         </FadeIn>
-        {children}
+        {/* the body follows the header in — one calm reveal per section (motion law 02) */}
+        <FadeIn y={MOTION.rise.sm} delay={MOTION.stagger.base}>{children}</FadeIn>
       </div>
     </section>
   )
@@ -61,7 +63,7 @@ export const ComposedFrom = ({ items, className }: { items: { label: string; hre
   >
     <span>Composed from</span>
     {items.map((it, i) => (
-      <span key={it.href} className="inline-flex items-center gap-2">
+      <span key={`${it.href}-${it.label}`} className="inline-flex items-center gap-2">
         <a href={it.href} className="text-accent-text underline-offset-4 hover:underline">
           {it.label}
         </a>
@@ -96,9 +98,10 @@ export const Demo = ({
       {/* Grey header band — a labelled "specimen drawer" chrome strip. `bg-selected` is the
           system's cool neutral grey (clearly set off from the white frame body); the mono label
           is `text-fg-muted` so it stays easy to read on the grey. This is the one place the rule
-          lives, so every Demo frame across the showcase picks it up. */}
+          lives, so every Demo frame across the showcase picks it up. The `demo-head` class is a hook:
+          <Inspectable> pads this strip on the right so its "+" never sits on a token chip. */}
       {(label || action) && (
-        <div className="flex items-center justify-between gap-3 border-b border-border bg-selected px-4 py-2.5">
+        <div className="demo-head flex items-center justify-between gap-3 border-b border-border bg-selected px-4 py-2.5">
           {label ? <span className="font-mono text-caption font-medium text-fg-muted">{label}</span> : <span />}
           {action}
         </div>
@@ -106,5 +109,6 @@ export const Demo = ({
       <div className={cn(padded && 'p-6 md:p-8')}>{children}</div>
     </div>
   )
-  return inspect ? <Inspectable {...inspect}>{frame}</Inspectable> : frame
+  // every exhibit rises in as it is scrolled to (rise-sm) — the system-wide entrance for specimens
+  return <FadeIn y={MOTION.rise.sm} className="h-full">{inspect ? <Inspectable {...inspect}>{frame}</Inspectable> : frame}</FadeIn>
 }
