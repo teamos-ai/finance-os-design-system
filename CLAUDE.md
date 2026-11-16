@@ -52,10 +52,30 @@ not a showcase exhibit — it is used live on client calls.
   `@fontsource`, imported in `main.tsx`. No Google Fonts request at runtime.
 - **Logos: use ONLY the provided real assets — never draw, recolour, fabricate or AI-generate a
   logo, monogram or favicon.** Square mark → `/logo-square-blue.png`; rectangle long lockup →
-  `/logo-rect-blue.png` (on light) / `/logo-rect-white.png` (on dark/photo). The favicon is the
+  `/logo-rect-blue.png` (every surface — light, muted and black; the legacy gold files incl. the
+  misnamed `logo-rect-white.png` were deleted 2026-11-16 — there is no white or gold lockup). The favicon is the
   real square logo, set in `index.html`. `src/components/brand/Logo.tsx` is the only logo component.
 - Foundations: **8px-max squircles** (radius scale is 2/4/6/8 only — no pills, no full rounds) ·
   gentle Framer motion · **NO glassmorphism**.
+
+## Motion (calm precision + one signature flourish — set 2026-11-16)
+- **Five laws:** land and hold · one move per moment · exits quicker than entrances · nothing bounces
+  (one sanctioned **confirm** overshoot only) · blue leads. Full rules live in the **Motion** section
+  (`MotionSection.tsx`) and in the **`motion-finance` skill** (sibling repo `../motion-finance`, symlinked
+  into `~/.claude/skills/motion-finance`; GitHub `teamos-ai/motion-finance`, private).
+- **Motion tokens are ground truth too:** `--dur-fast/base/slow/slower/draw`, `--ease-out/in/in-out/confirm`,
+  `--rise-sm/rise/rise-lg`, `--stagger-tight/stagger` in `tokens.css` = `MOTION` in `src/lib/motion-tokens.ts`
+  = the skill's GSAP presets (`fos-motion.js`). Never a magic duration or ease. Use `transition-calm`
+  (named properties) — **never `transition-all`**.
+- **Primitives:** `src/lib/motion.tsx` (`FadeIn`, `Stagger`, `MaskReveal`, `DrawLine`, `CountUp`, …). In-view
+  triggers use `MOTION.viewport` (a margin, not a visible fraction, so tall blocks on phones still reveal).
+  `Section` reveals its body and every `Demo` frame rises in — that is the system-wide entrance.
+- **Signature = Atlas Blue halftone clouds** (`components/brand/HalftoneClouds.tsx` + `lib/halftone.ts`,
+  same algorithm as the skill's `fos-clouds.js`). One field per view; type never sits on dense dots; the
+  "cloud dissolve" once per piece. Sanctioned loops only: Marquee, BreathingDot, the cloud drift, hero FloatWobble.
+- **Video = HyperFrames** (HTML + GSAP → MP4) via the skill's kit; films live in `public/motion/`. No Remotion,
+  no physics, no generated logos. Never animate a figure nobody stated.
+- **Tailwind token colours are alpha-aware** (`alphaAware()` in `tailwind.config.ts`), so `bg-accent/70` works.
 
 ## Token architecture (3 layers)
 `primitive` (`--p-*`, raw brand ramps) → `semantic` (`--c-*`, intent: canvas/surface/elevated/
@@ -255,6 +275,27 @@ Vercel accepts the deploy.
   prod deploy. **Don't-touch —** keep the blue grid retired; keep it Light (no dark tokens); Overview is
   token-coverage EXEMPT so the new bento cells need no TokenTag. **Open question —** none. **Last updated
   —** 2026-11-16, Claude (Opus 4.8).
+- **Current State (2026-11-16 · motion system + motion-finance skill + logo/inspector fixes):** **Focus
+  now —** built + verified, **awaiting Tumai's push** (this repo) and **repo creation + push** (motion-finance).
+  (1) **`motion-finance` skill** (new sibling repo, committed locally `09da6eb`, symlinked into Claude skills):
+  SKILL.md + 7 references (tokens · ui-motion · video · patterns · clouds · qa · stack), a HyperFrames **kit**
+  (real fonts/logos, `fos-brand.css`, `fos-motion.js`, `fos-clouds.js`), `new-video.sh`, `calm-audit.mjs`, and
+  **4 rendered example films** (brand-sting · kinetic-headline · data-story · flow-diagram). Stack decided from a
+  scan of 23 repos: Framer Motion + CSS for UI, HyperFrames for film, bespoke halftone clouds; three.js / librosa /
+  Tegaki only when needed; Remotion, Blender, physics, mascots rejected. (2) **Motion section rebuilt** (was
+  blank): five laws, playable duration/easing/distance tokens, 8 live patterns, the clouds exhibit, the 4 films
+  (`public/motion/`), the skill card (download `public/packs/motion-finance-skill.zip`). No longer coverage-EXEMPT.
+  (3) **Motion pass everywhere:** new motion tokens; primitives moved onto them; `Section` body + every `Demo`
+  reveal; `transition-all` → `transition-calm` (13 spots, audit tool untouched); button press 0.97. (4) **Fixes:**
+  gold logo files deleted (the "white" lockup was gold) — black tile uses the blue lockup; inspector "+" no longer
+  overlaps header token chips (151 inspectors, 0 overlaps); Tailwind colours made alpha-aware (54 silently broken
+  `/NN` classes now render); ComposedFrom duplicate-key warning fixed. Gate green (check 21/21, coverage 0
+  missing, build OK). **Next step —** Tumai: push this repo; create + push `teamos-ai/motion-finance`; sign in to
+  21st.dev + Pinterest in the browser pane so the bookmarks/board can inform the visual sweep. **Don't-touch —**
+  no bounce, no idle loops, no second accent; blue grid stays retired; Light only. **Open question —** the hero
+  `FloatWobble` is an idle loop the new laws would otherwise ban (kept as the documented exception — Tumai to
+  confirm); visual redesign beyond motion/polish is not started (awaiting the board walkthrough). **Last updated
+  —** 2026-11-16, Claude (Fable 5.2).
 
 ---
 

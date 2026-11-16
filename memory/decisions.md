@@ -78,3 +78,16 @@
   the team / the Ultra Code pass to avoid burying real diffs and un-aligning intentional comments.
 - **(historical) — One Light theme only.** No dark/paper themes, no theme toggle. Matches
   financeos.au. See `HANDOVER.md` for the migration history.
+
+## 2026-11-16 — Motion direction and stack
+- **Motion personality = calm precision + ONE signature flourish** (Tumai's choice). Flourish = **Atlas Blue
+  halftone clouds** (from the Pinterest board's dithered-cloud pins). Why: keeps the Ruler/Sage voice while
+  giving the brand one ownable visual; built as code so it can never go off-palette.
+- **Stack = Framer Motion/CSS for UI + HyperFrames for film.** Why: no new runtime in the app, HTML we already
+  write, deterministic renders. Remotion (second renderer + licence), Blender MCP, physics, mascots and style
+  prompt packs rejected; three.js / librosa / Tegaki deferred until a concrete need.
+- **Skill lives in its own private repo** (`teamos-ai/motion-finance`), linked + downloadable from the DS.
+- **No white or gold logo exists.** The blue lockup is used on every surface. Why: the file named
+  `logo-rect-white.png` was the retired gold lockup.
+- **Tailwind token colours are alpha-aware by config**, not per-class. Why: fixes the whole class of silent
+  no-op `/NN` modifiers at the root.

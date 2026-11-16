@@ -12,7 +12,16 @@
     (`sections/overview/`). Catalogued: new **Card Sphere** section (Orbit icon, after Heroes) + "The
     tilt bento" in Bento Box. `GlanceBento`/`FeatureBento` deleted.
 
-- **CURRENT FOCUS / NEXT STEP (2026-11-16):** an Overview-polish batch is **built + verified (desktop +
+- **CURRENT FOCUS / NEXT STEP (2026-11-16, later) — motion system built, awaiting Tumai:**
+  1. `git push origin main` in this repo (motion section, tokens, fixes).
+  2. In `../motion-finance`: `gh repo create teamos-ai/motion-finance --private --source . --push`.
+  3. Sign in to **21st.dev** and **Pinterest** in the browser pane (or connect Claude in Chrome) — the bookmark
+     list reads empty signed-out and the board is login-walled. Then walk the board before any visual redesign.
+  4. Confirm: keep the hero `FloatWobble` as the one idle-loop exception? Halftone clouds approved as the
+     signature — where next (hero band, section dividers, social templates)?
+  - Skill is live locally: `~/.claude/skills/motion-finance` → ask for "a Finance OS brand sting".
+
+- **EARLIER TODAY (2026-11-16) — Overview polish batch [3b3725a · cfd0492]:** an Overview-polish batch is **built + verified (desktop +
   mobile), NOT yet pushed** — 9 files, gate-green. **→ Tumai runs `git push origin main`** (push blocked
   for Claude), then confirm the gated prod deploy. The four changes:
   1. **Card Sphere** no longer clips — `overflow:visible` + smaller heroes + tighter fill (0.74); caption

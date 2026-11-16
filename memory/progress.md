@@ -2,6 +2,28 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-16 (later) — Motion system, motion-finance skill, logo + inspector fixes (built + verified, awaiting push)
+
+- **Research:** three parallel read-only scans (5 teamos-ai forks, 8 third-party kits, the YouTube video's 10
+  repos). Outcome in the skill's `references/stack.md`. Nothing cloned or executed from third parties.
+- **motion-finance skill** → `~/1-Tumai-Second-Brain/1-projects/motion-finance` (own git repo, commit `09da6eb`,
+  not yet on GitHub). Films authored as single-file HyperFrames compositions; `lint` 0 errors, `calm-audit` 0
+  errors (negative-tested: it fails on bounce / infinite repeat / gold logo / two blue keywords), contact sheets
+  reviewed, 4 MP4s rendered and durations verified with ffprobe. Bug found + fixed in review: SVG arrowheads
+  collapsed because GSAP overwrote the positioning `<g>` transform (now animates the child path — documented).
+  HyperFrames telemetry kept off (`HYPERFRAMES_NO_TELEMETRY=1`).
+- **Design system:** motion tokens (CSS + Tailwind + `motion-tokens.ts`), `MaskReveal` / `DrawLine`,
+  `HalftoneClouds`, rebuilt `MotionSection`, `public/motion/*` (web copies ≈1.3 MB total) and the skill zip.
+- **Sweep / polish:** Section body + Demo reveals; `transition-calm`; in-view margin instead of fraction;
+  Tailwind `alphaAware()` (opacity modifiers on token colours were silently no-ops — 54 uses in 23 files).
+- **Logo:** `logo-rect-white.png`, `logo-rect.png`, `logo-square.png` were all gold → `git rm`; middleware
+  allow-list + README + CLAUDE.md updated. **Inspector:** `demo-head` hook pads the header under the "+".
+- **Checks:** `npm run check` exit 0 (contrast 21/21, coverage 0 missing), `npm run build` OK, in-browser desktop
+  pass (151 inspectors / 0 overlaps / no horizontal scroll / nothing left hidden at normal scroll). Mobile:
+  DOM overflow check clean; screenshots limited because the preview pane runs as a hidden page (IO throttled).
+- **Not done / blocked:** 21st.dev list shows empty when signed out; Pinterest board is behind a login wall
+  (only the first rows visible). Chrome extension was not connected.
+
 ## 2026-11-16 — Overview polish batch: sphere room, true bento, Tokens removed, Typography mixed default (built + verified, awaiting Tumai's push)
 
 Four changes, one working set (9 files), gate-green (`npm run build` 1.4s · `npm run check`
