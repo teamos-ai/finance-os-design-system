@@ -3,6 +3,28 @@
 <!-- Architecture / strategy calls + the reason behind each, so we don't re-litigate them.
      Date each entry (YYYY-MM-DD). -->
 
+- **2026-11-17 — Goat rating: GOLD → AMBER (forced by the DS).** The website grades scores in a `gold` token;
+  the DS forbids gold and reserves AMBER for ratings (tokens.css: "star ratings"). So the stars, the graded
+  border ramp (`AMBER_RAMP` / `scoreBorder` in `scoring.ts`) and the Goated badge all read amber. Amber now
+  means exactly one thing in the DS — a score — so don't borrow it for anything that isn't a rating.
+- **2026-11-17 — Goat hover reactions kept as a scoped, reduced-motion exception.** Codex asked to match the
+  source behaviour (one cries · two sways · three nods · four bounces · five celebrates). These are HOVER-only
+  (not idle) expressive animations on an illustrated asset — same class of exception as the hero FloatWobble —
+  injected as a scoped `<style data-fos-goats>` and collapsing to a still goat under prefers-reduced-motion
+  (one still shows its tears, arrived not run). This is why the motion laws' "nothing bounces" is not violated
+  in spirit: it's character artwork on hover, not UI chrome.
+- **2026-11-17 — Font downloads use DownloadFolder, not the older SectionFolder.** Codex wrote "the existing
+  Section Folder component"; the new `DownloadFolder` (press→open→save) is purpose-built for exactly this and
+  is the better fit. Per-family ZIPs built from the Downloads archive, kept in `public/packs` with each OFL.
+- **2026-11-17 — Bold icon stroke removed at the Icons convention + showcase only.** Dropped the documented
+  bold ({2}) stroke-weight teaching and standardised the Icons showcase to 1.75. Functional `strokeWidth={2}`
+  on small UI glyphs elsewhere (X, chevrons) is left as-is — it's legibility, not "the bold variant". A full
+  app-wide sweep is available if Tumai wants one.
+- **2026-11-17 — Tables on white surfaces; grey only as a transient hover.** No Tables screenshot was in the
+  handoff, so "grey shading → white" was read as: resting cells/headers white (matrix group-headers are now
+  white with an accent overline), grey kept only for row hover. Binary comparison cells use the shared
+  `StatusIcon` with accessible labels (shape + colour, never colour alone). Flag if a different grey was meant.
+
 - **2026-11-16 — The glass folder is admitted as an illustrated OBJECT, not a UI surface.** Tumai pasted a
   glassmorphism "folder cards" component into a system whose hard rule is "no glass". Resolved it the way the
   system already handles tensions (amber = status-only, FloatWobble = the one idle loop): the folder is an

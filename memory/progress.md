@@ -2,6 +2,33 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-17 — Codex design-review handoff implemented (4 commits, awaiting push)
+
+Implemented `memory/design-review-handoff-2026-11-17.md` (Codex, 17 Nov). Four commits, each gate-green
+(`build` OK · `check` 21/21 · token-coverage 36 ok · 7 exempt · 0 missing · 0 lint errors) and verified
+in-browser (desktop; 0 console errors).
+
+- **Icons [58a85dd]** — removed the bold stroke-weight teaching (one standard 1.75); IconButton demo glyphs
+  → 1.75. New shared `StatusIcon` (`src/components/ui/status-icon.tsx`: yes = green check · no = red cross ·
+  warn = amber triangle), accessible labels, used by Icons AND Tables. New "Status variants" exhibit.
+- **Typography [94caaf7]** — corrected the roles: body paragraphs + captions are **Spline Sans**, NOT
+  Anonymous Pro (the old copy was wrong); utility specimens now actually render in Anonymous Pro (font-mono).
+  Three explicit groups (Headings/Body = Spline Sans · Utility = Anonymous Pro) with family + size + weight +
+  line-height shown inline. Two font **download folders** (DownloadFolder) → per-family ZIPs built from
+  `~/Downloads/Anonymous_Pro,Spline_Sans.zip` into `public/packs` (spline-sans.zip, anonymous-pro.zip, each
+  with its OFL). Pairing rules fixed.
+- **Scoring [90b3374]** — ported the goat rating from `teamos-ai/financeos-website-main` (inspected read-only
+  via gh; goats are owner-supplied artwork): `src/data/scoring.ts` + `GoatRating`/`GoatScorecard`
+  (next/image→img, cx→cn, DS type/radius, **GOLD→AMBER**). 7 PNGs → `public/goats`. Hover reactions injected
+  as a scoped, reduced-motion-safe stylesheet. Surfaced in Icons (a rating exhibit) + Image Library (a
+  "Scoring artwork" group) via shared files.
+- **Tables [8fca79d]** — rebuilt on **white surfaces** (grey only as a transient hover): software scorecard,
+  software ratings (goats + Goated badge), side-by-side (StatusIcon cells), plan inclusions (StatusIcon),
+  plain data table, and expandable rows. All scores clearly-labelled samples.
+
+`docs/COMPONENTS.md` regenerated (72 rows). Font ZIPs verified to open. Dev server needs restarting between
+turns (it is cleaned up) — a fresh browser tab clears any stale Vite HMR state.
+
 ## 2026-11-16 (folders · marble pass) — drew from Tumai's onestaaack tools folders; blue marble/streak art restored
 
 Mid-task, Tumai pointed to his live folders (tools.onestaaack.ai) + the repo `teamos-ai/dictionary-finovate-v2`.

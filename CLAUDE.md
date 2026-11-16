@@ -325,6 +325,29 @@ Vercel accepts the deploy.
   pending Tumai's sign-in. **Don't-touch —** keep the blue grid retired; Light only; ONE cloud field per
   folder; put a `<TokenTag>`/`<ComposedFrom>` on every new specimen. **Last updated —** 2026-11-16,
   Claude (Opus 4.8).
+- **Current State (2026-11-17 · Codex design-review handoff — Icons · Typography · Scoring · Tables):**
+  **Focus now —** implemented `memory/design-review-handoff-2026-11-17.md` (from a Codex session) in 4
+  gate-green, in-browser-verified commits, **awaiting Tumai's push** (58a85dd · 94caaf7 · 90b3374 ·
+  8fca79d + a memory checkpoint). (1) **Icons** — dropped the **bold stroke-weight** option (one standard
+  1.75); new shared **`StatusIcon`** (`src/components/ui/status-icon.tsx`: yes = green check · no = red
+  cross · warn = amber triangle, accessible labels) used by Icons + Tables; "Status variants" exhibit. (2)
+  **Typography** — corrected the roles (**body paragraphs + captions are Spline Sans**, not Anonymous Pro;
+  utility specimens now actually render Anonymous Pro); three explicit groups with family+size+weight+lh
+  inline; two **font download folders** (`DownloadFolder`) → per-family ZIPs in `public/packs`
+  (spline-sans.zip · anonymous-pro.zip, each with OFL). (3) **Scoring** — ported the goat rating from
+  `teamos-ai/financeos-website-main`: `src/data/scoring.ts` + `GoatRating`/`GoatScorecard`
+  (`src/components/scoring`), artwork in `public/goats` (5 goats + cry + trophy). **GOLD → AMBER** (the DS
+  has no gold; amber is the rating colour); hover reactions are a scoped, reduced-motion-safe exception.
+  Surfaced in Icons (rating exhibit) + Image Library (Scoring artwork). (4) **Tables** — rebuilt on **white
+  surfaces** (grey only on hover): software scorecard, software ratings (goats + Goated badge), side-by-side
+  (StatusIcon cells), plan inclusions, plain data table, expandable rows. All scores are labelled samples.
+  **Next step —** Tumai pushes, then confirm the gated prod deploy. **Flags —** amber (not gold) for
+  ratings; bold-stroke removal scoped to the Icons convention (functional `strokeWidth={2}` on small glyphs
+  elsewhere left as-is — ask for an app-wide sweep if wanted); "white tables" = resting-white + grey-on-hover
+  (no Tables screenshot was in the handoff). **Don't-touch —** no gold (amber for ratings); keep the blue
+  grid retired; Light only; one standard icon stroke; `<TokenTag>`/`<ComposedFrom>` on every new specimen.
+  **Open —** the wider 21st.dev / Pinterest visual sweep still pending Tumai's sign-in. **Last updated —**
+  2026-11-17, Claude (Opus 4.8).
 
 ---
 

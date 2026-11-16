@@ -1,10 +1,21 @@
 # Next Actions
 
-- [17 November design review handoff](design-review-handoff-2026-11-17.md) — Tables, Typography, Bold Icon Removal and Icon Variants.
-
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
-- **CURRENT FOCUS / NEXT STEP (2026-11-16, Folders) — built + verified, awaiting Tumai's push:**
+- **CURRENT FOCUS / NEXT STEP (2026-11-17) — Codex design-review handoff implemented; awaiting Tumai's push:**
+  1. **`git push origin main`** — 4 feature commits (58a85dd Icons · 94caaf7 Typography · 90b3374 scoring ·
+     8fca79d Tables) + a memory checkpoint. Then confirm the gated prod deploy.
+  2. Implemented [design-review-handoff-2026-11-17.md](design-review-handoff-2026-11-17.md): bold-icon removal
+     + shared `StatusIcon` variants; Typography roles fixed (body = Spline Sans) + two font download folders;
+     the goat rating ported (amber) into Icons / Image Library / Tables; Tables rebuilt on white surfaces with
+     StatusIcon cells, goat ratings and expandable rows. Gate green, verified in-browser.
+  3. **Flags for Tumai:** (a) goat ratings use **amber**, not gold (the DS has no gold; amber IS the rating
+     colour), and the goat hover reactions are a scoped, reduced-motion-safe exception. (b) Bold stroke removed
+     at the Icons convention/showcase only — functional `strokeWidth={2}` on small glyphs elsewhere is left
+     as-is; say if you want an app-wide sweep. (c) "White tables" read as resting-white + grey-on-hover (no
+     Tables screenshot was in the handoff — point me if a specific grey was meant).
+
+- **DONE + PUSHED (2026-11-16, Folders) [a8427c0] — the glass-folder object + download-folder pattern, live:**
   1. **`git push origin main`** in this repo (new: `Folder.tsx`, `folder-art.ts`, `DownloadFolder.tsx`,
      `FoldersSection.tsx`; changed: `nav.ts`, `App.tsx`, `IconsSection.tsx`, `MotionSection.tsx`,
      `docs/COMPONENTS.md`), then confirm the gated prod deploy (ds.financeos.au root → 302 /login.html; look for
