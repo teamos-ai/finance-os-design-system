@@ -367,6 +367,28 @@ function PhotoLibrary() {
   )
 }
 
+/* ── Scoring artwork — the goats + trophy, shared with Icons & the Tables ─────── */
+
+const GOAT_ART: ReadonlyArray<{ id: string; label: string; note: string; alt: string }> = [
+  { id: 'goat-1', label: 'Deficient', note: '1 / 5', alt: 'Score 1 goat — a frown' },
+  { id: 'goat-2', label: 'Limited', note: '2 / 5', alt: 'Score 2 goat' },
+  { id: 'goat-3', label: 'Capable', note: '3 / 5', alt: 'Score 3 goat' },
+  { id: 'goat-4', label: 'Strong', note: '4 / 5', alt: 'Score 4 goat' },
+  { id: 'goat-5', label: 'Exceptional', note: '5 / 5', alt: 'Score 5 goat — star eyes' },
+  { id: 'trophy', label: 'Goated', note: 'trophy', alt: 'The Goated trophy' },
+]
+
+function goatArtInspect(g: (typeof GOAT_ART)[number]): InspectData {
+  const file = `/goats/${g.id}.png`
+  return {
+    name: g.label,
+    explain: `${g.alt}. Owner-supplied voxel artwork, shared with the Icons rating glyph and the comparison Tables — rendered through <GoatRating>, which prints the numeral and grades the border in amber.`,
+    token: `asset  ${file}\nused by  <GoatRating> · Icons · Tables`,
+    code: `import { GoatRating } from '@/components/scoring/GoatRating'\n\n<GoatRating score={${g.id === 'trophy' ? 5 : g.id.slice(-1)}} showLabel />`,
+    download: { filename: `${g.id}.png`, href: file },
+  }
+}
+
 export function ImageLibrarySection() {
   return (
     <Section
@@ -670,6 +692,38 @@ export function ImageLibrarySection() {
           One recipe everywhere: same ratios, same rounded corner + hairline border, same bottom-up
           scrim — so a single change reflows every frame.
         </p>
+      </div>
+
+      {/* Scoring artwork — the goats + trophy, shared with Icons & the comparison Tables */}
+      <div className="mt-14">
+        <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
+          <MonoLabel number="17.7" dot>
+            Scoring artwork
+          </MonoLabel>
+          <span className="font-mono text-caption text-fg-subtle">shared with Icons &amp; Tables</span>
+        </div>
+        <p className="mb-6 max-w-2xl font-body text-body-md leading-relaxed text-fg-muted">
+          The five voxel goats — one per score, a frown at one, star-eyes at five — and the Goated trophy.
+          The same files the <span className="font-mono text-caption">&lt;GoatRating&gt;</span> glyph renders
+          in Icons and in the comparison tables; one PNG per score in{' '}
+          <span className="font-mono text-caption">public/goats</span>, graded in amber. Open any tile’s{' '}
+          <span className="font-mono text-caption">+</span> to download the asset.
+        </p>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {GOAT_ART.map((g) => (
+            <div key={g.id}>
+              <Inspectable {...goatArtInspect(g)}>
+                <div className="grid aspect-square place-items-center overflow-hidden rounded-lg border border-border bg-canvas-muted p-4">
+                  <img src={`/goats/${g.id}.png`} alt={g.alt} loading="lazy" className="max-h-full w-auto object-contain" />
+                </div>
+              </Inspectable>
+              <div className="mt-2 flex items-baseline justify-between gap-2">
+                <span className="font-display text-body-sm font-medium text-fg">{g.label}</span>
+                <span className="font-mono text-mono-2xs tabular-nums text-fg-subtle">{g.note}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </Section>
   )

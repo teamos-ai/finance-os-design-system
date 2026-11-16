@@ -61,6 +61,8 @@ import { TokenTag } from '@/components/ui/token-tag'
 import { Input } from '@/components/ui/input'
 import { IconButton } from '@/components/ui/icon-button'
 import { StatusIcon, type StatusVariant } from '@/components/ui/status-icon'
+import { GoatRating, GoatedBadge } from '@/components/scoring/GoatRating'
+import { type GoatScore } from '@/data/scoring'
 import { DownloadFolder } from '@/components/brand/DownloadFolder'
 import { Stagger, StaggerItem } from '@/lib/motion'
 import { copyText } from '@/lib/utils'
@@ -666,6 +668,46 @@ function StatusVariants() {
   )
 }
 
+/* ── A3 · Rating artwork — the goats (shared with Tables & Image Library) ─────── */
+
+const GOAT_INSPECT = {
+  name: 'Goat rating',
+  explain:
+    'The rating glyph — five voxel goats, one per score, whose expression IS the score. Owner-supplied artwork, shared across Icons, Image Library and the comparison Tables. AMBER is the rating colour here (the DS has no gold); the numeral renders with the picture, and each goat reacts on hover in the mood of its score (reduced-motion safe). Scores shown are samples.',
+  token: [
+    'component  <GoatRating score={1..5} size showLabel showStars />',
+    'artwork    /goats/goat-1.png … goat-5.png  (shared assets)',
+    'colour     amber (stars · graded border ramp · Goated badge)',
+    'a11y       score in alt + printed n/5 · hover reactions reduced-motion safe',
+  ].join('\n'),
+  code: [
+    "import { GoatRating, GoatedBadge } from '@/components/scoring/GoatRating'",
+    '',
+    '<GoatRating score={4} showLabel />   // a frown at 1, star-eyes at 5',
+    '<GoatedBadge />                        // 22/25 and never below 4',
+  ].join('\n'),
+}
+
+function GoatRatingExhibit() {
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
+        {([1, 2, 3, 4, 5] as GoatScore[]).map((s) => (
+          <div key={s} className="flex flex-col items-center gap-2">
+            <GoatRating score={s} size={56} showCount={false} />
+            <span className="font-mono text-mono-2xs tabular-nums text-fg-subtle">{s}/5</span>
+          </div>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-5">
+        <GoatedBadge />
+        <span className="font-body text-caption text-fg-subtle">Hover a goat — it reacts in the mood of its score. Sample scores.</span>
+        <TokenTag className="ml-auto">{'<GoatRating score>'}</TokenTag>
+      </div>
+    </div>
+  )
+}
+
 /* ── Section ───────────────────────────────────────────────────────────────── */
 
 export function IconsSection() {
@@ -690,6 +732,13 @@ export function IconsSection() {
           action={<TokenTag>{'<StatusIcon variant>'}</TokenTag>}
         >
           <StatusVariants />
+        </Demo>
+
+        <Demo
+          label="Rating — the goats (amber), shared with Tables & Image Library"
+          inspect={GOAT_INSPECT}
+        >
+          <GoatRatingExhibit />
         </Demo>
 
         <Demo label="The set — search, then click an icon to copy its name" inspect={SET_INSPECT}>
