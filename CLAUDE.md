@@ -235,6 +235,26 @@ Vercel accepts the deploy.
   keep it Light (no dark tokens); keep the blue grid retired; put a `<TokenTag>`/`<ComposedFrom>` on
   every new specimen (the guard enforces it). **Open question —** none. **Last updated —** 2026-11-15,
   Claude (Opus 4.8).
+- **Current State (2026-11-16 · sphere room · true bento · Tokens removed · Typography mixed):** **Focus
+  now —** an Overview-polish batch is **built + verified (desktop + mobile), awaiting Tumai's push** (9
+  files; `npm run build` OK · `check` 21/21 · token-coverage 34 ok · 8 exempt · 0 missing). (1) **Card
+  Sphere** stops clipping — `CardSphere.tsx` container `overflow:hidden; contain:strict` → **`overflow:
+  visible; contain:layout`** (frame can't clip a face), hero faces ×0.85, fill factor 0.82 → **0.74**;
+  `OverviewSection.tsx` drops the "showing buttons…" caption + state so the sphere just floats on its
+  halo. (2) **System Bento** rebuilt — fixed **`md:auto-rows-[188px]`** + `grid-flow-dense`, mixed spans
+  (token-arch hero 2×3; Typography / Verified-AA / Three-layer 2×2; Image-Library 4×1; rest 2×1; CTA
+  6×1). Heights **locked**: Typography is a 2-row box and its Aa inset has **`min-h-[7rem]`**, so the
+  ramp animates without ever reflowing the grid (mobile too). **7 new `NavCell`s** (Buttons · Logo ·
+  Colour · This-vs-That · Spacing · Blogs · Lead Magnets) + wide Image-Library strip, each `↗`-linked to
+  its section, all on `TiltCard`. (3) **Tokens section DELETED** (`TokensSection.tsx` git-rm'd; dropped
+  from `App.tsx`, `nav.ts` + its `Blocks` import, token-coverage EXEMPT) — nav now goes **Overview →
+  Colour**; `ColorSection` cards default **expanded** + click-to-copy (lead rewritten). (4) **Typography**
+  default is the **Mixed hero-H1 pattern** — ink line + one Atlas-Blue keyword (`text-fg` +
+  `text-highlight`, per-row `hl` word) via a new `HeadingText`; the **Mixed / Blue / Black** switcher is
+  kept (all three verified). **Next step —** Tumai runs `git push origin main`, then confirm the gated
+  prod deploy. **Don't-touch —** keep the blue grid retired; keep it Light (no dark tokens); Overview is
+  token-coverage EXEMPT so the new bento cells need no TokenTag. **Open question —** none. **Last updated
+  —** 2026-11-16, Claude (Opus 4.8).
 
 ---
 

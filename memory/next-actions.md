@@ -12,8 +12,20 @@
     (`sections/overview/`). Catalogued: new **Card Sphere** section (Orbit icon, after Heroes) + "The
     tilt bento" in Bento Box. `GlanceBento`/`FeatureBento` deleted.
 
-- **CURRENT FOCUS / NEXT STEP:** nothing outstanding — await Tumai's next direction. Everything built
-  this session is live behind the gate on ds.financeos.au.
+- **CURRENT FOCUS / NEXT STEP (2026-11-16):** an Overview-polish batch is **built + verified (desktop +
+  mobile), NOT yet pushed** — 9 files, gate-green. **→ Tumai runs `git push origin main`** (push blocked
+  for Claude), then confirm the gated prod deploy. The four changes:
+  1. **Card Sphere** no longer clips — `overflow:visible` + smaller heroes + tighter fill (0.74); caption
+     removed, it just floats on its halo.
+  2. **System Bento** heights **locked** (fixed `auto-rows-[188px]`; Typography is a 2-row box + the Aa
+     inset has `min-h-[7rem]` so the ramp animates without resizing — mobile too) and expanded into a
+     **true varied bento** with 7 new `NavCell`s (Buttons · Logo · Colour · This-vs-That · Spacing · Blogs
+     · Lead Magnets) + a wide Image-Library strip, each `↗`-linked to its section.
+  3. **Tokens section deleted** — nav goes Overview → Colour; Colour cards default **expanded** + click-to-copy.
+  4. **Typography** default is now the **Mixed** hero-H1 pattern (ink + one blue keyword); Blue / Black
+     switcher kept.
+  - **Don't-touch:** keep the blue grid retired; keep it Light (no dark tokens); every new specimen needs a
+    `<TokenTag>`/`<ComposedFrom>` (Overview is EXEMPT, so the new bento cells are fine).
 
 - **DONE + PUSHED (2026-11-15) — three DS changes [f7bbbf6]:**
   - **Video Explainer dashboard:** cursor-follow parallax **hover tilt** on the flip card (FT 10 → ±5°,

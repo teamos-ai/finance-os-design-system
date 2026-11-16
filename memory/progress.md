@@ -2,6 +2,38 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-16 — Overview polish batch: sphere room, true bento, Tokens removed, Typography mixed default (built + verified, awaiting Tumai's push)
+
+Four changes, one working set (9 files), gate-green (`npm run build` 1.4s · `npm run check`
+21/21 · token-coverage 34 ok · 8 exempt · 0 missing), verified in-browser on **desktop + mobile**.
+NOT yet committed/pushed — **Tumai runs the push** (push blocked for Claude).
+
+- **(1) Card Sphere — stop the clipping.** `CardSphere.tsx`: container `overflow:hidden; contain:strict`
+  → **`overflow:visible; contain:layout`** (the real fix — the frame can no longer clip a card), hero
+  faces ×0.85, fill factor 0.82 → **0.74** (cards orbit tighter / more central). `OverviewSection.tsx`:
+  removed the "showing buttons…" caption + its state — the sphere now just floats on its halo, no box,
+  no caption. Verified across idle-drift frames: big "Cards"/"Typography" faces render whole, no cut-off.
+- **(2) System Bento — locked heights + a true, varied bento.** Rebuilt `overview/SystemBento.tsx`:
+  fixed **`md:auto-rows-[188px]`** + `grid-flow-dense` with mixed spans (token-architecture hero 2×3;
+  Typography / Verified-AA / Three-layer-tokens 2×2; Image-Library wide 4×1; the rest 2×1; CTA 6×1).
+  The resize bug is gone: **Typography is a fixed 2-row box** so the animated Aa ramp cycles inside it
+  without ever reflowing the grid (confirmed body-md→display-lg with the Verified-AA cell staying
+  top-aligned). Added a **`min-h-[7rem]`** on the Aa inset so it also holds steady on mobile
+  (single-column, auto-height). **Seven new cells** communicate the rest of the system, each a compact
+  `NavCell` with an `↗` link: Buttons (#components), Logo (#logo), Colour (#color), This-vs-That
+  (#this-vs-that), Spacing & Layout (#spacing), Blogs (#blogs), Lead Magnets (#leadmagnets), plus a wide
+  **Image Library** strip (#imagery, wash swatches). All on `TiltCard`.
+- **(3) Tokens section deleted.** `TokensSection.tsx` removed (git rm); dropped from `App.tsx` SECTIONS,
+  `nav.ts` (+ its `Blocks` import), and the token-coverage EXEMPT list. Nav now goes **Overview → Colour**
+  directly. **Colour made the single colour home:** `ColorSection.tsx` cards default **expanded**
+  (`useState(true)`) with "SHADES — CLICK TO COPY" and the existing click-to-copy (verified — swatch
+  shows a copied overlay); lead rewritten ("Every family is expanded below — click any swatch to copy").
+- **(4) Typography — tokenised mixed black+blue default.** `TypographySection.tsx`: new `HeadingText`
+  renders the **hero-H1 pattern** — ink line with ONE Atlas-Blue keyword (`text-fg` + `text-highlight`),
+  via a per-row `hl` word ("Predictable", "settlements", "Less", "calm", "Unified", "Automated").
+  Toggle is now **Mixed (default) / Blue / Black**; the full-blue + full-black switcher kept (all three
+  verified live). Mixed shows two token chips, the others one.
+
 ## 2026-11-15 — Overview premium rebuild + self-documenting token system (3 commits, shipped + pushed, all live)
 
 Three commits, each gate-green (`npm run check` incl. the new token-coverage, `npm run build`),
