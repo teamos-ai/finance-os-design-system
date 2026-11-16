@@ -60,6 +60,7 @@ import { MonoLabel } from '@/components/ui/mono-label'
 import { TokenTag } from '@/components/ui/token-tag'
 import { Input } from '@/components/ui/input'
 import { IconButton } from '@/components/ui/icon-button'
+import { DownloadFolder } from '@/components/brand/DownloadFolder'
 import { Stagger, StaggerItem } from '@/lib/motion'
 import { copyText } from '@/lib/utils'
 import { cn } from '@/lib/cn'
@@ -547,63 +548,65 @@ function IconButtonShowcase() {
   )
 }
 
-/* ── D · Icon packs — downloadable sets (full static + animated) ─────────────── */
-
-function PackRow({
-  title,
-  count,
-  href,
-  size,
-  children,
-}: {
-  title: string
-  count: string
-  href: string
-  size: string
-  children: React.ReactNode
-}) {
-  return (
-    <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex flex-col gap-2">
-        <MonoLabel tone="subtle" size="sm" trailing={count}>
-          {title}
-        </MonoLabel>
-        <p className="max-w-xl font-body text-body-sm leading-relaxed text-fg-muted">{children}</p>
-      </div>
-      <a
-        href={href}
-        download
-        className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-accent px-4 py-2.5 font-body text-body-sm font-semibold text-accent-fg shadow-sm transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-canvas active:scale-[0.98]"
-      >
-        <Download className="h-4 w-4" strokeWidth={2} aria-hidden />
-        Download · {size}
-      </a>
-    </div>
-  )
-}
+/* ── D · Icon packs — downloadable sets, each drawn as a folder (press → open → download) ── */
 
 function IconPacks() {
   return (
-    <div className="flex flex-col gap-6">
-      <PackRow title="Full Lucide set" count="2713" href="/packs/lucide-icons-full.zip" size="1.2 MB">
-        Every Lucide icon as a clean SVG —{' '}
-        <a href="https://lucide.dev" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
-          lucide.dev
-        </a>{' '}
-        (ISC): 2,356 core (<span className="font-mono text-mono-2xs">lucide-static</span> 1.72.0) + 357
-        experimental (<span className="font-mono text-mono-2xs">@lucide/lab</span>), aliases included. In code
-        the icons are already React components via <span className="font-mono text-mono-2xs">lucide-react</span>;
-        this is the raw SVG library for design tools, email and exports.
-      </PackRow>
-      <div className="h-px bg-border" aria-hidden />
-      <PackRow title="Animated Lucide set" count="999" href="/packs/animated-lucide-icons.zip" size="1.5 MB">
-        The same shapes, animated — self-contained React components (hover to play). A vendored snapshot of{' '}
-        <a href="https://github.com/Avijit07x/animateicons" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
-          AnimateIcons
-        </a>{' '}
-        (MIT) over Lucide (ISC). Each needs the <span className="font-mono text-mono-2xs">motion</span> runtime —
-        the bundled README has the two-line setup.
-      </PackRow>
+    <div className="flex flex-col gap-10">
+      <p className="mx-auto max-w-xl text-center font-body text-body-sm leading-relaxed text-fg-muted">
+        Two full sets to take with you — each a <span className="text-accent-text">folder</span>, not a button.
+        Press to open and see what is inside, press again to save the <span className="font-mono text-mono-2xs">.zip</span>.
+      </p>
+      <div className="grid gap-x-10 gap-y-14 sm:grid-cols-2">
+        <DownloadFolder
+          label="Full Lucide set"
+          meta="2713 · 1.2 MB"
+          filename="lucide-icons-full.zip"
+          href="/packs/lucide-icons-full.zip"
+          width={292}
+          art="atlas"
+          seed={3}
+          files={[
+            { name: 'lucide-static', meta: '2356 SVG', art: 'mist' },
+            { name: '@lucide/lab', meta: '357 SVG' },
+            { name: 'README.md', meta: 'ISC' },
+          ]}
+          caption={
+            <p className="max-w-xs font-body text-caption leading-relaxed text-fg-subtle">
+              Every Lucide icon as a clean SVG —{' '}
+              <a href="https://lucide.dev" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
+                lucide.dev
+              </a>{' '}
+              (ISC): 2,356 core (<span className="font-mono text-mono-2xs">lucide-static</span> 1.72.0) + 357
+              experimental (<span className="font-mono text-mono-2xs">@lucide/lab</span>). The raw SVG library for
+              design tools, email and exports.
+            </p>
+          }
+        />
+        <DownloadFolder
+          label="Animated Lucide"
+          meta="999 · 1.5 MB"
+          filename="animated-lucide-icons.zip"
+          href="/packs/animated-lucide-icons.zip"
+          width={292}
+          art="tide"
+          seed={11}
+          files={[
+            { name: 'components', meta: '999 .tsx', art: 'mist' },
+            { name: 'README.md', meta: 'setup' },
+            { name: 'LICENSE', meta: 'MIT · ISC' },
+          ]}
+          caption={
+            <p className="max-w-xs font-body text-caption leading-relaxed text-fg-subtle">
+              The same shapes, animated — self-contained React components (hover to play). A vendored snapshot of{' '}
+              <a href="https://github.com/Avijit07x/animateicons" target="_blank" rel="noreferrer" className="text-accent-text underline-offset-4 hover:underline">
+                AnimateIcons
+              </a>{' '}
+              (MIT) over Lucide (ISC). Each needs the <span className="font-mono text-mono-2xs">motion</span> runtime.
+            </p>
+          }
+        />
+      </div>
     </div>
   )
 }

@@ -2,6 +2,57 @@
 
 <!-- What was done, errors hit, tests run, results. Newest on top. Date each entry (YYYY-MM-DD). -->
 
+## 2026-11-16 (folders · marble pass) — drew from Tumai's onestaaack tools folders; blue marble/streak art restored
+
+Mid-task, Tumai pointed to his live folders (tools.onestaaack.ai) + the repo `teamos-ai/dictionary-finovate-v2`.
+
+- **Looked at the reference** via `gh api` (read-only, nothing cloned/run): `src/components/GlassFolder.tsx`
+  (the SAME engine Tumai pasted) + `src/components/Overview.tsx` (the live usage). The live folders use BLUE
+  recipes that are literally the Atlas Blue ramp (`#33488f`=--p-blue-400 …), plus a `"N fields · +N"` meta.
+- **Reversed the earlier "clouds not marble" call.** Restored the marble/streak engine as a pure
+  `src/components/brand/folder-art.ts` with those exact blue recipes (`atlas`/`azure` marble · `tide`/`mist`/
+  `slate` streak). `Folder` `art` widened to `ArtPreset | ArtRecipe | 'clouds' | 'wash' | 'none' | image`;
+  **default `atlas`**, clouds kept as the signature. Added the **accent `· +N`** meta rendering. `DownloadFolder`
+  default art → `atlas`. Icons packs → `atlas` / `tide`; Motion skill stays `clouds` (thematic).
+- **Fixes:** `new ImageData(pixels,…)` overload error → `ctx.createImageData` + `data.set` (no cast). Lint went
+  8→12 (react-refresh, engine+component in one `.tsx`) → split engine into pure `.ts`, `ArtCanvas` now internal
+  to `Folder.tsx` → back to 8 warnings.
+- **Checks:** `npm run build` OK, `npm run check` green (0 lint errors / 8 warnings, contrast 21/21,
+  token-coverage 36 ok · 7 exempt · 0 missing), `docs:components` 69 rows. **In-browser verified** (fresh tab,
+  0 console errors): Contacts = blue marble + "220 fields · +28" (+28 accent), Pipelines = blue streak, Motion =
+  clouds; Icons packs marble/streak. NOTE: a mid-edit file delete left the OLD tab's Vite HMR graph stale
+  (phantom "ArtCanvas is not defined" + dead-WS errors) — a fresh tab is clean; it was never a code defect
+  (build was green throughout).
+
+## 2026-11-16 (later still) — Folders: the glass-folder object + download-folder pattern (built + verified, awaiting push)
+
+Ported the 21st.dev "glass folder cards" (pasted by Tumai, with 5 screenshots) into the brand. 8 files.
+
+- **New components:** `src/components/brand/Folder.tsx` (the object) + `src/components/brand/DownloadFolder.tsx`
+  (press → open → press again → save). New Library section `FoldersSection.tsx` (id `folders`, `Folders`
+  icon) under **Images & Backgrounds**, after Scroll Blue Band — wired in `nav.ts` + `App.tsx`.
+- **Brand adaptation (what changed from the paste):** dropped the whole marble art engine + the
+  orange/red/plum/moss presets → back-panel art is the **signature halftone clouds** (reuses `@/lib/halftone`,
+  one field per folder), plus `wash` / `none` / `image`. Dropped dark/smoked tone (Light only). Key = solid
+  Atlas-Blue 8px squircle, white glyph; ··· menu = solid 8px popover (no glass); focus = neutral `--c-ring`.
+  Motion rebuilt on the tokens + five laws (open/close `--ease-out`, the one `--ease-confirm` overshoot only
+  on a file drop); CSS fully tokenised in one injected `<style data-fos-folder>`.
+- **The frost:** kept a near-opaque frosted front as the folder's *material* (reads solid even with
+  backdrop-filter off) — a documented scoped exception to "no glass", like the hero FloatWobble. No glass on
+  UI chrome. Flagged to Tumai with a one-line flip to fully-opaque.
+- **Used it:** the download-folder replaced the plain download buttons on **Icons** (both packs: Full Lucide /
+  Animated Lucide) and **Motion** (the skill zip; "Open the repo" link kept). Source attributions + licences
+  preserved (lucide.dev ISC, AnimateIcons MIT).
+- **Responsiveness fix:** the folder was fixed-px and would clip in a Demo frame / phone gutter → made it fluid
+  (`width: min(Npx, 100%)` + a ResizeObserver that recomputes the stage scale `k`). Mobile (375) now fits with
+  0 horizontal overflow.
+- **Checks:** `npm run build` OK (1.7s), `npm run check` green (tsc clean, 0 lint errors / 8 pre-existing
+  warnings, check:audit PASS, contrast 21/21, token-coverage 36 ok · 7 exempt · 0 missing), `docs:components`
+  regenerated (69 rows). In-browser verified on **desktop + mobile**: open/fan, `+` drop + count-roll,
+  clouds vs wash art, the two-press download ("Press again to download"), Icons packs, Motion skill card,
+  the Folders→Heroes divider order, no console errors.
+- **Awaiting:** Tumai's `git push origin main` (push blocked for Claude).
+
 ## 2026-11-16 (later) — Motion system, motion-finance skill, logo + inspector fixes (built + verified, awaiting push)
 
 - **Research:** three parallel read-only scans (5 teamos-ai forks, 8 third-party kits, the YouTube video's 10

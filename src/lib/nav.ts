@@ -3,7 +3,7 @@ import {
   Rocket, PlayCircle, Compass,
   Palette, Type, Ruler, Layers2, Wand2, Gem, Shapes,
   ToggleLeft, CreditCard, TextCursorInput, Table, FolderOpen, Gauge, LineChart,
-  Image, Images, MoveVertical,
+  Image, Images, MoveVertical, Folders,
   Crown, Orbit, LayoutGrid, LayoutTemplate, Tags, Quote, Table2, ArrowRightLeft, SquareSplitHorizontal,
   LayoutDashboard, BarChart3,
   Megaphone, FileText, Smartphone, Magnet, ListChecks, Filter, Mail, PenLine,
@@ -65,6 +65,7 @@ export const SHOWCASE_NAV: NavItem[] = [
   { id: 'imagery', label: 'Image Library', Icon: Image, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
   { id: 'scrollers', label: 'Scroller Images', Icon: Images, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
   { id: 'scroll-blue-band', label: 'Scroll Blue Band', Icon: MoveVertical, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
+  { id: 'folders', label: 'Folders', Icon: Folders, accent: 'blue', group: 'Library', category: 'Images & Backgrounds' },
 
   /* ── LIBRARY › Website Sections ────────────────────────────────────────── */
   { id: 'heroes', label: 'Heroes', Icon: Crown, accent: 'blue', group: 'Library', category: 'Website Sections' },

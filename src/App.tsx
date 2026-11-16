@@ -22,6 +22,7 @@ import { ChartsSection } from '@/showcase/sections/ChartsSection'
 import { ImageLibrarySection } from '@/showcase/sections/ImageLibrarySection'
 import { ScrollersSection } from '@/showcase/sections/ScrollersSection'
 import { ScrollBlueSection } from '@/showcase/sections/ScrollBlueSection'
+import { FoldersSection } from '@/showcase/sections/FoldersSection'
 import { HeroesSection } from '@/showcase/sections/HeroesSection'
 import { CardSphereSection } from '@/showcase/sections/CardSphereSection'
 import { BentoSection } from '@/showcase/sections/BentoSection'
@@ -68,6 +69,7 @@ const SECTIONS: Record<string, React.ComponentType> = {
   imagery: ImageLibrarySection,
   scrollers: ScrollersSection,
   'scroll-blue-band': ScrollBlueSection,
+  folders: FoldersSection,
   heroes: HeroesSection,
   'card-sphere': CardSphereSection,
   bento: BentoSection,

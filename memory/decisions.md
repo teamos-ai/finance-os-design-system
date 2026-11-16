@@ -3,6 +3,39 @@
 <!-- Architecture / strategy calls + the reason behind each, so we don't re-litigate them.
      Date each entry (YYYY-MM-DD). -->
 
+- **2026-11-16 — The glass folder is admitted as an illustrated OBJECT, not a UI surface.** Tumai pasted a
+  glassmorphism "folder cards" component into a system whose hard rule is "no glass". Resolved it the way the
+  system already handles tensions (amber = status-only, FloatWobble = the one idle loop): the folder is an
+  *object/illustration* (owns its geometry like the logo), and its frosted front is the folder's **material** —
+  kept but **near-opaque** so it reads solid even with backdrop-filter unavailable. Glass never touches real UI
+  chrome (key = solid Atlas-Blue squircle, menu = solid popover). Flagged to Tumai with a one-line flip to fully
+  opaque if he wants "no glass" held strictly. Rejected both extremes (paste verbatim = breaks 5 rules; strip
+  the frost = loses what makes it a folder).
+- **2026-11-16 — Folder back-panel art = the BLUE marble/streak engine (the onestaaack tools look), clouds as
+  a second option.** REVERSES an earlier same-day call. First pass dropped the paste's marble engine (its
+  presets were orange/red/plum = off-brand) and used the halftone clouds instead. Then Tumai pointed to his
+  live folders (tools.onestaaack.ai · `teamos-ai/dictionary-finovate-v2` · `GlassFolder` + `Overview`) — the
+  SAME engine, but driven by BLUE recipes that are literally the Atlas Blue ramp (`#33488f`=--p-blue-400,
+  `#5c6da5`=-300, `#1f2b56`=-500 …). So the marble was only ever off-brand because of the *colours*. Restored
+  the engine as `src/components/brand/folder-art.ts` with those exact blue recipes (`atlas`/`azure` marble ·
+  `tide`/`mist`/`slate` streak); **`art="atlas"` is the default** (matches the tools), **`art="clouds"` stays**
+  as the animated motion signature. Also adopted their **`· +N` meta** (the overflow count, drawn in
+  `--c-accent-text`). The marble paints a STILL image (via a shared frame-sliced painter queue) — calmer and
+  cheaper at rest than the drifting clouds. Lesson: look at the owner's real reference before deciding a motif
+  is "off-brand".
+- **2026-11-16 — Engine in a pure `.ts`, the canvas component inside `Folder.tsx`.** Keeping `ArtCanvas`
+  beside the engine in one `.tsx` tripped `react-refresh/only-export-components` (8→12 warnings). Split: the
+  pure engine is `folder-art.ts` (no React, no component export → no warning), and `ArtCanvas` is an internal
+  (non-exported) component in `Folder.tsx`, its only consumer. Back to 8 warnings.
+- **2026-11-16 — Download = a folder, not a button, where Tumai asked ("instead of a button").** Built
+  `DownloadFolder` (press → opens + fans the contents as a preview → press again → saves) and used it to replace
+  the plain download buttons on Icons (both packs) and Motion (the skill). Centered / floating / minimal per the
+  brief; the label spells the second press out so the two-step gesture is never a guess. The base `Folder` keeps
+  `action="add" | "more" | "download" | "none"` so the object stays general (storage / templates / docs too).
+- **2026-11-16 — Folders live in Library › Images & Backgrounds.** It's a generated-art visual-object asset, so
+  it sits with Image Library / Scrollers / Scroll Blue Band rather than in Components (atomic UI parts). Easy to
+  move if Tumai wants a dedicated "Files" category later.
+
 - **2026-11-15 — Every specimen names its token inline (`<TokenTag>` / `<ComposedFrom>`), enforced.**
   Tumai's goal: the showcase must be referenceable by eye AND by an AI agent via tokens. The "+"
   inspector hid tokens behind a click, so `<TokenTag>` surfaces them inline + emits `data-token` for

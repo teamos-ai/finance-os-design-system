@@ -13,7 +13,7 @@
  */
 import * as React from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Check, Copy, Download, Github, RotateCw } from 'lucide-react'
+import { ArrowRight, Check, Copy, Github, RotateCw } from 'lucide-react'
 import { Section, Demo } from '@/showcase/Section'
 import { MonoLabel } from '@/components/ui/mono-label'
 import { TokenTag } from '@/components/ui/token-tag'
@@ -23,6 +23,7 @@ import { SegmentedControl } from '@/components/ui/segmented'
 import { Inspectable, type InspectData } from '@/components/ui/inspectable'
 import { Logo } from '@/components/brand/Logo'
 import { HalftoneClouds } from '@/components/brand/HalftoneClouds'
+import { DownloadFolder } from '@/components/brand/DownloadFolder'
 import { CountUp, DrawLine, FadeIn, HoverLift, MaskReveal, Stagger, StaggerItem } from '@/lib/motion'
 import { MOTION, cssBezier } from '@/lib/motion-tokens'
 import type { CloudShape, CloudTone } from '@/lib/halftone'
@@ -751,11 +752,24 @@ export function MotionSection() {
                 The tokens, the UI rules, a branded HyperFrames kit with the real fonts and logos, the halftone clouds,
                 and a calm audit that fails a film for bouncing, looping, off-palette colour or a fabricated logo.
               </p>
+              {/* the skill, drawn as a folder — press to open, press again to download (not a button) */}
+              <DownloadFolder
+                label="motion-finance"
+                meta="skill · 156 KB"
+                filename="motion-finance-skill.zip"
+                href="/packs/motion-finance-skill.zip"
+                width={268}
+                art="clouds"
+                seed={7}
+                className="self-start"
+                files={[
+                  { name: 'SKILL.md', meta: 'the rules', art: 'wash' },
+                  { name: 'references', meta: '7 docs' },
+                  { name: 'kit', meta: 'HyperFrames' },
+                  { name: 'examples', meta: '4 films' },
+                ]}
+              />
               <div className="flex flex-wrap items-center gap-3">
-                <a href="/packs/motion-finance-skill.zip" download className={buttonVariants({ variant: 'primary', size: 'md' })}>
-                  <Download width={18} height={18} strokeWidth={1.5} aria-hidden />
-                  Download the skill
-                </a>
                 <a href={REPO} target="_blank" rel="noreferrer" className={buttonVariants({ variant: 'secondary', size: 'md' })}>
                   <Github width={18} height={18} strokeWidth={1.5} aria-hidden />
                   Open the repo

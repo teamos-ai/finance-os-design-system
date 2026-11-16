@@ -2,6 +2,30 @@
 
 <!-- Read this FIRST to pick up where you left off. Keep it to the current focus + next step. -->
 
+- **CURRENT FOCUS / NEXT STEP (2026-11-16, Folders) — built + verified, awaiting Tumai's push:**
+  1. **`git push origin main`** in this repo (new: `Folder.tsx`, `folder-art.ts`, `DownloadFolder.tsx`,
+     `FoldersSection.tsx`; changed: `nav.ts`, `App.tsx`, `IconsSection.tsx`, `MotionSection.tsx`,
+     `docs/COMPONENTS.md`), then confirm the gated prod deploy (ds.financeos.au root → 302 /login.html; look for
+     the new **Folders** section #20 and the download folders on **Icons** + **Motion**).
+  2. **Flag for Tumai:** the folder's frosted front is the one thing that bends the hard "no glass" rule — it's
+     scoped to the folder *object* and near-opaque. One-line flip to fully-opaque in `Folder.tsx` `.gf-tint` /
+     `.gf-front` backdrop-filter if he'd rather hold "no glass" strictly. Awaiting his call.
+  - Components: `Folder` (`art` atlas·azure·tide·mist·slate [blue marble/streak, the onestaaack tools look] ·
+    clouds [animated signature] · wash · none · image — default `atlas`; `action` add·more·download·none; meta
+    `"N fields · +N"` with the +N in accent) + `DownloadFolder` (press→open→press again→save). Art engine in
+    `folder-art.ts`. Home: Library › Images & Backgrounds › **Folders**. Reuse it anywhere files / storage /
+    templates / downloads want a container with presence.
+
+- **STILL PENDING Tumai (the wider visual sweep, from the motion batch):**
+  - Sign in to **21st.dev** (bookmark list reads empty signed-out) and **Pinterest** (board login-walled) in the
+    browser pane — then walk the board before any broad visual redesign. Cross-check direction with him first.
+  - Open question: keep the hero `FloatWobble` as the one idle-loop exception, or remove it?
+  - The halftone clouds are now in BOTH the Motion signature and the Folders — confirm where else they should go
+    (hero band, section dividers, social templates).
+
+- **DONE + PUSHED (2026-11-16) — motion system + motion-finance skill [a869b3c · 322896e], live behind the gate;
+  skill repo created + pushed (`teamos-ai/motion-finance`, private, @ `09da6eb`).**
+
 - **DONE + PUSHED (2026-11-15) — Overview premium + self-documenting tokens [0ec8752 · 4bceb4d · 2b0d38e], all live:**
   - **Self-documenting specimens:** `<TokenTag>` (inline class/token/prop + `data-token` for agents) +
     `<ComposedFrom>` across ~31 sections; guard `scripts/token-coverage.mjs` in `npm run check`
@@ -12,13 +36,6 @@
     (`sections/overview/`). Catalogued: new **Card Sphere** section (Orbit icon, after Heroes) + "The
     tilt bento" in Bento Box. `GlanceBento`/`FeatureBento` deleted.
 
-- **CURRENT FOCUS / NEXT STEP (2026-11-16, later) — motion system built, awaiting Tumai:**
-  1. `git push origin main` in this repo (motion section, tokens, fixes).
-  2. In `../motion-finance`: `gh repo create teamos-ai/motion-finance --private --source . --push`.
-  3. Sign in to **21st.dev** and **Pinterest** in the browser pane (or connect Claude in Chrome) — the bookmark
-     list reads empty signed-out and the board is login-walled. Then walk the board before any visual redesign.
-  4. Confirm: keep the hero `FloatWobble` as the one idle-loop exception? Halftone clouds approved as the
-     signature — where next (hero band, section dividers, social templates)?
   - Skill is live locally: `~/.claude/skills/motion-finance` → ask for "a Finance OS brand sting".
 
 - **EARLIER TODAY (2026-11-16) — Overview polish batch [3b3725a · cfd0492]:** an Overview-polish batch is **built + verified (desktop +

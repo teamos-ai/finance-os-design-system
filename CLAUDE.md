@@ -296,6 +296,35 @@ Vercel accepts the deploy.
   `FloatWobble` is an idle loop the new laws would otherwise ban (kept as the documented exception — Tumai to
   confirm); visual redesign beyond motion/polish is not started (awaiting the board walkthrough). **Last updated
   —** 2026-11-16, Claude (Fable 5.2).
+- **Current State (2026-11-16 · Folders — the glass-folder object + download-folder pattern):** **Focus
+  now —** built + verified (desktop + mobile), **awaiting Tumai's push** (8 files; `npm run build` OK ·
+  `check` 21/21 · token-coverage 36 ok · 7 exempt · 0 missing · 0 lint errors). Ported the 21st.dev
+  "glass folder cards" into a brand-tokenised **`Folder`** object (`src/components/brand/Folder.tsx`),
+  a **`DownloadFolder`** wrapper (`src/components/brand/DownloadFolder.tsx`), and a new **Library ›
+  Images & Backgrounds › "Folders"** section (`FoldersSection.tsx`, id `folders`, `Folders` icon, after
+  Scroll Blue Band). The folder is an **illustrated object** (owns its drawn geometry, like the logo),
+  adapted to brand: (1) **art = the BLUE liquid marble/streak engine** — the onestaaack tools look
+  (`teamos-ai/dictionary-finovate-v2 · GlassFolder`), restored as `src/components/brand/folder-art.ts`
+  with recipes that ARE the Atlas Blue ramp (`atlas`/`azure` marble · `tide`/`mist`/`slate` streak);
+  **`art="atlas"` default**, plus **`art="clouds"`** (the animated signature, `@/lib/halftone`), `wash`,
+  `none`, `image`. The orange/red marble presets were the only thing off-brand — recoloured blue it IS
+  the brand. Adopted their **`· +N` meta** (overflow count in `--c-accent-text`). (2) **Light only**
+  (dark/smoked tone removed). (3) **Chrome on-brand:** the
+  +/↓/··· key is a solid Atlas-Blue 8px squircle (white glyph, blue leads); the ··· menu is a solid 8px
+  popover (no glass); focus rings neutral (`--c-ring`). (4) **Motion = tokens + five laws:** open/close
+  on `--ease-out` (land + hold, nothing bounces), the ONE sanctioned `--ease-confirm` overshoot reserved
+  for a file dropping in; reduced-motion safe; CSS fully tokenised (one injected `<style data-fos-folder>`).
+  (5) **Fluid width** (`min(width,100%)` + ResizeObserver) so it never clips in a Demo frame or phone
+  gutter. The **download-folder pattern** (press → opens/fans the contents → press again → saves) now
+  **replaces the plain download buttons** on **Icons** (both packs) and **Motion** (the skill zip; repo
+  link kept). **Next step —** Tumai runs `git push origin main`, then confirm the gated prod deploy.
+  **Flag / open question —** the folder's **frosted front is a near-opaque scoped "material" exception**
+  to the hard "no glass" rule (reads solid even with backdrop-filter off; documented like the hero
+  FloatWobble; glass never leaks onto UI chrome). One-line flip to fully-opaque if Tumai wants "no
+  glass" held strictly. The Pinterest / 21st.dev board walkthrough + wider visual sweep are still
+  pending Tumai's sign-in. **Don't-touch —** keep the blue grid retired; Light only; ONE cloud field per
+  folder; put a `<TokenTag>`/`<ComposedFrom>` on every new specimen. **Last updated —** 2026-11-16,
+  Claude (Opus 4.8).
 
 ---
 
