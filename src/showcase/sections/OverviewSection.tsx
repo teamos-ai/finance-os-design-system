@@ -31,13 +31,13 @@ export function OverviewSection() {
         <div className="relative">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[440px] w-[760px] max-w-[114%] -translate-x-1/2 -translate-y-1/2 rounded-sm opacity-70 blur-3xl"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[480px] w-[780px] max-w-[116%] -translate-x-1/2 -translate-y-1/2 rounded-sm opacity-70 blur-3xl"
             style={{
               background:
                 'radial-gradient(closest-side, color-mix(in srgb, var(--c-accent) 15%, transparent), transparent 72%)',
             }}
           />
-          <div className="relative h-[clamp(380px,56vw,560px)]">
+          <div className="relative h-[clamp(420px,58vw,600px)]">
             <CardSphere onSettle={setShowing} />
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center">

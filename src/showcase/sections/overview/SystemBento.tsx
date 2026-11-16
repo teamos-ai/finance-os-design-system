@@ -324,7 +324,7 @@ function ColourInset() {
 /* ── Section ─────────────────────────────────────────────────────────────────────────────────── */
 export function SystemBento() {
   return (
-    <Stagger className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[184px]" amount={0.08}>
+    <Stagger className="grid grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[minmax(190px,auto)]" amount={0.08}>
       {/* Token architecture — tall hero, top-left */}
       <StaggerItem className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-2">
         <TiltCard className="h-full">

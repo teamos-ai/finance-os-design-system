@@ -130,14 +130,15 @@ const glyphFor = (o: Card): string => {
   return `<svg viewBox="0 0 24 24" width="${g}" height="${g}" aria-hidden="true">${GLYPH[o.kind]}</svg>`
 }
 
-/** Full card face: glyph, then (on larger cards) a Spline Sans title. */
+/** Full card face: the glyph and (on larger cards) a Spline Sans title, centred as one group so the
+ *  card reads balanced — not top-heavy with a footer label. */
 const faceHTML = (o: Card): string => {
-  const pad = o.w * 0.11
+  const pad = o.w * 0.12
   const title = o.label && o.w >= 150
-    ? `<div style="font-family:${SPLINE};font-weight:600;font-size:${o.w * 0.1}px;letter-spacing:-0.01em;line-height:1.1;color:${TITLE_COLOR[o.role]}">${o.label}</div>`
+    ? `<div style="font-family:${SPLINE};font-weight:600;font-size:${o.w * 0.095}px;letter-spacing:-0.01em;line-height:1.15;text-align:center;color:${TITLE_COLOR[o.role]}">${o.label}</div>`
     : ''
-  return `<div style="display:flex;flex-direction:column;height:100%;box-sizing:border-box;padding:${pad}px;gap:${pad * 0.7}px">
-      <div style="flex:1;display:grid;place-items:center;min-height:0">${glyphFor(o)}</div>${title}</div>`
+  return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;box-sizing:border-box;padding:${pad}px;gap:${o.w * 0.07}px">
+      <div style="display:grid;place-items:center;min-height:0">${glyphFor(o)}</div>${title}</div>`
 }
 
 /* The 8 "hero" cards that settle to the front — the headline parts of the system. */
@@ -232,7 +233,8 @@ export default function CardSphere({ onSettle, className, style }: CardSpherePro
     const size = () => {
       const r = root.getBoundingClientRect(); W = r.width; H = r.height
       u = Math.min(W, H * 0.82) / 720; F = 502 * u
-      Ax = Math.max(1, (W / 2) / (F * 0.577) * 0.97); Ay = Math.max(1, (H / 2) / (F * 0.577) * 0.97)
+      // 0.82 (was 0.97) leaves a clear margin around the sphere so no card clips at any rotation.
+      Ax = Math.max(1, (W / 2) / (F * 0.577) * 0.82); Ay = Math.max(1, (H / 2) / (F * 0.577) * 0.82)
     }
     size()
     const ro = new ResizeObserver(size); ro.observe(root)

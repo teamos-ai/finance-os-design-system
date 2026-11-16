@@ -406,8 +406,8 @@ export function DashboardsSection() {
           <ComposedFrom
             className="mt-3 mb-6"
             items={[
-              { label: 'BrandDashboard', href: '#video' },
-              { label: 'ScaleToFit', href: '#video' },
+              { label: 'BrandDashboard', href: '#dashboards' },
+              { label: 'ScaleToFit', href: '#dashboards' },
             ]}
           />
           <Demo label="My Account workspace — the full brand layout, tokenised" inspect={WORKSPACE_INSPECT}>
