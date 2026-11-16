@@ -34,6 +34,7 @@ The reusable primitives. Compose only from `--c-*` tokens.
 | `SaveButton` | A blue accent CTA (`variant="primary"`) that, on click, sends up a few small green check chips that rise and fade — the calm "saved" confirmation. |  | `ui/save-button.tsx` |
 | `SegmentedControl` | Daily \| Weekly \| Monthly. |  | `ui/segmented.tsx` |
 | `Stat` | a big outcome figure with a calm label. |  | `ui/stat.tsx` |
+| `StatusIcon` | the shared semantic status glyph: yes (green check), no (red cross), warn (amber). |  | `ui/status-icon.tsx` |
 | `Swatch` `GradientSwatch` | a click-to-copy colour chip. |  | `ui/swatch.tsx` |
 | `TokenTag` | the system's inline "what produces this" chip. |  | `ui/token-tag.tsx` |
 | `ToolCard` | a single "thing Finance OS replaces" card for the horizontal carousel (app-card craft). |  | `ui/tool-card.tsx` |
@@ -128,6 +129,13 @@ Broker email-signature block + preview.
 | Component(s) | Purpose | Variants | Source |
 |---|---|:---:|---|
 | `QuizRunner` | a reusable, no-backend quiz: single-choice questions that tally toward a set of stages and reveal a result in the browser (no email, nothing submitted). |  | `quizzes/QuizRunner.tsx` |
+
+## scoring `src/components/scoring`
+
+| Component(s) | Purpose | Variants | Source |
+|---|---|:---:|---|
+| `StarRow` `GoatRating` `GoatedBadge` | the Finance OS rating glyph: five voxel goats, one per score, whose expression IS the score (a frown at one, star-eyes at five). |  | `scoring/GoatRating.tsx` |
+| `GoatScorecard` | the five-criterion scorecard for one product, ported from financeos.au and tokenised for the design system (DS type + 8px radius; amber lives inside GoatRating). |  | `scoring/GoatScorecard.tsx` |
 
 ## scroll-blue `src/components/scroll-blue`
 
